@@ -1,0 +1,90 @@
+{
+  "schema": "scrapyard/dependency_models@1",
+  "runtime_depends_on": {
+    "app_factory": [
+      "db_session"
+    ],
+    "auth_routes": [
+      "db_session",
+      "session_manager"
+    ],
+    "session_manager": [
+      "db_session"
+    ],
+    "subscriptions": [
+      "db_session"
+    ],
+    "subscription_status": [
+      "subscriptions",
+      "db_session"
+    ],
+    "stripe_checkout": [
+      "subscriptions",
+      "stripe_api"
+    ],
+    "stripe_webhooks": [
+      "subscriptions",
+      "db_session",
+      "stripe_api"
+    ],
+    "entitlement_gate": [
+      "subscription_status"
+    ],
+    "feature_gates": [
+      "entitlement_gate"
+    ],
+    "email": [
+      "smtp_provider"
+    ],
+    "password_reset": [
+      "email",
+      "db_session"
+    ],
+    "email_verification": [
+      "email",
+      "db_session"
+    ],
+    "rag": [
+      "vector_store",
+      "llm_client",
+      "db_session"
+    ],
+    "embeddings": [
+      "llm_client"
+    ],
+    "vector_store": [
+      "db_session"
+    ],
+    "queues": [
+      "broker"
+    ],
+    "background_tasks": [
+      "queues"
+    ],
+    "audit_logs": [
+      "db_session"
+    ],
+    "data_export": [
+      "db_session"
+    ],
+    "account_deletion": [
+      "db_session",
+      "data_export"
+    ],
+    "uploads": [
+      "storage_adapters"
+    ],
+    "signed_urls": [
+      "storage_adapters"
+    ]
+  },
+  "external": [
+    "stripe_api",
+    "smtp_provider",
+    "broker",
+    "storage_adapters",
+    "db_session",
+    "llm_client",
+    "vector_store"
+  ]
+}

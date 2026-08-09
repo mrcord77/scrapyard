@@ -1,0 +1,86 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "real_estate",
+  "label": "Property listings / brokerage",
+  "terminology": {
+    "listing": "a property for sale/rent",
+    "agent": "licensed broker",
+    "showing": "scheduled property visit",
+    "MLS": "multiple listing service feed"
+  },
+  "entities": [
+    {
+      "name": "Listing",
+      "fields": [
+        "id",
+        "address",
+        "price_cents",
+        "status",
+        "beds",
+        "baths",
+        "sqft",
+        "agent_id"
+      ]
+    },
+    {
+      "name": "Agent",
+      "fields": [
+        "id",
+        "user_id",
+        "license_no",
+        "brokerage"
+      ]
+    },
+    {
+      "name": "Showing",
+      "fields": [
+        "id",
+        "listing_id",
+        "client_id",
+        "scheduled_at",
+        "status"
+      ]
+    },
+    {
+      "name": "Inquiry",
+      "fields": [
+        "id",
+        "listing_id",
+        "name",
+        "contact",
+        "message",
+        "created_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "create listing + media -> publish -> faceted search",
+    "schedule showing",
+    "capture + route inquiry",
+    "status: active/pending/sold"
+  ],
+  "permissions": [
+    "listing.manage.own",
+    "showing.schedule",
+    "inquiry.view"
+  ],
+  "reports": [
+    "active inventory",
+    "days on market",
+    "showings per listing",
+    "inquiry conversion"
+  ],
+  "capability_hints": [
+    "search_faceted",
+    "files_core",
+    "comms_core",
+    "seo_metadata"
+  ],
+  "data_sensitivity": "moderate",
+  "sensitive_entities": [
+    "Inquiry"
+  ],
+  "regulated_data": false,
+  "minimum_security_stage": "growth",
+  "privacy_notes": "Contact details are PII; limit exposure."
+}

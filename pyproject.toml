@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scrapyard-parts"
+version = "0.1.0"
+description = "A verified source catalog of reusable Python application parts"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [{name = "Andre Cordero"}]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "alembic",
+  "authlib",
+  "babel",
+  "bleach",
+  "cryptography",
+  "dilithium-py",
+  "email-validator",
+  "fastapi",
+  "httpx",
+  "itsdangerous",
+  "jinja2",
+  "kyber-py",
+  "markdown",
+  "matplotlib",
+  "numpy",
+  "onnx",
+  "opentelemetry-api",
+  "opentelemetry-sdk",
+  "pandas",
+  "passlib[argon2]",
+  "pillow",
+  "psutil",
+  "psycopg2-binary",
+  "pydantic",
+  "pydantic-settings",
+  "pyjwt",
+  "pypdf",
+  "pyproj",
+  "python-hcl2",
+  "pyyaml",
+  "redis",
+  "requests",
+  "scikit-learn",
+  "selenium",
+  "sentry-sdk",
+  "sqlalchemy",
+  "stripe",
+  "torch",
+  "uvicorn",
+]
+
+[tool.setuptools.packages.find]
+include = ["scrapyard*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100

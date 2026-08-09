@@ -1,0 +1,14 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "documentation_site",
+  "description": "Versioned docs: markdown pages, navigation, SEO, search.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "content_core",
+    "search_core",
+    "frontend_marketing",
+    "seo_metadata",
+    "sitemap"
+  ]
+}

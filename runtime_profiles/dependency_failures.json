@@ -1,0 +1,14 @@
+{
+  "schema": "scrapyard/runtime-profile@1",
+  "category": "dependency",
+  "scenarios": [
+    {
+      "name": "schema_not_migrated_in_production",
+      "set": {"APP_ENV": "production"},
+      "fresh_db": true,
+      "needs_key": true,
+      "expect_boot": false,
+      "expect_message": "schema not initialized"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "saas",
+  "label": "Generic B2B/B2C SaaS",
+  "terminology": {
+    "account": "billable customer org or person",
+    "seat": "a user slot in a plan",
+    "plan": "priced tier of entitlements",
+    "workspace": "tenant boundary"
+  },
+  "entities": [
+    {
+      "name": "Account",
+      "fields": [
+        "id",
+        "name",
+        "plan_id",
+        "status",
+        "created_at"
+      ],
+      "notes": "billable tenant"
+    },
+    {
+      "name": "Member",
+      "fields": [
+        "id",
+        "account_id",
+        "user_id",
+        "role",
+        "invited_at"
+      ]
+    },
+    {
+      "name": "Plan",
+      "fields": [
+        "id",
+        "name",
+        "price_cents",
+        "interval",
+        "entitlements"
+      ]
+    },
+    {
+      "name": "Invitation",
+      "fields": [
+        "id",
+        "account_id",
+        "email",
+        "role",
+        "token",
+        "expires_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "sign up -> create account -> invite team",
+    "upgrade/downgrade plan",
+    "seat assignment",
+    "trial -> paid conversion",
+    "cancel + retention offer"
+  ],
+  "permissions": [
+    "account.manage",
+    "member.invite",
+    "member.remove",
+    "billing.manage",
+    "settings.edit"
+  ],
+  "reports": [
+    "MRR / ARR",
+    "churn rate",
+    "seat utilization",
+    "trial conversion",
+    "plan distribution"
+  ],
+  "capability_hints": [
+    "billing_stripe",
+    "multitenancy_core",
+    "authorization_rbac"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "scrapyard/workflow@1",
+  "name": "entitlement_lifecycle",
+  "actors": [
+    "subscriber"
+  ],
+  "requires": [
+    "entitlement_gate"
+  ],
+  "starting_state": "free plan",
+  "steps": [
+    {
+      "action": "free_denied_premium",
+      "expect": "premium feature denied on free"
+    },
+    {
+      "action": "upgrade_to_pro",
+      "expect": "premium feature granted on pro"
+    },
+    {
+      "action": "hit_seat_limit",
+      "expect": "within-limit true below cap, false at cap"
+    },
+    {
+      "action": "downgrade",
+      "expect": "premium feature denied again"
+    }
+  ],
+  "final_state": "access tracks plan changes"
+}

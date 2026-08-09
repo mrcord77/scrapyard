@@ -1,0 +1,17 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "mobile_app",
+  "description": "Mobile product backend: auth, push, sync API, billing. Native client lives outside the yard.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "billing_stripe",
+    "comms_core",
+    "realtime_core",
+    "observability_core"
+  ],
+  "notes": "Parts cover the server/API the mobile client talks to (incl. push_notifications). The iOS/Android client itself is out of scope."
+}

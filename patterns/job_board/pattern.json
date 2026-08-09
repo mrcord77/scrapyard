@@ -1,0 +1,18 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "job_board",
+  "description": "Job board: postings, applications, search, employer accounts, paid listings.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "billing_stripe",
+    "search_faceted",
+    "files_core",
+    "comms_core",
+    "frontend_app",
+    "frontend_marketing"
+  ]
+}

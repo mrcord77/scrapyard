@@ -1,0 +1,61 @@
+{
+  "schema": "scrapyard/cost_model@1",
+  "note": "ESTIMATES ONLY \u2014 order-of-magnitude monthly USD for planning, not quotes. Real cost depends on provider, region, and usage.",
+  "capabilities": {
+    "db_session": {
+      "base": 15,
+      "per_1k": 2,
+      "note": "managed Postgres baseline + storage"
+    },
+    "storage_adapters": {
+      "base": 5,
+      "per_1k": 3,
+      "note": "object storage + egress"
+    },
+    "email": {
+      "base": 0,
+      "per_1k": 1,
+      "note": "transactional email per-send"
+    },
+    "llm_client": {
+      "base": 0,
+      "per_1k": 40,
+      "note": "token cost dominates; usage-driven"
+    },
+    "rag": {
+      "base": 0,
+      "per_1k": 25,
+      "note": "embeddings + retrieval + generation"
+    },
+    "vector_store": {
+      "base": 20,
+      "per_1k": 4,
+      "note": "managed VDB or pgvector compute"
+    },
+    "queues": {
+      "base": 10,
+      "per_1k": 1,
+      "note": "broker infra"
+    },
+    "full_text_search": {
+      "base": 0,
+      "per_1k": 2,
+      "note": "pg FTS cheap; search cluster much more"
+    },
+    "stripe_checkout": {
+      "base": 0,
+      "per_1k": 0,
+      "note": "Stripe takes a % of revenue, not per-user infra"
+    },
+    "multitenancy_core": {
+      "base": 0,
+      "per_1k": 1,
+      "note": "mostly engineering cost, some query overhead"
+    },
+    "observability_core": {
+      "base": 25,
+      "per_1k": 3,
+      "note": "logs/metrics/traces ingestion"
+    }
+  }
+}

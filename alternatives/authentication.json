@@ -1,0 +1,98 @@
+{
+  "schema": "scrapyard/alternatives@1",
+  "capability": "authentication",
+  "role": "How users prove who they are",
+  "options": [
+    {
+      "id": "session_cookie",
+      "label": "Server session cookies",
+      "part_hint": "session_manager",
+      "simplicity": 4,
+      "scalability": 3,
+      "security": 4,
+      "notes": "Easiest mental model; revocation is trivial; needs sticky/shared session store at scale.",
+      "reasons": {
+        "simplicity": "One server-side record; revoke by deleting it.",
+        "scalability": "Needs a shared/sticky session store across instances.",
+        "security": "Server-controlled; easy revocation; CSRF must be handled."
+      },
+      "lessons": [],
+      "contraindications": [
+        "stateless multi-region APIs"
+      ],
+      "recommended_stages": [
+        "mvp",
+        "growth"
+      ]
+    },
+    {
+      "id": "jwt_stateless",
+      "label": "Stateless JWT",
+      "part_hint": "jwt_manager",
+      "simplicity": 3,
+      "scalability": 5,
+      "security": 3,
+      "notes": "Scales horizontally with no session store; revocation and token theft are the hard parts.",
+      "reasons": {
+        "simplicity": "Token carries claims; no session store, but revocation logic is extra work.",
+        "scalability": "No shared state \u2014 scales horizontally cleanly.",
+        "security": "Can't revoke a leaked token without a denylist; keep TTL short."
+      },
+      "lessons": [
+        "L003"
+      ],
+      "contraindications": [
+        "apps needing instant revocation without a denylist"
+      ],
+      "recommended_stages": [
+        "scale",
+        "enterprise"
+      ]
+    },
+    {
+      "id": "oauth_social",
+      "label": "Delegated OAuth / social login",
+      "part_hint": "oauth_google",
+      "simplicity": 4,
+      "scalability": 4,
+      "security": 4,
+      "notes": "No passwords to hold; depends on third-party IdP; still need local account linking.",
+      "reasons": {
+        "simplicity": "No password storage, but IdP integration + account linking add steps.",
+        "scalability": "Offloads auth load to the IdP.",
+        "security": "No passwords to leak; depends on IdP security and correct token validation."
+      },
+      "lessons": [],
+      "contraindications": [
+        "air-gapped or no-third-party environments"
+      ],
+      "recommended_stages": [
+        "growth",
+        "scale"
+      ]
+    },
+    {
+      "id": "managed",
+      "label": "Managed auth (Clerk/Auth0-style)",
+      "part_hint": null,
+      "simplicity": 5,
+      "scalability": 5,
+      "security": 4,
+      "notes": "Fastest to ship and offloads security; recurring cost and vendor lock-in; outside the yard.",
+      "reasons": {
+        "simplicity": "Drop-in; least code.",
+        "scalability": "Vendor handles scale.",
+        "security": "Vendor hardened, but data leaves your boundary and you inherit their incidents."
+      },
+      "lessons": [],
+      "contraindications": [
+        "strict data-residency",
+        "tight cost constraints"
+      ],
+      "recommended_stages": [
+        "mvp",
+        "growth"
+      ]
+    }
+  ]
+}

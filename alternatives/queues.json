@@ -1,0 +1,34 @@
+{
+  "schema": "scrapyard/alternatives@1",
+  "capability": "queues",
+  "role": "How background work is dispatched",
+  "options": [
+    {
+      "id": "db_queue",
+      "label": "DB-backed queue",
+      "part_hint": "queues",
+      "simplicity": 5,
+      "scalability": 2,
+      "security": 4,
+      "notes": "No new infra; fine for low volume; polling overhead and contention at scale."
+    },
+    {
+      "id": "redis_rq",
+      "label": "Redis-backed (RQ/Celery)",
+      "part_hint": "queues",
+      "simplicity": 3,
+      "scalability": 4,
+      "security": 3,
+      "notes": "Standard choice; needs Redis; good throughput."
+    },
+    {
+      "id": "sqs",
+      "label": "Cloud queue (SQS/PubSub)",
+      "part_hint": "queues",
+      "simplicity": 3,
+      "scalability": 5,
+      "security": 4,
+      "notes": "Fully managed and durable; vendor coupling; outside the yard."
+    }
+  ]
+}

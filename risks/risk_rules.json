@@ -1,0 +1,57 @@
+{
+  "schema": "scrapyard/risks@1",
+  "by_capability": {
+    "authentication": [
+      "account takeover",
+      "session/token theft",
+      "weak password reset"
+    ],
+    "auth_routes": [
+      "credential stuffing",
+      "enumeration via login errors"
+    ],
+    "billing_stripe": [
+      "webhook replay",
+      "entitlement mismatch",
+      "cancellation inconsistency"
+    ],
+    "stripe_webhooks": [
+      "forged events if unsigned",
+      "double-processing"
+    ],
+    "ai_core": [
+      "hallucinated output",
+      "prompt injection",
+      "cost runaway"
+    ],
+    "rag": [
+      "stale embeddings",
+      "bad retrieval",
+      "document leakage"
+    ],
+    "uploads": [
+      "malicious upload",
+      "oversized upload",
+      "private file exposure"
+    ],
+    "multitenancy_core": [
+      "cross-tenant data exposure"
+    ],
+    "llm_client": [
+      "cost runaway",
+      "provider outage"
+    ]
+  },
+  "by_domain_sensitivity": {
+    "high": [
+      "sensitive data exposure",
+      "insufficient deletion/retention controls",
+      "over-collection of personal data"
+    ],
+    "moderate": [
+      "PII exposure",
+      "weak access control"
+    ],
+    "low": []
+  }
+}

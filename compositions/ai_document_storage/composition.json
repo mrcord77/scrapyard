@@ -1,0 +1,16 @@
+{
+  "schema": "scrapyard/composition@1",
+  "name": "ai_document_storage",
+  "binds": [
+    "ai_core",
+    "files_core"
+  ],
+  "problem": "Users upload documents the AI must read; raw files and derived text/vectors must be linked and access-controlled.",
+  "glue": "files_core stores the original (storage_adapters + signed_urls); an ingestion job extracts text and hands it to the AI/embeddings pipeline; access checks reuse the owning user's permissions.",
+  "steps": [
+    "uploads accepts the file; storage_adapters persists it; record file_id + owner.",
+    "A background job (jobs_core) extracts text and triggers embeddings.",
+    "Serve originals via signed_urls; never expose raw storage paths."
+  ],
+  "owns_data": "documents.file_id, documents.owner_user_id"
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "directory_site",
+  "description": "Browseable directory/listing site with faceted filters and saved searches.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "content_core",
+    "search_faceted",
+    "seo_metadata",
+    "sitemap",
+    "frontend_marketing"
+  ]
+}

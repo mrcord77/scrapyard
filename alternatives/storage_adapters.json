@@ -1,0 +1,25 @@
+{
+  "schema": "scrapyard/alternatives@1",
+  "capability": "storage_adapters",
+  "role": "Where user files live",
+  "options": [
+    {
+      "id": "local_disk",
+      "label": "Local filesystem",
+      "part_hint": "storage_adapters",
+      "simplicity": 5,
+      "scalability": 1,
+      "security": 3,
+      "notes": "Zero setup for dev/single-box; does not survive multi-instance or redeploys."
+    },
+    {
+      "id": "s3",
+      "label": "S3 / object storage",
+      "part_hint": "storage_adapters",
+      "simplicity": 3,
+      "scalability": 5,
+      "security": 4,
+      "notes": "Durable, scalable, signed-URL friendly; needs credentials + bucket policy."
+    }
+  ]
+}

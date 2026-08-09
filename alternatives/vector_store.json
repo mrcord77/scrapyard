@@ -1,0 +1,34 @@
+{
+  "schema": "scrapyard/alternatives@1",
+  "capability": "vector_store",
+  "role": "Where embeddings are indexed for retrieval",
+  "options": [
+    {
+      "id": "pgvector",
+      "label": "pgvector (Postgres)",
+      "part_hint": "vector_store",
+      "simplicity": 4,
+      "scalability": 3,
+      "security": 4,
+      "notes": "One database to run; great up to ~1M vectors; reuses your Postgres."
+    },
+    {
+      "id": "faiss_local",
+      "label": "FAISS (in-process)",
+      "part_hint": "vector_store",
+      "simplicity": 4,
+      "scalability": 2,
+      "security": 3,
+      "notes": "No service to run; not durable or shared; good for prototypes."
+    },
+    {
+      "id": "managed_vdb",
+      "label": "Managed vector DB (Pinecone/Weaviate)",
+      "part_hint": null,
+      "simplicity": 3,
+      "scalability": 5,
+      "security": 4,
+      "notes": "Scales to billions; recurring cost; another vendor; outside the yard."
+    }
+  ]
+}

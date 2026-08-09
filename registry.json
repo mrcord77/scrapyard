@@ -1,0 +1,2251 @@
+{
+  "schema": "scrapyard/registry@1",
+  "capabilities": {
+    "ab_testing": {
+      "kind": "concrete",
+      "part": "scrapyard.analytics.ab_testing",
+      "layer": "analytics",
+      "purpose": "Assign + measure experiment variants.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "account_deletion": {
+      "kind": "concrete",
+      "part": "scrapyard.compliance.account_deletion",
+      "layer": "compliance",
+      "purpose": "Hard/soft delete + downstream purge.",
+      "requires": [
+        "users",
+        "data_export"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "account_lockout": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.account_lockout",
+      "layer": "identity",
+      "purpose": "Lock accounts after repeated failed logins.",
+      "requires": [
+        "users",
+        "rate_limiting"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "admin.dashboards": {
+      "kind": "concrete",
+      "part": "scrapyard.admin.dashboards",
+      "layer": "admin",
+      "purpose": "Admin overview metrics aggregation.",
+      "requires": [
+        "audit_logs",
+        "usage_metrics"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "admin_access": {
+      "kind": "concrete",
+      "part": "scrapyard.authorization.admin_access",
+      "layer": "authorization",
+      "purpose": "Guard admin-only surfaces.",
+      "requires": [
+        "permissions"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "app_factory": {
+      "kind": "concrete",
+      "part": "scrapyard.api.app_factory",
+      "layer": "api",
+      "purpose": "FastAPI application factory wiring middleware, errors, health.",
+      "requires": [
+        "config",
+        "logging_setup",
+        "health",
+        "request_context",
+        "error_handling"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "app_scaffold": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.app_scaffold",
+      "layer": "foundation",
+      "purpose": "Minimal application entrypoint wiring config+logging+app_factory.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "audit_logs": {
+      "kind": "concrete",
+      "part": "scrapyard.admin.audit_logs",
+      "layer": "admin",
+      "purpose": "Append-only admin action audit log.",
+      "requires": [
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "audit_mixin": {
+      "kind": "concrete",
+      "part": "scrapyard.database.audit_mixin",
+      "layer": "database",
+      "purpose": "created_by/updated_by + change tracking mixin.",
+      "requires": [
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "auth_checks": {
+      "kind": "concrete",
+      "part": "scrapyard.testing.auth_checks",
+      "layer": "testing",
+      "purpose": "Verify login/refresh/permission paths.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "auth_pages": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.auth_pages",
+      "layer": "frontend",
+      "purpose": "Login/signup/reset UI blocks.",
+      "requires": [
+        "forms"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "auth_routes": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.auth_routes",
+      "layer": "identity",
+      "purpose": "Login/logout/refresh route handlers (login_routes).",
+      "requires": [
+        "users",
+        "password_hashing",
+        "jwt_manager",
+        "session_manager"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "background_tasks": {
+      "kind": "concrete",
+      "part": "scrapyard.jobs.background_tasks",
+      "layer": "jobs",
+      "purpose": "Fire-and-forget tasks off the request path.",
+      "requires": [
+        "queues"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "backups": {
+      "kind": "concrete",
+      "part": "scrapyard.deployment.backups",
+      "layer": "deployment",
+      "purpose": "Scheduled DB + media backup scripts.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "base_model": {
+      "kind": "concrete",
+      "part": "scrapyard.database.base_model",
+      "layer": "database",
+      "purpose": "Declarative base with primary key + common helpers.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "blog": {
+      "kind": "concrete",
+      "part": "scrapyard.content.blog",
+      "layer": "content",
+      "purpose": "Blog posts with tags, slugs, drafts.",
+      "requires": [
+        "cms",
+        "markdown_pages"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "cache_client": {
+      "kind": "concrete",
+      "part": "scrapyard.caching.cache_client",
+      "layer": "caching",
+      "purpose": "Unified cache interface (memory/redis).",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "cache_invalidation": {
+      "kind": "concrete",
+      "part": "scrapyard.caching.cache_invalidation",
+      "layer": "caching",
+      "purpose": "Tag-based invalidation helpers.",
+      "requires": [
+        "cache_client"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "cached_decorator": {
+      "kind": "concrete",
+      "part": "scrapyard.caching.cached_decorator",
+      "layer": "caching",
+      "purpose": "Memoize function results with TTL.",
+      "requires": [
+        "cache_client"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "cancellation_flow": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.cancellation_flow",
+      "layer": "billing",
+      "purpose": "Cancel/downgrade with grace + reason capture.",
+      "requires": [
+        "subscriptions"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "cms": {
+      "kind": "concrete",
+      "part": "scrapyard.content.cms",
+      "layer": "content",
+      "purpose": "Generic content model + publish workflow.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "config": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.config",
+      "layer": "foundation",
+      "purpose": "Typed settings loaded from env/.env with validation.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "consent_logs": {
+      "kind": "concrete",
+      "part": "scrapyard.compliance.consent_logs",
+      "layer": "compliance",
+      "purpose": "Record consent grants/revocations with proof.",
+      "requires": [
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "contract_tests": {
+      "kind": "concrete",
+      "part": "scrapyard.testing.contract_tests",
+      "layer": "testing",
+      "purpose": "Validate responses against OpenAPI schema.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "cors": {
+      "kind": "concrete",
+      "part": "scrapyard.security.cors",
+      "layer": "security",
+      "purpose": "Configured CORS policy helper.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "cron_jobs": {
+      "kind": "concrete",
+      "part": "scrapyard.jobs.cron_jobs",
+      "layer": "jobs",
+      "purpose": "Declarative scheduled job registry.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "csrf": {
+      "kind": "concrete",
+      "part": "scrapyard.security.csrf",
+      "layer": "security",
+      "purpose": "Double-submit CSRF protection for cookie auth.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "data_export": {
+      "kind": "concrete",
+      "part": "scrapyard.compliance.data_export",
+      "layer": "compliance",
+      "purpose": "Export a user's data (DSAR/portability).",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "db_session": {
+      "kind": "concrete",
+      "part": "scrapyard.database.db_session",
+      "layer": "database",
+      "purpose": "SQLAlchemy engine + session factory + get_db dependency.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "dead_letter": {
+      "kind": "concrete",
+      "part": "scrapyard.jobs.dead_letter",
+      "layer": "jobs",
+      "purpose": "Dead-letter capture for exhausted jobs.",
+      "requires": [
+        "queues"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "dependency_container": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.dependency_container",
+      "layer": "foundation",
+      "purpose": "Tiny service registry / DI container.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "docker": {
+      "kind": "concrete",
+      "part": "scrapyard.deployment.docker",
+      "layer": "deployment",
+      "purpose": "Multistage Dockerfile + compose for the stack.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "email": {
+      "kind": "concrete",
+      "part": "scrapyard.communication.email",
+      "layer": "communication",
+      "purpose": "Transactional email send via pluggable provider.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "email_verification": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.email_verification",
+      "layer": "identity",
+      "purpose": "Email confirmation token issue + verify.",
+      "requires": [
+        "users",
+        "email"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "embeddings": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.embeddings",
+      "layer": "ai",
+      "purpose": "Create + cache text embeddings.",
+      "requires": [
+        "llm_client"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "empty_states": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.empty_states",
+      "layer": "frontend",
+      "purpose": "Reusable empty/error/loading states.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "entitlement_gate": {
+      "kind": "concrete",
+      "part": "scrapyard.authorization.entitlement_gate",
+      "layer": "authorization",
+      "purpose": "Gate features by billing plan/entitlement.",
+      "requires": [
+        "subscription_status"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "entitlements": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.entitlements",
+      "layer": "billing",
+      "purpose": "Map plan -> entitlements/limits.",
+      "requires": [
+        "subscription_status"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "env_loading": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.env_loading",
+      "layer": "foundation",
+      "purpose": "Locate and load .env files across environments.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "error_handling": {
+      "kind": "concrete",
+      "part": "scrapyard.api.error_handling",
+      "layer": "api",
+      "purpose": "Exception handlers producing consistent error envelopes.",
+      "requires": [
+        "error_taxonomy"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "error_reporting": {
+      "kind": "concrete",
+      "part": "scrapyard.observability.error_reporting",
+      "layer": "observability",
+      "purpose": "Capture exceptions to Sentry/provider.",
+      "requires": [
+        "structured_logging"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "error_taxonomy": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.error_taxonomy",
+      "layer": "foundation",
+      "purpose": "Canonical app error classes mapped to HTTP + codes.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "eval_harness": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.eval_harness",
+      "layer": "ai",
+      "purpose": "Run prompt evals against fixtures.",
+      "requires": [
+        "llm_client",
+        "prompt_registry"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "event_bus": {
+      "kind": "concrete",
+      "part": "scrapyard.messaging.event_bus",
+      "layer": "messaging",
+      "purpose": "In-process pub/sub for domain events.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "event_tracking": {
+      "kind": "concrete",
+      "part": "scrapyard.analytics.event_tracking",
+      "layer": "analytics",
+      "purpose": "Capture typed product events.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "faceted_search": {
+      "kind": "concrete",
+      "part": "scrapyard.search.faceted_search",
+      "layer": "search",
+      "purpose": "Facet counts/aggregations for filters.",
+      "requires": [
+        "full_text_search"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "factories": {
+      "kind": "concrete",
+      "part": "scrapyard.testing.factories",
+      "layer": "testing",
+      "purpose": "Model factories/fixtures for tests.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "feature_gates": {
+      "kind": "concrete",
+      "part": "scrapyard.authorization.feature_gates",
+      "layer": "authorization",
+      "purpose": "Boolean/percentage feature flags per user/tenant.",
+      "requires": [
+        "entitlement_gate"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "field_encryption": {
+      "kind": "concrete",
+      "part": "scrapyard.security.field_encryption",
+      "layer": "security",
+      "purpose": "Encrypt sensitive columns at rest.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "filters": {
+      "kind": "concrete",
+      "part": "scrapyard.search.filters",
+      "layer": "search",
+      "purpose": "Composable, safe filter spec -> query.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "forms": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.forms",
+      "layer": "frontend",
+      "purpose": "Accessible form fields + validation display.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "frontend.dashboards": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.dashboards",
+      "layer": "frontend",
+      "purpose": "Dashboard shell with cards/charts slots.",
+      "requires": [
+        "tables"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "full_text_search": {
+      "kind": "concrete",
+      "part": "scrapyard.search.full_text_search",
+      "layer": "search",
+      "purpose": "Full-text search (pg tsvector / external engine).",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "funnels": {
+      "kind": "concrete",
+      "part": "scrapyard.analytics.funnels",
+      "layer": "analytics",
+      "purpose": "Define + compute conversion funnels.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "gdpr_dsr": {
+      "kind": "concrete",
+      "part": "scrapyard.compliance.gdpr_dsr",
+      "layer": "compliance",
+      "purpose": "Intake + fulfill data-subject requests.",
+      "requires": [
+        "data_export",
+        "account_deletion",
+        "consent_logs"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "github_actions": {
+      "kind": "concrete",
+      "part": "scrapyard.deployment.github_actions",
+      "layer": "deployment",
+      "purpose": "CI: lint/test/build/deploy workflow.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "guardrails": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.guardrails",
+      "layer": "ai",
+      "purpose": "Validate/repair model output to a schema.",
+      "requires": [
+        "llm_client"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "health": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.health",
+      "layer": "foundation",
+      "purpose": "Liveness/readiness checks aggregating dependency probes.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "healthcheck_probe": {
+      "kind": "concrete",
+      "part": "scrapyard.deployment.healthcheck_probe",
+      "layer": "deployment",
+      "purpose": "Container/orchestrator probe script.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "i18n": {
+      "kind": "concrete",
+      "part": "scrapyard.localization.i18n",
+      "layer": "localization",
+      "purpose": "Translate keys with locale fallback.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "idempotency": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.idempotency",
+      "layer": "foundation",
+      "purpose": "Idempotency-key store to dedupe unsafe retried requests.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "image_processing": {
+      "kind": "concrete",
+      "part": "scrapyard.files.image_processing",
+      "layer": "files",
+      "purpose": "Resize/convert/strip-EXIF images.",
+      "requires": [
+        "uploads"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "impersonation": {
+      "kind": "concrete",
+      "part": "scrapyard.admin.impersonation",
+      "layer": "admin",
+      "purpose": "Safe, logged user impersonation for support.",
+      "requires": [
+        "users",
+        "session_manager",
+        "audit_logs"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "input_sanitization": {
+      "kind": "concrete",
+      "part": "scrapyard.security.input_sanitization",
+      "layer": "security",
+      "purpose": "Sanitize/escape untrusted input + HTML.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "invoice_portal": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.invoice_portal",
+      "layer": "billing",
+      "purpose": "Stripe billing portal session creation.",
+      "requires": [
+        "invoices"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "invoices": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.invoices",
+      "layer": "billing",
+      "purpose": "List/fetch invoices for a customer.",
+      "requires": [
+        "subscriptions"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "jwt_manager": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.jwt_manager",
+      "layer": "identity",
+      "purpose": "Encode/decode signed access + refresh tokens.",
+      "requires": [
+        "config"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "link_checks": {
+      "kind": "concrete",
+      "part": "scrapyard.testing.link_checks",
+      "layer": "testing",
+      "purpose": "Crawl + verify internal/external links.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "llm_client": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.llm_client",
+      "layer": "ai",
+      "purpose": "Provider-agnostic chat/completions client.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "locale_middleware": {
+      "kind": "concrete",
+      "part": "scrapyard.localization.locale_middleware",
+      "layer": "localization",
+      "purpose": "Detect locale from header/user.",
+      "requires": [
+        "i18n"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "logging_setup": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.logging_setup",
+      "layer": "foundation",
+      "purpose": "Structured, JSON-capable logging with request correlation.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "markdown_pages": {
+      "kind": "concrete",
+      "part": "scrapyard.content.markdown_pages",
+      "layer": "content",
+      "purpose": "Render markdown pages with front-matter.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "media_library": {
+      "kind": "concrete",
+      "part": "scrapyard.content.media_library",
+      "layer": "content",
+      "purpose": "Catalog uploaded media with metadata.",
+      "requires": [
+        "uploads"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "metrics": {
+      "kind": "concrete",
+      "part": "scrapyard.observability.metrics",
+      "layer": "observability",
+      "purpose": "Prometheus counters/histograms.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "mfa_totp": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.mfa_totp",
+      "layer": "identity",
+      "purpose": "TOTP enrollment + verification (RFC 6238).",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "middleware": {
+      "kind": "concrete",
+      "part": "scrapyard.api.middleware",
+      "layer": "api",
+      "purpose": "Common middleware stack (timing, body limits, gzip).",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "migrations": {
+      "kind": "concrete",
+      "part": "scrapyard.database.migrations",
+      "layer": "database",
+      "purpose": "Alembic setup conventions for schema migrations.",
+      "requires": [
+        "db_session"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "moderation_tools": {
+      "kind": "concrete",
+      "part": "scrapyard.admin.moderation_tools",
+      "layer": "admin",
+      "purpose": "Flag/review/resolve user-generated content.",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "navbars": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.navbars",
+      "layer": "frontend",
+      "purpose": "Responsive nav + mobile menu block.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "notification_center": {
+      "kind": "concrete",
+      "part": "scrapyard.communication.notification_center",
+      "layer": "communication",
+      "purpose": "In-app notification inbox model + feed.",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "oauth_google": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.oauth_google",
+      "layer": "identity",
+      "purpose": "Google OAuth2 sign-in (authorize + callback).",
+      "requires": [
+        "users",
+        "session_manager"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "openapi_custom": {
+      "kind": "concrete",
+      "part": "scrapyard.api.openapi_custom",
+      "layer": "api",
+      "purpose": "Customize OpenAPI schema, tags, security schemes.",
+      "requires": [
+        "app_factory"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "pagination": {
+      "kind": "concrete",
+      "part": "scrapyard.database.pagination",
+      "layer": "database",
+      "purpose": "Limit/offset + keyset (cursor) pagination helpers.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "pagination_params": {
+      "kind": "concrete",
+      "part": "scrapyard.api.pagination_params",
+      "layer": "api",
+      "purpose": "Shared query params for page/cursor pagination.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "password_hashing": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.password_hashing",
+      "layer": "identity",
+      "purpose": "Hash + verify passwords with Argon2/bcrypt.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "password_policy": {
+      "kind": "concrete",
+      "part": "scrapyard.security.password_policy",
+      "layer": "security",
+      "purpose": "Enforce password strength + breach check.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "password_reset": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.password_reset",
+      "layer": "identity",
+      "purpose": "Token-based password reset request + confirm flow.",
+      "requires": [
+        "users",
+        "email"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "payment_checks": {
+      "kind": "concrete",
+      "part": "scrapyard.testing.payment_checks",
+      "layer": "testing",
+      "purpose": "Verify checkout/webhook path in test mode.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "per_tenant_config": {
+      "kind": "concrete",
+      "part": "scrapyard.multitenancy.per_tenant_config",
+      "layer": "multitenancy",
+      "purpose": "Per-tenant settings/overrides.",
+      "requires": [
+        "tenant_context"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "permissions": {
+      "kind": "concrete",
+      "part": "scrapyard.authorization.permissions",
+      "layer": "authorization",
+      "purpose": "Permission checks + FastAPI require() dependency (RBAC).",
+      "requires": [
+        "roles"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "pricing_pages": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.pricing_pages",
+      "layer": "frontend",
+      "purpose": "Pricing tiers + checkout CTA block.",
+      "requires": [
+        "forms"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "privacy_policy_hooks": {
+      "kind": "concrete",
+      "part": "scrapyard.compliance.privacy_policy_hooks",
+      "layer": "compliance",
+      "purpose": "Surface + version privacy policy acceptance.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "prompt_registry": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.prompt_registry",
+      "layer": "ai",
+      "purpose": "Versioned, named prompt templates.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "push_notifications": {
+      "kind": "concrete",
+      "part": "scrapyard.communication.push_notifications",
+      "layer": "communication",
+      "purpose": "Web/mobile push dispatch.",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "query_helpers": {
+      "kind": "concrete",
+      "part": "scrapyard.database.query_helpers",
+      "layer": "database",
+      "purpose": "Common filter/sort/search query builders.",
+      "requires": [
+        "db_session"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "queues": {
+      "kind": "concrete",
+      "part": "scrapyard.jobs.queues",
+      "layer": "jobs",
+      "purpose": "Enqueue/consume via Redis/RQ/Celery adapter.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "rag": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.rag",
+      "layer": "ai",
+      "purpose": "Retrieval-augmented generation orchestration.",
+      "requires": [
+        "embeddings",
+        "vector_store",
+        "llm_client"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "railway": {
+      "kind": "concrete",
+      "part": "scrapyard.deployment.railway",
+      "layer": "deployment",
+      "purpose": "Railway service + variables config.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "rate_limiting": {
+      "kind": "concrete",
+      "part": "scrapyard.security.rate_limiting",
+      "layer": "security",
+      "purpose": "Token-bucket rate limiter (in-mem/redis).",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "render": {
+      "kind": "concrete",
+      "part": "scrapyard.deployment.render",
+      "layer": "deployment",
+      "purpose": "render.yaml blueprint.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "reports": {
+      "kind": "concrete",
+      "part": "scrapyard.analytics.reports",
+      "layer": "analytics",
+      "purpose": "Scheduled/exportable report builder.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "repository": {
+      "kind": "concrete",
+      "part": "scrapyard.database.repository",
+      "layer": "database",
+      "purpose": "Generic typed repository over a model.",
+      "requires": [
+        "db_session",
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "request_context": {
+      "kind": "concrete",
+      "part": "scrapyard.api.request_context",
+      "layer": "api",
+      "purpose": "Per-request ID + context var propagated to logs.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "retention_policy": {
+      "kind": "concrete",
+      "part": "scrapyard.compliance.retention_policy",
+      "layer": "compliance",
+      "purpose": "Auto-expire data per retention rules.",
+      "requires": [
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "retries": {
+      "kind": "concrete",
+      "part": "scrapyard.jobs.retries",
+      "layer": "jobs",
+      "purpose": "Backoff + jitter retry wrapper for tasks.",
+      "requires": [
+        "queues"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "roles": {
+      "kind": "concrete",
+      "part": "scrapyard.authorization.roles",
+      "layer": "authorization",
+      "purpose": "Role definitions + assignment to principals.",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "routers": {
+      "kind": "concrete",
+      "part": "scrapyard.api.routers",
+      "layer": "api",
+      "purpose": "Convention for grouping/mounting versioned routers.",
+      "requires": [
+        "app_factory"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "saved_searches": {
+      "kind": "concrete",
+      "part": "scrapyard.search.saved_searches",
+      "layer": "search",
+      "purpose": "Persist + replay user search definitions.",
+      "requires": [
+        "full_text_search",
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "scheduled_workflows": {
+      "kind": "concrete",
+      "part": "scrapyard.jobs.scheduled_workflows",
+      "layer": "jobs",
+      "purpose": "Multi-step scheduled workflow runner.",
+      "requires": [
+        "cron_jobs",
+        "queues"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "search_pagination": {
+      "kind": "concrete",
+      "part": "scrapyard.search.search_pagination",
+      "layer": "search",
+      "purpose": "Pagination tuned for search result sets.",
+      "requires": [
+        "full_text_search"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "secrets": {
+      "kind": "concrete",
+      "part": "scrapyard.security.secrets",
+      "layer": "security",
+      "purpose": "Load secrets from env/manager; never log them.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "security_headers": {
+      "kind": "concrete",
+      "part": "scrapyard.security.security_headers",
+      "layer": "security",
+      "purpose": "CSP/HSTS/frame/referrer security headers.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "seed_data": {
+      "kind": "concrete",
+      "part": "scrapyard.database.seed_data",
+      "layer": "database",
+      "purpose": "Idempotent seed/fixture loader for dev + tests.",
+      "requires": [
+        "db_session",
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "seo_metadata": {
+      "kind": "concrete",
+      "part": "scrapyard.content.seo_metadata",
+      "layer": "content",
+      "purpose": "Per-page title/description/OG/Twitter tags.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "session_manager": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.session_manager",
+      "layer": "identity",
+      "purpose": "Server-side session issue/lookup/revoke.",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "settings_pages": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.settings_pages",
+      "layer": "frontend",
+      "purpose": "Account/settings layout with sections.",
+      "requires": [
+        "forms"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "settings_validation": {
+      "kind": "concrete",
+      "part": "scrapyard.foundation.settings_validation",
+      "layer": "foundation",
+      "purpose": "Fail-fast validation of required settings at boot.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "signed_cookies": {
+      "kind": "concrete",
+      "part": "scrapyard.security.signed_cookies",
+      "layer": "security",
+      "purpose": "Tamper-evident signed cookies.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "signed_urls": {
+      "kind": "concrete",
+      "part": "scrapyard.files.signed_urls",
+      "layer": "files",
+      "purpose": "Time-limited signed download/upload URLs.",
+      "requires": [
+        "storage_adapters"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "sitemap": {
+      "kind": "concrete",
+      "part": "scrapyard.content.sitemap",
+      "layer": "content",
+      "purpose": "Generate sitemap.xml + robots.txt.",
+      "requires": [
+        "seo_metadata"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "smoke_checks": {
+      "kind": "concrete",
+      "part": "scrapyard.testing.smoke_checks",
+      "layer": "testing",
+      "purpose": "Post-deploy smoke test of key routes.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "sms": {
+      "kind": "concrete",
+      "part": "scrapyard.communication.sms",
+      "layer": "communication",
+      "purpose": "SMS send via pluggable provider.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "soft_delete": {
+      "kind": "concrete",
+      "part": "scrapyard.database.soft_delete",
+      "layer": "database",
+      "purpose": "Mixin + query filter for soft deletes.",
+      "requires": [
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "sorting": {
+      "kind": "concrete",
+      "part": "scrapyard.search.sorting",
+      "layer": "search",
+      "purpose": "Whitelisted multi-field sorting.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "sse_stream": {
+      "kind": "concrete",
+      "part": "scrapyard.realtime.sse_stream",
+      "layer": "realtime",
+      "purpose": "Server-Sent Events response helper.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "storage_adapters": {
+      "kind": "concrete",
+      "part": "scrapyard.files.storage_adapters",
+      "layer": "files",
+      "purpose": "S3/GCS/local storage behind one interface.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "streaming": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.streaming",
+      "layer": "ai",
+      "purpose": "Stream tokens to client via SSE.",
+      "requires": [
+        "llm_client",
+        "sse_stream"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "stripe_checkout": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.stripe_checkout",
+      "layer": "billing",
+      "purpose": "Create Stripe Checkout sessions for plans.",
+      "requires": [
+        "subscriptions",
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "stripe_webhooks": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.stripe_webhooks",
+      "layer": "billing",
+      "purpose": "Verify + dispatch Stripe webhook events.",
+      "requires": [
+        "subscriptions",
+        "subscription_status"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "structured_logging": {
+      "kind": "concrete",
+      "part": "scrapyard.observability.structured_logging",
+      "layer": "observability",
+      "purpose": "Log helpers that emit structured events.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "subscription_status": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.subscription_status",
+      "layer": "billing",
+      "purpose": "Resolve a customer's current plan/status.",
+      "requires": [
+        "subscriptions"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "subscriptions": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.subscriptions",
+      "layer": "billing",
+      "purpose": "Subscription model + lifecycle state.",
+      "requires": [
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "tables": {
+      "kind": "concrete",
+      "part": "scrapyard.frontend.tables",
+      "layer": "frontend",
+      "purpose": "Sortable/paginated data table.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "templates": {
+      "kind": "concrete",
+      "part": "scrapyard.communication.templates",
+      "layer": "communication",
+      "purpose": "Render notification templates (text/html).",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "tenant_access": {
+      "kind": "concrete",
+      "part": "scrapyard.authorization.tenant_access",
+      "layer": "authorization",
+      "purpose": "Authorize a principal against a tenant boundary.",
+      "requires": [
+        "tenant_context",
+        "permissions"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "tenant_context": {
+      "kind": "concrete",
+      "part": "scrapyard.multitenancy.tenant_context",
+      "layer": "multitenancy",
+      "purpose": "Resolve + carry current tenant per request.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "tenant_isolation": {
+      "kind": "concrete",
+      "part": "scrapyard.multitenancy.tenant_isolation",
+      "layer": "multitenancy",
+      "purpose": "Scope queries to the active tenant.",
+      "requires": [
+        "tenant_context"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "timestamps": {
+      "kind": "concrete",
+      "part": "scrapyard.database.timestamps",
+      "layer": "database",
+      "purpose": "created_at/updated_at mixin with auto-touch.",
+      "requires": [
+        "base_model"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "token_cost_logging": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.token_cost_logging",
+      "layer": "ai",
+      "purpose": "Log tokens + $ cost per call/user.",
+      "requires": [
+        "llm_client"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "tool_calling": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.tool_calling",
+      "layer": "ai",
+      "purpose": "Register + dispatch model tool calls safely.",
+      "requires": [
+        "llm_client"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "tracing": {
+      "kind": "concrete",
+      "part": "scrapyard.observability.tracing",
+      "layer": "observability",
+      "purpose": "OpenTelemetry spans for requests/db/llm.",
+      "requires": [
+        "structured_logging"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "transactions": {
+      "kind": "concrete",
+      "part": "scrapyard.database.transactions",
+      "layer": "database",
+      "purpose": "Transaction + unit-of-work context managers.",
+      "requires": [
+        "db_session"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "translations": {
+      "kind": "concrete",
+      "part": "scrapyard.localization.translations",
+      "layer": "localization",
+      "purpose": "Catalog format + loader for messages.",
+      "requires": [
+        "i18n"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "unit_of_work": {
+      "kind": "concrete",
+      "part": "scrapyard.database.unit_of_work",
+      "layer": "database",
+      "purpose": "Explicit UoW boundary around repositories.",
+      "requires": [
+        "db_session"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "unsubscribe_handling": {
+      "kind": "concrete",
+      "part": "scrapyard.communication.unsubscribe_handling",
+      "layer": "communication",
+      "purpose": "Honor unsubscribe + suppression list.",
+      "requires": [
+        "email",
+        "users"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "uploads": {
+      "kind": "concrete",
+      "part": "scrapyard.files.uploads",
+      "layer": "files",
+      "purpose": "Validated multipart upload handling.",
+      "requires": [
+        "storage_adapters"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "usage_metering": {
+      "kind": "concrete",
+      "part": "scrapyard.billing.usage_metering",
+      "layer": "billing",
+      "purpose": "Record metered usage for usage-based billing.",
+      "requires": [
+        "subscriptions"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "usage_metrics": {
+      "kind": "concrete",
+      "part": "scrapyard.analytics.usage_metrics",
+      "layer": "analytics",
+      "purpose": "Aggregate active users / feature usage.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "user_management": {
+      "kind": "concrete",
+      "part": "scrapyard.admin.user_management",
+      "layer": "admin",
+      "purpose": "Search/suspend/restore/edit users (admin).",
+      "requires": [
+        "users",
+        "roles"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "users": {
+      "kind": "concrete",
+      "part": "scrapyard.identity.users",
+      "layer": "identity",
+      "purpose": "User model + core user service (create/find/update).",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "validation": {
+      "kind": "concrete",
+      "part": "scrapyard.api.validation",
+      "layer": "api",
+      "purpose": "Reusable request/response model patterns and validators.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "vector_store": {
+      "kind": "concrete",
+      "part": "scrapyard.ai.vector_store",
+      "layer": "ai",
+      "purpose": "Upsert/query vectors behind one interface.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": true
+    },
+    "vercel": {
+      "kind": "concrete",
+      "part": "scrapyard.deployment.vercel",
+      "layer": "deployment",
+      "purpose": "vercel.json for frontend deploys.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "versioning": {
+      "kind": "concrete",
+      "part": "scrapyard.api.versioning",
+      "layer": "api",
+      "purpose": "URL/header API versioning helpers.",
+      "requires": [
+        "routers"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "virus_scanning": {
+      "kind": "concrete",
+      "part": "scrapyard.files.virus_scanning",
+      "layer": "files",
+      "purpose": "Scan uploads via ClamAV/provider before persist.",
+      "requires": [
+        "uploads"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "webhooks_inbound": {
+      "kind": "concrete",
+      "part": "scrapyard.messaging.webhooks_inbound",
+      "layer": "messaging",
+      "purpose": "Verify + route inbound webhooks.",
+      "requires": [
+        "event_bus"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "webhooks_outbound": {
+      "kind": "concrete",
+      "part": "scrapyard.messaging.webhooks_outbound",
+      "layer": "messaging",
+      "purpose": "Signed, retried outbound webhook delivery.",
+      "requires": [
+        "event_bus"
+      ],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "websocket_manager": {
+      "kind": "concrete",
+      "part": "scrapyard.realtime.websocket_manager",
+      "layer": "realtime",
+      "purpose": "Track + broadcast over WebSocket connections.",
+      "requires": [],
+      "status": "core",
+      "confidence": 0.85,
+      "has_ops_profile": false
+    },
+    "admin_console": {
+      "kind": "meta",
+      "purpose": "Back-office: audit logs, dashboards, user management, moderation, impersonation.",
+      "requires": [
+        "audit_logs",
+        "admin.dashboards",
+        "user_management",
+        "moderation_tools",
+        "impersonation"
+      ],
+      "has_ops_profile": false
+    },
+    "agent_stack": {
+      "kind": "meta",
+      "purpose": "Tool-using agents with streaming and evaluation.",
+      "requires": [
+        "ai_core",
+        "tool_calling",
+        "streaming",
+        "eval_harness"
+      ],
+      "has_ops_profile": false
+    },
+    "ai_core": {
+      "kind": "meta",
+      "purpose": "LLM plumbing: client, prompt registry, cost logging, guardrails.",
+      "requires": [
+        "llm_client",
+        "prompt_registry",
+        "token_cost_logging",
+        "guardrails"
+      ],
+      "has_ops_profile": false
+    },
+    "analytics_core": {
+      "kind": "meta",
+      "purpose": "Product analytics: event tracking, funnels, usage metrics, reports.",
+      "requires": [
+        "event_tracking",
+        "funnels",
+        "usage_metrics",
+        "reports"
+      ],
+      "has_ops_profile": false
+    },
+    "authentication": {
+      "kind": "meta",
+      "purpose": "Who the user is: accounts, password + token auth, verification, recovery.",
+      "requires": [
+        "users",
+        "password_hashing",
+        "password_policy",
+        "jwt_manager",
+        "session_manager",
+        "auth_routes",
+        "email_verification",
+        "password_reset",
+        "account_lockout"
+      ],
+      "has_ops_profile": false
+    },
+    "authorization_rbac": {
+      "kind": "meta",
+      "purpose": "What the user may do: roles, permissions, admin gating.",
+      "requires": [
+        "roles",
+        "permissions",
+        "admin_access"
+      ],
+      "has_ops_profile": false
+    },
+    "billing_stripe": {
+      "kind": "meta",
+      "purpose": "Money: Stripe checkout, webhooks, subscriptions, invoices, entitlement gating.",
+      "requires": [
+        "subscriptions",
+        "subscription_status",
+        "stripe_checkout",
+        "stripe_webhooks",
+        "invoices",
+        "cancellation_flow",
+        "entitlements",
+        "entitlement_gate"
+      ],
+      "has_ops_profile": false
+    },
+    "comms_core": {
+      "kind": "meta",
+      "purpose": "Outbound communication: email, templates, notifications, unsubscribe.",
+      "requires": [
+        "email",
+        "templates",
+        "notification_center",
+        "unsubscribe_handling"
+      ],
+      "has_ops_profile": false
+    },
+    "compliance_gdpr": {
+      "kind": "meta",
+      "purpose": "Data-subject rights: export, deletion, consent, retention, DSR handling.",
+      "requires": [
+        "gdpr_dsr",
+        "data_export",
+        "account_deletion",
+        "consent_logs",
+        "retention_policy",
+        "privacy_policy_hooks"
+      ],
+      "has_ops_profile": false
+    },
+    "content_core": {
+      "kind": "meta",
+      "purpose": "Publishing: CMS, markdown pages, SEO metadata, sitemap.",
+      "requires": [
+        "cms",
+        "markdown_pages",
+        "seo_metadata",
+        "sitemap"
+      ],
+      "has_ops_profile": false
+    },
+    "deploy_container": {
+      "kind": "meta",
+      "purpose": "Ship it: docker, CI, health probe, backups.",
+      "requires": [
+        "docker",
+        "github_actions",
+        "healthcheck_probe",
+        "backups"
+      ],
+      "has_ops_profile": false
+    },
+    "files_core": {
+      "kind": "meta",
+      "purpose": "User files: uploads, storage adapters, signed URLs.",
+      "requires": [
+        "uploads",
+        "storage_adapters",
+        "signed_urls"
+      ],
+      "has_ops_profile": false
+    },
+    "foundation_core": {
+      "kind": "meta",
+      "purpose": "Config, logging, health, error taxonomy \u2014 every app needs this.",
+      "requires": [
+        "config",
+        "logging_setup",
+        "health",
+        "error_taxonomy",
+        "settings_validation"
+      ],
+      "has_ops_profile": false
+    },
+    "frontend_app": {
+      "kind": "meta",
+      "purpose": "Shipped UI surface: navbars, tables, forms, dashboards, settings, empty states.",
+      "requires": [
+        "navbars",
+        "tables",
+        "forms",
+        "frontend.dashboards",
+        "settings_pages",
+        "empty_states"
+      ],
+      "has_ops_profile": false
+    },
+    "frontend_marketing": {
+      "kind": "meta",
+      "purpose": "Public-facing pages: pricing, auth pages, forms.",
+      "requires": [
+        "pricing_pages",
+        "auth_pages",
+        "forms"
+      ],
+      "has_ops_profile": false
+    },
+    "jobs_core": {
+      "kind": "meta",
+      "purpose": "Async work: queues, background tasks, retries, scheduling, dead-letter.",
+      "requires": [
+        "queues",
+        "background_tasks",
+        "retries",
+        "cron_jobs",
+        "scheduled_workflows",
+        "dead_letter"
+      ],
+      "has_ops_profile": false
+    },
+    "metering_billing": {
+      "kind": "meta",
+      "purpose": "Usage-based billing on top of subscriptions.",
+      "requires": [
+        "billing_stripe",
+        "usage_metering",
+        "usage_metrics"
+      ],
+      "has_ops_profile": false
+    },
+    "multitenancy_core": {
+      "kind": "meta",
+      "purpose": "Tenant boundary: context, isolation, per-tenant config, tenant-scoped access.",
+      "requires": [
+        "tenant_context",
+        "tenant_isolation",
+        "per_tenant_config",
+        "tenant_access"
+      ],
+      "has_ops_profile": true
+    },
+    "observability_core": {
+      "kind": "meta",
+      "purpose": "Know what's happening in prod: structured logs, metrics, tracing, error reporting.",
+      "requires": [
+        "structured_logging",
+        "metrics",
+        "tracing",
+        "error_reporting"
+      ],
+      "has_ops_profile": false
+    },
+    "persistence_core": {
+      "kind": "meta",
+      "purpose": "Relational persistence: sessions, base model, mixins, repository, pagination.",
+      "requires": [
+        "db_session",
+        "base_model",
+        "timestamps",
+        "soft_delete",
+        "pagination",
+        "repository",
+        "transactions",
+        "migrations"
+      ],
+      "has_ops_profile": false
+    },
+    "rag_stack": {
+      "kind": "meta",
+      "purpose": "Retrieval-augmented generation: embeddings, vector store, RAG over ai_core.",
+      "requires": [
+        "ai_core",
+        "embeddings",
+        "vector_store",
+        "rag"
+      ],
+      "has_ops_profile": false
+    },
+    "realtime_core": {
+      "kind": "meta",
+      "purpose": "Live updates: SSE and websocket transport.",
+      "requires": [
+        "sse_stream",
+        "websocket_manager"
+      ],
+      "has_ops_profile": false
+    },
+    "search_core": {
+      "kind": "meta",
+      "purpose": "Find things: full-text search, filters, sorting, paginated results.",
+      "requires": [
+        "full_text_search",
+        "filters",
+        "sorting",
+        "search_pagination"
+      ],
+      "has_ops_profile": false
+    },
+    "search_faceted": {
+      "kind": "meta",
+      "purpose": "Faceted/aggregated search for catalogs and directories.",
+      "requires": [
+        "search_core",
+        "faceted_search",
+        "saved_searches"
+      ],
+      "has_ops_profile": false
+    },
+    "security_baseline": {
+      "kind": "meta",
+      "purpose": "Always-on security: headers, CORS, rate limiting, sanitization, secrets.",
+      "requires": [
+        "security_headers",
+        "cors",
+        "rate_limiting",
+        "input_sanitization",
+        "secrets"
+      ],
+      "has_ops_profile": false
+    },
+    "web_api": {
+      "kind": "meta",
+      "purpose": "HTTP layer: app factory, routing, validation, request context, errors.",
+      "requires": [
+        "foundation_core",
+        "app_factory",
+        "request_context",
+        "error_handling",
+        "routers",
+        "validation",
+        "pagination_params",
+        "middleware"
+      ],
+      "has_ops_profile": false
+    }
+  },
+  "patterns": [
+    "agent_platform",
+    "api_product",
+    "basic_saas",
+    "course_platform",
+    "crm",
+    "desktop_tool",
+    "directory_site",
+    "documentation_site",
+    "job_board",
+    "knowledge_base",
+    "marketplace",
+    "mobile_app",
+    "saas_subscription_app",
+    "ticketing_system",
+    "web_application"
+  ],
+  "domains": [
+    "community_platform",
+    "construction",
+    "ecommerce",
+    "education",
+    "healthcare",
+    "oil_and_gas",
+    "real_estate",
+    "saas",
+    "sobriety",
+    "user_centered_application"
+  ],
+  "compositions": [
+    {
+      "name": "ai_document_storage",
+      "binds": [
+        "ai_core",
+        "files_core"
+      ]
+    },
+    {
+      "name": "ai_vector_search",
+      "binds": [
+        "ai_core",
+        "vector_store"
+      ]
+    },
+    {
+      "name": "authentication_billing",
+      "binds": [
+        "authentication",
+        "billing_stripe"
+      ]
+    },
+    {
+      "name": "authentication_rbac",
+      "binds": [
+        "authentication",
+        "authorization_rbac"
+      ]
+    },
+    {
+      "name": "billing_feature_gates",
+      "binds": [
+        "billing_stripe",
+        "feature_gates"
+      ]
+    },
+    {
+      "name": "users_audit_logs",
+      "binds": [
+        "users",
+        "audit_logs"
+      ]
+    },
+    {
+      "name": "users_notifications",
+      "binds": [
+        "users",
+        "notification_center"
+      ]
+    }
+  ],
+  "alternatives": [
+    "authentication",
+    "full_text_search",
+    "llm_client",
+    "password_hashing",
+    "queues",
+    "storage_adapters",
+    "vector_store"
+  ],
+  "lessons": [
+    {
+      "id": "L001",
+      "created_at": "2026-06-06T00:00:00+00:00",
+      "title": "Verify Stripe webhook signatures before trusting events",
+      "problem": "Unverified webhooks let attackers forge subscription state.",
+      "fix": "In stripe_webhooks, check the Stripe-Signature header against STRIPE_WEBHOOK_SECRET before mutating subscription_status.",
+      "applies_to": {
+        "patterns": [],
+        "domains": [],
+        "capabilities": [
+          "stripe_webhooks"
+        ],
+        "compositions": [
+          "authentication_billing"
+        ],
+        "stages": []
+      },
+      "mitigation": "idempotency",
+      "status": "resolved",
+      "resolution": "stripe_webhooks now implements signature verification + an idempotency ledger (ProcessedEvent)."
+    },
+    {
+      "id": "L002",
+      "created_at": "2026-06-06T00:00:00+00:00",
+      "title": "Default journals to private and encrypt at rest",
+      "problem": "Recovery journals are highly sensitive; a plaintext default risks exposure.",
+      "fix": "Set JournalEntry.private=True by default and apply field_encryption to the body column.",
+      "applies_to": {
+        "patterns": [],
+        "domains": [
+          "sobriety"
+        ],
+        "capabilities": [],
+        "compositions": [],
+        "stages": []
+      },
+      "mitigation": "field_encryption",
+      "status": "open"
+    },
+    {
+      "id": "L003",
+      "created_at": "2026-06-06T00:00:00+00:00",
+      "title": "JWTs need short TTL + revocation at scale",
+      "problem": "Long-lived stateless JWTs can't be revoked, a liability as user count grows.",
+      "fix": "Keep access tokens short-lived, issue refresh tokens, and maintain a revocation list once past MVP.",
+      "applies_to": {
+        "patterns": [],
+        "domains": [],
+        "capabilities": [
+          "jwt_manager"
+        ],
+        "compositions": [],
+        "stages": [
+          "scale",
+          "enterprise"
+        ]
+      },
+      "mitigation": "account_lockout",
+      "status": "open"
+    }
+  ],
+  "totals": {
+    "capabilities": 184,
+    "with_ops_profile": 10,
+    "with_alternatives": 7,
+    "patterns": 15,
+    "domains": 10,
+    "compositions": 7,
+    "lessons": 3
+  }
+}

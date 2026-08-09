@@ -1,0 +1,47 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "community_platform",
+  "extends": "user_centered_application",
+  "label": "App where users interact around shared activity",
+  "terminology": {
+    "member": "a user participating in the community",
+    "feed": "stream of community activity"
+  },
+  "entities": [
+    {
+      "name": "Membership",
+      "fields": [
+        "id",
+        "user_id",
+        "role",
+        "joined_at"
+      ]
+    },
+    {
+      "name": "Post",
+      "fields": [
+        "id",
+        "user_id",
+        "body",
+        "created_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "join community",
+    "post + react",
+    "moderate content"
+  ],
+  "permissions": [
+    "post.write",
+    "post.moderate"
+  ],
+  "reports": [
+    "engagement",
+    "retention cohorts"
+  ],
+  "capability_hints": [
+    "comms_core",
+    "content_core"
+  ]
+}

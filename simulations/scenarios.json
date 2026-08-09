@@ -1,0 +1,130 @@
+{
+  "schema": "scrapyard/simulations@1",
+  "scenarios": [
+    {
+      "id": "S1",
+      "trigger": "Stripe webhook delivery fails or is replayed",
+      "affected": [
+        "stripe_webhooks",
+        "subscription_status"
+      ],
+      "expected": "subscription state diverges from Stripe",
+      "safeguards": [
+        "idempotency",
+        "audit_logs"
+      ],
+      "detection": "webhook failure metric",
+      "recovery": "replay from Stripe dashboard",
+      "severity": "high"
+    },
+    {
+      "id": "S2",
+      "trigger": "Email provider outage",
+      "affected": [
+        "email",
+        "password_reset",
+        "email_verification"
+      ],
+      "expected": "users can't reset/verify",
+      "safeguards": [
+        "queues",
+        "retries"
+      ],
+      "detection": "send-failure rate",
+      "recovery": "retry queue; switch provider",
+      "severity": "medium"
+    },
+    {
+      "id": "S3",
+      "trigger": "Vector DB down or index stale",
+      "affected": [
+        "vector_store",
+        "rag"
+      ],
+      "expected": "RAG returns nothing or stale context",
+      "safeguards": [
+        "dead_letter",
+        "token_cost_logging"
+      ],
+      "detection": "retrieval hit-rate drop",
+      "recovery": "re-embed from source",
+      "severity": "medium"
+    },
+    {
+      "id": "S4",
+      "trigger": "DB connection pool exhausted under load",
+      "affected": [
+        "db_session"
+      ],
+      "expected": "requests time out",
+      "safeguards": [
+        "rate_limiting"
+      ],
+      "detection": "active-connection metric",
+      "recovery": "raise pool / add replica",
+      "severity": "high"
+    },
+    {
+      "id": "S5",
+      "trigger": "Background jobs retry forever",
+      "affected": [
+        "queues",
+        "retries"
+      ],
+      "expected": "resource exhaustion",
+      "safeguards": [
+        "dead_letter"
+      ],
+      "detection": "oldest-job age",
+      "recovery": "move to dead-letter, cap retries",
+      "severity": "medium"
+    },
+    {
+      "id": "S6",
+      "trigger": "User cancels subscription but keeps active session",
+      "affected": [
+        "subscriptions",
+        "entitlement_gate",
+        "session_manager"
+      ],
+      "expected": "continued access after downgrade",
+      "safeguards": [
+        "feature_gates",
+        "entitlement_gate"
+      ],
+      "detection": "entitlement mismatch",
+      "recovery": "re-check entitlements on each gated action",
+      "severity": "medium"
+    },
+    {
+      "id": "S7",
+      "trigger": "Malicious or oversized file upload",
+      "affected": [
+        "uploads"
+      ],
+      "expected": "storage abuse or RCE",
+      "safeguards": [
+        "virus_scanning",
+        "input_sanitization"
+      ],
+      "detection": "upload size/type anomalies",
+      "recovery": "quarantine + reject",
+      "severity": "high"
+    },
+    {
+      "id": "S8",
+      "trigger": "Cross-tenant query missing a tenant filter",
+      "affected": [
+        "tenant_isolation",
+        "tenant_context"
+      ],
+      "expected": "data leak across tenants",
+      "safeguards": [
+        "tenant_isolation"
+      ],
+      "detection": "cross-tenant access audit",
+      "recovery": "isolate + audit + notify",
+      "severity": "high"
+    }
+  ]
+}

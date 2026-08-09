@@ -1,0 +1,19 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "course_platform",
+  "description": "Online courses: lessons, enrollment, progress, payments, certificates.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "authorization_rbac",
+    "billing_stripe",
+    "content_core",
+    "files_core",
+    "comms_core",
+    "analytics_core",
+    "frontend_app"
+  ]
+}

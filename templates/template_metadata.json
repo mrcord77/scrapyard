@@ -1,0 +1,22 @@
+{
+  "saas_app": {
+    "required_feature_routes": ["/auth/register", "/auth/login"],
+    "behavior_probe": "saas_auth"
+  },
+  "internal_tool": {
+    "required_feature_routes": ["/admin/status"],
+    "behavior_probe": "feature_routes_present"
+  },
+  "content_site": {
+    "required_feature_routes": ["/content"],
+    "behavior_probe": "feature_routes_present"
+  },
+  "ai_tool": {
+    "required_feature_routes": ["/ai/status"],
+    "behavior_probe": "feature_routes_present"
+  },
+  "marketplace": {
+    "required_feature_routes": ["/marketplace/listings"],
+    "behavior_probe": "feature_routes_present"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "agent_platform",
+  "description": "LLM agent product: tool-using agents, RAG, streaming, cost logging, evals.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "agent_stack",
+    "rag_stack",
+    "realtime_core",
+    "observability_core",
+    "jobs_core",
+    "frontend_app"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "healthcare",
+  "label": "Health / clinical (NON-clinical-decision; admin & scheduling focus)",
+  "terminology": {
+    "patient": "care recipient",
+    "provider": "clinician",
+    "encounter": "a visit",
+    "PHI": "protected health information"
+  },
+  "entities": [
+    {
+      "name": "Patient",
+      "fields": [
+        "id",
+        "user_id",
+        "dob",
+        "mrn"
+      ],
+      "notes": "PHI \u2014 encrypt + audit access"
+    },
+    {
+      "name": "Provider",
+      "fields": [
+        "id",
+        "user_id",
+        "npi",
+        "specialty"
+      ]
+    },
+    {
+      "name": "Appointment",
+      "fields": [
+        "id",
+        "patient_id",
+        "provider_id",
+        "starts_at",
+        "status"
+      ]
+    },
+    {
+      "name": "Encounter",
+      "fields": [
+        "id",
+        "appointment_id",
+        "notes_ref",
+        "created_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "book appointment -> reminders -> check-in",
+    "provider schedule management",
+    "consent capture",
+    "record access with audit"
+  ],
+  "permissions": [
+    "patient.read",
+    "appointment.manage",
+    "record.access.audited"
+  ],
+  "reports": [
+    "appointment volume",
+    "no-show rate",
+    "provider utilization"
+  ],
+  "capability_hints": [
+    "pq_field_encryption",
+    "compliance_gdpr",
+    "authentication",
+    "comms_core",
+    "admin_console"
+  ],
+  "notes": "Compliance-heavy (HIPAA-style). Treat all patient fields as PHI: encrypt at rest, audit every read. Not for clinical decision-making.",
+  "data_sensitivity": "high",
+  "sensitive_entities": [
+    "Patient",
+    "Encounter"
+  ],
+  "regulated_data": true,
+  "retention_requirements": "per regulatory retention schedule",
+  "deletion_requirements": "controlled per regulation (not always permitted)",
+  "consent_requirements": "documented consent",
+  "audit_requirements": "audit every PHI access",
+  "minimum_security_stage": "scale",
+  "privacy_notes": "PHI. Encrypt at rest, audit all reads, restrict by role. Not for clinical decisions.",
+  "sensitive_fields": {
+    "Patient": [
+      "mrn"
+    ],
+    "Encounter": [
+      "notes_ref"
+    ]
+  },
+  "exempt_fields": {
+    "Provider": [
+      "npi",
+      "specialty"
+    ],
+    "Appointment": [
+      "status"
+    ]
+  },
+  "retention_days": {
+    "encounters": 2555
+  }
+}

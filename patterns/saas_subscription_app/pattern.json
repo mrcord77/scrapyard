@@ -1,0 +1,16 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "saas_subscription_app",
+  "extends": "basic_saas",
+  "description": "Multi-tenant subscription SaaS: auth, RBAC, Stripe billing, admin, the works.",
+  "requires": [
+    "authorization_rbac",
+    "billing_stripe",
+    "multitenancy_core",
+    "admin_console",
+    "comms_core",
+    "frontend_marketing",
+    "observability_core",
+    "deploy_container"
+  ]
+}

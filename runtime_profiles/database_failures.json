@@ -1,0 +1,13 @@
+{
+  "schema": "scrapyard/runtime-profile@1",
+  "category": "database",
+  "scenarios": [
+    {
+      "name": "database_unreachable",
+      "set": {"DATABASE_URL": "sqlite:////nonexistent_dir_xyzzy/app.db"},
+      "needs_key": true,
+      "expect_boot": false,
+      "expect_message": "could not connect to database"
+    }
+  ]
+}

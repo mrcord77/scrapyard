@@ -1,0 +1,16 @@
+{
+  "schema": "scrapyard/composition@1",
+  "name": "users_notifications",
+  "binds": [
+    "users",
+    "notification_center"
+  ],
+  "problem": "Notifications must target users, respect their channel preferences, and honor unsubscribe.",
+  "glue": "notification_center resolves recipient users, checks per-user channel prefs + unsubscribe state, then dispatches via comms_core (email/push/sms).",
+  "steps": [
+    "Add notification_preferences to the users model (or a side table).",
+    "notification_center filters recipients by prefs and unsubscribe_handling state.",
+    "Dispatch through email/sms/push parts; record delivery."
+  ],
+  "owns_data": "notification_preferences, notifications.user_id"
+}

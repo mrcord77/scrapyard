@@ -1,0 +1,29 @@
+{
+  "schema": "scrapyard/workflow@1",
+  "name": "subscription_lifecycle",
+  "actors": [
+    "customer"
+  ],
+  "requires": [
+    "stripe_checkout",
+    "subscriptions",
+    "stripe_webhooks",
+    "entitlement_gate"
+  ],
+  "starting_state": "no subscription",
+  "steps": [
+    {
+      "action": "checkout",
+      "expect": "Stripe customer + subscription created"
+    },
+    {
+      "action": "webhook_activates",
+      "expect": "subscription_status active; entitlements granted"
+    },
+    {
+      "action": "cancel",
+      "expect": "status canceled; entitlements revoked; email sent; audit written"
+    }
+  ],
+  "final_state": "full purchase->cancel cycle with side effects"
+}

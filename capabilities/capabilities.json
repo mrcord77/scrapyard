@@ -1,0 +1,4270 @@
+{
+  "schema": "scrapyard/capabilities@1",
+  "totals": {
+    "concrete": 469,
+    "meta": 27,
+    "concrete_core": 469,
+    "collisions_qualified": [
+      "dashboards",
+      "dependency_resolver"
+    ],
+    "edges": 268
+  },
+  "concrete": {
+    "ab_testing": {
+      "part": "scrapyard.analytics.ab_testing",
+      "layer": "analytics",
+      "status": "core",
+      "addition": true,
+      "purpose": "Assign + measure experiment variants.",
+      "requires": []
+    },
+    "account_deletion": {
+      "part": "scrapyard.compliance.account_deletion",
+      "layer": "compliance",
+      "status": "core",
+      "addition": false,
+      "purpose": "Hard/soft delete + downstream purge.",
+      "requires": [
+        "users",
+        "data_export"
+      ]
+    },
+    "account_lockout": {
+      "part": "scrapyard.identity.account_lockout",
+      "layer": "identity",
+      "status": "core",
+      "addition": true,
+      "purpose": "Lock accounts after repeated failed logins.",
+      "requires": [
+        "users",
+        "rate_limiting"
+      ]
+    },
+    "action_tracer": {
+      "part": "scrapyard.agents.action_tracer",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tracks the execution of each action for debugging and learning, providing a detailed audit trail of agent behavior. It enables post-hoc analysis and performance optimization by capturing start and end",
+      "requires": []
+    },
+    "admin.dashboards": {
+      "part": "scrapyard.admin.dashboards",
+      "layer": "admin",
+      "status": "core",
+      "addition": false,
+      "purpose": "Admin overview metrics aggregation.",
+      "requires": [
+        "audit_logs",
+        "usage_metrics"
+      ]
+    },
+    "admin_access": {
+      "part": "scrapyard.authorization.admin_access",
+      "layer": "authorization",
+      "status": "core",
+      "addition": false,
+      "purpose": "Guard admin-only surfaces.",
+      "requires": [
+        "permissions"
+      ]
+    },
+    "admin_routes": {
+      "part": "scrapyard.admin.admin_routes",
+      "layer": "admin",
+      "status": "core",
+      "addition": true,
+      "purpose": "Operational admin endpoints: /admin/status (live counts + fallback posture) and /admin/jobs (durable queue stats).",
+      "requires": [
+        "db_session"
+      ]
+    },
+    "agent_loop": {
+      "part": "scrapyard.agents.agent_loop",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages the core loop of an agent, coordinating perception, planning, and action execution through a modular architecture. It integrates with a tool registry, planner, and executor to enable dynamic, ",
+      "requires": []
+    },
+    "ai_routes": {
+      "part": "scrapyard.ai.ai_routes",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Durable AI endpoints: /ai/status, /ai/documents (ingest/get/list/delete), /ai/query (cited RAG).",
+      "requires": [
+        "document_store",
+        "rag_service",
+        "providers",
+        "guardrails"
+      ]
+    },
+    "allocation_engine": {
+      "part": "scrapyard.projects.allocation_engine",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.projects.allocation_engine` module provides a reusable core for dynamically allocating resources based on availability and capacity constraints, supporting flexible scheduling in com",
+      "requires": []
+    },
+    "app_factory": {
+      "part": "scrapyard.api.app_factory",
+      "layer": "api",
+      "status": "core",
+      "addition": false,
+      "purpose": "FastAPI application factory wiring middleware, errors, health.",
+      "requires": [
+        "config",
+        "logging_setup",
+        "health",
+        "request_context",
+        "error_handling"
+      ]
+    },
+    "app_scaffold": {
+      "part": "scrapyard.foundation.app_scaffold",
+      "layer": "foundation",
+      "status": "core",
+      "addition": false,
+      "purpose": "Minimal application entrypoint wiring config+logging+app_factory.",
+      "requires": []
+    },
+    "argument_schemas_validator": {
+      "part": "scrapyard.skills.argument_schemas_validator",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Validate input arguments against predefined schemas to ensure correctness and consistency in skill execution, supporting dynamic schema validation and schema versioning.",
+      "requires": []
+    },
+    "artifact_search": {
+      "part": "scrapyard.portal.artifact_search",
+      "layer": "portal",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Enables efficient, metadata-driven search for shared artifacts in a client portal, with indexing and querying capabilities. Serves as a reusable component for artifact discovery across distributed ",
+      "requires": []
+    },
+    "artifact_versioning": {
+      "part": "scrapyard.portal.artifact_versioning",
+      "layer": "portal",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Tracks and manages different versions of shared artifacts for the client portal, enabling audit, rollback, and versioned access. This module provides a robust, type-safe, and scalable mechanism for",
+      "requires": []
+    },
+    "attention_block": {
+      "part": "scrapyard.ml.attention_block",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.attention_block` module provides reusable attention mechanisms for neural networks, enabling flexible integration into various deep learning architectures. It is designed to be mo",
+      "requires": []
+    },
+    "audio_extractor": {
+      "part": "scrapyard.media.audio_extractor",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "Extracts audio from video files using FFmpeg, providing a reusable, type-safe interface for media processing pipelines.",
+      "requires": []
+    },
+    "audio_normalizer": {
+      "part": "scrapyard.media.audio_normalizer",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "audio normalizer",
+      "requires": []
+    },
+    "audit_logs": {
+      "part": "scrapyard.admin.audit_logs",
+      "layer": "admin",
+      "status": "core",
+      "addition": false,
+      "purpose": "Tamper-evident append-only audit log (hash chain + hybrid post-quantum witness).",
+      "requires": [
+        "base_model"
+      ]
+    },
+    "audit_mixin": {
+      "part": "scrapyard.database.audit_mixin",
+      "layer": "database",
+      "status": "core",
+      "addition": true,
+      "purpose": "created_by/updated_by + change tracking mixin.",
+      "requires": [
+        "base_model"
+      ]
+    },
+    "audit_trail": {
+      "part": "scrapyard.legal.audit_trail",
+      "layer": "legal",
+      "status": "core",
+      "addition": true,
+      "purpose": "audit trail",
+      "requires": []
+    },
+    "auth_checks": {
+      "part": "scrapyard.testing.auth_checks",
+      "layer": "testing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Verify login/refresh/permission paths.",
+      "requires": []
+    },
+    "auth_pages": {
+      "part": "scrapyard.frontend.auth_pages",
+      "layer": "frontend",
+      "status": "core",
+      "addition": true,
+      "purpose": "Login/signup/reset UI blocks.",
+      "requires": [
+        "forms"
+      ]
+    },
+    "auth_routes": {
+      "part": "scrapyard.identity.auth_routes",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "Login/logout/refresh route handlers (login_routes).",
+      "requires": [
+        "users",
+        "password_hashing",
+        "jwt_manager",
+        "session_manager"
+      ]
+    },
+    "autostart_registration": {
+      "part": "scrapyard.desktop.autostart_registration",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Registers and unregisters a desktop application for autostart across major OS platforms. Provides a consistent, OS-agnostic API for managing startup behavior, ensuring compatibility and reliability",
+      "requires": []
+    },
+    "availability_rule": {
+      "part": "scrapyard.projects.availability_rule",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Define business rules for resource availability and scheduling constraints, enabling flexible and reusable validation and application logic in resource scheduling systems. This module provides a co",
+      "requires": []
+    },
+    "background_tasks": {
+      "part": "scrapyard.jobs.background_tasks",
+      "layer": "jobs",
+      "status": "core",
+      "addition": false,
+      "purpose": "Fire-and-forget tasks off the request path.",
+      "requires": [
+        "queues"
+      ]
+    },
+    "backoff_scheduler": {
+      "part": "scrapyard.llm.backoff_scheduler",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "Schedule and manage exponential backoff intervals for retrying failed LLM inference requests, ensuring resilience and rate compliance.",
+      "requires": []
+    },
+    "backup": {
+      "part": "scrapyard.operations.backup",
+      "layer": "operations",
+      "status": "core",
+      "addition": true,
+      "purpose": "Executable PostgreSQL backup/restore with verified roundtrip.",
+      "requires": []
+    },
+    "backups": {
+      "part": "scrapyard.deployment.backups",
+      "layer": "deployment",
+      "status": "core",
+      "addition": false,
+      "purpose": "Scheduled DB + media backup scripts.",
+      "requires": []
+    },
+    "base_model": {
+      "part": "scrapyard.database.base_model",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "Declarative base with primary key + common helpers.",
+      "requires": []
+    },
+    "batch_inference_server": {
+      "part": "scrapyard.ml.batch_inference_server",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provide a scalable, batch-oriented inference server for ML models. Enables efficient processing of multiple requests in parallel, reducing latency and resource overhead.",
+      "requires": []
+    },
+    "batch_processing_queue": {
+      "part": "scrapyard.media.batch_processing_queue",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages batch processing tasks using a queue, enabling scalable and reliable media processing workflows.",
+      "requires": []
+    },
+    "blog": {
+      "part": "scrapyard.content.blog",
+      "layer": "content",
+      "status": "core",
+      "addition": false,
+      "purpose": "Blog posts with tags, slugs, drafts.",
+      "requires": [
+        "cms",
+        "markdown_pages"
+      ]
+    },
+    "breach_detector": {
+      "part": "scrapyard.support.breach_detector",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Monitor and detect SLA breaches based on actual performance, providing actionable events for remediation and reporting.",
+      "requires": []
+    },
+    "breach_notifier": {
+      "part": "scrapyard.support.breach_notifier",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Notify stakeholders when an SLA breach occurs, ensuring timely corrective actions. It provides a flexible and extensible mechanism for defining and sending breach notifications through multiple channe",
+      "requires": []
+    },
+    "breach_resolver": {
+      "part": "scrapyard.support.breach_resolver",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Handle resolution of SLA breaches, including manual overrides and corrections. Provides structured tracking and validation of breach resolutions within the system.",
+      "requires": []
+    },
+    "browser_automation": {
+      "part": "scrapyard.automation.browser_automation",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "A browser automation tool using Playwright to interact with web pages, providing reusable page objects and session management for scalable web scraping and testing workflows.",
+      "requires": []
+    },
+    "buffer_calculator": {
+      "part": "scrapyard.scheduling.buffer_calculator",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "Computes and applies time buffers before and after scheduled slots to improve scheduling robustness and flexibility. It ensures slots are padded with buffer time for unexpected delays or early complet",
+      "requires": []
+    },
+    "build_metadata_composer": {
+      "part": "scrapyard.curation.build_metadata_composer",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Generate a build metadata from job descriptions by composing parts and resolving dependencies. It ensures ordered, consistent assembly of software components based on curated data and graph logic.",
+      "requires": []
+    },
+    "burndown_generator": {
+      "part": "scrapyard.projects.burndown_generator",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Generates burndown charts for project management by analyzing task progress over time, enabling teams to visualize work completion and forecast project timelines. This module provides reusable, dat",
+      "requires": []
+    },
+    "cache_client": {
+      "part": "scrapyard.caching.cache_client",
+      "layer": "caching",
+      "status": "core",
+      "addition": true,
+      "purpose": "Unified cache (memory|redis); in-memory forbidden in production.",
+      "requires": []
+    },
+    "cache_invalidation": {
+      "part": "scrapyard.caching.cache_invalidation",
+      "layer": "caching",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tag-based invalidation helpers.",
+      "requires": [
+        "cache_client"
+      ]
+    },
+    "cached_decorator": {
+      "part": "scrapyard.caching.cached_decorator",
+      "layer": "caching",
+      "status": "core",
+      "addition": true,
+      "purpose": "Memoize function results with TTL.",
+      "requires": [
+        "cache_client"
+      ]
+    },
+    "cancellation_flow": {
+      "part": "scrapyard.billing.cancellation_flow",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Cancel/downgrade with grace + reason capture.",
+      "requires": [
+        "subscriptions"
+      ]
+    },
+    "capacity_forecast": {
+      "part": "scrapyard.projects.capacity_forecast",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Forecast future capacity needs based on historical data and trends. Provides a reusable forecasting model for resource scheduling scenarios.",
+      "requires": []
+    },
+    "capacity_report": {
+      "part": "scrapyard.projects.capacity_report",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.projects.capacity_report` module provides tools to generate and export capacity usage reports for resource scheduling systems. It enables structured analysis of resource availability",
+      "requires": []
+    },
+    "category_mapping": {
+      "part": "scrapyard.expenses.category_mapping",
+      "layer": "expenses",
+      "status": "core",
+      "addition": true,
+      "purpose": "Map expenses to predefined business categories for consistent financial reporting and analysis. Enables flexible and maintainable categorization of expenses across different business contexts.",
+      "requires": []
+    },
+    "change_detector": {
+      "part": "scrapyard.automation.change_detector",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Detects changes in web page content over time using HTML diffing and automation. Core module for monitoring and comparing web page structures and content dynamically.",
+      "requires": []
+    },
+    "chart_generation": {
+      "part": "scrapyard.data_eng.chart_generation",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Generates customizable visualizations for data analysis workflows. Provides reusable, high-level charting functions that abstract matplotlib complexity while enabling fine-grained control.",
+      "requires": []
+    },
+    "checkpointing": {
+      "part": "scrapyard.ml.checkpointing",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages saving and loading model checkpoints during training, ensuring robust state persistence and recovery. It provides tools for checkpoint management that integrate seamlessly with training loops ",
+      "requires": []
+    },
+    "chunking": {
+      "part": "scrapyard.ai.chunking",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Sentence-aware text chunking with overlap for RAG ingestion.",
+      "requires": []
+    },
+    "clause_library": {
+      "part": "scrapyard.legal.clause_library",
+      "layer": "legal",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.legal.clause_library` module provides a centralized, reusable library for managing contract clauses used in e-signature workflows. It ensures consistency, reusability, and efficient ",
+      "requires": []
+    },
+    "clause_usage": {
+      "part": "scrapyard.legal.clause_usage",
+      "layer": "legal",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Track which legal clauses are used in which contracts, enabling audit, compliance, and analytics in contract management systems. This module provides a lightweight, reusable way to log and query cl",
+      "requires": []
+    },
+    "clipboard_history_logger": {
+      "part": "scrapyard.automation.clipboard_history_logger",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Log all clipboard changes to a persistent history store for auditing or recovery. Enables tracking of user activity and content flow in automation workflows.",
+      "requires": []
+    },
+    "clipboard_operations": {
+      "part": "scrapyard.desktop.clipboard_operations",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.desktop.clipboard_operations` module provides a reliable and cross-platform interface for interacting with the system clipboard, ensuring seamless text copying and pasting across des",
+      "requires": []
+    },
+    "clock_rule": {
+      "part": "scrapyard.support.clock_rule",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Define how time is measured for SLA compliance, enabling flexible and policy-driven time calculations across different service scenarios.",
+      "requires": []
+    },
+    "cms": {
+      "part": "scrapyard.content.cms",
+      "layer": "content",
+      "status": "core",
+      "addition": false,
+      "purpose": "Generic content model + publish workflow.",
+      "requires": []
+    },
+    "cnn_block": {
+      "part": "scrapyard.ml.cnn_block",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.cnn_block` module provides reusable building blocks for constructing convolutional neural networks, enabling rapid prototyping and modular design in deep learning applications. It",
+      "requires": []
+    },
+    "cohort_analysis": {
+      "part": "scrapyard.data_eng.cohort_analysis",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.data_eng.cohort_analysis` module provides tools to analyze user behavior by cohort, enabling insights into retention, engagement, and trend patterns over time. It builds on a datafra",
+      "requires": []
+    },
+    "comment_thread_manager": {
+      "part": "scrapyard.portal.comment_thread_manager",
+      "layer": "portal",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages creation and retrieval of comment threads on shared artifacts, enabling collaborative feedback and discussion within the client portal.",
+      "requires": []
+    },
+    "config": {
+      "part": "scrapyard.foundation.config",
+      "layer": "foundation",
+      "status": "core",
+      "addition": false,
+      "purpose": "Typed settings loaded from env/.env with validation.",
+      "requires": []
+    },
+    "config_file_loader": {
+      "part": "scrapyard.clitools.config_file_loader",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "config file loader",
+      "requires": []
+    },
+    "configuration_manager": {
+      "part": "scrapyard.ml.configuration_manager",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.configuration_manager` module provides a centralized, type-safe, and versioned mechanism for managing configuration settings used in ML inference serving systems. It ensures consi",
+      "requires": []
+    },
+    "configurator": {
+      "part": "scrapyard.devops.configurator",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manage and apply configuration settings across different environments, ensuring consistency and traceability. It provides a structured way to define, store, and apply configuration values with environ",
+      "requires": []
+    },
+    "consent_logs": {
+      "part": "scrapyard.compliance.consent_logs",
+      "layer": "compliance",
+      "status": "core",
+      "addition": false,
+      "purpose": "Record consent grants/revocations with proof.",
+      "requires": [
+        "base_model"
+      ]
+    },
+    "content_routes": {
+      "part": "scrapyard.content.content_routes",
+      "layer": "content",
+      "status": "core",
+      "addition": true,
+      "purpose": "DB-backed content endpoints: list/read published content, with key-gated authoring.",
+      "requires": [
+        "db_session",
+        "base_model",
+        "blog"
+      ]
+    },
+    "content_scraper": {
+      "part": "scrapyard.automation.content_scraper",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.automation.content_scraper` module provides a flexible and reusable framework for scraping structured content from web pages using a chain of customizable extractors. It enables modu",
+      "requires": []
+    },
+    "contract_template": {
+      "part": "scrapyard.legal.contract_template",
+      "layer": "legal",
+      "status": "core",
+      "addition": true,
+      "purpose": "The contract_template module provides a foundation for managing reusable contract templates, clauses, versions, and digital signatures within a legal ecosystem. It enables structured storage, retrieva",
+      "requires": []
+    },
+    "contract_tests": {
+      "part": "scrapyard.testing.contract_tests",
+      "layer": "testing",
+      "status": "core",
+      "addition": true,
+      "purpose": "Validate responses against OpenAPI schema.",
+      "requires": []
+    },
+    "contract_version": {
+      "part": "scrapyard.legal.contract_version",
+      "layer": "legal",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Track and manage multiple versions of electronic contracts, ensuring auditability and version control for legal and compliance use. This module provides a structured, reusable way to handle contrac",
+      "requires": []
+    },
+    "conversation_state": {
+      "part": "scrapyard.agents.conversation_state",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages and persists conversation state across interactions, enabling memory-based agents to maintain context and recall past exchanges efficiently.",
+      "requires": []
+    },
+    "cors": {
+      "part": "scrapyard.security.cors",
+      "layer": "security",
+      "status": "core",
+      "addition": false,
+      "purpose": "Configured CORS policy helper.",
+      "requires": []
+    },
+    "cost_accountant": {
+      "part": "scrapyard.llm.cost_accountant",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track and aggregate LLM request costs based on token usage and provider pricing. Integrates with stream_handler to capture usage metrics and apply pricing models.",
+      "requires": []
+    },
+    "credit_allocator": {
+      "part": "scrapyard.support.credit_allocator",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Automatically allocate credits based on breach severity and contract terms, enforcing contract rules and ensuring fair credit distribution across service agreements.",
+      "requires": []
+    },
+    "crm_account_hierarchy": {
+      "part": "scrapyard.sales.crm_account_hierarchy",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Manage hierarchical CRM account relationships, enabling tree traversal and structured parent/child link management. Supports complex account hierarchies for sales pipeline analytics and organizatio",
+      "requires": []
+    },
+    "crm_activity_timeline": {
+      "part": "scrapyard.sales.crm_activity_timeline",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.sales.crm_activity_timeline` module provides a reusable, type-safe, and scalable way to log and retrieve CRM activity timelines, ensuring consistent tracking of entity interactions a",
+      "requires": []
+    },
+    "crm_audit_trail": {
+      "part": "scrapyard.sales.crm_audit_trail",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track changes to CRM entities for auditing and compliance, ensuring full visibility of modifications. This module provides a robust, reusable audit trail system for CRM pipelines.",
+      "requires": []
+    },
+    "crm_contact_linking": {
+      "part": "scrapyard.sales.crm_contact_linking",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "Link contacts to leads, accounts, or other contacts based on relationships, enabling CRM pipeline tracking and relationship management.",
+      "requires": []
+    },
+    "crm_data_export": {
+      "part": "scrapyard.sales.crm_data_export",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.sales.crm_data_export` module provides tools to export CRM pipeline data into structured formats for reporting or migration, ensuring clean, consistent, and reusable data access. It ",
+      "requires": []
+    },
+    "crm_lead_management": {
+      "part": "scrapyard.sales.crm_lead_management",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manage the creation, tracking, and updating of leads within the CRM pipeline. Provides a structured way to handle lead lifecycle events and maintain historical status changes.",
+      "requires": []
+    },
+    "cron_jobs": {
+      "part": "scrapyard.jobs.cron_jobs",
+      "layer": "jobs",
+      "status": "core",
+      "addition": false,
+      "purpose": "Declarative scheduled job registry.",
+      "requires": []
+    },
+    "crypto_agility": {
+      "part": "scrapyard.security.crypto_agility",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Name every crypto operation as a swappable cipher suite and select the backend, so algorithms can migrate without rewrites.",
+      "requires": []
+    },
+    "csrf": {
+      "part": "scrapyard.security.csrf",
+      "layer": "security",
+      "status": "core",
+      "addition": false,
+      "purpose": "Double-submit CSRF protection for cookie auth.",
+      "requires": []
+    },
+    "csv_dataset_loader": {
+      "part": "scrapyard.ml.csv_dataset_loader",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `csv_dataset_loader` module provides a flexible and efficient way to load CSV datasets into memory or as a stream, supporting large-scale data processing and integration with ML pipelines.",
+      "requires": []
+    },
+    "csv_writer": {
+      "part": "scrapyard.documents.csv_writer",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.documents.csv_writer` module provides a robust and reusable interface for writing structured data to CSV files, ensuring compatibility, performance, and flexibility for document proc",
+      "requires": []
+    },
+    "curation.dependency_resolver": {
+      "part": "scrapyard.curation.dependency_resolver",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Resolve the full dependency closure for a chosen part set (scrapyard imports found by AST plus PART-META dependencies), with cycle detection and a safe assembly order.",
+      "requires": []
+    },
+    "data_augmentation_pipeline": {
+      "part": "scrapyard.ml.data_augmentation_pipeline",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Apply data augmentation techniques to datasets in a modular and reusable way, enabling consistent preprocessing across ML projects.",
+      "requires": []
+    },
+    "data_deduplication": {
+      "part": "scrapyard.data_io.data_deduplication",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.data_io.data_deduplication` module provides strategies for identifying and resolving duplicate records in datasets, ensuring data integrity during import and export workflows. It sup",
+      "requires": []
+    },
+    "data_export": {
+      "part": "scrapyard.compliance.data_export",
+      "layer": "compliance",
+      "status": "core",
+      "addition": false,
+      "purpose": "Export a user's data (DSAR/portability).",
+      "requires": [
+        "users"
+      ]
+    },
+    "data_export_executor": {
+      "part": "scrapyard.data_io.data_export_executor",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "Execute data export operations with transaction management and rollback support, ensuring data integrity during export workflows.",
+      "requires": []
+    },
+    "data_export_formatter": {
+      "part": "scrapyard.data_io.data_export_formatter",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.data_io.data_export_formatter` module provides a reusable, type-safe interface for formatting structured data into standardized export formats like CSV or JSON. It ensures consistent",
+      "requires": []
+    },
+    "data_import_executor": {
+      "part": "scrapyard.data_io.data_import_executor",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "Execute data import operations with transaction management and rollback support. Ensures data integrity during bulk imports using SQLAlchemy sessions and rollback on failure.",
+      "requires": []
+    },
+    "data_loader_factory": {
+      "part": "scrapyard.ml.data_loader_factory",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides a factory for creating data loaders with various transformations and augmentations, enabling flexible and reusable ML training pipelines.",
+      "requires": []
+    },
+    "data_loader_helper": {
+      "part": "scrapyard.ml.data_loader_helper",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides reusable data loading and preprocessing utilities for neural network training and evaluation, with support for database-backed data sources and flexible preprocessing pipelines.",
+      "requires": []
+    },
+    "data_mapping_config": {
+      "part": "scrapyard.data_io.data_mapping_config",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Define and manage mappings between data fields and domain models for consistent data import/export. This module provides a reusable configuration system for aligning external data with internal dom",
+      "requires": []
+    },
+    "data_mapping_loader": {
+      "part": "scrapyard.data_io.data_mapping_loader",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.data_io.data_mapping_loader` module provides a flexible and reusable mechanism for loading and parsing data mapping configurations from external files. It enables consistent and type",
+      "requires": []
+    },
+    "data_storage_handler": {
+      "part": "scrapyard.clitools.data_storage_handler",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides SQLite-based data storage for CLI tools, enabling structured data management via SQLAlchemy. Supports database creation, CRUD operations, and table management for common entities.",
+      "requires": []
+    },
+    "data_validation_engine": {
+      "part": "scrapyard.data_io.data_validation_engine",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `Validator` class ensures data integrity by enforcing schema and business rules during import/export operations. It provides a reusable, rule-based validation engine for structured data process",
+      "requires": []
+    },
+    "dataframe_convenience_layer": {
+      "part": "scrapyard.data_eng.dataframe_convenience_layer",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides reusable, high-level dataframe operations for data analysis, reducing boilerplate and improving consistency across projects. Functions are designed to be flexible, type-safe, and compatible w",
+      "requires": []
+    },
+    "dataset_splitter": {
+      "part": "scrapyard.ml.dataset_splitter",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.dataset_splitter` module provides flexible, reusable tools for splitting datasets into training, validation, and test sets, supporting multiple data formats. It ensures consistent",
+      "requires": []
+    },
+    "db_queue": {
+      "part": "scrapyard.jobs.db_queue",
+      "layer": "jobs",
+      "status": "core",
+      "addition": true,
+      "purpose": "Durable database-backed job queue with locking, retry/backoff, dead-letter, and idempotency.",
+      "requires": [
+        "db_session",
+        "base_model"
+      ]
+    },
+    "db_session": {
+      "part": "scrapyard.database.db_session",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "SQLAlchemy engine + session factory + get_db dependency.",
+      "requires": []
+    },
+    "dead_letter": {
+      "part": "scrapyard.jobs.dead_letter",
+      "layer": "jobs",
+      "status": "core",
+      "addition": true,
+      "purpose": "Dead-letter capture for exhausted jobs.",
+      "requires": [
+        "queues"
+      ]
+    },
+    "dead_letter_handler": {
+      "part": "scrapyard.data_eng.dead_letter_handler",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "Handle and manage failed or invalid data entries that cannot be processed. This module ensures robust error recovery in data pipelines by isolating problematic records for later inspection or reproces",
+      "requires": []
+    },
+    "deduplicator": {
+      "part": "scrapyard.data_eng.deduplicator",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `deduplicator` module provides core functionality to eliminate duplicate records from datasets during data pipeline processing. It leverages transformation logic and ensures data integrity thro",
+      "requires": []
+    },
+    "dependency_container": {
+      "part": "scrapyard.foundation.dependency_container",
+      "layer": "foundation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tiny service registry / DI container.",
+      "requires": []
+    },
+    "dependency_tracker": {
+      "part": "scrapyard.factory_intel.dependency_tracker",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tracks cross-project dependencies in the workspace. Enables analysis of interdependencies between projects, modules, and libraries.",
+      "requires": []
+    },
+    "deploy_smoke_test_runner": {
+      "part": "scrapyard.devops.deploy_smoke_test_runner",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Run smoke tests post-deployment to validate core system functionality, ensuring minimal operational impact and rapid failure detection.",
+      "requires": []
+    },
+    "docker": {
+      "part": "scrapyard.deployment.docker",
+      "layer": "deployment",
+      "status": "core",
+      "addition": false,
+      "purpose": "Multistage Dockerfile + compose for the stack.",
+      "requires": []
+    },
+    "dockerfile_generator": {
+      "part": "scrapyard.devops.dockerfile_generator",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Generates Dockerfiles for various application stacks, enabling consistent and repeatable container builds across different project types and environments.",
+      "requires": []
+    },
+    "document_diffing": {
+      "part": "scrapyard.documents.document_diffing",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Compare and highlight differences between two documents, providing structured output for review or automation. This module enables precise, efficient document comparison using standard text processing",
+      "requires": []
+    },
+    "document_generator": {
+      "part": "scrapyard.documents.document_generator",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Orchestrate end-to-end document generation using templates and data inputs. Provides a reusable, type-safe, and testable interface for generating documents in bytes format.",
+      "requires": []
+    },
+    "document_publisher": {
+      "part": "scrapyard.documents.document_publisher",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "**: The `scrapyard.documents.document_publisher` module provides a reusable mechanism to publish or export generated documents to external systems or storage, with detailed logging for audit and debug",
+      "requires": []
+    },
+    "document_renderer": {
+      "part": "scrapyard.documents.document_renderer",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.documents.document_renderer` module provides a reusable, type-safe interface for rendering structured documents from templates and dynamic data. It supports flexible rendering strate",
+      "requires": []
+    },
+    "document_store": {
+      "part": "scrapyard.ai.document_store",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Durable document/chunk storage with embedded-chunk retrieval (scored citations) and retrieval logging.",
+      "requires": [
+        "db_session",
+        "base_model",
+        "chunking",
+        "embeddings"
+      ]
+    },
+    "document_versioner": {
+      "part": "scrapyard.documents.document_versioner",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Track and manage document versions for generated content, ensuring auditability and version control. This module provides a robust, reusable mechanism for versioning documents in any software produ",
+      "requires": []
+    },
+    "docx_generator": {
+      "part": "scrapyard.documents.docx_generator",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "docx generator",
+      "requires": []
+    },
+    "domain_errors": {
+      "part": "scrapyard.api.domain_errors",
+      "layer": "api",
+      "status": "core",
+      "addition": false,
+      "purpose": "Typed domain-rule violations (reference/conflict/workflow) and their 409 handlers.",
+      "requires": []
+    },
+    "early_stopping": {
+      "part": "scrapyard.ml.early_stopping",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "early stopping",
+      "requires": []
+    },
+    "email": {
+      "part": "scrapyard.communication.email",
+      "layer": "communication",
+      "status": "core",
+      "addition": false,
+      "purpose": "Transactional email send via pluggable provider.",
+      "requires": []
+    },
+    "email_verification": {
+      "part": "scrapyard.identity.email_verification",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "Email confirmation token issue + verify.",
+      "requires": [
+        "users",
+        "email"
+      ]
+    },
+    "embedding_generator": {
+      "part": "scrapyard.factory_intel.embedding_generator",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "embedding generator",
+      "requires": []
+    },
+    "embedding_index": {
+      "part": "scrapyard.curation.embedding_index",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "embedding index",
+      "requires": []
+    },
+    "embedding_layer": {
+      "part": "scrapyard.ml.embedding_layer",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `scrapyard.ml.embedding_layer` module provides reusable, configurable embedding layer utilities for text and categorical data, enabling seamless integration into neural network architectures. It i",
+      "requires": []
+    },
+    "embedding_service": {
+      "part": "scrapyard.ml.embedding_service",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provide a reusable, scalable interface for managing and serving embedding models, enabling efficient inference and storage of embeddings.",
+      "requires": []
+    },
+    "embeddings": {
+      "part": "scrapyard.ai.embeddings",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Create + cache text embeddings.",
+      "requires": [
+        "llm_client"
+      ]
+    },
+    "empty_states": {
+      "part": "scrapyard.frontend.empty_states",
+      "layer": "frontend",
+      "status": "core",
+      "addition": true,
+      "purpose": "Reusable empty/error/loading states.",
+      "requires": []
+    },
+    "entitlement_gate": {
+      "part": "scrapyard.authorization.entitlement_gate",
+      "layer": "authorization",
+      "status": "core",
+      "addition": false,
+      "purpose": "Gate features by billing plan/entitlement.",
+      "requires": [
+        "subscription_status"
+      ]
+    },
+    "entitlements": {
+      "part": "scrapyard.billing.entitlements",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Map plan -> entitlements/limits.",
+      "requires": [
+        "subscription_status"
+      ]
+    },
+    "env_loading": {
+      "part": "scrapyard.foundation.env_loading",
+      "layer": "foundation",
+      "status": "core",
+      "addition": false,
+      "purpose": "Locate and load .env files across environments.",
+      "requires": []
+    },
+    "environment_diffing_tool": {
+      "part": "scrapyard.devops.environment_diffing_tool",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Compare and diff software environments (dev, staging, prod) by analyzing configuration and state differences. Enables rapid identification of drift and misalignment between environments.",
+      "requires": []
+    },
+    "environment_variable_manager": {
+      "part": "scrapyard.clitools.environment_variable_manager",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages environment variables for CLI tools, ensuring consistent access and validation across the application. Provides a safe and reusable interface for reading, defaulting, and validating environmen",
+      "requires": []
+    },
+    "episodic_memory_store": {
+      "part": "scrapyard.agents.episodic_memory_store",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `episodic_memory_store` module provides a durable, timestamped storage system for episodic memories used by agent systems. It enables agents to record and retrieve contextual experiences over t",
+      "requires": []
+    },
+    "error_handler": {
+      "part": "scrapyard.automation.error_handler",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `error_handler` module provides centralized error handling and logging for web automation tasks, ensuring consistent behavior across the automation_web domain. It enables robust error capture, cla",
+      "requires": []
+    },
+    "error_handling": {
+      "part": "scrapyard.api.error_handling",
+      "layer": "api",
+      "status": "core",
+      "addition": false,
+      "purpose": "Exception handlers producing consistent error envelopes.",
+      "requires": [
+        "error_taxonomy"
+      ]
+    },
+    "error_reporting": {
+      "part": "scrapyard.observability.error_reporting",
+      "layer": "observability",
+      "status": "core",
+      "addition": true,
+      "purpose": "Capture exceptions to Sentry/provider.",
+      "requires": [
+        "structured_logging"
+      ]
+    },
+    "error_taxonomy": {
+      "part": "scrapyard.foundation.error_taxonomy",
+      "layer": "foundation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Canonical app error classes mapped to HTTP + codes.",
+      "requires": []
+    },
+    "estimation_cost_estimator": {
+      "part": "scrapyard.sales.estimation_cost_estimator",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "Calculates total cost of an estimate based on task hours and rate cards. Provides modular, reusable cost estimation logic for pricing and quoting workflows.",
+      "requires": []
+    },
+    "estimation_exporter": {
+      "part": "scrapyard.sales.estimation_exporter",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Exports estimation data in multiple formats for use in sales and pricing workflows. Designed to be reusable across products, it ensures consistent data serialization and reporting.",
+      "requires": []
+    },
+    "estimation_validator": {
+      "part": "scrapyard.sales.estimation_validator",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "Ensures estimates meet business rules and constraints by validating rate card compliance, task hours, and overall estimate structure. Acts as a gatekeeper for estimation pricing workflows.",
+      "requires": []
+    },
+    "estimation_versioning": {
+      "part": "scrapyard.sales.estimation_versioning",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Tracks and manages estimate versions for audit and comparison, enabling traceability and rollback in pricing workflows. Provides a robust versioning mechanism with history tracking and controlled r",
+      "requires": []
+    },
+    "estimation_work_breakdown": {
+      "part": "scrapyard.sales.estimation_work_breakdown",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Manages hierarchical decomposition of projects into work packages and tasks for accurate estimation and pricing. Provides reusable modeling and operations for structuring complex work breakdowns in",
+      "requires": []
+    },
+    "eval_harness": {
+      "part": "scrapyard.ai.eval_harness",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Run prompt evals against fixtures.",
+      "requires": [
+        "llm_client",
+        "prompt_registry"
+      ]
+    },
+    "event_bus": {
+      "part": "scrapyard.messaging.event_bus",
+      "layer": "messaging",
+      "status": "core",
+      "addition": true,
+      "purpose": "In-process pub/sub for domain events.",
+      "requires": []
+    },
+    "event_tracking": {
+      "part": "scrapyard.analytics.event_tracking",
+      "layer": "analytics",
+      "status": "core",
+      "addition": false,
+      "purpose": "Capture typed product events.",
+      "requires": []
+    },
+    "executor": {
+      "part": "scrapyard.agents.executor",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Executes agent plans by decomposing them into steps and performing actions. It acts as the execution engine for the agents_core domain, ensuring plans are carried out systematically and reliably.",
+      "requires": []
+    },
+    "experiment_config_management": {
+      "part": "scrapyard.ml.experiment_config_management",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages experiment configurations and hyperparameters in a structured and reusable way, ensuring consistency and traceability across ML training workflows.",
+      "requires": []
+    },
+    "export_progress_tracker": {
+      "part": "scrapyard.data_io.export_progress_tracker",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track the progress of an ongoing export operation in real-time, providing visibility into the status and performance of data export processes. It ensures consistent state tracking and supports real-ti",
+      "requires": []
+    },
+    "export_service": {
+      "part": "scrapyard.knowledge.export_service",
+      "layer": "knowledge",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.knowledge.export_service` module provides reusable functionality for exporting knowledge base content in structured formats, enabling integration with external systems and user-facin",
+      "requires": []
+    },
+    "extractor": {
+      "part": "scrapyard.data_eng.extractor",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `extractor` module provides reusable functions for pulling data from diverse sources, enabling flexible and scalable data pipeline architectures.",
+      "requires": []
+    },
+    "faceted_search": {
+      "part": "scrapyard.search.faceted_search",
+      "layer": "search",
+      "status": "core",
+      "addition": true,
+      "purpose": "Facet counts/aggregations for filters.",
+      "requires": [
+        "full_text_search"
+      ]
+    },
+    "factories": {
+      "part": "scrapyard.testing.factories",
+      "layer": "testing",
+      "status": "core",
+      "addition": true,
+      "purpose": "Model factories/fixtures for tests.",
+      "requires": []
+    },
+    "feature_gates": {
+      "part": "scrapyard.authorization.feature_gates",
+      "layer": "authorization",
+      "status": "core",
+      "addition": false,
+      "purpose": "Boolean/percentage feature flags per user/tenant.",
+      "requires": [
+        "entitlement_gate"
+      ]
+    },
+    "feedback_loop": {
+      "part": "scrapyard.agents.feedback_loop",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Enables continuous learning by capturing and applying feedback from agent actions. It supports iterative refinement of plans through data-driven insights.",
+      "requires": []
+    },
+    "few_shot_example_selector": {
+      "part": "scrapyard.llm.few_shot_example_selector",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `few_shot_example_selector` module selects relevant few-shot examples from a repository based on input context, enabling dynamic and context-aware prompting for LLMs. It supports modular, reusa",
+      "requires": []
+    },
+    "field_encryption": {
+      "part": "scrapyard.security.field_encryption",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Encrypt sensitive columns at rest.",
+      "requires": []
+    },
+    "file_dialogs": {
+      "part": "scrapyard.desktop.file_dialogs",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides platform-agnostic file and directory selection dialogs for desktop applications. Enables users to open or save files, and select directories with consistent UI across platforms.",
+      "requires": []
+    },
+    "file_system_tools": {
+      "part": "scrapyard.clitools.file_system_tools",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides reusable CLI file system utilities for reading, writing, and managing files and directories. Designed to be modular, type-safe, and testable.",
+      "requires": []
+    },
+    "file_system_watcher": {
+      "part": "scrapyard.automation.file_system_watcher",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Monitor file system changes for real-time automation. Provides a robust, cross-platform watcher with filtering and event handling.",
+      "requires": []
+    },
+    "file_walker": {
+      "part": "scrapyard.factory_intel.file_walker",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "Walks and indexes all files and directories in a given workspace, providing a foundational dataset for project classification and analysis.",
+      "requires": []
+    },
+    "filters": {
+      "part": "scrapyard.search.filters",
+      "layer": "search",
+      "status": "core",
+      "addition": false,
+      "purpose": "Composable, safe filter spec -> query.",
+      "requires": []
+    },
+    "forgetting_policy_manager": {
+      "part": "scrapyard.agents.forgetting_policy_manager",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages policies for forgetting outdated or less relevant memories. It evaluates memory relevance and applies forgetting rules to maintain efficient and focused agent memory.",
+      "requires": []
+    },
+    "forms": {
+      "part": "scrapyard.frontend.forms",
+      "layer": "frontend",
+      "status": "core",
+      "addition": false,
+      "purpose": "Accessible form fields + validation display.",
+      "requires": []
+    },
+    "frontend.dashboards": {
+      "part": "scrapyard.frontend.dashboards",
+      "layer": "frontend",
+      "status": "core",
+      "addition": false,
+      "purpose": "Dashboard shell with cards/charts slots.",
+      "requires": [
+        "tables"
+      ]
+    },
+    "full_text_search": {
+      "part": "scrapyard.search.full_text_search",
+      "layer": "search",
+      "status": "core",
+      "addition": false,
+      "purpose": "Full-text search (pg tsvector / external engine).",
+      "requires": []
+    },
+    "funnels": {
+      "part": "scrapyard.analytics.funnels",
+      "layer": "analytics",
+      "status": "core",
+      "addition": false,
+      "purpose": "Define + compute conversion funnels.",
+      "requires": []
+    },
+    "gdpr_dsr": {
+      "part": "scrapyard.compliance.gdpr_dsr",
+      "layer": "compliance",
+      "status": "core",
+      "addition": true,
+      "purpose": "Intake + fulfill data-subject requests.",
+      "requires": [
+        "data_export",
+        "account_deletion",
+        "consent_logs"
+      ]
+    },
+    "geospatial_transforms": {
+      "part": "scrapyard.scientific.geospatial_transforms",
+      "layer": "scientific",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `geospatial_transforms` module provides tools for performing geospatial transformations and projections, enabling accurate coordinate system conversions in scientific and engineering applicatio",
+      "requires": []
+    },
+    "github_actions": {
+      "part": "scrapyard.deployment.github_actions",
+      "layer": "deployment",
+      "status": "core",
+      "addition": false,
+      "purpose": "CI: lint/test/build/deploy workflow.",
+      "requires": []
+    },
+    "github_actions_workflow_creator": {
+      "part": "scrapyard.devops.github_actions_workflow_creator",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Create GitHub Actions workflows for CI/CD pipelines, enabling automated testing, building, and deployment.",
+      "requires": []
+    },
+    "goal_manager": {
+      "part": "scrapyard.agents.goal_manager",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages an agent's evolving set of goals, dynamically updating them based on progress and new information. Integrates with the planner to ensure goals remain actionable and aligned with the agent's mi",
+      "requires": []
+    },
+    "google_api_client_wrapper": {
+      "part": "scrapyard.connectors.google_api_client_wrapper",
+      "layer": "connectors",
+      "status": "core",
+      "addition": true,
+      "purpose": "Wraps Google API interactions to provide consistent, typed responses and reduce boilerplate in integrations. It enables safe, reusable access to Google services with clear error handling and type safe",
+      "requires": []
+    },
+    "guardrails": {
+      "part": "scrapyard.ai.guardrails",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Validate/repair model output to a schema.",
+      "requires": [
+        "llm_client"
+      ]
+    },
+    "health": {
+      "part": "scrapyard.foundation.health",
+      "layer": "foundation",
+      "status": "core",
+      "addition": false,
+      "purpose": "Liveness/readiness checks aggregating dependency probes.",
+      "requires": []
+    },
+    "healthcheck_probe": {
+      "part": "scrapyard.deployment.healthcheck_probe",
+      "layer": "deployment",
+      "status": "core",
+      "addition": true,
+      "purpose": "Container/orchestrator probe script.",
+      "requires": []
+    },
+    "healthcheck_prober": {
+      "part": "scrapyard.devops.healthcheck_prober",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Generate customizable health check endpoints and readiness/liveness probes for cloud-native services, ensuring robustness and observability in distributed systems.",
+      "requires": []
+    },
+    "http_client": {
+      "part": "scrapyard.clitools.http_client",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.clitools.http_client` module provides a reusable, type-safe, and extensible HTTP client for CLI tools to interact with external APIs. It abstracts common request patterns and integra",
+      "requires": []
+    },
+    "hybrid_searcher": {
+      "part": "scrapyard.curation.hybrid_searcher",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Rank database entries using a hybrid of keyword matching and vector similarity",
+      "requires": []
+    },
+    "i18n": {
+      "part": "scrapyard.localization.i18n",
+      "layer": "localization",
+      "status": "core",
+      "addition": true,
+      "purpose": "Translate keys with locale fallback.",
+      "requires": []
+    },
+    "idempotency": {
+      "part": "scrapyard.foundation.idempotency",
+      "layer": "foundation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Idempotency-key store to dedupe unsafe retried requests.",
+      "requires": []
+    },
+    "image_converter": {
+      "part": "scrapyard.media.image_converter",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "Converts images between formats using a modular, reusable API, supporting integration with other media processing components.",
+      "requires": []
+    },
+    "image_cropper": {
+      "part": "scrapyard.media.image_cropper",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "The image_cropper module provides flexible image cropping capabilities using either absolute coordinates or aspect ratios, supporting integration with other media processing tools.",
+      "requires": []
+    },
+    "image_dataset_loader": {
+      "part": "scrapyard.ml.image_dataset_loader",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.image_dataset_loader` module provides a reusable, flexible interface for loading image datasets from common formats, enabling seamless integration into ML pipelines. It abstracts ",
+      "requires": []
+    },
+    "image_processing": {
+      "part": "scrapyard.files.image_processing",
+      "layer": "files",
+      "status": "core",
+      "addition": false,
+      "purpose": "Resize/convert/strip-EXIF images.",
+      "requires": [
+        "uploads"
+      ]
+    },
+    "image_resizer": {
+      "part": "scrapyard.media.image_resizer",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "The image_resizer module provides core functionality for resizing images to specified dimensions, forming the foundation for more complex image manipulation tasks.",
+      "requires": []
+    },
+    "image_watermarker": {
+      "part": "scrapyard.media.image_watermarker",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.media.image_watermarker` module provides a reusable, flexible image watermarking utility, integrating with common media processing workflows. It enables adding watermarks to images w",
+      "requires": []
+    },
+    "impersonation": {
+      "part": "scrapyard.admin.impersonation",
+      "layer": "admin",
+      "status": "core",
+      "addition": true,
+      "purpose": "Safe, logged user impersonation for support.",
+      "requires": [
+        "users",
+        "session_manager",
+        "audit_logs"
+      ]
+    },
+    "import_dry_run_simulator": {
+      "part": "scrapyard.data_io.import_dry_run_simulator",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Simulate data import operations without affecting the database, enabling safe validation and analysis of data before actual ingestion. This module provides a reusable, type-safe, and testable frame",
+      "requires": []
+    },
+    "import_progress_tracker": {
+      "part": "scrapyard.data_io.import_progress_tracker",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track real-time import progress with database persistence and flexible update mechanisms, enabling monitoring and control of data import/export workflows.",
+      "requires": []
+    },
+    "import_rollback_manager": {
+      "part": "scrapyard.data_io.import_rollback_manager",
+      "layer": "data_io",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages rollback of partially completed data imports to ensure data integrity on failure. Centralizes transaction state tracking and provides safe recovery mechanisms for import workflows.",
+      "requires": []
+    },
+    "index_watcher": {
+      "part": "scrapyard.curation.index_watcher",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "index watcher",
+      "requires": []
+    },
+    "input_sanitization": {
+      "part": "scrapyard.security.input_sanitization",
+      "layer": "security",
+      "status": "core",
+      "addition": false,
+      "purpose": "Sanitize/escape untrusted input + HTML.",
+      "requires": []
+    },
+    "interactive_prompts": {
+      "part": "scrapyard.clitools.interactive_prompts",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages interactive prompts for user input in CLI applications, providing flexible and reusable input handling with session-based state.",
+      "requires": []
+    },
+    "interpolation_1d_grid": {
+      "part": "scrapyard.scientific.interpolation_1d_grid",
+      "layer": "scientific",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Interpolate values on a one-dimensional grid using linear or cubic spline methods. This module provides efficient, reusable interpolation tools for scientific computing and data analysis workflows.",
+      "requires": []
+    },
+    "invoice_portal": {
+      "part": "scrapyard.billing.invoice_portal",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Stripe billing portal session creation.",
+      "requires": [
+        "invoices"
+      ]
+    },
+    "invoices": {
+      "part": "scrapyard.billing.invoices",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "List/fetch invoices for a customer.",
+      "requires": [
+        "subscriptions"
+      ]
+    },
+    "jobs_admin_routes": {
+      "part": "scrapyard.jobs.jobs_admin_routes",
+      "layer": "jobs",
+      "status": "core",
+      "addition": true,
+      "purpose": "Admin endpoints to inspect, retry, and cancel durable jobs.",
+      "requires": [
+        "db_queue"
+      ]
+    },
+    "jwt_manager": {
+      "part": "scrapyard.identity.jwt_manager",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "Encode/decode signed access + refresh tokens.",
+      "requires": [
+        "config"
+      ]
+    },
+    "librarian_http_service": {
+      "part": "scrapyard.curation.librarian_http_service",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `librarian_http_service` module provides an HTTP interface for querying and managing curation metadata, enabling workers to interact with the librarian subsystem. It ensures secure, efficient ",
+      "requires": []
+    },
+    "librarian_service": {
+      "part": "scrapyard.curation.librarian_service",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Curate and manage part metadata and metadata",
+      "requires": []
+    },
+    "link_checks": {
+      "part": "scrapyard.testing.link_checks",
+      "layer": "testing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Crawl + verify internal/external links.",
+      "requires": []
+    },
+    "listings": {
+      "part": "scrapyard.marketplace.listings",
+      "layer": "marketplace",
+      "status": "core",
+      "addition": true,
+      "purpose": "Marketplace listings: DB-backed list/detail (public) and seller-key-gated create.",
+      "requires": [
+        "db_session",
+        "base_model"
+      ]
+    },
+    "llm_client": {
+      "part": "scrapyard.ai.llm_client",
+      "layer": "ai",
+      "status": "core",
+      "addition": false,
+      "purpose": "Provider-agnostic chat/completions client.",
+      "requires": []
+    },
+    "llm_provider_adapter": {
+      "part": "scrapyard.llm.llm_provider_adapter",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "Adapter layer to unify LLM provider APIs, enabling consistent interaction with multiple inference backends. It abstracts provider-specific details and routes requests via model_router.",
+      "requires": []
+    },
+    "loader": {
+      "part": "scrapyard.data_eng.loader",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.data_eng.loader` module provides reusable functionality to load transformed data into target storage systems such as databases or files, ensuring consistency and reliability in data ",
+      "requires": []
+    },
+    "local_embedding_index": {
+      "part": "scrapyard.curation.local_embedding_index",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.curation.local_embedding_index` module builds and maintains a local semantic index of part purposes/APIs for efficient search and discovery. It enables developers to query the librar",
+      "requires": []
+    },
+    "local_llm_client": {
+      "part": "scrapyard.llm.local_llm_client",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.llm.local_llm_client` module provides a standardized interface for interacting with local LLM services such as Ollama, abstracting away connection and inference logic. It enables sea",
+      "requires": []
+    },
+    "local_settings_storage": {
+      "part": "scrapyard.desktop.local_settings_storage",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.desktop.local_settings_storage` module provides a simple, reliable way to persist and retrieve desktop application settings using JSON files, ensuring cross-platform compatibility an",
+      "requires": []
+    },
+    "locale_middleware": {
+      "part": "scrapyard.localization.locale_middleware",
+      "layer": "localization",
+      "status": "core",
+      "addition": true,
+      "purpose": "Detect locale from header/user.",
+      "requires": [
+        "i18n"
+      ]
+    },
+    "log_manager": {
+      "part": "scrapyard.desktop.log_manager",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages application logging with structured storage and retrieval, ensuring logs are persisted and queryable for debugging and auditing.",
+      "requires": []
+    },
+    "log_shipper": {
+      "part": "scrapyard.devops.log_shipper",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Configure log shipping and rotation for application logs, providing a reusable and customizable interface for log aggregation and management.",
+      "requires": []
+    },
+    "logger_setup": {
+      "part": "scrapyard.clitools.logger_setup",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides a flexible and reusable logger configuration system for CLI tools, enabling structured logging with multiple log levels and file handlers, ensuring consistent logging behavior across applicat",
+      "requires": []
+    },
+    "logging_setup": {
+      "part": "scrapyard.foundation.logging_setup",
+      "layer": "foundation",
+      "status": "core",
+      "addition": false,
+      "purpose": "Structured, JSON-capable logging with request correlation.",
+      "requires": []
+    },
+    "loss_function_selector": {
+      "part": "scrapyard.ml.loss_function_selector",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `loss_function_selector` module provides a flexible and extensible mechanism to choose appropriate loss functions for machine learning tasks, ensuring compatibility with model architectures and tr",
+      "requires": []
+    },
+    "metadata_composer": {
+      "part": "scrapyard.curation.metadata_composer",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Compose a metadata of required components based on dependency needs and confidence thresholds.",
+      "requires": []
+    },
+    "metadata_generator": {
+      "part": "scrapyard.ml.metadata_generator",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `metadata_generator` module generates structured metadata for dataset versions and splits, enabling reproducible and auditable ML workflows. It integrates with dataset versioning to ensure man",
+      "requires": []
+    },
+    "markdown_pages": {
+      "part": "scrapyard.content.markdown_pages",
+      "layer": "content",
+      "status": "core",
+      "addition": false,
+      "purpose": "Render markdown pages with front-matter.",
+      "requires": []
+    },
+    "media_library": {
+      "part": "scrapyard.content.media_library",
+      "layer": "content",
+      "status": "core",
+      "addition": false,
+      "purpose": "Catalog uploaded media with metadata.",
+      "requires": [
+        "uploads"
+      ]
+    },
+    "media_metadata_prober": {
+      "part": "scrapyard.media.media_metadata_prober",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.media.media_metadata_prober` module provides a reusable, extensible system for probing and extracting metadata from media files, supporting images, videos, and audio. It abstracts me",
+      "requires": []
+    },
+    "memory_consolidation_summarizer": {
+      "part": "scrapyard.agents.memory_consolidation_summarizer",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Consolidates and summarizes similar or related memories into general knowledge, enhancing recall and reducing redundancy in memory systems.",
+      "requires": []
+    },
+    "memory_query_handler": {
+      "part": "scrapyard.agents.memory_query_handler",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Handles queries to the memory system and retrieves relevant memories. It uses semantic indexing and recall scoring to efficiently find and return the most relevant memories based on a given query.",
+      "requires": []
+    },
+    "memory_recall_scoring": {
+      "part": "scrapyard.agents.memory_recall_scoring",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Scores and ranks memories based on relevance to a query, enabling efficient retrieval and prioritization in agent memory systems.",
+      "requires": []
+    },
+    "memory_system_assembler": {
+      "part": "scrapyard.agents.memory_system_assembler",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Assembles and manages the components of a memory system for autonomous agents, ensuring coherence, recall, and retention of information across interactions and sessions.",
+      "requires": []
+    },
+    "memory_system_configuration": {
+      "part": "scrapyard.agents.memory_system_configuration",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Configures memory system parameters for agents, enabling dynamic recall scoring and adaptive forgetting policies. This module centralizes control over memory retention and retrieval behavior in AI ",
+      "requires": []
+    },
+    "mesh_grid_operations": {
+      "part": "scrapyard.scientific.mesh_grid_operations",
+      "layer": "scientific",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.scientific.mesh_grid_operations` module provides reusable functionality for manipulating mesh grids in scientific computing, supporting operations like slicing and merging. It is des",
+      "requires": []
+    },
+    "message_bus": {
+      "part": "scrapyard.agents.message_bus",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Facilitate inter-agent communication through a publish-subscribe message bus, enabling scalable and decoupled agent interactions.",
+      "requires": []
+    },
+    "metadata_harvester": {
+      "part": "scrapyard.curation.metadata_harvester",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Harvest every part's PART-META-JSON header and AST public API (functions/classes/signatures) into a sqlite catalog, incrementally by file hash.",
+      "requires": []
+    },
+    "metadata_service": {
+      "part": "scrapyard.knowledge.metadata_service",
+      "layer": "knowledge",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manage custom metadata for articles and categories, enabling flexible tagging and querying. Supports structured storage, retrieval, and modification of key-value pairs tied to knowledge base entries.",
+      "requires": []
+    },
+    "metric_tracking": {
+      "part": "scrapyard.ml.metric_tracking",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tracks and logs ML training metrics for analysis and monitoring, providing structured logging and integration with training and stopping logic.",
+      "requires": []
+    },
+    "metrics": {
+      "part": "scrapyard.observability.metrics",
+      "layer": "observability",
+      "status": "core",
+      "addition": true,
+      "purpose": "Prometheus counters/histograms.",
+      "requires": []
+    },
+    "mfa_totp": {
+      "part": "scrapyard.identity.mfa_totp",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "TOTP enrollment + verification (RFC 6238).",
+      "requires": [
+        "users"
+      ]
+    },
+    "middleware": {
+      "part": "scrapyard.api.middleware",
+      "layer": "api",
+      "status": "core",
+      "addition": false,
+      "purpose": "Common middleware stack (timing, body limits, gzip).",
+      "requires": []
+    },
+    "migrations": {
+      "part": "scrapyard.database.migrations",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "Alembic setup conventions for schema migrations.",
+      "requires": [
+        "db_session"
+      ]
+    },
+    "milestone_tracker": {
+      "part": "scrapyard.projects.milestone_tracker",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Tracks milestones and their relationship to projects, enabling structured project progress monitoring. Provides a reusable, scalable interface for managing milestones with SQLAlchemy and type-safe ",
+      "requires": []
+    },
+    "mixed_precision": {
+      "part": "scrapyard.ml.mixed_precision",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages mixed precision training for better resource utilization and performance. It provides tools to enable automatic mixed precision (AMP) and custom scaling for efficient GPU memory use and faster",
+      "requires": []
+    },
+    "model_factory": {
+      "part": "scrapyard.ml.model_factory",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `model_factory` module provides a reusable system for dynamically instantiating machine learning models based on configuration specifications, enabling flexible and decoupled model creation in tra",
+      "requires": []
+    },
+    "model_loader": {
+      "part": "scrapyard.ml.model_loader",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Load and warmup machine learning models for inference, providing a reusable foundation for serving and optimizing models across deployment scenarios.",
+      "requires": []
+    },
+    "model_registry": {
+      "part": "scrapyard.ml.model_registry",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Maintain a centralized registry of machine learning models with metadata for serving and deployment. Enables discovery, versioning, and management of models across ML systems.",
+      "requires": []
+    },
+    "model_version_router": {
+      "part": "scrapyard.ml.model_version_router",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Route incoming ML requests to the correct model version based on metadata, ensuring consistent and versioned inference behavior. This module enables dynamic model versioning and routing, integratin",
+      "requires": []
+    },
+    "moderation_tools": {
+      "part": "scrapyard.admin.moderation_tools",
+      "layer": "admin",
+      "status": "core",
+      "addition": false,
+      "purpose": "Flag/review/resolve user-generated content.",
+      "requires": [
+        "users"
+      ]
+    },
+    "navbars": {
+      "part": "scrapyard.frontend.navbars",
+      "layer": "frontend",
+      "status": "core",
+      "addition": false,
+      "purpose": "Responsive nav + mobile menu block.",
+      "requires": []
+    },
+    "network_logger": {
+      "part": "scrapyard.network.network_logger",
+      "layer": "network",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `network_logger` module provides a structured, reusable logging system for network events, enabling consistent debugging and monitoring across distributed systems.",
+      "requires": []
+    },
+    "network_status": {
+      "part": "scrapyard.desktop.network_status",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Monitors and reports internet connectivity status for desktop applications. Provides a simple, reliable API to determine if the system is connected to the internet.",
+      "requires": []
+    },
+    "network_utility": {
+      "part": "scrapyard.network.network_utility",
+      "layer": "network",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.network.network_utility` module provides essential network-related functions for IP resolution and interface discovery, enabling robust and reusable networking capabilities across so",
+      "requires": []
+    },
+    "notification_center": {
+      "part": "scrapyard.communication.notification_center",
+      "layer": "communication",
+      "status": "core",
+      "addition": true,
+      "purpose": "In-app notification inbox model + feed.",
+      "requires": [
+        "users"
+      ]
+    },
+    "notification_dispatcher": {
+      "part": "scrapyard.projects.notification_dispatcher",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Sends timely notifications for project events, ensuring users stay informed about task status, deadlines, and project changes. It provides a flexible and scalable mechanism for managing and delivering",
+      "requires": []
+    },
+    "notification_service": {
+      "part": "scrapyard.expenses.notification_service",
+      "layer": "expenses",
+      "status": "core",
+      "addition": true,
+      "purpose": "Send timely notifications for expense events via customizable templates, ensuring users are informed of submission, approval, and reimbursement statuses.",
+      "requires": []
+    },
+    "numerical_integration": {
+      "part": "scrapyard.scientific.numerical_integration",
+      "layer": "scientific",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Provide core numerical integration tools for scientific computing, supporting both simple and adaptive methods. Designed for flexibility, accuracy, and integration with scientific workflows requiri",
+      "requires": []
+    },
+    "oauth2_client_credentials": {
+      "part": "scrapyard.connectors.oauth2_client_credentials",
+      "layer": "connectors",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides a reusable OAuth2 client credentials flow for secure API access, with support for typed API wrappers and webhook verification.",
+      "requires": []
+    },
+    "oauth2_refresh_flow": {
+      "part": "scrapyard.connectors.oauth2_refresh_flow",
+      "layer": "connectors",
+      "status": "core",
+      "addition": true,
+      "purpose": "Implements a reusable OAuth2 refresh flow for maintaining access tokens, ensuring secure and continuous API access without user interaction. This module abstracts the token refresh logic, enabling int",
+      "requires": []
+    },
+    "oauth_google": {
+      "part": "scrapyard.identity.oauth_google",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "Google OAuth2 sign-in (authorize + callback).",
+      "requires": [
+        "users",
+        "session_manager"
+      ]
+    },
+    "ocr_integration": {
+      "part": "scrapyard.documents.ocr_integration",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provide OCR integration for document processing, enabling text extraction from images. This module abstracts OCR execution and result handling, ensuring reusability across document workflows.",
+      "requires": []
+    },
+    "ollama_local_model": {
+      "part": "scrapyard.factory_intel.ollama_local_model",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides local access to an Ollama model for generating embeddings. Enables embedding generation without network dependencies, using a local Ollama instance.",
+      "requires": []
+    },
+    "onnx_exporter": {
+      "part": "scrapyard.ml.onnx_exporter",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.onnx_exporter` module provides a standardized interface for exporting machine learning models to ONNX format, enabling deployment across diverse inference runtimes. It relies on a",
+      "requires": []
+    },
+    "openapi_custom": {
+      "part": "scrapyard.api.openapi_custom",
+      "layer": "api",
+      "status": "core",
+      "addition": true,
+      "purpose": "Customize OpenAPI schema, tags, security schemes.",
+      "requires": [
+        "app_factory"
+      ]
+    },
+    "outcome_feedback": {
+      "part": "scrapyard.curation.outcome_feedback",
+      "layer": "curation",
+      "status": "core",
+      "addition": true,
+      "purpose": "outcome feedback",
+      "requires": []
+    },
+    "output_formatter": {
+      "part": "scrapyard.documents.output_formatter",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Convert rendered document content into target formats like DOCX, PDF, or HTML, ensuring consistent output and format-specific styling. This module provides a flexible and extensible interface for d",
+      "requires": []
+    },
+    "page_diff_reporter": {
+      "part": "scrapyard.automation.page_diff_reporter",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Generates actionable reports and notifications for detected changes in web pages during automation tasks. It enables teams to track, review, and respond to UI or content drift in web applications.",
+      "requires": []
+    },
+    "pagination": {
+      "part": "scrapyard.database.pagination",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "Limit/offset + keyset (cursor) pagination helpers.",
+      "requires": []
+    },
+    "pagination_params": {
+      "part": "scrapyard.api.pagination_params",
+      "layer": "api",
+      "status": "core",
+      "addition": true,
+      "purpose": "Shared query params for page/cursor pagination.",
+      "requires": []
+    },
+    "parameter_count_summary": {
+      "part": "scrapyard.ml.parameter_count_summary",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Generates a concise summary of parameter counts in neural network models, aiding in model analysis and optimization. Designed as a reusable, lightweight tool for ML developers working within the `n",
+      "requires": []
+    },
+    "parquet_dataset_loader": {
+      "part": "scrapyard.ml.parquet_dataset_loader",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.parquet_dataset_loader` module provides efficient, reusable tools for loading large Parquet datasets in machine learning workflows. It ensures scalability, flexibility, and compat",
+      "requires": []
+    },
+    "password_hashing": {
+      "part": "scrapyard.identity.password_hashing",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "Hash + verify passwords with Argon2/bcrypt.",
+      "requires": []
+    },
+    "password_policy": {
+      "part": "scrapyard.security.password_policy",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Enforce password strength + breach check.",
+      "requires": []
+    },
+    "password_reset": {
+      "part": "scrapyard.identity.password_reset",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "Token-based password reset request + confirm flow.",
+      "requires": [
+        "users",
+        "email"
+      ]
+    },
+    "pause_condition": {
+      "part": "scrapyard.support.pause_condition",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Define conditions under which SLA time should be paused, enabling flexible and rule-based SLA management.",
+      "requires": []
+    },
+    "payment_checks": {
+      "part": "scrapyard.testing.payment_checks",
+      "layer": "testing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Verify checkout/webhook path in test mode.",
+      "requires": []
+    },
+    "per_tenant_config": {
+      "part": "scrapyard.multitenancy.per_tenant_config",
+      "layer": "multitenancy",
+      "status": "core",
+      "addition": true,
+      "purpose": "Per-tenant settings/overrides.",
+      "requires": [
+        "tenant_context"
+      ]
+    },
+    "permissions": {
+      "part": "scrapyard.authorization.permissions",
+      "layer": "authorization",
+      "status": "core",
+      "addition": false,
+      "purpose": "Permission checks + FastAPI require() dependency (RBAC).",
+      "requires": [
+        "roles"
+      ]
+    },
+    "pipeline_scheduler": {
+      "part": "scrapyard.data_eng.pipeline_scheduler",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "Schedule the execution of ETL pipelines at specified intervals or based on triggers. This module provides a lightweight, type-safe interface for defining and managing pipeline execution schedules.",
+      "requires": []
+    },
+    "pivot_rollup_helpers": {
+      "part": "scrapyard.data_eng.pivot_rollup_helpers",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `pivot_rollup_helpers` module provides reusable tools for generating pivot and roll-up tables, enabling efficient data aggregation and summarization in data analysis workflows. It builds on a d",
+      "requires": []
+    },
+    "planner": {
+      "part": "scrapyard.agents.planner",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Generates actionable plans for agents based on their goals and current state. Integrates with execution systems to translate high-level intent into step-by-step actions.",
+      "requires": []
+    },
+    "plugin_discovery": {
+      "part": "scrapyard.clitools.plugin_discovery",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "Discovers and loads CLI plugins from specified directories or files, enabling dynamic extension of command-line interfaces. It provides a robust mechanism for plugin discovery, loading, and registrati",
+      "requires": []
+    },
+    "polite_crawler": {
+      "part": "scrapyard.automation.polite_crawler",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "polite crawler",
+      "requires": []
+    },
+    "port_scanner": {
+      "part": "scrapyard.network.port_scanner",
+      "layer": "network",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.network.port_scanner` module provides a reusable, efficient, and type-safe tool for scanning open ports on a local service. It is designed to be lightweight, self-contained, and suit",
+      "requires": []
+    },
+    "pq_envelope": {
+      "part": "scrapyard.security.pq_envelope",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Seal data and wrap data-encryption keys with hybrid post-quantum key transport, secure if either X25519 or ML-KEM-768 holds.",
+      "requires": [
+        "crypto_agility"
+      ]
+    },
+    "pq_field_encryption": {
+      "part": "scrapyard.security.pq_field_encryption",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Encrypt sensitive columns at rest under hybrid post-quantum key transport (harvest-now-decrypt-later defense).",
+      "requires": [
+        "pq_envelope",
+        "crypto_agility"
+      ]
+    },
+    "pq_signing": {
+      "part": "scrapyard.security.pq_signing",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Sign and verify with hybrid post-quantum signatures for tamper-evident audit witness and attestation, valid only if both Ed25519 and ML-DSA-65 verify.",
+      "requires": [
+        "crypto_agility"
+      ]
+    },
+    "prediction_cache": {
+      "part": "scrapyard.ml.prediction_cache",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Cache model predictions to improve response times for repeated queries. This module provides a reusable, scalable, and type-safe interface for caching and retrieving predictions using a database-backe",
+      "requires": []
+    },
+    "pricing_pages": {
+      "part": "scrapyard.frontend.pricing_pages",
+      "layer": "frontend",
+      "status": "core",
+      "addition": false,
+      "purpose": "Pricing tiers + checkout CTA block.",
+      "requires": [
+        "forms"
+      ]
+    },
+    "privacy_policy_hooks": {
+      "part": "scrapyard.compliance.privacy_policy_hooks",
+      "layer": "compliance",
+      "status": "core",
+      "addition": false,
+      "purpose": "Surface + version privacy policy acceptance.",
+      "requires": []
+    },
+    "process_launcher": {
+      "part": "scrapyard.automation.process_launcher",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `process_launcher` module provides tools to launch, monitor, and manage system processes, enabling automation workflows with robust supervision and control.",
+      "requires": []
+    },
+    "process_monitor": {
+      "part": "scrapyard.automation.process_monitor",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.automation.process_monitor` module provides lifecycle management for processes running on Windows, enabling monitoring, termination, and integration with process launchers. It ensure",
+      "requires": []
+    },
+    "project_classifier": {
+      "part": "scrapyard.factory_intel.project_classifier",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Classifies subprojects into predefined categories for structured factory intelligence. Enables automated categorization of codebases for reuse, maintenance, and deployment planning.",
+      "requires": []
+    },
+    "project_time_tracker": {
+      "part": "scrapyard.projects.project_time_tracker",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tracks time spent on projects and tasks, enabling project-level time reporting. Provides structured logging and querying of time entries.",
+      "requires": []
+    },
+    "projects.dependency_resolver": {
+      "part": "scrapyard.projects.dependency_resolver",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages task dependencies in project management systems, ensuring correct task ordering and validation. It provides tools to define, query, and validate dependency chains for reliable workflow executi",
+      "requires": []
+    },
+    "prompt_guardrails": {
+      "part": "scrapyard.llm.prompt_guardrails",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Implements guardrail checks to ensure generated prompts are safe and adhere to policy guidelines. Integrates with validation tools to enforce compliance and prevent harmful outputs.",
+      "requires": []
+    },
+    "prompt_registry": {
+      "part": "scrapyard.ai.prompt_registry",
+      "layer": "ai",
+      "status": "core",
+      "addition": false,
+      "purpose": "Versioned, named prompt templates.",
+      "requires": []
+    },
+    "prompt_runner": {
+      "part": "scrapyard.llm.prompt_runner",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.llm.prompt_runner` module executes prompts generated by the `prompt_assembler` and validates outputs using `json_output_validator`, ensuring consistent and reliable LLM interaction. ",
+      "requires": []
+    },
+    "prompt_structure_parser": {
+      "part": "scrapyard.llm.prompt_structure_parser",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.llm.prompt_structure_parser` module provides robust parsing and repair capabilities for structured LLM prompt outputs, ensuring consistent JSON formatting and handling malformed inpu",
+      "requires": []
+    },
+    "provider_agnostic_chat_client": {
+      "part": "scrapyard.llm.provider_agnostic_chat_client",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "A reusable, provider-agnostic chat client for LLM inference, enabling consistent interaction across multiple LLM backends. It abstracts provider-specific details and supports modular integration with ",
+      "requires": []
+    },
+    "providers": {
+      "part": "scrapyard.ai.providers",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Pluggable LLM + embedding providers (offline/anthropic/openai) behind one interface, offline-honest and prod-fail-closed.",
+      "requires": [
+        "embeddings"
+      ]
+    },
+    "push_notifications": {
+      "part": "scrapyard.communication.push_notifications",
+      "layer": "communication",
+      "status": "core",
+      "addition": false,
+      "purpose": "Web/mobile push dispatch.",
+      "requires": [
+        "users"
+      ]
+    },
+    "quantization_helper": {
+      "part": "scrapyard.ml.quantization_helper",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Apply quantization techniques to reduce inference time and memory usage. This module provides tools to quantize and dequantize machine learning models for efficient deployment in serving environments.",
+      "requires": []
+    },
+    "query_handler": {
+      "part": "scrapyard.factory_intel.query_handler",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "The `query_handler` module processes natural language queries from AI workers, resolving intent and mapping to internal capabilities, while ensuring safe and efficient information retrieval.",
+      "requires": []
+    },
+    "query_helpers": {
+      "part": "scrapyard.database.query_helpers",
+      "layer": "database",
+      "status": "core",
+      "addition": true,
+      "purpose": "Common filter/sort/search query builders.",
+      "requires": [
+        "db_session"
+      ]
+    },
+    "queues": {
+      "part": "scrapyard.jobs.queues",
+      "layer": "jobs",
+      "status": "core",
+      "addition": false,
+      "purpose": "Enqueue/consume via Redis/RQ/Celery adapter.",
+      "requires": []
+    },
+    "rag": {
+      "part": "scrapyard.ai.rag",
+      "layer": "ai",
+      "status": "core",
+      "addition": false,
+      "purpose": "Retrieval-augmented generation orchestration.",
+      "requires": [
+        "embeddings",
+        "vector_store",
+        "llm_client"
+      ]
+    },
+    "rag_service": {
+      "part": "scrapyard.ai.rag_service",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Retrieval-augmented answers with citations, usage accounting, and an honest offline flag.",
+      "requires": [
+        "providers",
+        "document_store"
+      ]
+    },
+    "railway": {
+      "part": "scrapyard.deployment.railway",
+      "layer": "deployment",
+      "status": "core",
+      "addition": false,
+      "purpose": "Railway service + variables config.",
+      "requires": []
+    },
+    "rate_card_manager": {
+      "part": "scrapyard.sales.rate_card_manager",
+      "layer": "sales",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Maintains and applies rate cards for labor types and locations, enabling accurate cost estimation and pricing in software products. This module provides a reusable, database-backed system for manag",
+      "requires": []
+    },
+    "rate_limiting": {
+      "part": "scrapyard.security.rate_limiting",
+      "layer": "security",
+      "status": "core",
+      "addition": false,
+      "purpose": "Token-bucket rate limiter (in-mem/redis).",
+      "requires": []
+    },
+    "readiness": {
+      "part": "scrapyard.operations.readiness",
+      "layer": "operations",
+      "status": "core",
+      "addition": true,
+      "purpose": "Deep readiness probe (DB + Redis + migration state) with a fail-closed /readyz.",
+      "requires": []
+    },
+    "reflection_engine": {
+      "part": "scrapyard.agents.reflection_engine",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Enables agents to analyze past actions and refine their planning strategies through structured reflection. Supports continuous learning and adaptation by capturing feedback and updating future plans a",
+      "requires": []
+    },
+    "registry_accessor": {
+      "part": "scrapyard.automation.registry_accessor",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `registry_accessor` module provides safe, type-aware access to the Windows registry for automation tasks. It abstracts low-level registry operations into clean, reusable functions for reading a",
+      "requires": []
+    },
+    "reimbursement_generation": {
+      "part": "scrapyard.expenses.reimbursement_generation",
+      "layer": "expenses",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Generate reimbursement requests from approved expenses, ensuring accurate financial reconciliation and auditability. This module provides a reusable, type-safe, and testable interface for expense-t",
+      "requires": []
+    },
+    "reminder_sender": {
+      "part": "scrapyard.scheduling.reminder_sender",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "reminder sender",
+      "requires": []
+    },
+    "render": {
+      "part": "scrapyard.deployment.render",
+      "layer": "deployment",
+      "status": "core",
+      "addition": false,
+      "purpose": "render.yaml blueprint.",
+      "requires": []
+    },
+    "report_generation_markdown": {
+      "part": "scrapyard.data_eng.report_generation_markdown",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Generates Markdown-formatted reports from data analysis results, enabling structured documentation of insights and findings. Integrates with HTML report generation and dataframe utilities for seaml",
+      "requires": []
+    },
+    "report_generator": {
+      "part": "scrapyard.projects.report_generator",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.projects.report_generator` module provides reusable tools for generating structured project reports, task summaries, and milestone overviews. It supports dynamic report templates and",
+      "requires": []
+    },
+    "reports": {
+      "part": "scrapyard.analytics.reports",
+      "layer": "analytics",
+      "status": "core",
+      "addition": false,
+      "purpose": "Scheduled/exportable report builder.",
+      "requires": []
+    },
+    "repository": {
+      "part": "scrapyard.database.repository",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "Generic typed repository over a model.",
+      "requires": [
+        "db_session",
+        "base_model"
+      ]
+    },
+    "request_context": {
+      "part": "scrapyard.api.request_context",
+      "layer": "api",
+      "status": "core",
+      "addition": true,
+      "purpose": "Per-request ID + context var propagated to logs.",
+      "requires": []
+    },
+    "request_logger": {
+      "part": "scrapyard.llm.request_logger",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "Log detailed information about each LLM inference request for debugging and auditing, ensuring traceability and compliance.",
+      "requires": []
+    },
+    "request_security": {
+      "part": "scrapyard.runtime.request_security",
+      "layer": "runtime",
+      "status": "core",
+      "addition": true,
+      "purpose": "Auto-inject distributed rate limiting + per-request RLS context into every generated route.",
+      "requires": []
+    },
+    "resource_calendar": {
+      "part": "scrapyard.projects.resource_calendar",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track resource availability and unavailability periods for scheduling. Enables precise time-based allocation and conflict detection in resource-scheduling systems.",
+      "requires": []
+    },
+    "resource_monitor": {
+      "part": "scrapyard.devops.resource_monitor",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Monitor resource usage and health of deployed services. Provides structured tracking and querying of CPU, memory, and service health metrics for operational visibility and alerting.",
+      "requires": []
+    },
+    "resource_type": {
+      "part": "scrapyard.projects.resource_type",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Define and manage resource categories and attributes for scheduling systems. Enables consistent classification and querying of resource types across projects.",
+      "requires": []
+    },
+    "response_library": {
+      "part": "scrapyard.support.response_library",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.support.response_library` module provides a reusable, structured way to manage and retrieve pre-defined canned responses for support desk agents, ensuring consistency and efficiency ",
+      "requires": []
+    },
+    "result_aggregation": {
+      "part": "scrapyard.agents.result_aggregation",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Aggregate results from multiple agents to form a comprehensive output or decision. This module provides tools to collect, merge, and finalize results from distributed agent execution.",
+      "requires": []
+    },
+    "retention_policy": {
+      "part": "scrapyard.compliance.retention_policy",
+      "layer": "compliance",
+      "status": "core",
+      "addition": true,
+      "purpose": "Auto-expire data per retention rules.",
+      "requires": [
+        "base_model"
+      ]
+    },
+    "retries": {
+      "part": "scrapyard.jobs.retries",
+      "layer": "jobs",
+      "status": "core",
+      "addition": false,
+      "purpose": "Backoff + jitter retry wrapper for tasks.",
+      "requires": [
+        "queues"
+      ]
+    },
+    "retry_policy": {
+      "part": "scrapyard.llm.retry_policy",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Implement a retry strategy with exponential backoff for failed LLM inference requests. This module enables robust handling of transient failures in LLM inference workflows by providing configurable",
+      "requires": []
+    },
+    "revision_history": {
+      "part": "scrapyard.knowledge.revision_history",
+      "layer": "knowledge",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track all revisions of an article over time, enabling audit trails and version control for knowledge base content.",
+      "requires": []
+    },
+    "role_definitions": {
+      "part": "scrapyard.agents.role_definitions",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Define roles and their permissions for agents within the system. Provides a reusable mechanism to model agent access control and responsibilities.",
+      "requires": []
+    },
+    "roles": {
+      "part": "scrapyard.authorization.roles",
+      "layer": "authorization",
+      "status": "core",
+      "addition": false,
+      "purpose": "Role definitions + assignment to principals.",
+      "requires": [
+        "users"
+      ]
+    },
+    "routers": {
+      "part": "scrapyard.api.routers",
+      "layer": "api",
+      "status": "core",
+      "addition": false,
+      "purpose": "Convention for grouping/mounting versioned routers.",
+      "requires": [
+        "app_factory"
+      ]
+    },
+    "row_level_security": {
+      "part": "scrapyard.security.row_level_security",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Database-enforced per-tenant/per-owner row isolation (PostgreSQL RLS).",
+      "requires": []
+    },
+    "run_budget": {
+      "part": "scrapyard.agents.run_budget",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.agents.run_budget` module manages resource budgets for agent runs, enforcing limits and terminating execution when thresholds are exceeded. It ensures efficient use of computational ",
+      "requires": []
+    },
+    "sales_tax_filing_calendar": {
+      "part": "scrapyard.compliance.sales_tax_filing_calendar",
+      "layer": "compliance",
+      "status": "core",
+      "addition": true,
+      "purpose": "Once you are registered and collecting sales tax, generate the per-state remittance filing calendar (frequency, period, due date) so returns are filed on time and collected tax is actually remitted \u2014 never sitting uncollected-and-unremitted, which is a liability, not an oversight.",
+      "requires": []
+    },
+    "sales_tax_nexus": {
+      "part": "scrapyard.compliance.sales_tax_nexus",
+      "layer": "compliance",
+      "status": "core",
+      "addition": true,
+      "purpose": "Map where a SaaS/digital seller has crossed a state's economic-nexus sales-tax threshold (revenue OR transaction count) and must register, before a state finds them first.",
+      "requires": []
+    },
+    "sandboxed_skill_executor": {
+      "part": "scrapyard.skills.sandboxed_skill_executor",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Execute skills in a secure, isolated sandboxed environment to prevent unintended side effects, while providing a consistent interface for skill execution across the system.",
+      "requires": []
+    },
+    "saved_searches": {
+      "part": "scrapyard.search.saved_searches",
+      "layer": "search",
+      "status": "core",
+      "addition": false,
+      "purpose": "Persist + replay user search definitions.",
+      "requires": [
+        "full_text_search",
+        "users"
+      ]
+    },
+    "scaling": {
+      "part": "scrapyard.operations.scaling",
+      "layer": "operations",
+      "status": "core",
+      "addition": true,
+      "purpose": "nginx load-balancer config + CDN cache-control middleware for horizontal scale.",
+      "requires": []
+    },
+    "scheduled_workflows": {
+      "part": "scrapyard.jobs.scheduled_workflows",
+      "layer": "jobs",
+      "status": "core",
+      "addition": false,
+      "purpose": "Multi-step scheduled workflow runner.",
+      "requires": [
+        "cron_jobs",
+        "queues"
+      ]
+    },
+    "scheduling_event": {
+      "part": "scrapyard.projects.scheduling_event",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track and manage scheduled events and their impact on resource availability. Provides a reusable foundation for resource scheduling systems.",
+      "requires": []
+    },
+    "schema_validator": {
+      "part": "scrapyard.data_eng.schema_validator",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `schema_validator` module ensures data conforms to expected schemas during data pipeline processing, enforcing consistency and reliability in extracted or transformed data. It provides a reusab",
+      "requires": []
+    },
+    "scratchpad_storage": {
+      "part": "scrapyard.agents.scratchpad_storage",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides a persistent scratchpad for temporary data storage and manipulation, enabling agents to work with ephemeral data across sessions.",
+      "requires": []
+    },
+    "search_pagination": {
+      "part": "scrapyard.search.search_pagination",
+      "layer": "search",
+      "status": "core",
+      "addition": false,
+      "purpose": "Pagination tuned for search result sets.",
+      "requires": [
+        "full_text_search"
+      ]
+    },
+    "secrets": {
+      "part": "scrapyard.security.secrets",
+      "layer": "security",
+      "status": "core",
+      "addition": false,
+      "purpose": "Load secrets from env/manager; never log them.",
+      "requires": []
+    },
+    "security_headers": {
+      "part": "scrapyard.security.security_headers",
+      "layer": "security",
+      "status": "core",
+      "addition": false,
+      "purpose": "CSP/HSTS/frame/referrer security headers.",
+      "requires": []
+    },
+    "seed_data": {
+      "part": "scrapyard.database.seed_data",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "Idempotent seed/fixture loader for dev + tests.",
+      "requires": [
+        "db_session",
+        "base_model"
+      ]
+    },
+    "self_critique_engine": {
+      "part": "scrapyard.agents.self_critique_engine",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Performs self-critique of agent actions to identify mistakes and improve future behavior. Integrates with reflection systems to enable adaptive, learning-based agents.",
+      "requires": []
+    },
+    "self_update_checker": {
+      "part": "scrapyard.clitools.self_update_checker",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `self_update_checker` module enables CLI tools to detect and prompt users for software updates, ensuring applications stay current and secure. It provides a reusable, lightweight mechanism to c",
+      "requires": []
+    },
+    "semantic_memory_index": {
+      "part": "scrapyard.agents.semantic_memory_index",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Indexes semantic or vector memories for efficient recall scoring. Enables agents to query and retrieve relevant memories based on vector similarity.",
+      "requires": []
+    },
+    "semantic_version_bumper": {
+      "part": "scrapyard.devops.semantic_version_bumper",
+      "layer": "devops",
+      "status": "core",
+      "addition": true,
+      "purpose": "Automate semantic version number bumping and changelog generation for software projects. Ensures consistent versioning and tracks changes in a structured format.",
+      "requires": []
+    },
+    "seo_metadata": {
+      "part": "scrapyard.content.seo_metadata",
+      "layer": "content",
+      "status": "core",
+      "addition": false,
+      "purpose": "Per-page title/description/OG/Twitter tags.",
+      "requires": []
+    },
+    "service_discovery": {
+      "part": "scrapyard.network.service_discovery",
+      "layer": "network",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Implements automatic service discovery using mDNS, enabling seamless detection of network services without manual configuration. Designed for use in distributed systems, IoT, and zero-configuration",
+      "requires": []
+    },
+    "service_wrapper": {
+      "part": "scrapyard.automation.service_wrapper",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Wrap Python scripts as Windows services, enabling long-running automation tasks with process isolation and restart-on-failure behavior.",
+      "requires": []
+    },
+    "session_manager": {
+      "part": "scrapyard.identity.session_manager",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "Server-side session issue/lookup/revoke.",
+      "requires": [
+        "users"
+      ]
+    },
+    "settings_pages": {
+      "part": "scrapyard.frontend.settings_pages",
+      "layer": "frontend",
+      "status": "core",
+      "addition": false,
+      "purpose": "Account/settings layout with sections.",
+      "requires": [
+        "forms"
+      ]
+    },
+    "settings_validation": {
+      "part": "scrapyard.foundation.settings_validation",
+      "layer": "foundation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Fail-fast validation of required settings at boot.",
+      "requires": []
+    },
+    "shell_completion": {
+      "part": "scrapyard.clitools.shell_completion",
+      "layer": "clitools",
+      "status": "core",
+      "addition": true,
+      "purpose": "Generates shell completion scripts for CLI applications, enabling seamless integration with bash, zsh, and other shells. It abstracts the complexity of shell-specific syntax and provides a consistent ",
+      "requires": []
+    },
+    "signature_capture": {
+      "part": "scrapyard.legal.signature_capture",
+      "layer": "legal",
+      "status": "core",
+      "addition": true,
+      "purpose": "Capture and store digital signatures on contracts for e-signature workflows. Provides secure, auditable storage and retrieval of user signatures tied to specific contracts.",
+      "requires": []
+    },
+    "signed_cookies": {
+      "part": "scrapyard.security.signed_cookies",
+      "layer": "security",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tamper-evident signed cookies.",
+      "requires": []
+    },
+    "signed_urls": {
+      "part": "scrapyard.files.signed_urls",
+      "layer": "files",
+      "status": "core",
+      "addition": true,
+      "purpose": "Time-limited signed download/upload URLs.",
+      "requires": [
+        "storage_adapters"
+      ]
+    },
+    "simple_gui_forms_tkinter": {
+      "part": "scrapyard.desktop.simple_gui_forms_tkinter",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "Simplifies creating simple GUI forms using Tkinter with minimal boilerplate and reusable components. This module provides a declarative interface for building desktop forms, focusing on usability and ",
+      "requires": []
+    },
+    "sitemap": {
+      "part": "scrapyard.content.sitemap",
+      "layer": "content",
+      "status": "core",
+      "addition": true,
+      "purpose": "Generate sitemap.xml + robots.txt.",
+      "requires": [
+        "seo_metadata"
+      ]
+    },
+    "sitemap_walker": {
+      "part": "scrapyard.automation.sitemap_walker",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `sitemap_walker` module discovers and traverses URLs from sitemaps, enabling systematic crawling of web content. It integrates with `polite_crawler` to ensure respectful and efficient traversal",
+      "requires": []
+    },
+    "skill_authorization": {
+      "part": "scrapyard.skills.skill_authorization",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Enforce role-based access control for skill execution. Provides a centralized service to validate permissions against user roles.",
+      "requires": []
+    },
+    "skill_discovery_search": {
+      "part": "scrapyard.skills.skill_discovery_search",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Discover and search for available skills using a centralized registry of skill loaders. This module enables dynamic skill discovery and querying, supporting flexible and scalable skill-based systems.",
+      "requires": []
+    },
+    "skill_execution_context": {
+      "part": "scrapyard.skills.skill_execution_context",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provide a reusable execution context for skills, encapsulating dependencies and runtime state, ensuring safe and consistent skill execution.",
+      "requires": []
+    },
+    "skill_loader_registry": {
+      "part": "scrapyard.skills.skill_loader_registry",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `skill_loader_registry` module manages dynamic loading and registration of skills, ensuring modular and extensible skill handling in the skills system. It relies on a standardized skill manifes",
+      "requires": []
+    },
+    "skill_logging": {
+      "part": "scrapyard.skills.skill_logging",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provide structured logging for skill execution events. Enables auditing, debugging, and performance tracking of skill operations.",
+      "requires": []
+    },
+    "skill_metadata_format": {
+      "part": "scrapyard.skills.skill_metadata_format",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Define a standard format for skill metadata to enable consistent skill registration, execution, and versioning across the system.",
+      "requires": []
+    },
+    "sla_definition": {
+      "part": "scrapyard.support.sla_definition",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Define service level agreements (SLAs) with structured metrics, targets, and timeframes. Supports creation, validation, and storage of SLA definitions for use in service management systems.",
+      "requires": []
+    },
+    "sla_versioning": {
+      "part": "scrapyard.support.sla_versioning",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track and manage SLA versioning to ensure auditability and rollback capability. Enables structured handling of SLA changes across time.",
+      "requires": []
+    },
+    "slack_client_wrapper": {
+      "part": "scrapyard.connectors.slack_client_wrapper",
+      "layer": "connectors",
+      "status": "core",
+      "addition": true,
+      "purpose": "Wraps Slack API interactions to provide type-safe, reusable messaging capabilities. Encapsulates Slack API calls with typed responses and error handling for integration use.",
+      "requires": []
+    },
+    "slot_history": {
+      "part": "scrapyard.scheduling.slot_history",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Tracks historical changes to scheduling slots for auditing and reporting. Provides immutable, versioned records of slot modifications.",
+      "requires": []
+    },
+    "slot_manager": {
+      "part": "scrapyard.scheduling.slot_manager",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages creation, allocation, and modification of bookable time slots for meeting scheduling. Provides a reusable, type-safe, and scalable interface for time slot lifecycle management.",
+      "requires": []
+    },
+    "slot_notifier": {
+      "part": "scrapyard.scheduling.slot_notifier",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "Notifies users and admins of slot changes, cancellations, or confirmations. It provides a clean, reusable interface for scheduling systems to trigger alerts based on slot state transitions.",
+      "requires": []
+    },
+    "slot_searcher": {
+      "part": "scrapyard.scheduling.slot_searcher",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "Enables efficient search and filtering of scheduling slots based on time, resource, and status. Supports complex queries for meeting scheduling systems requiring dynamic slot selection.",
+      "requires": []
+    },
+    "slot_serializer": {
+      "part": "scrapyard.scheduling.slot_serializer",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Serializes and deserializes meeting scheduling slot data for API communication, ensuring consistent data representation between internal models and external payloads. This module enables seamless d",
+      "requires": []
+    },
+    "slot_validator": {
+      "part": "scrapyard.scheduling.slot_validator",
+      "layer": "scheduling",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Validates meeting scheduling slots for consistency, detects overlaps, and ensures data integrity without relying on external systems. It serves as a foundational component for ensuring accurate and",
+      "requires": []
+    },
+    "smoke_checks": {
+      "part": "scrapyard.testing.smoke_checks",
+      "layer": "testing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Post-deploy smoke test of key routes.",
+      "requires": []
+    },
+    "sms": {
+      "part": "scrapyard.communication.sms",
+      "layer": "communication",
+      "status": "core",
+      "addition": false,
+      "purpose": "SMS send via pluggable provider.",
+      "requires": []
+    },
+    "socket_utils": {
+      "part": "scrapyard.network.socket_utils",
+      "layer": "network",
+      "status": "core",
+      "addition": true,
+      "purpose": "A collection of utility functions for various socket operations, including error handling and common tasks. It provides reusable, type-safe, and robust networking components for use across multiple so",
+      "requires": []
+    },
+    "soft_delete": {
+      "part": "scrapyard.database.soft_delete",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "Mixin + query filter for soft deletes.",
+      "requires": [
+        "base_model"
+      ]
+    },
+    "sorting": {
+      "part": "scrapyard.search.sorting",
+      "layer": "search",
+      "status": "core",
+      "addition": false,
+      "purpose": "Whitelisted multi-field sorting.",
+      "requires": []
+    },
+    "source_connector_databases": {
+      "part": "scrapyard.data_eng.source_connector_databases",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "Connect and extract data from database sources using SQLAlchemy 2.x, ensuring type safety and separation of concerns between data access and business logic.",
+      "requires": []
+    },
+    "spreadsheet_reader_writer": {
+      "part": "scrapyard.documents.spreadsheet_reader_writer",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `spreadsheet_reader_writer` module provides reusable functionality for reading from and writing to Excel and CSV files using pandas, enabling seamless integration with data processing pipelines",
+      "requires": []
+    },
+    "sqlite_storage": {
+      "part": "scrapyard.factory_intel.sqlite_storage",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.factory_intel.sqlite_storage` module provides a lightweight, self-contained SQLite backend for managing workspace data in the factory intelligence domain. It ensures consistent, type",
+      "requires": []
+    },
+    "sse_stream": {
+      "part": "scrapyard.realtime.sse_stream",
+      "layer": "realtime",
+      "status": "core",
+      "addition": true,
+      "purpose": "Server-Sent Events response helper.",
+      "requires": []
+    },
+    "state_tracker": {
+      "part": "scrapyard.agents.state_tracker",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tracks the state of an agent throughout its operations, providing a persistent and auditable history of state transitions.",
+      "requires": []
+    },
+    "statistics_distributions": {
+      "part": "scrapyard.scientific.statistics_distributions",
+      "layer": "scientific",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Provide a reusable collection of statistical distributions with core properties and generation capabilities. Built for integration into scientific compute workflows, with a focus on flexibility and",
+      "requires": []
+    },
+    "stop_condition_checker": {
+      "part": "scrapyard.agents.stop_condition_checker",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `stop_condition_checker` module evaluates predefined stop conditions to determine whether an agent should terminate its execution, ensuring safe and controlled operation. It relies on the plann",
+      "requires": []
+    },
+    "storage_adapters": {
+      "part": "scrapyard.files.storage_adapters",
+      "layer": "files",
+      "status": "core",
+      "addition": false,
+      "purpose": "S3/GCS/local storage behind one interface.",
+      "requires": []
+    },
+    "stream_handler": {
+      "part": "scrapyard.llm.stream_handler",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "Handle streaming responses from LLMs by processing tokens in real-time, enabling dynamic updates and efficient handling of large or continuous outputs.",
+      "requires": []
+    },
+    "streaming": {
+      "part": "scrapyard.ai.streaming",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Stream tokens to client via SSE.",
+      "requires": [
+        "llm_client",
+        "sse_stream"
+      ]
+    },
+    "streaming_dataset_loader": {
+      "part": "scrapyard.ml.streaming_dataset_loader",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Load large datasets as a stream to handle memory constraints. This module provides efficient, memory-friendly loading of ML datasets from various formats.",
+      "requires": []
+    },
+    "stripe_checkout": {
+      "part": "scrapyard.billing.stripe_checkout",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Create Stripe Checkout sessions for plans.",
+      "requires": [
+        "subscriptions",
+        "users"
+      ]
+    },
+    "stripe_client_wrapper": {
+      "part": "scrapyard.connectors.stripe_client_wrapper",
+      "layer": "connectors",
+      "status": "core",
+      "addition": true,
+      "purpose": "Wraps Stripe API calls to provide typed responses. Enables consistent, safe, and reusable integration with Stripe's payment system.",
+      "requires": []
+    },
+    "stripe_tax": {
+      "part": "scrapyard.billing.stripe_tax",
+      "layer": "billing",
+      "status": "core",
+      "addition": true,
+      "purpose": "Enable Stripe Tax on Checkout Sessions and Subscriptions so the correct sales tax is calculated and collected at checkout, plus register tax collection per nexus state \u2014 the collection half of sales-tax compliance.",
+      "requires": []
+    },
+    "stripe_webhooks": {
+      "part": "scrapyard.billing.stripe_webhooks",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Verify + dispatch Stripe webhook events.",
+      "requires": [
+        "subscriptions",
+        "subscription_status"
+      ]
+    },
+    "structured_logging": {
+      "part": "scrapyard.observability.structured_logging",
+      "layer": "observability",
+      "status": "core",
+      "addition": true,
+      "purpose": "Log helpers that emit structured events.",
+      "requires": []
+    },
+    "subscription_status": {
+      "part": "scrapyard.billing.subscription_status",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Resolve a customer's current plan/status.",
+      "requires": [
+        "subscriptions"
+      ]
+    },
+    "subscriptions": {
+      "part": "scrapyard.billing.subscriptions",
+      "layer": "billing",
+      "status": "core",
+      "addition": false,
+      "purpose": "Subscription model + lifecycle state.",
+      "requires": [
+        "users"
+      ]
+    },
+    "swarm_health_monitoring": {
+      "part": "scrapyard.agents.swarm_health_monitoring",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Monitor the health and status of a swarm of agents to ensure system reliability. It provides tools to track agent status, detect failures, and trigger alerts based on predefined thresholds and quorum ",
+      "requires": []
+    },
+    "sync_state_tracker": {
+      "part": "scrapyard.connectors.sync_state_tracker",
+      "layer": "connectors",
+      "status": "core",
+      "addition": true,
+      "purpose": "Tracks and records synchronization states between systems, ensuring data consistency and providing a historical view of sync progress.",
+      "requires": []
+    },
+    "system_information": {
+      "part": "scrapyard.desktop.system_information",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.desktop.system_information` module provides a reusable interface for retrieving key system metrics, enabling consistent access to OS and hardware data across desktop applications. It",
+      "requires": []
+    },
+    "system_notification": {
+      "part": "scrapyard.automation.system_notification",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Send system notifications with platform-agnostic support, focusing on Windows for now, using a clean and reusable interface.",
+      "requires": []
+    },
+    "system_tray_application_scaffold": {
+      "part": "scrapyard.desktop.system_tray_application_scaffold",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides a reusable scaffold for building system tray applications with hotkeys, notifications, and simple GUI forms.",
+      "requires": []
+    },
+    "table_extractor": {
+      "part": "scrapyard.documents.table_extractor",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "table extractor",
+      "requires": []
+    },
+    "tables": {
+      "part": "scrapyard.frontend.tables",
+      "layer": "frontend",
+      "status": "core",
+      "addition": false,
+      "purpose": "Sortable/paginated data table.",
+      "requires": []
+    },
+    "task_claim_lock": {
+      "part": "scrapyard.agents.task_claim_lock",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "task claim lock",
+      "requires": []
+    },
+    "task_manager": {
+      "part": "scrapyard.projects.task_manager",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages task lifecycle and assignments for project workflows. Provides structured access to task data and ownership tracking.",
+      "requires": []
+    },
+    "task_queue": {
+      "part": "scrapyard.agents.task_queue",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manage a queue of tasks that can be claimed by agents for execution. This module provides a centralized, scalable, and type-safe interface for task lifecycle management.",
+      "requires": []
+    },
+    "template_engine": {
+      "part": "scrapyard.llm.template_engine",
+      "layer": "llm",
+      "status": "core",
+      "addition": true,
+      "purpose": "The template engine provides a flexible system for generating dynamic prompts with variables and reusable partials, enabling consistent and customizable LLM interactions.",
+      "requires": []
+    },
+    "template_processor": {
+      "part": "scrapyard.documents.template_processor",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "template processor",
+      "requires": []
+    },
+    "templates": {
+      "part": "scrapyard.communication.templates",
+      "layer": "communication",
+      "status": "core",
+      "addition": false,
+      "purpose": "Render notification templates (text/html).",
+      "requires": []
+    },
+    "tenant_access": {
+      "part": "scrapyard.authorization.tenant_access",
+      "layer": "authorization",
+      "status": "core",
+      "addition": false,
+      "purpose": "Authorize a principal against a tenant boundary.",
+      "requires": [
+        "tenant_context",
+        "permissions"
+      ]
+    },
+    "tenant_context": {
+      "part": "scrapyard.multitenancy.tenant_context",
+      "layer": "multitenancy",
+      "status": "core",
+      "addition": true,
+      "purpose": "Resolve + carry current tenant per request.",
+      "requires": []
+    },
+    "tenant_isolation": {
+      "part": "scrapyard.multitenancy.tenant_isolation",
+      "layer": "multitenancy",
+      "status": "core",
+      "addition": true,
+      "purpose": "Scope queries to the active tenant.",
+      "requires": [
+        "tenant_context"
+      ]
+    },
+    "tensorboard_integration": {
+      "part": "scrapyard.ml.tensorboard_integration",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Integrates TensorBoard for logging metrics and visualizations during ML training, enabling real-time monitoring and analysis of training progress.",
+      "requires": []
+    },
+    "text_dataset_loader": {
+      "part": "scrapyard.ml.text_dataset_loader",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.text_dataset_loader` module provides a reusable, standardized interface for loading text datasets commonly used in natural language processing tasks. It ensures consistent data lo",
+      "requires": []
+    },
+    "text_extractor": {
+      "part": "scrapyard.documents.text_extractor",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Extracts text content from various document formats including PDF, DOCX, XLSX.",
+      "requires": []
+    },
+    "ticket_attachment": {
+      "part": "scrapyard.support.ticket_attachment",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "ticket attachment",
+      "requires": []
+    },
+    "ticket_closure": {
+      "part": "scrapyard.support.ticket_closure",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages the finalization of support tickets with validation and resolution tracking. Ensures closure is only applied when conditions are met, using predefined templates.",
+      "requires": []
+    },
+    "ticket_notifier": {
+      "part": "scrapyard.support.ticket_notifier",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "Sends notifications (email, in-app, etc.) related to ticket status changes. Provides reusable, extensible notification logic for support desk systems.",
+      "requires": []
+    },
+    "ticket_search": {
+      "part": "scrapyard.support.ticket_search",
+      "layer": "support",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.support.ticket_search` module enables efficient querying and indexing of support tickets, enhancing searchability and auditability within a support desk system. It provides a reusabl",
+      "requires": []
+    },
+    "time_entry_validator": {
+      "part": "scrapyard.projects.time_entry_validator",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `time_entry_validator` module enforces business rules on time tracking data to ensure accuracy and compliance with organizational policies. It provides reusable validation logic for timers and ",
+      "requires": []
+    },
+    "timer_manager": {
+      "part": "scrapyard.projects.timer_manager",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages creation, start, pause, and stop of individual timers. Provides a reusable ORM model and API for time-tracking functionality in software products.",
+      "requires": []
+    },
+    "timesheet_approver": {
+      "part": "scrapyard.projects.timesheet_approver",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manages time tracking approval workflows, enabling timesheets to be submitted, reviewed, and approved by designated supervisors. It ensures proper authorization and maintains an auditable trail of app",
+      "requires": []
+    },
+    "timestamps": {
+      "part": "scrapyard.database.timestamps",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "created_at/updated_at mixin with auto-touch.",
+      "requires": [
+        "base_model"
+      ]
+    },
+    "toast_notifications": {
+      "part": "scrapyard.desktop.toast_notifications",
+      "layer": "desktop",
+      "status": "core",
+      "addition": true,
+      "purpose": "Displays system tray notifications with customizable text and icons, enabling desktop applications to communicate with users in a non-intrusive manner.",
+      "requires": []
+    },
+    "token_cost_logging": {
+      "part": "scrapyard.ai.token_cost_logging",
+      "layer": "ai",
+      "status": "core",
+      "addition": false,
+      "purpose": "Log tokens + $ cost per call/user.",
+      "requires": [
+        "llm_client"
+      ]
+    },
+    "tool_calling": {
+      "part": "scrapyard.ai.tool_calling",
+      "layer": "ai",
+      "status": "core",
+      "addition": false,
+      "purpose": "Register + dispatch model tool calls safely.",
+      "requires": [
+        "llm_client"
+      ]
+    },
+    "tool_registry": {
+      "part": "scrapyard.agents.tool_registry",
+      "layer": "agents",
+      "status": "core",
+      "addition": true,
+      "purpose": "Registers and dispatches tools for agent operations, enabling dynamic extension of agent capabilities. Provides a centralized, type-safe, and queryable registry for tool definitions and execution.",
+      "requires": []
+    },
+    "tracing": {
+      "part": "scrapyard.observability.tracing",
+      "layer": "observability",
+      "status": "core",
+      "addition": true,
+      "purpose": "OpenTelemetry spans for requests/db/llm.",
+      "requires": [
+        "structured_logging"
+      ]
+    },
+    "training_loop": {
+      "part": "scrapyard.ml.training_loop",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides a flexible PyTorch training loop with hooks, resume capabilities, and integration with checkpointing and metric tracking. Designed to be modular and extensible for various ML workflows.",
+      "requires": []
+    },
+    "transactions": {
+      "part": "scrapyard.database.transactions",
+      "layer": "database",
+      "status": "core",
+      "addition": false,
+      "purpose": "Transaction + unit-of-work context managers.",
+      "requires": [
+        "db_session"
+      ]
+    },
+    "transformer": {
+      "part": "scrapyard.data_eng.transformer",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.data_eng.transformer` module provides reusable data transformation logic for data pipelines, ensuring consistency and integrity before data is loaded into storage. It supports schema",
+      "requires": []
+    },
+    "transformer_block": {
+      "part": "scrapyard.ml.transformer_block",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Provides reusable Transformer encoder and decoder blocks for neural network construction. Designed for modularity, extensibility, and seamless integration with other neural building blocks.",
+      "requires": []
+    },
+    "translations": {
+      "part": "scrapyard.localization.translations",
+      "layer": "localization",
+      "status": "core",
+      "addition": true,
+      "purpose": "Catalog format + loader for messages.",
+      "requires": [
+        "i18n"
+      ]
+    },
+    "tts_pipeline_hook": {
+      "part": "scrapyard.media.tts_pipeline_hook",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.media.tts_pipeline_hook` module provides a reusable interface for integrating Text-to-Speech (TTS) pipelines into media processing workflows. It enables flexible hooking of TTS servi",
+      "requires": []
+    },
+    "udp_socket_helper": {
+      "part": "scrapyard.network.udp_socket_helper",
+      "layer": "network",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides reusable UDP socket utilities for reliable datagram handling in distributed systems, with focus on type safety, error resilience, and configurability.",
+      "requires": []
+    },
+    "unit_conversion_utils": {
+      "part": "scrapyard.scientific.unit_conversion_utils",
+      "layer": "scientific",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides reusable unit conversion utilities for scientific computing, supporting temperature and pressure conversions with extensibility via a registry.",
+      "requires": []
+    },
+    "unit_of_work": {
+      "part": "scrapyard.database.unit_of_work",
+      "layer": "database",
+      "status": "core",
+      "addition": true,
+      "purpose": "Explicit UoW boundary around repositories.",
+      "requires": [
+        "db_session"
+      ]
+    },
+    "unsubscribe_handling": {
+      "part": "scrapyard.communication.unsubscribe_handling",
+      "layer": "communication",
+      "status": "core",
+      "addition": false,
+      "purpose": "Honor unsubscribe + suppression list.",
+      "requires": [
+        "email",
+        "users"
+      ]
+    },
+    "uploads": {
+      "part": "scrapyard.files.uploads",
+      "layer": "files",
+      "status": "core",
+      "addition": false,
+      "purpose": "Validated multipart upload handling.",
+      "requires": [
+        "storage_adapters"
+      ]
+    },
+    "url_generator": {
+      "part": "scrapyard.automation.url_generator",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "Generates URLs based on provided templates or patterns, supporting dynamic replacement and sitemap integration.",
+      "requires": []
+    },
+    "usage_metering": {
+      "part": "scrapyard.billing.usage_metering",
+      "layer": "billing",
+      "status": "core",
+      "addition": true,
+      "purpose": "Record metered usage for usage-based billing.",
+      "requires": [
+        "subscriptions"
+      ]
+    },
+    "usage_metrics": {
+      "part": "scrapyard.analytics.usage_metrics",
+      "layer": "analytics",
+      "status": "core",
+      "addition": false,
+      "purpose": "Aggregate active users / feature usage.",
+      "requires": []
+    },
+    "usage_metrics_collector": {
+      "part": "scrapyard.skills.usage_metrics_collector",
+      "layer": "skills",
+      "status": "core",
+      "addition": true,
+      "purpose": "Collect and store metrics on skill usage for analysis and optimization. This module provides tools to record, track, and query skill usage data in a structured and scalable way.",
+      "requires": []
+    },
+    "user_access": {
+      "part": "scrapyard.knowledge.user_access",
+      "layer": "knowledge",
+      "status": "core",
+      "addition": true,
+      "purpose": "Control access to knowledge base articles using user roles and permissions. Provides fine-grained access management with persistent storage and type-safe operations.",
+      "requires": []
+    },
+    "user_management": {
+      "part": "scrapyard.admin.user_management",
+      "layer": "admin",
+      "status": "core",
+      "addition": false,
+      "purpose": "Search/suspend/restore/edit users (admin).",
+      "requires": [
+        "users",
+        "roles"
+      ]
+    },
+    "users": {
+      "part": "scrapyard.identity.users",
+      "layer": "identity",
+      "status": "core",
+      "addition": false,
+      "purpose": "User model + core user service (create/find/update).",
+      "requires": []
+    },
+    "utilization_calculator": {
+      "part": "scrapyard.projects.utilization_calculator",
+      "layer": "projects",
+      "status": "core",
+      "addition": true,
+      "purpose": "** Calculates user utilization rates based on billable and available time, enabling accurate resource planning and performance tracking. Designed as a reusable, testable, and self-contained module for",
+      "requires": []
+    },
+    "validation": {
+      "part": "scrapyard.api.validation",
+      "layer": "api",
+      "status": "core",
+      "addition": false,
+      "purpose": "Reusable request/response model patterns and validators.",
+      "requires": []
+    },
+    "vector_store": {
+      "part": "scrapyard.ai.vector_store",
+      "layer": "ai",
+      "status": "core",
+      "addition": true,
+      "purpose": "Upsert/query vectors behind one interface.",
+      "requires": []
+    },
+    "vercel": {
+      "part": "scrapyard.deployment.vercel",
+      "layer": "deployment",
+      "status": "core",
+      "addition": false,
+      "purpose": "vercel.json for frontend deploys.",
+      "requires": []
+    },
+    "versioning": {
+      "part": "scrapyard.api.versioning",
+      "layer": "api",
+      "status": "core",
+      "addition": true,
+      "purpose": "URL/header API versioning helpers.",
+      "requires": [
+        "routers"
+      ]
+    },
+    "versioning_service": {
+      "part": "scrapyard.knowledge.versioning_service",
+      "layer": "knowledge",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manage article versions and allow rollbacks to previous states. Provides a versioning mechanism for knowledge articles, enabling retrieval and restoration of historical states.",
+      "requires": []
+    },
+    "video_concatenator": {
+      "part": "scrapyard.media.video_concatenator",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "video concatenator",
+      "requires": []
+    },
+    "video_transcoder": {
+      "part": "scrapyard.media.video_transcoder",
+      "layer": "media",
+      "status": "core",
+      "addition": true,
+      "purpose": "Transcodes video files to a specified format and resolution using FFmpeg. Provides a reusable, flexible, and robust interface for video processing tasks.",
+      "requires": []
+    },
+    "virus_scanning": {
+      "part": "scrapyard.files.virus_scanning",
+      "layer": "files",
+      "status": "core",
+      "addition": false,
+      "purpose": "Scan uploads via ClamAV/provider before persist.",
+      "requires": [
+        "uploads"
+      ]
+    },
+    "watermark_manager": {
+      "part": "scrapyard.data_eng.watermark_manager",
+      "layer": "data_eng",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manage watermarks for incremental data sync, ensuring only new or updated records are processed. It tracks and updates the latest processed position for data sources.",
+      "requires": []
+    },
+    "webhook_event_handler": {
+      "part": "scrapyard.connectors.webhook_event_handler",
+      "layer": "connectors",
+      "status": "core",
+      "addition": true,
+      "purpose": "Handles incoming webhook events by validating, parsing, and routing them to appropriate handlers, ensuring secure and reliable event processing.",
+      "requires": []
+    },
+    "webhooks_inbound": {
+      "part": "scrapyard.messaging.webhooks_inbound",
+      "layer": "messaging",
+      "status": "core",
+      "addition": true,
+      "purpose": "Verify + route inbound webhooks.",
+      "requires": [
+        "event_bus"
+      ]
+    },
+    "webhooks_outbound": {
+      "part": "scrapyard.messaging.webhooks_outbound",
+      "layer": "messaging",
+      "status": "core",
+      "addition": true,
+      "purpose": "Signed, retried outbound webhook delivery.",
+      "requires": [
+        "event_bus"
+      ]
+    },
+    "websocket_client": {
+      "part": "scrapyard.network.websocket_client",
+      "layer": "network",
+      "status": "core",
+      "addition": true,
+      "purpose": "Provides a robust WebSocket client with automatic reconnection and message handling for networked applications. Designed to be reused across services requiring persistent, reliable communication over ",
+      "requires": []
+    },
+    "websocket_manager": {
+      "part": "scrapyard.realtime.websocket_manager",
+      "layer": "realtime",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track + broadcast over WebSocket connections.",
+      "requires": []
+    },
+    "weight_init_helper": {
+      "part": "scrapyard.ml.weight_init_helper",
+      "layer": "ml",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.ml.weight_init_helper` module provides flexible and reusable utilities for initializing weights in neural network layers, supporting common strategies like Xavier and Kaiming initial",
+      "requires": []
+    },
+    "window_manager": {
+      "part": "scrapyard.automation.window_manager",
+      "layer": "automation",
+      "status": "core",
+      "addition": true,
+      "purpose": "The window_manager module provides a reusable interface for managing and interacting with application windows, enabling automation tasks such as locating, moving, and closing windows.",
+      "requires": []
+    },
+    "worker": {
+      "part": "scrapyard.jobs.worker",
+      "layer": "jobs",
+      "status": "core",
+      "addition": true,
+      "purpose": "Worker loop that claims and runs durable jobs, with a CLI entrypoint.",
+      "requires": [
+        "db_queue"
+      ]
+    },
+    "workflow_engine": {
+      "part": "scrapyard.knowledge.workflow_engine",
+      "layer": "knowledge",
+      "status": "core",
+      "addition": true,
+      "purpose": "Manage article workflow states through transitions between draft, review, and published states. Enables structured content lifecycle management with auditability and access control.",
+      "requires": []
+    },
+    "workspace_walker": {
+      "part": "scrapyard.factory_intel.workspace_walker",
+      "layer": "factory_intel",
+      "status": "core",
+      "addition": true,
+      "purpose": "Track and classify projects in a workspace, storing metadata in SQLite.",
+      "requires": []
+    },
+    "xlsx_writer": {
+      "part": "scrapyard.documents.xlsx_writer",
+      "layer": "documents",
+      "status": "core",
+      "addition": true,
+      "purpose": "** The `scrapyard.documents.xlsx_writer` module provides a reusable interface for writing structured data to XLSX files, leveraging `openpyxl` for compatibility and performance. It ensures clean, type",
+      "requires": []
+    }
+  },
+  "meta": {
+    "admin_console": {
+      "description": "Back-office: audit logs, dashboards, user management, moderation, impersonation.",
+      "requires": [
+        "audit_logs",
+        "admin.dashboards",
+        "user_management",
+        "moderation_tools",
+        "impersonation"
+      ]
+    },
+    "agent_stack": {
+      "description": "Tool-using agents with streaming and evaluation.",
+      "requires": [
+        "ai_core",
+        "tool_calling",
+        "streaming",
+        "eval_harness"
+      ]
+    },
+    "ai_core": {
+      "description": "LLM plumbing: client, prompt registry, cost logging, guardrails.",
+      "requires": [
+        "llm_client",
+        "prompt_registry",
+        "token_cost_logging",
+        "guardrails"
+      ]
+    },
+    "analytics_core": {
+      "description": "Product analytics: event tracking, funnels, usage metrics, reports.",
+      "requires": [
+        "event_tracking",
+        "funnels",
+        "usage_metrics",
+        "reports"
+      ]
+    },
+    "authentication": {
+      "description": "Who the user is: accounts, password + token auth, verification, recovery.",
+      "requires": [
+        "users",
+        "password_hashing",
+        "password_policy",
+        "jwt_manager",
+        "session_manager",
+        "auth_routes",
+        "email_verification",
+        "password_reset",
+        "account_lockout"
+      ]
+    },
+    "authorization_rbac": {
+      "description": "What the user may do: roles, permissions, admin gating.",
+      "requires": [
+        "roles",
+        "permissions",
+        "admin_access"
+      ]
+    },
+    "billing_stripe": {
+      "description": "Money: Stripe checkout, webhooks, subscriptions, invoices, entitlement gating.",
+      "requires": [
+        "subscriptions",
+        "subscription_status",
+        "stripe_checkout",
+        "stripe_webhooks",
+        "invoices",
+        "cancellation_flow",
+        "entitlements",
+        "entitlement_gate",
+        "sales_tax_compliance"
+      ]
+    },
+    "comms_core": {
+      "description": "Outbound communication: email, templates, notifications, unsubscribe.",
+      "requires": [
+        "email",
+        "templates",
+        "notification_center",
+        "unsubscribe_handling"
+      ]
+    },
+    "compliance_gdpr": {
+      "description": "Data-subject rights: export, deletion, consent, retention, DSR handling.",
+      "requires": [
+        "gdpr_dsr",
+        "data_export",
+        "account_deletion",
+        "consent_logs",
+        "retention_policy",
+        "privacy_policy_hooks"
+      ]
+    },
+    "content_core": {
+      "description": "Publishing: CMS, markdown pages, SEO metadata, sitemap.",
+      "requires": [
+        "cms",
+        "markdown_pages",
+        "seo_metadata",
+        "sitemap"
+      ]
+    },
+    "deploy_container": {
+      "description": "Ship it: docker, CI, health probe, backups.",
+      "requires": [
+        "docker",
+        "github_actions",
+        "healthcheck_probe",
+        "backups"
+      ]
+    },
+    "files_core": {
+      "description": "User files: uploads, storage adapters, signed URLs.",
+      "requires": [
+        "uploads",
+        "storage_adapters",
+        "signed_urls"
+      ]
+    },
+    "foundation_core": {
+      "description": "Config, logging, health, error taxonomy \u2014 every app needs this.",
+      "requires": [
+        "config",
+        "logging_setup",
+        "health",
+        "error_taxonomy",
+        "settings_validation"
+      ]
+    },
+    "frontend_app": {
+      "description": "Shipped UI surface: navbars, tables, forms, dashboards, settings, empty states.",
+      "requires": [
+        "navbars",
+        "tables",
+        "forms",
+        "frontend.dashboards",
+        "settings_pages",
+        "empty_states"
+      ]
+    },
+    "frontend_marketing": {
+      "description": "Public-facing pages: pricing, auth pages, forms.",
+      "requires": [
+        "pricing_pages",
+        "auth_pages",
+        "forms"
+      ]
+    },
+    "jobs_core": {
+      "description": "Async work: queues, background tasks, retries, scheduling, dead-letter.",
+      "requires": [
+        "queues",
+        "background_tasks",
+        "retries",
+        "cron_jobs",
+        "scheduled_workflows",
+        "dead_letter"
+      ]
+    },
+    "metering_billing": {
+      "description": "Usage-based billing on top of subscriptions.",
+      "requires": [
+        "billing_stripe",
+        "usage_metering",
+        "usage_metrics"
+      ]
+    },
+    "multitenancy_core": {
+      "description": "Tenant boundary: context, isolation, per-tenant config, tenant-scoped access.",
+      "requires": [
+        "tenant_context",
+        "tenant_isolation",
+        "per_tenant_config",
+        "tenant_access"
+      ]
+    },
+    "observability_core": {
+      "description": "Know what's happening in prod: structured logs, metrics, tracing, error reporting.",
+      "requires": [
+        "structured_logging",
+        "metrics",
+        "tracing",
+        "error_reporting"
+      ]
+    },
+    "persistence_core": {
+      "description": "Relational persistence: sessions, base model, mixins, repository, pagination.",
+      "requires": [
+        "db_session",
+        "base_model",
+        "timestamps",
+        "soft_delete",
+        "pagination",
+        "repository",
+        "transactions",
+        "migrations"
+      ]
+    },
+    "rag_stack": {
+      "description": "Retrieval-augmented generation: embeddings, vector store, RAG over ai_core.",
+      "requires": [
+        "ai_core",
+        "embeddings",
+        "vector_store",
+        "rag"
+      ]
+    },
+    "realtime_core": {
+      "description": "Live updates: SSE and websocket transport.",
+      "requires": [
+        "sse_stream",
+        "websocket_manager"
+      ]
+    },
+    "sales_tax_compliance": {
+      "description": "US economic-nexus (post-Wayfair) sales tax: exposure map (where you must register), Stripe Tax collection at checkout, and the remittance filing calendar. Required wherever money is collected across state lines \u2014 a missed obligation is a liability, not an oversight.",
+      "requires": [
+        "sales_tax_nexus",
+        "stripe_tax",
+        "sales_tax_filing_calendar"
+      ]
+    },
+    "search_core": {
+      "description": "Find things: full-text search, filters, sorting, paginated results.",
+      "requires": [
+        "full_text_search",
+        "filters",
+        "sorting",
+        "search_pagination"
+      ]
+    },
+    "search_faceted": {
+      "description": "Faceted/aggregated search for catalogs and directories.",
+      "requires": [
+        "search_core",
+        "faceted_search",
+        "saved_searches"
+      ]
+    },
+    "security_baseline": {
+      "description": "Always-on security: headers, CORS, rate limiting, sanitization, secrets.",
+      "requires": [
+        "security_headers",
+        "cors",
+        "rate_limiting",
+        "input_sanitization",
+        "secrets"
+      ]
+    },
+    "web_api": {
+      "description": "HTTP layer: app factory, routing, validation, request context, errors.",
+      "requires": [
+        "foundation_core",
+        "app_factory",
+        "request_context",
+        "error_handling",
+        "routers",
+        "validation",
+        "pagination_params",
+        "middleware"
+      ]
+    }
+  }
+}

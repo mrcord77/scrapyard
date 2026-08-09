@@ -1,0 +1,353 @@
+{
+  "name": "tool_library",
+  "label": "Community Tool Library",
+  "terminology": {},
+  "entities": [
+    {
+      "name": "Member",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "name",
+          "type": "str"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "active",
+        "transitions": {
+          "active": [
+            "suspended",
+            "expired",
+            "banned"
+          ],
+          "suspended": [
+            "active"
+          ],
+          "expired": [
+            "active"
+          ],
+          "banned": []
+        }
+      }
+    },
+    {
+      "name": "Tool",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "name",
+          "type": "str"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "available",
+        "transitions": {
+          "available": [
+            "reserved",
+            "checked_out",
+            "maintenance",
+            "broken",
+            "retired"
+          ],
+          "reserved": [
+            "available",
+            "checked_out"
+          ],
+          "checked_out": [
+            "available",
+            "maintenance",
+            "broken"
+          ],
+          "maintenance": [
+            "available",
+            "retired"
+          ],
+          "broken": [
+            "maintenance",
+            "retired"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Reservation",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "member_id"
+        },
+        {
+          "name": "tool_id"
+        },
+        {
+          "name": "start_at",
+          "type": "int"
+        },
+        {
+          "name": "end_at",
+          "type": "int"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
+      ],
+      "reference_rules": {
+        "member_id": {
+          "entity": "Member",
+          "status_field": "status",
+          "allowed": [
+            "active"
+          ],
+          "error": "member must exist and be active"
+        },
+        "tool_id": {
+          "entity": "Tool",
+          "status_field": "status",
+          "allowed": [
+            "available"
+          ],
+          "error": "tool must exist and be available"
+        }
+      },
+      "no_overlap": {
+        "scope": "tool_id",
+        "start": "start_at",
+        "end": "end_at",
+        "active": [
+          "requested",
+          "approved",
+          "reserved",
+          "checked_out"
+        ],
+        "error": "tool already reserved for an overlapping period"
+      },
+      "state_machine": {
+        "field": "status",
+        "initial": "requested",
+        "transitions": {
+          "requested": [
+            "approved",
+            "cancelled",
+            "denied",
+            "expired"
+          ],
+          "approved": [
+            "reserved",
+            "cancelled",
+            "expired"
+          ],
+          "reserved": [
+            "checked_out",
+            "cancelled",
+            "expired"
+          ],
+          "checked_out": [
+            "returned",
+            "returned_damaged"
+          ],
+          "returned": [],
+          "returned_damaged": [],
+          "cancelled": [],
+          "denied": [],
+          "expired": []
+        },
+        "guards": {
+          "checked_out": [
+            {
+              "ref": "tool_id",
+              "entity": "Tool",
+              "field": "status",
+              "in": [
+                "available",
+                "reserved"
+              ],
+              "error": "cannot check out: tool is not available"
+            },
+            {
+              "ref": "member_id",
+              "entity": "Member",
+              "field": "status",
+              "in": [
+                "active"
+              ],
+              "error": "cannot check out: member is not active"
+            }
+          ]
+        },
+        "effects": {
+          "checked_out": [
+            {
+              "set_related": {
+                "ref": "tool_id",
+                "entity": "Tool",
+                "field": "status",
+                "value": "checked_out",
+                "guarded": true
+              }
+            }
+          ],
+          "returned": [
+            {
+              "set_related": {
+                "ref": "tool_id",
+                "entity": "Tool",
+                "field": "status",
+                "value": "available",
+                "guarded": true
+              }
+            }
+          ],
+          "returned_damaged": [
+            {
+              "set_related": {
+                "ref": "tool_id",
+                "entity": "Tool",
+                "field": "status",
+                "value": "maintenance",
+                "guarded": true
+              }
+            },
+            {
+              "create": {
+                "entity": "Incident",
+                "values": {
+                  "tool_id": "$tool_id",
+                  "reservation_id": "$id",
+                  "note": "damaged on return"
+                }
+              }
+            },
+            {
+              "create": {
+                "entity": "MaintenanceRecord",
+                "values": {
+                  "tool_id": "$tool_id",
+                  "status": "open"
+                }
+              }
+            }
+          ]
+        },
+        "time_transitions": [
+          {
+            "from": "requested",
+            "to": "expired",
+            "when": "end_at"
+          },
+          {
+            "from": "approved",
+            "to": "expired",
+            "when": "end_at"
+          },
+          {
+            "from": "reserved",
+            "to": "expired",
+            "when": "end_at"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incident",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "tool_id"
+        },
+        {
+          "name": "reservation_id"
+        },
+        {
+          "name": "note",
+          "type": "str"
+        }
+      ]
+    },
+    {
+      "name": "MaintenanceRecord",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "tool_id"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        },
+        {
+          "name": "resolution",
+          "type": "str"
+        }
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "open",
+        "transitions": {
+          "open": [
+            "completed"
+          ],
+          "completed": []
+        },
+        "effects": {
+          "completed": [
+            {
+              "set_related": {
+                "ref": "tool_id",
+                "entity": "Tool",
+                "field": "status",
+                "value": "available",
+                "guarded": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Tag",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "name",
+          "type": "str"
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    "reserve -> approve -> check out (tool->checked_out) -> return or damaged-return (auto incident+maintenance, tool->broken) -> complete maintenance (tool->available)"
+  ],
+  "permissions": [],
+  "reports": [],
+  "capability_hints": [],
+  "data_sensitivity": "low",
+  "many_to_many": [
+    {
+      "left": "Tool",
+      "right": "Tag"
+    }
+  ]
+}

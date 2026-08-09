@@ -1,0 +1,39 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "ev_leads",
+  "label": "EV Charger Installation Leads",
+  "terminology": {
+    "lead": "a homeowner inquiry about EV charger installation",
+    "installer": "the licensed electrician who receives and works leads",
+    "verdict": "the intake decision: HOT, WARM, NURTURE, or ESCALATE",
+    "panel risk": "fine, load-management candidate, or upgrade likely"
+  },
+  "entities": [
+    {
+      "name": "Lead",
+      "fields": [
+        "id",
+        {"name": "source", "type": "str"},
+        {"name": "name", "type": "str"},
+        {"name": "email", "type": "str"},
+        {"name": "phone", "type": "str", "optional": true},
+        {"name": "zip", "type": "str"},
+        {"name": "intent", "type": "str"},
+        {"name": "answers", "type": "json"},
+        {"name": "estimate_lo", "type": "int"},
+        {"name": "estimate_hi", "type": "int"},
+        {"name": "message", "type": "text", "optional": true},
+        {"name": "score", "type": "int", "optional": true},
+        {"name": "verdict", "type": "str", "optional": true},
+        {"name": "flags", "type": "json", "optional": true},
+        {"name": "gaps", "type": "json", "optional": true},
+        {"name": "draft_reply", "type": "text", "optional": true},
+        {"name": "panel_risk", "type": "str", "optional": true},
+        {"name": "status", "type": "str"},
+        "created_at"
+      ],
+      "notes": "A homeowner lead from the estimator form. Operator writes verdict/flags/gaps/draft_reply onto the record."
+    }
+  ],
+  "data_sensitivity": "moderate"
+}

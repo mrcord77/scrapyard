@@ -1,0 +1,9 @@
+{
+  "product_type": "subscription saas for sobriety journaling",
+  "domain": "sobriety",
+  "stage": "growth",
+  "expected_users": 2000,
+  "must_have": ["field_encryption", "account_deletion"],
+  "must_not": ["multitenancy_core"],
+  "notes": "Privacy-first. No social features. Journaling + check-ins + billing."
+}

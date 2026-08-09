@@ -1,0 +1,38 @@
+{
+  "schema": "scrapyard/lifecycle@1",
+  "order": [
+    "mvp",
+    "growth",
+    "scale",
+    "enterprise"
+  ],
+  "description": "Maturity ladder. Resolving at a stage includes subsystems ranked at or below it. Unclassified capabilities default to mvp (always included).",
+  "stage_of": {
+    "foundation_core": "mvp",
+    "web_api": "mvp",
+    "persistence_core": "mvp",
+    "security_baseline": "mvp",
+    "authentication": "mvp",
+    "billing_stripe": "mvp",
+    "frontend_app": "mvp",
+    "authorization_rbac": "growth",
+    "comms_core": "growth",
+    "frontend_marketing": "growth",
+    "content_core": "growth",
+    "search_core": "growth",
+    "files_core": "growth",
+    "deploy_container": "growth",
+    "admin_console": "scale",
+    "observability_core": "scale",
+    "analytics_core": "scale",
+    "jobs_core": "scale",
+    "search_faceted": "scale",
+    "metering_billing": "scale",
+    "ai_core": "scale",
+    "rag_stack": "scale",
+    "agent_stack": "scale",
+    "realtime_core": "scale",
+    "multitenancy_core": "enterprise",
+    "compliance_gdpr": "enterprise"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "desktop_tool",
+  "description": "Local-first desktop tool. Backend parts are the API/persistence core; UI ships native (Electron/Tauri).",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication"
+  ],
+  "notes": "The scrapyard is backend-centric. A desktop shell (Electron/Tauri) wraps this API locally; native packaging lives outside the yard."
+}

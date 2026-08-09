@@ -1,0 +1,45 @@
+name: Bug report
+description: Report reproducible incorrect behavior in a Scrapyard part or tool.
+title: "[bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please remove secrets and personal data from logs before submitting.
+  - type: input
+    id: part
+    attributes:
+      label: Part or tool
+      description: Import path, file path, or command that failed.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include the smallest code or command sequence that demonstrates the problem.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Scrapyard version, Python version, and operating system.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues for this behavior.
+          required: true
+        - label: This report contains no credentials or sensitive data.
+          required: true

@@ -1,0 +1,13 @@
+{
+  "schema": "scrapyard/runtime-profile@1",
+  "category": "startup",
+  "scenarios": [
+    {
+      "name": "missing_encryption_key_for_sensitive_app",
+      "unset": ["FIELD_ENCRYPTION_KEY"],
+      "needs_key": false,
+      "expect_boot": false,
+      "expect_message": "FIELD_ENCRYPTION_KEY is required"
+    }
+  ]
+}

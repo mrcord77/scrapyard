@@ -1,0 +1,81 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "construction",
+  "label": "Construction project management",
+  "terminology": {
+    "RFI": "request for information",
+    "change order": "scope/price change",
+    "punch list": "final fixes",
+    "submittal": "material approval doc"
+  },
+  "entities": [
+    {
+      "name": "Project",
+      "fields": [
+        "id",
+        "name",
+        "client",
+        "status",
+        "budget_cents"
+      ]
+    },
+    {
+      "name": "Task",
+      "fields": [
+        "id",
+        "project_id",
+        "title",
+        "assignee_id",
+        "status",
+        "due"
+      ]
+    },
+    {
+      "name": "ChangeOrder",
+      "fields": [
+        "id",
+        "project_id",
+        "amount_cents",
+        "status",
+        "reason"
+      ]
+    },
+    {
+      "name": "Document",
+      "fields": [
+        "id",
+        "project_id",
+        "kind",
+        "media_id",
+        "uploaded_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "create project -> schedule tasks",
+    "RFI + submittal routing",
+    "change order approval",
+    "punch list close-out"
+  ],
+  "permissions": [
+    "project.manage",
+    "task.assign",
+    "changeorder.approve"
+  ],
+  "reports": [
+    "budget vs actual",
+    "task completion",
+    "open RFIs/change orders"
+  ],
+  "capability_hints": [
+    "files_core",
+    "comms_core",
+    "jobs_core",
+    "authorization_rbac"
+  ],
+  "data_sensitivity": "low",
+  "sensitive_entities": [],
+  "regulated_data": false,
+  "minimum_security_stage": "mvp",
+  "privacy_notes": "Mostly project/business data."
+}

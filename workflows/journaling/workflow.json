@@ -1,0 +1,27 @@
+{
+  "schema": "scrapyard/workflow@1",
+  "name": "journaling",
+  "actors": [
+    "member"
+  ],
+  "requires": [
+    "__generated_models__"
+  ],
+  "domain": "sobriety",
+  "starting_state": "member with no entries",
+  "steps": [
+    {
+      "action": "create_private_entry",
+      "expect": "entry persisted; private defaults True"
+    },
+    {
+      "action": "read_entry",
+      "expect": "entry retrievable by id"
+    },
+    {
+      "action": "soft_delete_entry",
+      "expect": "entry hidden from alive query"
+    }
+  ],
+  "final_state": "entry created then retracted; history preserved"
+}

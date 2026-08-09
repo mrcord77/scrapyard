@@ -1,0 +1,16 @@
+{
+  "schema": "scrapyard/composition@1",
+  "name": "billing_feature_gates",
+  "binds": [
+    "billing_stripe",
+    "feature_gates"
+  ],
+  "problem": "Features must switch on/off by plan, and reflect upgrades/downgrades immediately.",
+  "glue": "feature_gates reads entitlements derived from subscription_status; webhooks invalidate any cached entitlement on plan change.",
+  "steps": [
+    "Map each plan to an entitlement set (entitlements part).",
+    "feature_gates checks entitlement_gate, which reads subscription_status.",
+    "On stripe_webhooks plan change, refresh/invalidate the cached entitlements for that user."
+  ],
+  "owns_data": "plan_entitlements, subscriptions.plan_id"
+}

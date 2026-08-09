@@ -1,0 +1,16 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "knowledge_base",
+  "description": "Searchable help center: articles, categories, full-text search, feedback.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "content_core",
+    "search_core",
+    "authentication",
+    "frontend_app",
+    "frontend_marketing"
+  ]
+}

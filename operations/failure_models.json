@@ -1,0 +1,73 @@
+{
+  "schema": "scrapyard/failure_models@1",
+  "failure_modes": {
+    "db_session": [
+      {
+        "mode": "connection pool exhausted",
+        "severity": "high",
+        "detect": "active-connection metric",
+        "recovery": "raise pool size; add read replica; shed load via rate_limiting"
+      },
+      {
+        "mode": "primary down",
+        "severity": "critical",
+        "detect": "healthcheck failing",
+        "recovery": "failover to replica; restore from snapshot"
+      }
+    ],
+    "stripe_api": [
+      {
+        "mode": "API outage",
+        "severity": "high",
+        "detect": "checkout error rate",
+        "recovery": "queue checkout intents; retry; show degraded billing UI"
+      },
+      {
+        "mode": "webhook delivery delayed/duplicated/missing",
+        "severity": "high",
+        "detect": "webhook failure + gap metrics",
+        "recovery": "reconciliation job against Stripe; idempotency keys; retry queue"
+      }
+    ],
+    "smtp_provider": [
+      {
+        "mode": "provider outage",
+        "severity": "medium",
+        "detect": "send-failure rate",
+        "recovery": "retry queue; failover provider; in-app fallback notice"
+      }
+    ],
+    "broker": [
+      {
+        "mode": "broker unavailable",
+        "severity": "high",
+        "detect": "enqueue failures",
+        "recovery": "buffer to DB; replay when broker returns; dead_letter for poison jobs"
+      }
+    ],
+    "vector_store": [
+      {
+        "mode": "index unavailable or stale",
+        "severity": "medium",
+        "detect": "retrieval hit-rate drop",
+        "recovery": "fall back to keyword search; re-embed from source documents"
+      }
+    ],
+    "llm_client": [
+      {
+        "mode": "provider 429 / outage / cost spike",
+        "severity": "high",
+        "detect": "error rate + token spend",
+        "recovery": "backoff+retry; cheaper fallback model; per-tenant budget caps"
+      }
+    ],
+    "storage_adapters": [
+      {
+        "mode": "object store unavailable",
+        "severity": "high",
+        "detect": "upload/download errors",
+        "recovery": "retry; queue uploads; serve cached signed URLs"
+      }
+    ]
+  }
+}

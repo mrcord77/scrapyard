@@ -1,0 +1,83 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "oil_and_gas",
+  "label": "Upstream/field operations",
+  "terminology": {
+    "well": "a drilling/production site",
+    "lease": "land/mineral rights",
+    "run ticket": "volume transfer record",
+    "downtime": "non-producing period"
+  },
+  "entities": [
+    {
+      "name": "Well",
+      "fields": [
+        "id",
+        "name",
+        "lease_id",
+        "status",
+        "location"
+      ]
+    },
+    {
+      "name": "Lease",
+      "fields": [
+        "id",
+        "name",
+        "operator",
+        "county",
+        "state"
+      ]
+    },
+    {
+      "name": "ProductionLog",
+      "fields": [
+        "id",
+        "well_id",
+        "date",
+        "oil_bbl",
+        "gas_mcf",
+        "water_bbl"
+      ]
+    },
+    {
+      "name": "WorkOrder",
+      "fields": [
+        "id",
+        "well_id",
+        "kind",
+        "status",
+        "scheduled_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "log daily production",
+    "schedule + close work orders",
+    "downtime tracking",
+    "lease/well rollup reporting"
+  ],
+  "permissions": [
+    "well.manage",
+    "production.log",
+    "workorder.assign"
+  ],
+  "reports": [
+    "production by well/lease",
+    "downtime hours",
+    "work order backlog"
+  ],
+  "capability_hints": [
+    "jobs_core",
+    "analytics_core",
+    "files_core",
+    "observability_core"
+  ],
+  "data_sensitivity": "moderate",
+  "sensitive_entities": [
+    "ProductionLog"
+  ],
+  "regulated_data": true,
+  "minimum_security_stage": "growth",
+  "privacy_notes": "Production data may be commercially sensitive / regulated reporting."
+}

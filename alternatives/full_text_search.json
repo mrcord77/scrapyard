@@ -1,0 +1,25 @@
+{
+  "schema": "scrapyard/alternatives@1",
+  "capability": "full_text_search",
+  "role": "How records are searched by text",
+  "options": [
+    {
+      "id": "pg_fts",
+      "label": "Postgres full-text",
+      "part_hint": "full_text_search",
+      "simplicity": 4,
+      "scalability": 3,
+      "security": 4,
+      "notes": "No extra service; fine for moderate corpora; limited relevance tuning."
+    },
+    {
+      "id": "opensearch",
+      "label": "OpenSearch / Elasticsearch",
+      "part_hint": "full_text_search",
+      "simplicity": 2,
+      "scalability": 5,
+      "security": 3,
+      "notes": "Powerful relevance + facets at scale; heavy to operate."
+    }
+  ]
+}

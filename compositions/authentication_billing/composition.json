@@ -1,0 +1,17 @@
+{
+  "schema": "scrapyard/composition@1",
+  "name": "authentication_billing",
+  "binds": [
+    "authentication",
+    "billing_stripe"
+  ],
+  "problem": "A paying user must map to both an auth principal and a Stripe customer, and the two must stay in sync.",
+  "glue": "On user signup, lazily create a Stripe customer and store stripe_customer_id on the user. On Stripe webhooks, resolve events back to the user by that id.",
+  "steps": [
+    "Add stripe_customer_id (nullable) to the users model.",
+    "In auth_routes signup (or first checkout), call stripe_checkout to create/fetch the customer and persist the id.",
+    "In stripe_webhooks, look up the user by stripe_customer_id before mutating subscription_status.",
+    "Guard billing routes with the authentication dependency so only the owner acts on their subscription."
+  ],
+  "owns_data": "users.stripe_customer_id, subscriptions.user_id"
+}

@@ -1,0 +1,34 @@
+# Hardening & Maturity
+
+_Computed across 172 capabilities. "Hardened" is honest: it requires registered
+evidence (rotation/recovery/tamper/edge coverage), which most capabilities do not
+yet have. This is the point — "core" was never "production".
+
+## Maturity tiers
+
+- **implemented:** 0
+- **verified:** 172
+- **hardened:** 0
+- **operational:** 0
+
+- implemented (in catalog): 172/172
+- verified (behavior contract): 172/172
+- hardened (registered evidence): 0/172
+- operational (failure/deps declared): 25/172
+
+## Known hardening gaps (security-critical)
+
+- **account_deletion**: right to erasure — generated apps expose POST /privacy/delete-account which erases the user's DOMAIN-owned rows (generated privacy.py) then library identity (sessions + user, with audit). Without the generated half, domain rows would be orphaned. Proven end-to-end: one user's data erased, session revoked, other users untouched — IMPLEMENTED & proven; still pending: erasure is by user_id ownership; rows merely referencing a user without a user_id column (e.g. free-text mentions) are not swept; deletion is hard-delete, not anonymization-in-place
+- **audit_logs**: tamper detection ADDED (hash chain + hybrid-PQ witness, verify_chain proven); still pending: DB-enforced append-only (GRANTs/triggers); witness-key rotation / durable custody (set AUDIT_WITNESS_* or citadel); no archival/retention backend
+- **cache_client**: real Redis-backed cache (env-resolved, ping-fail-fast) with the same interface as the in-memory cache — proven against live Redis: value shared across independent clients, TTL applied, delete/clear (namespace-scoped); in-memory cache is FORBIDDEN in production (fail-closed gate), proven at boot (prod+memory refuses, prod+redis boots) — IMPLEMENTED & proven; still pending: get_cache() is available but not auto-wired into generated routes/services (apps opt in); no automatic write-through invalidation by default; values are JSON-serializable only; a mid-request Redis outage raises (fail-closed) rather than degrading — Redis is on the critical path until L13 HA; no cache-stampede/lock protection
+- **data_export**: GET /privacy/export builds the full payload synchronously (fine for typical accounts); a STREAMING variant GET /privacy/export/stream now emits NDJSON row-by-row via a server-side cursor (constant memory, scales to large accounts) — proven by the streaming_export contract + HTTP e2e; still pending: no background/async export JOB (the stream is still produced within the request, just not buffered); no resumable/checkpointed export
+- **document_store**: durable RAG store with idempotent ingest + scored citations + tenant scope + retrieval logging — IMPLEMENTED & proven; still pending: embeddings default to local/deterministic (use OpenAI provider for real semantics); cosine scan is exact not ANN (use pgvector for scale); no async re-embed/migration job
+- **error_reporting**: real Sentry SDK integration — proven: an exception flows through the actual sentry_sdk pipeline to its transport (verified via in-memory transport, no network); structured JSON logs carry level + request context with privacy redaction; generated apps call init_sentry() at boot; production running with no exporter is surfaced as a warning — IMPLEMENTED & proven; still pending: only exception capture is wired (no breadcrumbs/performance/release tagging); no automatic FastAPI exception-handler -> reporter middleware by default; Prometheus metrics endpoint not auto-exposed; live Sentry delivery not exercised in-sandbox (sentry.io unreachable) — proven through the SDK transport instead
+- **field_encryption**: legacy Fernet at-rest part; superseded for generated apps by pq_field_encryption; Fernet path itself still lacks key rotation / versioning
+- **pq_field_encryption**: hybrid PQ at-rest with key ROTATION + self-describing suite (versioning) — IMPLEMENTED & proven; still pending: row-level AAD (binds to table.column, not per-row); per-value KEM is heavier than a shared DEK; key custody is env-based unless citadel; local ML-KEM not constant-time/audited
+- **providers**: pluggable LLM+embedding providers (offline/anthropic/openai), offline refused in prod — IMPLEMENTED; still pending: streaming, per-call timeout/cost ceilings, retry policy on provider errors
+- **rate_limiting**: distributed Redis token bucket via atomic Lua check-and-decrement — proven: the limit is enforced GLOBALLY across 3 independent instances under concurrent load (only capacity admitted, not N x capacity); in-memory per-process limiter is FORBIDDEN in production (fail-closed), proven at boot — IMPLEMENTED & proven; still pending: get_rate_limiter() is not auto-wired as middleware into generated apps (opt-in); token-bucket only (no sliding-window-log option); no per-route limit templating; refill timing assumes roughly-synced clocks across instances
+- **retention_policy**: declared in domain policy but not enforced at runtime
+- **roles**: role-based authorization — persistent user_roles store + principal/permission expansion; an entity may declare route_policies[...].write_role so create/update/delete require that role (or a superuser 'owner' role) while reads stay auth-only. Generated apps emit a require_role dependency and create the user_roles table at startup. Proven end-to-end (normal user 403, admin 201, anon 401) + by the roles contract — IMPLEMENTED & proven; role ASSIGNMENT now has admin-gated self-serve endpoints (POST /admin/roles/grant, POST /admin/roles/revoke, GET /admin/roles/{user_id}) generated whenever roles are in use, all behind require_role('admin') — proven by the role_admin contract + HTTP boundary e2e (anon 401, non-admin 403, admin 200, and a revoked user loses access). The FIRST admin is still seeded out-of-band via roles.grant() (bootstrap). Still pending: no per-row (object-level) role grants — gating is per entity/action
+- **stripe_webhooks**: webhook signature verification + replay prevention + subscription lifecycle (activate/cancel/entitlement revoke) are implemented and proven by contracts and the entitlement-lifecycle workflow; the LIVE Stripe SDK call path is NOT wired — no real charges/subscriptions are created against Stripe's API; only the signature/lifecycle logic exists. No delayed-event reconciliation. Wire the stripe client + real webhook secret before taking payments
+- **tracing**: real OpenTelemetry tracing — proven: spans created and exported through the standard OTel SDK pipeline with correct parent/child linkage (verified via InMemorySpanExporter); init_otel() wires an OTLP exporter in production from OTEL_EXPORTER_OTLP_ENDPOINT — IMPLEMENTED & proven; still pending: no auto-instrumentation of FastAPI/SQLAlchemy by default (spans are manual); OTLP export not exercised against a live collector in-sandbox (none running); fixed sampling

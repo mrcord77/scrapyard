@@ -1,0 +1,13 @@
+{
+  "schema": "scrapyard/build_request@1",
+  "fields": {
+    "product_type": "free-text product kind (e.g. 'subscription saas', 'marketplace', 'agent platform')",
+    "domain": "one of domains/ (e.g. 'sobriety') or null",
+    "stage": "mvp | growth | scale | enterprise",
+    "expected_users": "integer estimate or null",
+    "must_have": ["extra capabilities to force-include"],
+    "must_not": ["capabilities/subsystems to exclude"],
+    "data_sensitivity": "low | moderate | high | regulated | null (else inferred from domain)",
+    "notes": "free text"
+  }
+}

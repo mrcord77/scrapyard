@@ -1,0 +1,11 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "web_application",
+  "description": "Any web app: foundation, HTTP API, persistence, baseline security.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "scrapyard/workflow@1",
+  "name": "authentication",
+  "actors": [
+    "user"
+  ],
+  "requires": [
+    "password_hashing",
+    "jwt_manager",
+    "permissions"
+  ],
+  "starting_state": "no account",
+  "steps": [
+    {
+      "action": "register",
+      "expect": "user persisted; password stored as hash (not plaintext)"
+    },
+    {
+      "action": "login_wrong_password",
+      "expect": "rejected"
+    },
+    {
+      "action": "login_correct",
+      "expect": "access token issued; subject = user id"
+    },
+    {
+      "action": "authorize_allowed",
+      "expect": "granted for held permission"
+    },
+    {
+      "action": "authorize_denied",
+      "expect": "denied for missing permission"
+    }
+  ],
+  "final_state": "authenticated user with scoped access"
+}

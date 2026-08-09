@@ -1,0 +1,1274 @@
+{
+  "schema": "scrapyard/confidence@1",
+  "scale": [
+    "experimental",
+    "draft",
+    "stable",
+    "proven",
+    "deprecated"
+  ],
+  "note": "158/158 implemented. 'proven'=passing automated behavior contract (python tools/verify_build.py all); 'stable'=implemented+import-checked.",
+  "totals": {
+    "proven": 157,
+    "stable": 0,
+    "draft": 0
+  },
+  "capabilities": {
+    "ab_testing": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "account_deletion": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "account_lockout": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "admin_access": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "app_factory": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "app_scaffold": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "audit_logs": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "audit_mixin": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "auth_checks": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "auth_pages": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "auth_routes": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "background_tasks": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "backups": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "base_model": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "blog": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "cache_client": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "cache_invalidation": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "cached_decorator": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "cancellation_flow": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "cms": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "config": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "consent_logs": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "contract_tests": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "cors": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "cron_jobs": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "csrf": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "dashboards": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "data_export": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "db_session": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "dead_letter": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "dependency_container": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "docker": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "email": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "email_verification": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "embeddings": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "empty_states": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "entitlement_gate": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "entitlements": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "env_loading": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "error_handling": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "error_reporting": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "error_taxonomy": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "eval_harness": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "event_bus": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "event_tracking": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "faceted_search": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "factories": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "feature_gates": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "field_encryption": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "filters": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "forms": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "full_text_search": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "funnels": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "gdpr_dsr": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "github_actions": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "guardrails": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "health": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "healthcheck_probe": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "i18n": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "idempotency": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "image_processing": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "impersonation": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "input_sanitization": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "invoice_portal": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "invoices": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "jwt_manager": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "link_checks": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "llm_client": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "locale_middleware": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "logging_setup": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "markdown_pages": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "media_library": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "metrics": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "mfa_totp": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "middleware": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "migrations": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "moderation_tools": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "navbars": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "notification_center": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "oauth_google": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "openapi_custom": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "pagination": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "pagination_params": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "password_hashing": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "password_policy": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "password_reset": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "payment_checks": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "per_tenant_config": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "permissions": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "pricing_pages": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "privacy_policy_hooks": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "prompt_registry": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "push_notifications": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "query_helpers": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "queues": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "rag": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "railway": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "rate_limiting": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "render": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "reports": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "repository": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "request_context": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "retention_policy": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "retries": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "roles": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "routers": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "saved_searches": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "scheduled_workflows": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "search_pagination": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "secrets": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "security_headers": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "seed_data": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "seo_metadata": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "session_manager": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "settings_pages": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "settings_validation": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "signed_cookies": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "signed_urls": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "sitemap": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "smoke_checks": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "sms": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "soft_delete": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "sorting": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "sse_stream": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "storage_adapters": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "streaming": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "stripe_checkout": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "stripe_webhooks": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "structured_logging": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "subscription_status": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "subscriptions": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "tables": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "templates": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "tenant_access": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "tenant_context": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "tenant_isolation": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "timestamps": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "token_cost_logging": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "tool_calling": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "tracing": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "transactions": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "translations": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "unit_of_work": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "unsubscribe_handling": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "uploads": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "usage_metering": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "usage_metrics": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "user_management": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "users": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "validation": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "vector_store": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "vercel": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "versioning": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "virus_scanning": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "webhooks_inbound": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "webhooks_outbound": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    },
+    "websocket_manager": {
+      "status": "proven",
+      "confidence_score": 0.85,
+      "confidence_reason": "covered by a passing automated behavior contract",
+      "evidence_count": 1,
+      "production_uses": 0,
+      "last_verified_at": null
+    }
+  }
+}

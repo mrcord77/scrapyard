@@ -1,0 +1,44 @@
+{
+  "scrapyard.identity.auth_routes": {
+    "router_factory": "build_auth_router",
+    "mount_prefix": "/auth",
+    "tags": [
+      "auth"
+    ]
+  },
+  "scrapyard.jobs.jobs_admin_routes": {
+    "router_factory": "build_jobs_admin_router",
+    "mount_prefix": "/admin/jobs",
+    "tags": [
+      "jobs-admin"
+    ]
+  },
+  "scrapyard.admin.admin_routes": {
+    "router_factory": "build_admin_router",
+    "mount_prefix": "/admin",
+    "tags": [
+      "admin"
+    ]
+  },
+  "scrapyard.content.content_routes": {
+    "router_factory": "build_content_router",
+    "mount_prefix": "/content",
+    "tags": [
+      "content"
+    ]
+  },
+  "scrapyard.ai.ai_routes": {
+    "router_factory": "build_ai_router",
+    "mount_prefix": "/ai",
+    "tags": [
+      "ai"
+    ]
+  },
+  "scrapyard.marketplace.listings": {
+    "router_factory": "build_marketplace_router",
+    "mount_prefix": "/marketplace",
+    "tags": [
+      "marketplace"
+    ]
+  }
+}

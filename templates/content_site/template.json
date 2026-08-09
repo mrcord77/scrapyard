@@ -1,0 +1,25 @@
+{
+  "description": "Content/marketing site: CMS, blog, markdown pages, SEO.",
+  "parts": [
+    "scrapyard.foundation.config",
+    "scrapyard.foundation.logging_setup",
+    "scrapyard.api.app_factory",
+    "scrapyard.api.error_handling",
+    "scrapyard.database.db_session",
+    "scrapyard.database.base_model",
+    "scrapyard.database.timestamps",
+    "scrapyard.content.cms",
+    "scrapyard.content.markdown_pages",
+    "scrapyard.content.blog",
+    "scrapyard.content.media_library",
+    "scrapyard.content.seo_metadata",
+    "scrapyard.content.sitemap",
+    "scrapyard.communication.email",
+    "scrapyard.communication.unsubscribe_handling",
+    "scrapyard.analytics.event_tracking",
+    "scrapyard.security.security_headers",
+    "scrapyard.frontend.navbars",
+    "scrapyard.deployment.vercel",
+    "scrapyard.content.content_routes"
+  ]
+}

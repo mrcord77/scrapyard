@@ -1,0 +1,16 @@
+{
+  "schema": "scrapyard/composition@1",
+  "name": "users_audit_logs",
+  "binds": [
+    "users",
+    "audit_logs"
+  ],
+  "problem": "Sensitive actions need an immutable record of who did what, when.",
+  "glue": "A write-path hook records actor (user id from auth), action, target, and timestamp into the audit_logs store; reads are admin-gated.",
+  "steps": [
+    "Wrap sensitive service methods so they emit an audit event with the current user id.",
+    "audit_logs persists append-only rows (audit_mixin or a dedicated table).",
+    "Expose audit reads only behind admin_access."
+  ],
+  "owns_data": "audit_log.actor_user_id"
+}

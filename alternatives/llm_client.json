@@ -1,0 +1,25 @@
+{
+  "schema": "scrapyard/alternatives@1",
+  "capability": "llm_client",
+  "role": "Which LLM backend answers",
+  "options": [
+    {
+      "id": "hosted_api",
+      "label": "Hosted API (Anthropic/OpenAI)",
+      "part_hint": "llm_client",
+      "simplicity": 5,
+      "scalability": 5,
+      "security": 3,
+      "notes": "Best quality, no ops; per-token cost; data leaves your boundary."
+    },
+    {
+      "id": "self_hosted",
+      "label": "Self-hosted open weights",
+      "part_hint": "llm_client",
+      "simplicity": 2,
+      "scalability": 3,
+      "security": 5,
+      "notes": "Data stays in-house; GPU ops burden; quality/throughput tradeoffs."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "ticketing_system",
+  "description": "Support/issue tracking: tickets, assignment, SLAs, notifications, audit trail.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "authorization_rbac",
+    "comms_core",
+    "jobs_core",
+    "search_core",
+    "admin_console",
+    "frontend_app"
+  ]
+}

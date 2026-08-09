@@ -1,0 +1,1449 @@
+{
+  "schema": "scrapyard/hardening@1",
+  "note": "implemented/verified COMPUTED; hardened requires registered evidence (deliberately near-zero today); operational COMPUTED from operations/ models.",
+  "totals": {
+    "count": 172,
+    "implemented": 172,
+    "verified": 172,
+    "hardened": 0,
+    "operational": 25,
+    "by_maturity": {
+      "verified": 172
+    }
+  },
+  "capabilities": {
+    "ab_testing": {
+      "layer": "analytics",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "account_deletion": {
+      "layer": "compliance",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "right to erasure \u2014 generated apps expose POST /privacy/delete-account which erases the user's DOMAIN-owned rows (generated privacy.py) then library identity (sessions + user, with audit). Without the generated half, domain rows would be orphaned. Proven end-to-end: one user's data erased, session revoked, other users untouched \u2014 IMPLEMENTED & proven",
+        "still pending: erasure is by user_id ownership; rows merely referencing a user without a user_id column (e.g. free-text mentions) are not swept; deletion is hard-delete, not anonymization-in-place"
+      ]
+    },
+    "account_lockout": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "admin_access": {
+      "layer": "authorization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "admin_routes": {
+      "layer": "admin",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "ai_routes": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "app_factory": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "app_scaffold": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "audit_logs": {
+      "layer": "admin",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "tamper detection ADDED (hash chain + hybrid-PQ witness, verify_chain proven)",
+        "still pending: DB-enforced append-only (GRANTs/triggers)",
+        "witness-key rotation / durable custody (set AUDIT_WITNESS_* or citadel)",
+        "no archival/retention backend"
+      ]
+    },
+    "audit_mixin": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "auth_checks": {
+      "layer": "testing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "auth_pages": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "auth_routes": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "background_tasks": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "backups": {
+      "layer": "deployment",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "base_model": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "blog": {
+      "layer": "content",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "cache_client": {
+      "layer": "caching",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "real Redis-backed cache (env-resolved, ping-fail-fast) with the same interface as the in-memory cache \u2014 proven against live Redis: value shared across independent clients, TTL applied, delete/clear (namespace-scoped); in-memory cache is FORBIDDEN in production (fail-closed gate), proven at boot (prod+memory refuses, prod+redis boots) \u2014 IMPLEMENTED & proven",
+        "still pending: get_cache() is available but not auto-wired into generated routes/services (apps opt in); no automatic write-through invalidation by default; values are JSON-serializable only; a mid-request Redis outage raises (fail-closed) rather than degrading \u2014 Redis is on the critical path until L13 HA; no cache-stampede/lock protection"
+      ]
+    },
+    "cache_invalidation": {
+      "layer": "caching",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "cached_decorator": {
+      "layer": "caching",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "cancellation_flow": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "chunking": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "cms": {
+      "layer": "content",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "config": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "consent_logs": {
+      "layer": "compliance",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "content_routes": {
+      "layer": "content",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "contract_tests": {
+      "layer": "testing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "cors": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "cron_jobs": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "crypto_agility": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "csrf": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "dashboards": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "data_export": {
+      "layer": "compliance",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "GET /privacy/export builds the full payload synchronously (fine for typical accounts); a STREAMING variant GET /privacy/export/stream now emits NDJSON row-by-row via a server-side cursor (constant memory, scales to large accounts) \u2014 proven by the streaming_export contract + HTTP e2e",
+        "still pending: no background/async export JOB (the stream is still produced within the request, just not buffered); no resumable/checkpointed export"
+      ]
+    },
+    "db_queue": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "db_session": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "dead_letter": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "dependency_container": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "docker": {
+      "layer": "deployment",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "document_store": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "durable RAG store with idempotent ingest + scored citations + tenant scope + retrieval logging \u2014 IMPLEMENTED & proven",
+        "still pending: embeddings default to local/deterministic (use OpenAI provider for real semantics); cosine scan is exact not ANN (use pgvector for scale); no async re-embed/migration job"
+      ]
+    },
+    "email": {
+      "layer": "communication",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "email_verification": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "embeddings": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "empty_states": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "entitlement_gate": {
+      "layer": "authorization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "entitlements": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "env_loading": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "error_handling": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "error_reporting": {
+      "layer": "observability",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "real Sentry SDK integration \u2014 proven: an exception flows through the actual sentry_sdk pipeline to its transport (verified via in-memory transport, no network); structured JSON logs carry level + request context with privacy redaction; generated apps call init_sentry() at boot; production running with no exporter is surfaced as a warning \u2014 IMPLEMENTED & proven",
+        "still pending: only exception capture is wired (no breadcrumbs/performance/release tagging); no automatic FastAPI exception-handler -> reporter middleware by default; Prometheus metrics endpoint not auto-exposed; live Sentry delivery not exercised in-sandbox (sentry.io unreachable) \u2014 proven through the SDK transport instead"
+      ]
+    },
+    "error_taxonomy": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "eval_harness": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "event_bus": {
+      "layer": "messaging",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "event_tracking": {
+      "layer": "analytics",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "faceted_search": {
+      "layer": "search",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "factories": {
+      "layer": "testing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "feature_gates": {
+      "layer": "authorization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "field_encryption": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "legacy Fernet at-rest part; superseded for generated apps by pq_field_encryption",
+        "Fernet path itself still lacks key rotation / versioning"
+      ]
+    },
+    "filters": {
+      "layer": "search",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "forms": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "full_text_search": {
+      "layer": "search",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "funnels": {
+      "layer": "analytics",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "gdpr_dsr": {
+      "layer": "compliance",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "github_actions": {
+      "layer": "deployment",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "guardrails": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "health": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "healthcheck_probe": {
+      "layer": "deployment",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "i18n": {
+      "layer": "localization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "idempotency": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "image_processing": {
+      "layer": "files",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "impersonation": {
+      "layer": "admin",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "input_sanitization": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "invoice_portal": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "invoices": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "jobs_admin_routes": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "jwt_manager": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "link_checks": {
+      "layer": "testing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "listings": {
+      "layer": "marketplace",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "llm_client": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "locale_middleware": {
+      "layer": "localization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "logging_setup": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "markdown_pages": {
+      "layer": "content",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "media_library": {
+      "layer": "content",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "metrics": {
+      "layer": "observability",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "mfa_totp": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "middleware": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "migrations": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "moderation_tools": {
+      "layer": "admin",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "navbars": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "notification_center": {
+      "layer": "communication",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "oauth_google": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "openapi_custom": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "pagination": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "pagination_params": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "password_hashing": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "password_policy": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "password_reset": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "payment_checks": {
+      "layer": "testing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "per_tenant_config": {
+      "layer": "multitenancy",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "permissions": {
+      "layer": "authorization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "pq_envelope": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "pq_field_encryption": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "hybrid PQ at-rest with key ROTATION + self-describing suite (versioning) \u2014 IMPLEMENTED & proven",
+        "still pending: row-level AAD (binds to table.column, not per-row); per-value KEM is heavier than a shared DEK; key custody is env-based unless citadel; local ML-KEM not constant-time/audited"
+      ]
+    },
+    "pq_signing": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "pricing_pages": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "privacy_policy_hooks": {
+      "layer": "compliance",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "prompt_registry": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "providers": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "pluggable LLM+embedding providers (offline/anthropic/openai), offline refused in prod \u2014 IMPLEMENTED",
+        "still pending: streaming, per-call timeout/cost ceilings, retry policy on provider errors"
+      ]
+    },
+    "push_notifications": {
+      "layer": "communication",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "query_helpers": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "queues": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "rag": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "rag_service": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "railway": {
+      "layer": "deployment",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "rate_limiting": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "distributed Redis token bucket via atomic Lua check-and-decrement \u2014 proven: the limit is enforced GLOBALLY across 3 independent instances under concurrent load (only capacity admitted, not N x capacity); in-memory per-process limiter is FORBIDDEN in production (fail-closed), proven at boot \u2014 IMPLEMENTED & proven",
+        "still pending: get_rate_limiter() is not auto-wired as middleware into generated apps (opt-in); token-bucket only (no sliding-window-log option); no per-route limit templating; refill timing assumes roughly-synced clocks across instances"
+      ]
+    },
+    "render": {
+      "layer": "deployment",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "reports": {
+      "layer": "analytics",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "repository": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "request_context": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "retention_policy": {
+      "layer": "compliance",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "declared in domain policy but not enforced at runtime"
+      ]
+    },
+    "retries": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "roles": {
+      "layer": "authorization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "role-based authorization \u2014 persistent user_roles store + principal/permission expansion; an entity may declare route_policies[...].write_role so create/update/delete require that role (or a superuser 'owner' role) while reads stay auth-only. Generated apps emit a require_role dependency and create the user_roles table at startup. Proven end-to-end (normal user 403, admin 201, anon 401) + by the roles contract \u2014 IMPLEMENTED & proven",
+        "role ASSIGNMENT now has admin-gated self-serve endpoints (POST /admin/roles/grant, POST /admin/roles/revoke, GET /admin/roles/{user_id}) generated whenever roles are in use, all behind require_role('admin') \u2014 proven by the role_admin contract + HTTP boundary e2e (anon 401, non-admin 403, admin 200, and a revoked user loses access). The FIRST admin is still seeded out-of-band via roles.grant() (bootstrap). Still pending: no per-row (object-level) role grants \u2014 gating is per entity/action"
+      ]
+    },
+    "routers": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "saved_searches": {
+      "layer": "search",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "scheduled_workflows": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "search_pagination": {
+      "layer": "search",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "secrets": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "security_headers": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "seed_data": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "seo_metadata": {
+      "layer": "content",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "session_manager": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "settings_pages": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "settings_validation": {
+      "layer": "foundation",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "signed_cookies": {
+      "layer": "security",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "signed_urls": {
+      "layer": "files",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "sitemap": {
+      "layer": "content",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "smoke_checks": {
+      "layer": "testing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "sms": {
+      "layer": "communication",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "soft_delete": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "sorting": {
+      "layer": "search",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "sse_stream": {
+      "layer": "realtime",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "storage_adapters": {
+      "layer": "files",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "streaming": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "stripe_checkout": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "stripe_webhooks": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "webhook signature verification + replay prevention + subscription lifecycle (activate/cancel/entitlement revoke) are implemented and proven by contracts and the entitlement-lifecycle workflow",
+        "the LIVE Stripe SDK call path is NOT wired \u2014 no real charges/subscriptions are created against Stripe's API; only the signature/lifecycle logic exists. No delayed-event reconciliation. Wire the stripe client + real webhook secret before taking payments"
+      ]
+    },
+    "structured_logging": {
+      "layer": "observability",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "subscription_status": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "subscriptions": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "tables": {
+      "layer": "frontend",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "templates": {
+      "layer": "communication",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "tenant_access": {
+      "layer": "authorization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "tenant_context": {
+      "layer": "multitenancy",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "tenant_isolation": {
+      "layer": "multitenancy",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "timestamps": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "token_cost_logging": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "tool_calling": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "tracing": {
+      "layer": "observability",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified",
+      "hardening_gaps": [
+        "real OpenTelemetry tracing \u2014 proven: spans created and exported through the standard OTel SDK pipeline with correct parent/child linkage (verified via InMemorySpanExporter); init_otel() wires an OTLP exporter in production from OTEL_EXPORTER_OTLP_ENDPOINT \u2014 IMPLEMENTED & proven",
+        "still pending: no auto-instrumentation of FastAPI/SQLAlchemy by default (spans are manual); OTLP export not exercised against a live collector in-sandbox (none running); fixed sampling"
+      ]
+    },
+    "transactions": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "translations": {
+      "layer": "localization",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "unit_of_work": {
+      "layer": "database",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "unsubscribe_handling": {
+      "layer": "communication",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "uploads": {
+      "layer": "files",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "usage_metering": {
+      "layer": "billing",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "usage_metrics": {
+      "layer": "analytics",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "user_management": {
+      "layer": "admin",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "users": {
+      "layer": "identity",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "validation": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "vector_store": {
+      "layer": "ai",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": true,
+      "maturity": "verified"
+    },
+    "vercel": {
+      "layer": "deployment",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "versioning": {
+      "layer": "api",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "virus_scanning": {
+      "layer": "files",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "webhooks_inbound": {
+      "layer": "messaging",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "webhooks_outbound": {
+      "layer": "messaging",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "websocket_manager": {
+      "layer": "realtime",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    },
+    "worker": {
+      "layer": "jobs",
+      "implemented": true,
+      "verified": true,
+      "hardened": false,
+      "operational": false,
+      "maturity": "verified"
+    }
+  }
+}

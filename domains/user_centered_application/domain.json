@@ -1,0 +1,41 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "user_centered_application",
+  "label": "Any app with end users",
+  "terminology": {
+    "user": "an authenticated person using the app",
+    "profile": "a user's editable details"
+  },
+  "entities": [
+    {
+      "name": "User",
+      "fields": [
+        "id",
+        "display_name",
+        "email",
+        "created_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "sign up / sign in",
+    "edit profile",
+    "delete account"
+  ],
+  "permissions": [
+    "profile.read.own",
+    "profile.write.own"
+  ],
+  "reports": [
+    "active users",
+    "signups over time"
+  ],
+  "capability_hints": [
+    "authentication"
+  ],
+  "data_sensitivity": "low",
+  "sensitive_entities": [],
+  "regulated_data": false,
+  "minimum_security_stage": "mvp",
+  "privacy_notes": "Standard account data; basic hygiene suffices."
+}

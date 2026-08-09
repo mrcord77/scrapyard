@@ -1,0 +1,19 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "crm",
+  "description": "Customer relationship manager: contacts, pipelines, activity log, reporting.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "authorization_rbac",
+    "search_core",
+    "comms_core",
+    "analytics_core",
+    "admin_console",
+    "frontend_app",
+    "observability_core"
+  ]
+}

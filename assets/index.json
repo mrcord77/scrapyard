@@ -1,0 +1,112 @@
+{
+  "schema": "scrapyard/assets@1",
+  "totals": {
+    "assets": 11,
+    "kinds": 7,
+    "by_kind": {
+      "ci": 1,
+      "deploy": 2,
+      "email": 2,
+      "legal": 2,
+      "migrations": 1,
+      "openapi": 1,
+      "prompts": 2
+    }
+  },
+  "assets": [
+    {
+      "kind": "ci",
+      "name": "github-actions-ci.yml",
+      "path": "assets/ci/github-actions-ci.yml",
+      "purpose": "CI \u2014 install, smoke-import, test",
+      "template_vars": []
+    },
+    {
+      "kind": "deploy",
+      "name": "Dockerfile",
+      "path": "assets/deploy/Dockerfile",
+      "purpose": "Production Dockerfile \u2014 Python/FastAPI",
+      "template_vars": []
+    },
+    {
+      "kind": "deploy",
+      "name": "docker-compose.yml",
+      "path": "assets/deploy/docker-compose.yml",
+      "purpose": "Local stack \u2014 app + postgres",
+      "template_vars": []
+    },
+    {
+      "kind": "email",
+      "name": "password_reset.html",
+      "path": "assets/email/password_reset.html",
+      "purpose": "Password reset email \u2014 vars: product_name, reset_url, ttl_minutes",
+      "template_vars": [
+        "product_name",
+        "reset_url",
+        "ttl_minutes"
+      ]
+    },
+    {
+      "kind": "email",
+      "name": "welcome.html",
+      "path": "assets/email/welcome.html",
+      "purpose": "Welcome email \u2014 vars: product_name, first_name, cta_url",
+      "template_vars": [
+        "cta_url",
+        "first_name",
+        "product_name"
+      ]
+    },
+    {
+      "kind": "legal",
+      "name": "privacy_policy.md",
+      "path": "assets/legal/privacy_policy.md",
+      "purpose": "Privacy Policy template \u2014 REVIEW WITH COUNSEL before publishing",
+      "template_vars": []
+    },
+    {
+      "kind": "legal",
+      "name": "terms_of_service.md",
+      "path": "assets/legal/terms_of_service.md",
+      "purpose": "Terms of Service template \u2014 REVIEW WITH COUNSEL before publishing",
+      "template_vars": []
+    },
+    {
+      "kind": "migrations",
+      "name": "0001_init.sql",
+      "path": "assets/migrations/0001_init.sql",
+      "purpose": "Initial schema migration template. Adapt table names to your generated models.",
+      "template_vars": []
+    },
+    {
+      "kind": "openapi",
+      "name": "base.yaml",
+      "path": "assets/openapi/base.yaml",
+      "purpose": "OpenAPI 3.1 base spec \u2014 extend with your generated routes",
+      "template_vars": [
+        "base_url",
+        "product_name"
+      ]
+    },
+    {
+      "kind": "prompts",
+      "name": "rag_answer.md",
+      "path": "assets/prompts/rag_answer.md",
+      "purpose": "RAG answer prompt \u2014 ground responses in retrieved context",
+      "template_vars": [
+        "context",
+        "question"
+      ]
+    },
+    {
+      "kind": "prompts",
+      "name": "system_base.md",
+      "path": "assets/prompts/system_base.md",
+      "purpose": "Base system prompt \u2014 safe, scoped assistant",
+      "template_vars": [
+        "product_name",
+        "product_scope"
+      ]
+    }
+  ]
+}

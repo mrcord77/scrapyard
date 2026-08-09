@@ -1,0 +1,188 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "sobriety",
+  "extends": "community_platform",
+  "label": "Recovery / sobriety support",
+  "terminology": {
+    "chip": "milestone token marking days/months sober",
+    "sponsor": "experienced peer guiding another member",
+    "meeting": "recovery gathering (in-person or online)",
+    "streak": "continuous days of sobriety",
+    "step work": "structured recovery program progress"
+  },
+  "entities": [
+    {
+      "name": "User",
+      "fields": [
+        "id",
+        "display_name",
+        "sobriety_date",
+        "timezone",
+        "is_anonymous"
+      ],
+      "notes": "anonymity-first: display_name may be a handle"
+    },
+    {
+      "name": "Sponsor",
+      "fields": [
+        "id",
+        "sponsor_user_id",
+        "sponsee_user_id",
+        "since",
+        "status"
+      ]
+    },
+    {
+      "name": "Meeting",
+      "fields": [
+        "id",
+        "title",
+        "kind",
+        "schedule",
+        "location_or_url",
+        "tags"
+      ]
+    },
+    {
+      "name": "Attendance",
+      "fields": [
+        "id",
+        "user_id",
+        "meeting_id",
+        "attended_on"
+      ]
+    },
+    {
+      "name": "Chip",
+      "fields": [
+        "id",
+        "user_id",
+        "milestone_days",
+        "awarded_on"
+      ]
+    },
+    {
+      "name": "JournalEntry",
+      "fields": [
+        "id",
+        "user_id",
+        "body",
+        "mood",
+        "created_at",
+        "private"
+      ],
+      "notes": "private by default"
+    },
+    {
+      "name": "Milestone",
+      "fields": [
+        "id",
+        "user_id",
+        "kind",
+        "reached_on"
+      ]
+    }
+  ],
+  "workflows": [
+    "set sobriety date -> auto streak + chip awards",
+    "find + attend meeting -> log attendance",
+    "daily journal entry",
+    "sponsor/sponsee pairing",
+    "milestone celebration + chip"
+  ],
+  "permissions": [
+    "journal.read.own",
+    "journal.write.own",
+    "sponsor.view.sponsee_progress",
+    "meeting.manage"
+  ],
+  "reports": [
+    "current streak",
+    "chips earned",
+    "meeting attendance over time",
+    "journaling consistency"
+  ],
+  "capability_hints": [
+    "pq_field_encryption",
+    "privacy_policy_hooks",
+    "retention_policy"
+  ],
+  "notes": "Privacy/anonymity are first-class. Prefer field_encryption for journals, avoid auto-location, default journals private.",
+  "data_sensitivity": "high",
+  "sensitive_entities": [
+    "JournalEntry",
+    "Milestone",
+    "Sponsor",
+    "Attendance"
+  ],
+  "regulated_data": false,
+  "retention_requirements": "user-controlled; purge on account deletion",
+  "deletion_requirements": "hard-delete journals + attendance on request",
+  "consent_requirements": "explicit consent before any sharing",
+  "audit_requirements": "audit access to journals",
+  "minimum_security_stage": "growth",
+  "privacy_notes": "Recovery data is deeply sensitive. Encrypt journals at rest, never log journal content, never put sobriety data in analytics events, prefer minimal collection, no auto-location.",
+  "route_policies": {
+    "JournalEntry": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "private_by_default": true,
+      "encrypted_fields": [
+        "body",
+        "mood"
+      ],
+      "audit": [
+        "create",
+        "delete"
+      ],
+      "retention_policy": "sobriety_journal"
+    },
+    "Attendance": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "audit": [
+        "create",
+        "delete"
+      ]
+    },
+    "Chip": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "Milestone": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "Sponsor": {
+      "requires_auth": true,
+      "audit": [
+        "create",
+        "delete"
+      ]
+    },
+    "Meeting": {
+      "requires_auth": true
+    }
+  },
+  "exempt_fields": {
+    "User": [
+      "display_name",
+      "timezone",
+      "sobriety_date"
+    ],
+    "Sponsor": [
+      "status"
+    ],
+    "Meeting": [
+      "title",
+      "kind",
+      "location_or_url"
+    ],
+    "Milestone": [
+      "kind"
+    ],
+    "Membership": [
+      "role"
+    ]
+  }
+}

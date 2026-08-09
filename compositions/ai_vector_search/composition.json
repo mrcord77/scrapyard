@@ -1,0 +1,17 @@
+{
+  "schema": "scrapyard/composition@1",
+  "name": "ai_vector_search",
+  "binds": [
+    "ai_core",
+    "vector_store"
+  ],
+  "problem": "LLM answers need grounding in your own data via semantic retrieval.",
+  "glue": "embeddings turns documents+queries into vectors; vector_store indexes and does ANN search; rag stitches retrieved context into the prompt via prompt_registry; token_cost_logging records spend.",
+  "steps": [
+    "Chunk + embed source docs (embeddings) and upsert into vector_store.",
+    "On query: embed the query, ANN-search vector_store, assemble context.",
+    "Render the grounded prompt from prompt_registry and call llm_client.",
+    "Log tokens/cost via token_cost_logging."
+  ],
+  "owns_data": "document_chunks, embeddings index"
+}

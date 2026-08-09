@@ -1,0 +1,29 @@
+{
+  "description": "Internal admin tool: simple auth, tables, audit logs, RBAC.",
+  "parts": [
+    "scrapyard.foundation.config",
+    "scrapyard.foundation.logging_setup",
+    "scrapyard.foundation.health",
+    "scrapyard.api.app_factory",
+    "scrapyard.api.error_handling",
+    "scrapyard.api.request_context",
+    "scrapyard.database.db_session",
+    "scrapyard.database.base_model",
+    "scrapyard.database.timestamps",
+    "scrapyard.database.pagination",
+    "scrapyard.database.repository",
+    "scrapyard.identity.password_hashing",
+    "scrapyard.identity.jwt_manager",
+    "scrapyard.authorization.permissions",
+    "scrapyard.authorization.admin_access",
+    "scrapyard.admin.dashboards",
+    "scrapyard.admin.user_management",
+    "scrapyard.admin.audit_logs",
+    "scrapyard.admin.impersonation",
+    "scrapyard.frontend.tables",
+    "scrapyard.frontend.forms",
+    "scrapyard.security.rate_limiting",
+    "scrapyard.security.security_headers",
+    "scrapyard.admin.admin_routes"
+  ]
+}

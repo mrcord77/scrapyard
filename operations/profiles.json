@@ -1,0 +1,173 @@
+{
+  "schema": "scrapyard/operations@1",
+  "profiles": {
+    "vector_store": {
+      "cost": "medium-high (storage + query compute)",
+      "scaling_limit": "pgvector fine to ~1M vectors; beyond that consider a managed VDB",
+      "failure_modes": [
+        "index corruption",
+        "stale embeddings after source change"
+      ],
+      "monitoring": [
+        "query latency",
+        "index size"
+      ],
+      "backup": "snapshot the vector index with the DB",
+      "recovery": "re-embed from source documents",
+      "recommended_stage": "scale",
+      "do_not_use_when": "you have no retrieval need \u2014 embeddings are wasted cost"
+    },
+    "llm_client": {
+      "cost": "per-token, can dominate the bill",
+      "scaling_limit": "provider rate limits; budget caps",
+      "failure_modes": [
+        "provider outage",
+        "rate-limit 429",
+        "cost runaway"
+      ],
+      "monitoring": [
+        "token spend",
+        "error rate",
+        "latency"
+      ],
+      "backup": "n/a (stateless)",
+      "recovery": "retry with backoff; fall back to a cheaper model",
+      "recommended_stage": "scale",
+      "do_not_use_when": "a deterministic rule would do the job"
+    },
+    "rag": {
+      "cost": "embedding + retrieval + generation, compounding",
+      "scaling_limit": "retrieval quality degrades with corpus growth without tuning",
+      "failure_modes": [
+        "bad retrieval",
+        "document leakage across tenants",
+        "ingestion failure"
+      ],
+      "monitoring": [
+        "retrieval hit rate",
+        "token cost",
+        "ingestion failures"
+      ],
+      "backup": "vector index + source docs",
+      "recovery": "re-ingest + re-embed",
+      "recommended_stage": "scale",
+      "do_not_use_when": "the answer set is small enough to put in the prompt"
+    },
+    "queues": {
+      "cost": "low-medium (broker infra)",
+      "scaling_limit": "DB-backed queues contend under load; move to Redis/broker",
+      "failure_modes": [
+        "stuck jobs",
+        "infinite retries",
+        "lost messages"
+      ],
+      "monitoring": [
+        "queue depth",
+        "job failure rate",
+        "age of oldest job"
+      ],
+      "backup": "persist job payloads",
+      "recovery": "dead-letter + replay",
+      "recommended_stage": "scale",
+      "do_not_use_when": "work is fast and synchronous"
+    },
+    "storage_adapters": {
+      "cost": "low (object storage) to high (egress)",
+      "scaling_limit": "local disk does not survive multi-instance",
+      "failure_modes": [
+        "lost files on redeploy (local)",
+        "public exposure via bad ACL"
+      ],
+      "monitoring": [
+        "storage size",
+        "egress",
+        "4xx on signed URLs"
+      ],
+      "backup": "object-store versioning",
+      "recovery": "restore from versioned bucket",
+      "recommended_stage": "growth",
+      "do_not_use_when": "compliance needs encryption you haven't configured"
+    },
+    "stripe_webhooks": {
+      "cost": "low",
+      "scaling_limit": "fine; bursty on billing cycles",
+      "failure_modes": [
+        "replayed events",
+        "missed events",
+        "signature bypass"
+      ],
+      "monitoring": [
+        "webhook failures",
+        "signature mismatches"
+      ],
+      "backup": "log raw events",
+      "recovery": "replay from Stripe dashboard",
+      "recommended_stage": "mvp",
+      "do_not_use_when": "you are not taking payments"
+    },
+    "email": {
+      "cost": "low per-send; reputation risk",
+      "scaling_limit": "provider sending limits",
+      "failure_modes": [
+        "bounce/spam",
+        "provider outage",
+        "silent drops"
+      ],
+      "monitoring": [
+        "bounce rate",
+        "send failures"
+      ],
+      "backup": "queue + retry",
+      "recovery": "retry; switch provider",
+      "recommended_stage": "growth",
+      "do_not_use_when": "in-app notification suffices"
+    },
+    "db_session": {
+      "cost": "core infra",
+      "scaling_limit": "connection pool exhaustion under spikes",
+      "failure_modes": [
+        "pool exhaustion",
+        "long transactions blocking"
+      ],
+      "monitoring": [
+        "active connections",
+        "slow queries"
+      ],
+      "backup": "regular DB snapshots",
+      "recovery": "restore snapshot; failover replica",
+      "recommended_stage": "mvp",
+      "do_not_use_when": "never \u2014 it's foundational"
+    },
+    "multitenancy_core": {
+      "cost": "adds query + ops complexity everywhere",
+      "scaling_limit": "row-level isolation needs disciplined query scoping",
+      "failure_modes": [
+        "cross-tenant data leak",
+        "missing tenant filter"
+      ],
+      "monitoring": [
+        "cross-tenant access attempts"
+      ],
+      "backup": "per-tenant export",
+      "recovery": "audit + isolate",
+      "recommended_stage": "enterprise",
+      "do_not_use_when": "single-tenant or low user count \u2014 large premature cost"
+    },
+    "full_text_search": {
+      "cost": "low (pg) to high (search cluster)",
+      "scaling_limit": "pg FTS relevance/scale limited; cluster is heavy to run",
+      "failure_modes": [
+        "stale index",
+        "poor relevance"
+      ],
+      "monitoring": [
+        "index lag",
+        "query latency"
+      ],
+      "backup": "reindex from source",
+      "recovery": "rebuild index",
+      "recommended_stage": "growth",
+      "do_not_use_when": "a simple filter query is enough"
+    }
+  }
+}

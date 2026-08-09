@@ -1,0 +1,92 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "education",
+  "label": "Learning / courses",
+  "terminology": {
+    "cohort": "a group moving through together",
+    "enrollment": "a learner registered in a course",
+    "module": "a unit of lessons",
+    "progress": "completion state"
+  },
+  "entities": [
+    {
+      "name": "Course",
+      "fields": [
+        "id",
+        "title",
+        "description",
+        "status",
+        "price_cents"
+      ]
+    },
+    {
+      "name": "Module",
+      "fields": [
+        "id",
+        "course_id",
+        "title",
+        "order"
+      ]
+    },
+    {
+      "name": "Lesson",
+      "fields": [
+        "id",
+        "module_id",
+        "title",
+        "content",
+        "media_id",
+        "order"
+      ]
+    },
+    {
+      "name": "Enrollment",
+      "fields": [
+        "id",
+        "user_id",
+        "course_id",
+        "status",
+        "enrolled_at"
+      ]
+    },
+    {
+      "name": "Progress",
+      "fields": [
+        "id",
+        "enrollment_id",
+        "lesson_id",
+        "completed_at"
+      ]
+    }
+  ],
+  "workflows": [
+    "publish course -> enroll (free/paid) -> track progress -> certificate",
+    "cohort scheduling",
+    "quizzes/assessments"
+  ],
+  "permissions": [
+    "course.author",
+    "enrollment.manage",
+    "grade.submit"
+  ],
+  "reports": [
+    "completion rate",
+    "enrollment trend",
+    "revenue per course",
+    "lesson drop-off"
+  ],
+  "capability_hints": [
+    "billing_stripe",
+    "content_core",
+    "files_core",
+    "comms_core"
+  ],
+  "data_sensitivity": "moderate",
+  "sensitive_entities": [
+    "Enrollment",
+    "Progress"
+  ],
+  "regulated_data": false,
+  "minimum_security_stage": "growth",
+  "privacy_notes": "Minor data may be regulated (FERPA-like); check jurisdiction."
+}

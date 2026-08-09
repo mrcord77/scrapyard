@@ -1,0 +1,14 @@
+{
+  "schema": "scrapyard/runtime-profile@1",
+  "category": "configuration",
+  "scenarios": [
+    {
+      "name": "missing_database_url_in_production",
+      "set": {"APP_ENV": "production"},
+      "unset": ["DATABASE_URL"],
+      "needs_key": true,
+      "expect_boot": false,
+      "expect_message": "DATABASE_URL is required"
+    }
+  ]
+}

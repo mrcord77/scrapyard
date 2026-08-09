@@ -1,0 +1,93 @@
+{
+  "schema": "scrapyard/domain@1",
+  "name": "ecommerce",
+  "label": "Online retail / storefront",
+  "terminology": {
+    "sku": "stock-keeping unit",
+    "cart": "pending order",
+    "fulfillment": "pick/pack/ship",
+    "variant": "size/color of a product"
+  },
+  "entities": [
+    {
+      "name": "Product",
+      "fields": [
+        "id",
+        "title",
+        "description",
+        "status",
+        "tags"
+      ]
+    },
+    {
+      "name": "Variant",
+      "fields": [
+        "id",
+        "product_id",
+        "sku",
+        "price_cents",
+        "inventory_qty"
+      ]
+    },
+    {
+      "name": "Cart",
+      "fields": [
+        "id",
+        "user_id",
+        "items",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Order",
+      "fields": [
+        "id",
+        "user_id",
+        "status",
+        "total_cents",
+        "placed_at"
+      ]
+    },
+    {
+      "name": "Shipment",
+      "fields": [
+        "id",
+        "order_id",
+        "carrier",
+        "tracking",
+        "status"
+      ]
+    }
+  ],
+  "workflows": [
+    "browse/search -> cart -> checkout -> pay",
+    "inventory decrement on order",
+    "refund/return",
+    "abandoned cart recovery"
+  ],
+  "permissions": [
+    "catalog.manage",
+    "order.fulfill",
+    "refund.issue",
+    "inventory.adjust"
+  ],
+  "reports": [
+    "revenue by period",
+    "top SKUs",
+    "cart abandonment",
+    "inventory turnover"
+  ],
+  "capability_hints": [
+    "billing_stripe",
+    "search_faceted",
+    "files_core",
+    "comms_core"
+  ],
+  "data_sensitivity": "moderate",
+  "sensitive_entities": [
+    "Order"
+  ],
+  "regulated_data": false,
+  "minimum_security_stage": "growth",
+  "privacy_notes": "Payment handled by Stripe; never store raw card data."
+}

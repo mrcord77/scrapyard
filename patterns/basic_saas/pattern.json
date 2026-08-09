@@ -1,0 +1,10 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "basic_saas",
+  "extends": "web_application",
+  "description": "A web app with accounts and a shipped UI \u2014 the floor for a SaaS.",
+  "requires": [
+    "authentication",
+    "frontend_app"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "api_product",
+  "description": "API-first product: keys, rate limits, usage metering, billing, docs.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "metering_billing",
+    "observability_core",
+    "jobs_core",
+    "deploy_container",
+    "openapi_custom"
+  ]
+}

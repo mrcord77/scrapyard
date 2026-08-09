@@ -1,0 +1,16 @@
+{
+  "schema": "scrapyard/composition@1",
+  "name": "authentication_rbac",
+  "binds": [
+    "authentication",
+    "authorization_rbac"
+  ],
+  "problem": "The auth layer proves *who* you are; RBAC decides *what* you may do. The permission check needs the authenticated principal.",
+  "glue": "Resolve the current principal from the session/JWT, attach roles, and feed it into the permissions dependency (overriding the _current_principal_placeholder).",
+  "steps": [
+    "Override permissions._current_principal_placeholder to read the user from the auth dependency.",
+    "Load the user's roles (roles part) when building the principal.",
+    "Use require('perm') as a FastAPI dependency on protected routes."
+  ],
+  "owns_data": "roles.user_id, role_permissions"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "bikeshop",
+  "label": "Bicycle Repair Shop",
+  "terminology": {},
+  "entities": [
+    {"name": "User", "fields": ["id", "email"]},
+    {"name": "RepairTicket", "fields": [
+      {"name": "id"},
+      {"name": "user_id"},
+      {"name": "bike_model", "type": "str"},
+      {"name": "parts_received", "type": "bool"},
+      {"name": "paid", "type": "bool"},
+      {"name": "status", "type": "str"}
+    ],
+     "state_machine": {
+       "field": "status",
+       "initial": "intake",
+       "transitions": {
+         "intake": ["diagnosed"],
+         "diagnosed": ["ready"],
+         "ready": ["picked_up"]
+       },
+       "guards": {
+         "ready": [{"field": "parts_received", "equals": true, "error": "cannot mark ready: parts not received"}],
+         "picked_up": [{"field": "paid", "equals": true, "error": "cannot pick up: invoice unpaid"}]
+       }
+     }}
+  ],
+  "workflows": ["intake -> diagnosed -> ready (needs parts) -> picked_up (needs payment)"],
+  "route_policies": {"RepairTicket": {"write_role": "admin"}},
+  "permissions": [],
+  "reports": [],
+  "capability_hints": [],
+  "data_sensitivity": "low"
+}

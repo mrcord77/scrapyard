@@ -1,0 +1,20 @@
+{
+  "schema": "scrapyard/pattern@1",
+  "name": "marketplace",
+  "description": "Two-sided marketplace: listings, faceted search, payments, moderation, reviews.",
+  "requires": [
+    "foundation_core",
+    "web_api",
+    "persistence_core",
+    "security_baseline",
+    "authentication",
+    "authorization_rbac",
+    "billing_stripe",
+    "search_faceted",
+    "files_core",
+    "comms_core",
+    "admin_console",
+    "frontend_app",
+    "observability_core"
+  ]
+}

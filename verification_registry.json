@@ -1,0 +1,1390 @@
+{
+  "schema": "scrapyard/verification-coverage@1",
+  "note": "All dimensions COMPUTED from verify_build/verify_workflow/runtime path; security applies only to security-relevant capabilities.",
+  "totals": {
+    "behavior": 172,
+    "workflow": 7,
+    "runtime": 14,
+    "security_of_applicable": 30,
+    "security_applicable": 30,
+    "count": 172
+  },
+  "capabilities": {
+    "ab_testing": {
+      "layer": "analytics",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "account_deletion": {
+      "layer": "compliance",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "account_lockout": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "admin_access": {
+      "layer": "authorization",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "admin_routes": {
+      "layer": "admin",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "ai_routes": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "app_factory": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "app_scaffold": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "audit_logs": {
+      "layer": "admin",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "audit_mixin": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "auth_checks": {
+      "layer": "testing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "auth_pages": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "auth_routes": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "background_tasks": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "backups": {
+      "layer": "deployment",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "base_model": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "blog": {
+      "layer": "content",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "cache_client": {
+      "layer": "caching",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "cache_invalidation": {
+      "layer": "caching",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "cached_decorator": {
+      "layer": "caching",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "cancellation_flow": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "chunking": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "cms": {
+      "layer": "content",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "config": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "consent_logs": {
+      "layer": "compliance",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "content_routes": {
+      "layer": "content",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "contract_tests": {
+      "layer": "testing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "cors": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "cron_jobs": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "crypto_agility": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "csrf": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "dashboards": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "data_export": {
+      "layer": "compliance",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "db_queue": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "db_session": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "dead_letter": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "dependency_container": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "docker": {
+      "layer": "deployment",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "document_store": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "email": {
+      "layer": "communication",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "email_verification": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "embeddings": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "empty_states": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "entitlement_gate": {
+      "layer": "authorization",
+      "behavior_verified": true,
+      "workflow_verified": true,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "entitlements": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "env_loading": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "error_handling": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "error_reporting": {
+      "layer": "observability",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "error_taxonomy": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "eval_harness": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "event_bus": {
+      "layer": "messaging",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "event_tracking": {
+      "layer": "analytics",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "faceted_search": {
+      "layer": "search",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "factories": {
+      "layer": "testing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "feature_gates": {
+      "layer": "authorization",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "field_encryption": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "filters": {
+      "layer": "search",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "forms": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "full_text_search": {
+      "layer": "search",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "funnels": {
+      "layer": "analytics",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "gdpr_dsr": {
+      "layer": "compliance",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "github_actions": {
+      "layer": "deployment",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "guardrails": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "health": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "healthcheck_probe": {
+      "layer": "deployment",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "i18n": {
+      "layer": "localization",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "idempotency": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "image_processing": {
+      "layer": "files",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "impersonation": {
+      "layer": "admin",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "input_sanitization": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "invoice_portal": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "invoices": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "jobs_admin_routes": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "jwt_manager": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": true,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.75
+    },
+    "link_checks": {
+      "layer": "testing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "listings": {
+      "layer": "marketplace",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "llm_client": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "locale_middleware": {
+      "layer": "localization",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "logging_setup": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "markdown_pages": {
+      "layer": "content",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "media_library": {
+      "layer": "content",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "metrics": {
+      "layer": "observability",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "mfa_totp": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "middleware": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "migrations": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "moderation_tools": {
+      "layer": "admin",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "navbars": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "notification_center": {
+      "layer": "communication",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "oauth_google": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "openapi_custom": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "pagination": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "pagination_params": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "password_hashing": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": true,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.75
+    },
+    "password_policy": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "password_reset": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "payment_checks": {
+      "layer": "testing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "per_tenant_config": {
+      "layer": "multitenancy",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "permissions": {
+      "layer": "authorization",
+      "behavior_verified": true,
+      "workflow_verified": true,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.75
+    },
+    "pq_envelope": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "pq_field_encryption": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "pq_signing": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "pricing_pages": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "privacy_policy_hooks": {
+      "layer": "compliance",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "prompt_registry": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "providers": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "push_notifications": {
+      "layer": "communication",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "query_helpers": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "queues": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "rag": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "rag_service": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "railway": {
+      "layer": "deployment",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "rate_limiting": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "render": {
+      "layer": "deployment",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "reports": {
+      "layer": "analytics",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "repository": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "request_context": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "retention_policy": {
+      "layer": "compliance",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "retries": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "roles": {
+      "layer": "authorization",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "routers": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "saved_searches": {
+      "layer": "search",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "scheduled_workflows": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "search_pagination": {
+      "layer": "search",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "secrets": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "security_headers": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": true,
+      "coverage": 0.75
+    },
+    "seed_data": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "seo_metadata": {
+      "layer": "content",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "session_manager": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "settings_pages": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "settings_validation": {
+      "layer": "foundation",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": true,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "signed_cookies": {
+      "layer": "security",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "signed_urls": {
+      "layer": "files",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "sitemap": {
+      "layer": "content",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "smoke_checks": {
+      "layer": "testing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "sms": {
+      "layer": "communication",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "soft_delete": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "sorting": {
+      "layer": "search",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "sse_stream": {
+      "layer": "realtime",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "storage_adapters": {
+      "layer": "files",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "streaming": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "stripe_checkout": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": true,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "stripe_webhooks": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": true,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "structured_logging": {
+      "layer": "observability",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "subscription_status": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "subscriptions": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": true,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.67
+    },
+    "tables": {
+      "layer": "frontend",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "templates": {
+      "layer": "communication",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "tenant_access": {
+      "layer": "authorization",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "tenant_context": {
+      "layer": "multitenancy",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "tenant_isolation": {
+      "layer": "multitenancy",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": true,
+      "coverage": 0.5
+    },
+    "timestamps": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "token_cost_logging": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "tool_calling": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "tracing": {
+      "layer": "observability",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "transactions": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "translations": {
+      "layer": "localization",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "unit_of_work": {
+      "layer": "database",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "unsubscribe_handling": {
+      "layer": "communication",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "uploads": {
+      "layer": "files",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "usage_metering": {
+      "layer": "billing",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "usage_metrics": {
+      "layer": "analytics",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "user_management": {
+      "layer": "admin",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "users": {
+      "layer": "identity",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "validation": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "vector_store": {
+      "layer": "ai",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "vercel": {
+      "layer": "deployment",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "versioning": {
+      "layer": "api",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "virus_scanning": {
+      "layer": "files",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "webhooks_inbound": {
+      "layer": "messaging",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "webhooks_outbound": {
+      "layer": "messaging",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "websocket_manager": {
+      "layer": "realtime",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    },
+    "worker": {
+      "layer": "jobs",
+      "behavior_verified": true,
+      "workflow_verified": false,
+      "runtime_verified": false,
+      "security_verified": "n/a",
+      "coverage": 0.33
+    }
+  }
+}
