@@ -4,6 +4,12 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 
+# Only keep the latest run per branch/PR alive; a new push cancels superseded
+# in-progress runs so they don't pile up.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # Blocking gate: verifies the library itself (per-part guarantees). No external
   # services required — every part self-tests offline (in-memory SQLite, etc.).
