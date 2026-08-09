@@ -22,6 +22,9 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = [
+  "openpyxl",
+  "jsonschema",
+  "bcrypt",
   "alembic",
   "authlib",
   "babel",

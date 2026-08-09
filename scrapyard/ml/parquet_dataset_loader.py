@@ -23,7 +23,16 @@ import os
 from typing import Iterator
 import logging
 import pandas as pd
-import pyarrow.parquet as pq
+
+# pyarrow is a heavy/optional dependency: guard it so this module imports on
+# platforms/CI where pyarrow is absent. The Parquet I/O paths require it at call
+# time and raise a clear error if it is missing.
+try:
+    import pyarrow.parquet as pq
+    _HAS_PYARROW = True
+except ImportError:
+    pq = None
+    _HAS_PYARROW = False
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -38,9 +47,13 @@ def load_parquet(file_path: str, batch_size: int = 1000, parallel: bool = False)
     :param parallel: Whether to load data in parallel (currently not supported)
     :return: Iterator yielding DataFrames
     """
+    if not _HAS_PYARROW:
+        raise RuntimeError(
+            "pyarrow is not installed; parquet loading requires it "
+            "(pip install pyarrow)")
     if parallel:
         logger.warning("Parallel loading is currently not supported.")
-    
+
     with pq.ParquetFile(file_path) as parquet_file:
         for batch in parquet_file.iter_batches(batch_size=batch_size):
             yield batch.to_pandas()
@@ -63,37 +76,60 @@ class ParquetLoader:
         :param parallel: Whether to load data in parallel (currently not supported)
         :return: Iterator yielding DataFrames
         """
+        if not _HAS_PYARROW:
+            raise RuntimeError(
+                "pyarrow is not installed; parquet loading requires it "
+                "(pip install pyarrow)")
         if parallel:
             logger.warning("Parallel loading is currently not supported.")
-        
+
         with pq.ParquetFile(self.file_path) as parquet_file:
             for batch in parquet_file.iter_batches(batch_size=self.batch_size):
                 yield batch.to_pandas()
 
 def _selftest():
     import tempfile
-    
+
+    # --- dep-free logic: constructor stores config without needing pyarrow ---
+    loader = ParquetLoader("/nonexistent.parquet", batch_size=500)
+    assert loader.file_path == "/nonexistent.parquet"
+    assert loader.batch_size == 500
+
+    # --- pyarrow leg: skip cleanly when the optional dep is absent ---
+    if not _HAS_PYARROW:
+        # A call must fail loudly (not silently no-op) when pyarrow is missing.
+        raised = False
+        try:
+            list(load_parquet("/nonexistent.parquet"))
+        except RuntimeError:
+            raised = True
+        assert raised, "load_parquet must raise RuntimeError without pyarrow"
+        print("parquet_dataset_loader selftest: SKIPPED (pyarrow not installed); "
+              "constructor + missing-dep guard verified")
+        return
+
     # Create a temporary directory and Parquet file
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp_dir:
         sample_data = pd.DataFrame({
             'id': range(10000),
             'value': [f'value_{i}' for i in range(10000)]
         })
-        
+
         # Write the DataFrame to a Parquet file
         parquet_file_path = os.path.join(tmp_dir, "sample.parquet")
         sample_data.to_parquet(parquet_file_path)
-        
+
         # Test load_parquet function
         df_generator = load_parquet(parquet_file_path, batch_size=1000)
         dfs = list(df_generator)
         assert len(dfs) == 10
-        
+
         # Test ParquetLoader class
         loader = ParquetLoader(parquet_file_path, batch_size=500)
         df_generator_loader = loader.load()
         dfs_loader = list(df_generator_loader)
         assert len(dfs_loader) == 20
+    print("parquet_dataset_loader selftest: PASS")
 
 if __name__ == "__main__":
     _selftest()

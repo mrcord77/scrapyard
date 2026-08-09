@@ -42,6 +42,19 @@ class PDFPage:
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
+def _pdf_backend_available() -> bool:
+    """True if a PDF parsing backend (pypdf, or legacy PyPDF2) is importable."""
+    try:
+        import pypdf  # noqa: F401
+        return True
+    except ImportError:
+        try:
+            import PyPDF2  # noqa: F401
+            return True
+        except ImportError:
+            return False
+
+
 def read_pdf(file_path: str) -> List[PDFPage]:
     """
     Extract text and metadata from a PDF file.
@@ -164,6 +177,10 @@ def _selftest() -> None:
     Proves that ``read_pdf`` can parse a sample PDF stored in an in-memory
     SQLite database into ``PDFPage`` objects with non-empty text.
     """
+    if not _pdf_backend_available():
+        print("pdf_reader selftest: SKIPPED (neither pypdf nor PyPDF2 installed)")
+        return
+
     connection = sqlite3.connect(":memory:")
     try:
         cursor = connection.cursor()

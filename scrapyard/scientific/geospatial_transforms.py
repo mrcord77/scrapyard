@@ -206,9 +206,10 @@ def _selftest() -> None:
             # lon=12.0, lat=34.0 in Zone 33N
             x2, y2 = project_point(12.0, 34.0, "EPSG:4326", "EPSG:32633")
             
-            # Verify values are in expected range for this zone
-            # Note: Range accommodates both pyproj (~3761440) and fallback (~3761509) results
-            assert 223000.0 < x2 < 224000.0, f"X out of expected range: {x2}"
+            # Verify values are in expected range for this zone. The range must
+            # accommodate BOTH the real pyproj transform (x2 ~= 222908.7) and the
+            # tangent-plane fallback used when pyproj is absent (x2 ~= 223xxx).
+            assert 222000.0 < x2 < 224000.0, f"X out of expected range: {x2}"
             assert 3761400.0 < y2 < 3761600.0, f"Y out of expected range: {y2}"
             
             cursor.execute(

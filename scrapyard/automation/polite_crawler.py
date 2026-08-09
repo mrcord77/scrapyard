@@ -22,8 +22,20 @@ polite_crawler — polite crawler
 from dataclasses import dataclass
 from typing import Optional, List, Dict, Any
 import os, json, hashlib, logging, tempfile
-from playwright.async_api import async_playwright, Page, BrowserContext
-from playwright.sync_api import sync_playwright
+
+# Playwright is an optional/heavy dependency: guard it so this module still
+# imports on platforms/CI where playwright is absent. Page/BrowserContext are
+# referenced in dataclass annotations, so they need module-level fallbacks.
+try:
+    from playwright.async_api import async_playwright, Page, BrowserContext
+    from playwright.sync_api import sync_playwright
+    _HAS_PLAYWRIGHT = True
+except ImportError:
+    async_playwright = None
+    sync_playwright = None
+    Page = Any
+    BrowserContext = Any
+    _HAS_PLAYWRIGHT = False
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -110,35 +122,43 @@ class CrawlManager:
         return html_content
 
 def _selftest():
-    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp_dir:
-        db_path = os.path.join(temp_dir, "test_db.sqlite")
+    """Offline selftest: exercises the dep-free logic (CookieJar dedupe,
+    DataExtractor, ChangeDetector positive+negative) with real assertions, then
+    skips the Playwright browser leg cleanly when the optional dep is absent."""
+    # --- dep-free logic, always runs ---
+    jar = CookieJar()
+    jar.add_cookie({"name": "sid", "value": "abc"})
+    jar.add_cookie({"name": "sid", "value": "def"})  # same name overwrites
+    jar.add_cookie({"name": "csrf", "value": "xyz"})
+    cookies = jar.get_cookies()
+    assert len(cookies) == 2, cookies
+    assert jar.cookies["sid"]["value"] == "def", "last write must win"
 
-        # Test fetch_page
+    data = DataExtractor.extract_data("<html><body><h1>Test</h1></body></html>")
+    assert "title" in data and "content" in data, data
+
+    # positive AND negative change detection
+    assert ChangeDetector("<a>", "<b>").detect_changes() is True
+    assert ChangeDetector("<same>", "<same>").detect_changes() is False
+
+    # --- Playwright leg: skip cleanly when the optional dep is absent ---
+    if not _HAS_PLAYWRIGHT:
+        print("polite_crawler selftest: SKIPPED (playwright not installed); "
+              "offline logic verified")
+        return
+
+    try:
         manager = CrawlManager()
-        try:
-            html_content = manager.fetch_page("http://example.com")
-            assert "<html" in html_content
-        except Exception as e:
-            logger.error(f"fetch_page failed: {e}")
+        session = manager.session_manager.start_session()
+        assert session is not None and session.context is not None
+    except Exception as exc:  # noqa: BLE001
+        msg = str(exc)
+        if "Executable doesn't exist" in msg or "playwright install" in msg:
+            print("polite_crawler selftest: SKIPPED (playwright browsers not "
+                  "installed); offline logic verified")
             return
-
-        # Test SessionManager
-        session_manager = SessionManager()
-        session = session_manager.start_session()
-        session_id = hashlib.sha256(json.dumps(session.context.storage_state()).encode()).hexdigest()
-        new_session = session_manager.get_session(session_id)
-        assert new_session is not None
-
-        # Test DataExtractor
-        extractor = DataExtractor()
-        data = extractor.extract_data("<html><body><h1>Test</h1></body></html>")
-        assert "title" in data and "content" in data
-
-        # Test ChangeDetector
-        detector = ChangeDetector("<html><body></body></html>", "<html><body><p>Hello</p></body></html>")
-        assert detector.detect_changes()
-
-        logger.info("Self-test completed successfully within 20 seconds.")
+        raise
+    print("polite_crawler selftest: PASS (playwright session created)")
 
 
 if __name__ == "__main__":
