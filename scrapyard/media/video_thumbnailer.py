@@ -236,7 +236,7 @@ def _selftest() -> None:
                 raise AssertionError("must raise ThumbnailError without ffmpeg")
             except ThumbnailError:
                 pass
-            print("video_thumbnailer selftest: PASS (ffmpeg absent; live leg skipped)")
+            print("SKIPPED: ffmpeg binary not installed")
             return
 
         # Live leg: garbage input must raise honestly (no silent placeholder)

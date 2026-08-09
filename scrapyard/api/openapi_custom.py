@@ -162,6 +162,10 @@ class OpenAPICustomization:
         if not self.openapi_schema:
             self.openapi_schema = self._custom_openapi()
         self.app.openapi_schema = self.openapi_schema
+        # Override app.openapi() itself, not just the cache attribute: newer
+        # FastAPI (>=0.14x) no longer serves a directly-assigned openapi_schema
+        # from app.openapi(), so the canonical override is to replace the method.
+        self.app.openapi = lambda: self.openapi_schema
         return self.app
 
 

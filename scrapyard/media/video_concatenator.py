@@ -167,7 +167,7 @@ def _selftest() -> None:
                 raise AssertionError("must raise FfmpegNotFoundError without ffmpeg")
             except FfmpegNotFoundError:
                 pass
-        print("video_concatenator selftest: PASS (ffmpeg absent; live concat skipped)")
+        print("SKIPPED: ffmpeg binary not installed")
         return
 
     # Live path: synthesize two tiny clips with ffmpeg, concat, verify output.

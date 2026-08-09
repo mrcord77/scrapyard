@@ -89,7 +89,7 @@ def _selftest() -> bool:
     """
     ffmpeg_path = "ffmpeg"
     if shutil.which(ffmpeg_path) is None:
-        print("SKIPPED: ffmpeg not installed")
+        print("SKIPPED: ffmpeg binary not installed")
         return True
 
     with TemporaryDirectory() as work:

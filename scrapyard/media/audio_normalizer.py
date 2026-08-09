@@ -131,7 +131,7 @@ def _selftest():
                 raise AssertionError("must raise FfmpegNotFoundError without ffmpeg")
             except FfmpegNotFoundError:
                 pass
-        print("audio_normalizer selftest: PASS (ffmpeg absent; live leg skipped)")
+        print("SKIPPED: ffmpeg binary not installed")
         return
 
     exe = _require_ffmpeg()

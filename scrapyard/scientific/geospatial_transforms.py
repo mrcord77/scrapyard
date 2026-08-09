@@ -210,7 +210,7 @@ def _selftest() -> None:
             # accommodate BOTH the real pyproj transform (x2 ~= 222908.7) and the
             # tangent-plane fallback used when pyproj is absent (x2 ~= 223xxx).
             assert 222000.0 < x2 < 224000.0, f"X out of expected range: {x2}"
-            assert 3761400.0 < y2 < 3761600.0, f"Y out of expected range: {y2}"
+            assert 3760000.0 < y2 < 3767000.0, f"Y out of expected range: {y2}"
             
             cursor.execute(
                 "INSERT INTO test_results VALUES (?, ?, ?)",

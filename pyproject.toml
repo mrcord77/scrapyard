@@ -22,6 +22,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = [
+  "pyarrow",
   "openpyxl",
   "jsonschema",
   "bcrypt",

@@ -22,6 +22,8 @@ video_transcoder — Transcodes video files to a specified format and resolution
 
 import os
 import re
+import shutil
+import sys
 import logging
 from subprocess import run, CalledProcessError
 from tempfile import TemporaryDirectory
@@ -101,11 +103,56 @@ def transcode_video(input_path: str, output_path: str, format: str, resolution: 
     transcoder.transcode()
 
 
-def _selftest():
+def _selftest() -> bool:
     with TemporaryDirectory(ignore_cleanup_errors=True) as temp_dir:
         input_file = os.path.join(temp_dir, "sample_input.mp4")
         output_file = os.path.join(temp_dir, "output_transcoded.mp4")
-        
+
+        # --- Real, ffmpeg-independent validation (always runs before any skip) ---
+        # Missing input raises FileNotFoundError
+        try:
+            transcode_video(os.path.join(temp_dir, "nonexistent.mp4"), output_file, "mp4", "1920x1080")
+            assert False, "Should have raised FileNotFoundError"
+        except FileNotFoundError:
+            logger.info("Correctly raised FileNotFoundError for missing input")
+
+        # Class-based invalid format validation
+        try:
+            VideoTranscoder(input_file, output_file).set_format("xyz")
+            assert False, "Should have raised ValueError for invalid format"
+        except ValueError:
+            logger.info("Correctly raised ValueError for invalid format")
+
+        # Class-based invalid resolution validation
+        try:
+            VideoTranscoder(input_file, output_file).set_resolution("1080p")
+            assert False, "Should have raised ValueError for invalid resolution"
+        except ValueError:
+            logger.info("Correctly raised ValueError for invalid resolution")
+
+        # transcode_video()-level format/resolution validation happens after the
+        # existence check, so give it a real (dummy) input file to get past that.
+        with open(input_file, "wb") as fh:
+            fh.write(b"\x00" * 64)
+        try:
+            transcode_video(input_file, output_file, "xyz", "1920x1080")
+            assert False, "Should have raised ValueError for unsupported format"
+        except ValueError:
+            logger.info("Correctly raised ValueError for unsupported format")
+        try:
+            transcode_video(input_file, output_file, "mp4", "1080p")
+            assert False, "Should have raised ValueError for invalid resolution format"
+        except ValueError:
+            logger.info("Correctly raised ValueError for invalid resolution format")
+
+        # --- ffmpeg gate: skip the live transcoding legs when the binary is absent ---
+        if shutil.which("ffmpeg") is None:
+            print("SKIPPED: ffmpeg binary not installed")
+            return True
+
+        # Remove the dummy file; the live legs need a real ffmpeg-built source.
+        os.remove(input_file)
+
         # Create a valid sample video using FFmpeg test source
         try:
             create_cmd = [
@@ -116,31 +163,9 @@ def _selftest():
             logger.info(f"Created test video: {input_file}")
         except CalledProcessError as e:
             logger.error(f"Failed to create test video: {e.stderr}")
-            # Skip transcoding tests if we can't create test data, but test validation logic
-            try:
-                transcode_video(os.path.join(temp_dir, "nonexistent.mp4"), output_file, "mp4", "1920x1080")
-                assert False, "Should have raised FileNotFoundError"
-            except FileNotFoundError:
-                logger.info("Correctly raised FileNotFoundError for missing input")
-            
-            # Test invalid format validation
-            try:
-                transcoder = VideoTranscoder(input_file, output_file)
-                transcoder.set_format("xyz")
-                assert False, "Should have raised ValueError for invalid format"
-            except ValueError:
-                logger.info("Correctly raised ValueError for invalid format")
-            
-            # Test invalid resolution validation
-            try:
-                transcoder = VideoTranscoder(input_file, output_file)
-                transcoder.set_resolution("1080p")
-                assert False, "Should have raised ValueError for invalid resolution"
-            except ValueError:
-                logger.info("Correctly raised ValueError for invalid resolution")
-            
-            return
-        
+            print("SKIPPED: ffmpeg present but cannot synthesize a test clip")
+            return True
+
         # Test 1: Successful transcoding to MP4 at 1080p
         transcode_video(input_file, output_file, "mp4", "1920x1080")
         assert os.path.exists(output_file), "Output file does not exist"
@@ -191,9 +216,11 @@ def _selftest():
         transcoder.set_resolution("1920x1080")
         transcoder.transcode()
         assert os.path.exists(transcoder.output_path), "Class-based transcoding failed"
-        
+
         logger.info("All self-tests passed")
+        print("video_transcoder selftest: PASS (live ffmpeg transcode verified)")
+        return True
 
 
 if __name__ == "__main__":
-    _selftest()
+    sys.exit(0 if _selftest() else 1)
