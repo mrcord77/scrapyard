@@ -40,4 +40,16 @@ jobs:
         run: |
           python -m pip install selenium
           python tools/eos.py --pattern basic_saas --domain tool_library --out /tmp/fe-smoke-app
-          python tools/verify_frontend.py /tmp/fe-smoke-app --smoke
+          python tools/verify_frontend.py /tmp/fe-smoke-app --smoke --out /tmp/fe-smoke-render.png
+      # Keep the visible evidence: the rendered screenshot + the generated app,
+      # downloadable from the run page — the proof must outlive the runner.
+      - name: Upload render evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-render-evidence
+          path: |
+            /tmp/fe-smoke-render.png
+            /tmp/fe-smoke-app
+          if-no-files-found: warn
+          retention-days: 30

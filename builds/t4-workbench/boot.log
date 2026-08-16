@@ -11,3 +11,17 @@ INFO:     127.0.0.1:60833 - "GET /app/dashboard.css HTTP/1.1" 200 OK
 INFO:     127.0.0.1:62423 - "GET /app/dashboard.js HTTP/1.1" 200 OK
 INFO:     127.0.0.1:62423 - "GET /auth/me HTTP/1.1" 401 Unauthorized
 INFO:     127.0.0.1:62423 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57918 - "GET /app/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57918 - "GET /app/dashboard.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56859 - "GET /app/dashboard.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56859 - "GET /auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56859 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57274 - "GET /app/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57274 - "GET /app/dashboard.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55042 - "GET /app/dashboard.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57274 - "GET /auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57274 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60462 - "GET /app/dashboard.html?fresh=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60462 - "GET /app/dashboard.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65451 - "GET /app/dashboard.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65451 - "GET /auth/me HTTP/1.1" 401 Unauthorized

@@ -492,7 +492,7 @@ def _smoke_signals(url: str) -> dict:
         driver.quit()
 
 
-def run_frontend_smoke(app_dir: str) -> bool:
+def run_frontend_smoke(app_dir: str, screenshot_path: str | None = None) -> bool:
     """BLOCKING anti-blank-page gate (no aesthetics): boot the app, execute its
     page in a real browser engine, and fail unless JS produced substantive,
     interactive DOM with a clean console. Exists because 2026-08-16 every
@@ -519,6 +519,12 @@ def run_frontend_smoke(app_dir: str) -> bool:
             print("  [FAIL] no HTML page served at /app/, / or /index.html")
             return False
         s = _smoke_signals(best_url)
+        if screenshot_path:
+            try:
+                _screenshot(best_url, screenshot_path)
+                print(f"  [frontend-smoke] render evidence -> {screenshot_path}")
+            except Exception as e:  # evidence is best-effort; the checks still gate
+                print(f"  [frontend-smoke] screenshot failed ({e})")
         checks = [
             ("renders_content", s["body_text_len"] >= 20 and s["el_count"] >= 5,
              f"body text {s['body_text_len']} chars, {s['el_count']} elements after JS"),
@@ -592,13 +598,13 @@ def main():
         sys.exit(2)
 
     app_dir = os.path.abspath(sys.argv[1])
-    if "--smoke" in sys.argv:
-        sys.exit(0 if run_frontend_smoke(app_dir) else 1)
     screenshot_out = None
     if "--out" in sys.argv:
         idx = sys.argv.index("--out")
         if idx + 1 < len(sys.argv):
             screenshot_out = sys.argv[idx + 1]
+    if "--smoke" in sys.argv:
+        sys.exit(0 if run_frontend_smoke(app_dir, screenshot_out) else 1)
 
     passed, verdicts = run_frontend_gate(app_dir, screenshot_out)
 
