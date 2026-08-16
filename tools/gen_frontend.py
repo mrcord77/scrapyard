@@ -86,6 +86,27 @@ def gen_index_html(domain_name: str, label: str, specs: list[dict]) -> str:
     return _TEMPLATE.replace("__LABEL__", label).replace("/*__CONFIG__*/ {}", cfg)
 
 
+def gen_frontend_files(domain_name: str, label: str, specs: list[dict]) -> dict:
+    """Split the SPA into CSP-compliant files. The backend serves
+    `Content-Security-Policy: default-src 'self'`, which forbids inline
+    <style>/<script> — a single-file inline SPA renders as a BLANK PAGE in a
+    real browser (2026-08-16 campaign finding; every HTTP-level check passed
+    because nothing executed JS). External same-origin files are allowed, so:
+    index.html links styles.css + app.js. The inline JSON config block stays —
+    type="application/json" is data, not an executed script, and CSP permits it.
+    """
+    html = gen_index_html(domain_name, label, specs)
+    s0 = html.index("<style>")
+    s1 = html.index("</style>")
+    css = html[s0 + len("<style>"):s1].strip("\n")
+    m0 = html.index('<script type="module">')
+    m1 = html.rindex("</script>")
+    js = html[m0 + len('<script type="module">'):m1].strip("\n")
+    index = (html[:s0] + '<link rel="stylesheet" href="styles.css"/>' + html[s1 + len("</style>"):m0]
+             + '<script type="module" src="app.js"></script>' + html[m1 + len("</script>"):])
+    return {"index.html": index, "styles.css": css, "app.js": js}
+
+
 _TEMPLATE = r"""<!doctype html>
 <html lang="en">
 <head>
@@ -319,8 +340,10 @@ def main(argv: list[str]) -> int:
     specs = entity_specs(entities, eps)
     label = domain.get("label") or domain_name.replace("_", " ").title()
     os.makedirs(out, exist_ok=True)
-    html = gen_index_html(domain_name, label, specs)
-    open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(html)
+    files = gen_frontend_files(domain_name, label, specs)
+    for fname, content in files.items():
+        open(os.path.join(out, fname), "w", encoding="utf-8").write(content)
+    html = files["index.html"]
     # machine-readable contract for verification
     open(os.path.join(out, "endpoints.json"), "w", encoding="utf-8").write(
         json.dumps(frontend_endpoints(specs), indent=2))

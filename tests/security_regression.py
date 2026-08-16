@@ -137,6 +137,31 @@ def caps_claim_exploit():
     assert "PUBLIC" in eos.policy_label(short["User"])
 check("CAPABILITIES.md security-claim accuracy", caps_claim_exploit)
 
+# 9. Generated SPA must be CSP-compliant: the backend serves
+# `Content-Security-Policy: default-src 'self'`, which blocks executable inline
+# <script>/<style>/on* handlers. (2026-08-16: the inline single-file SPA rendered
+# as a BLANK PAGE in every real browser; all HTTP-level checks passed anyway.)
+def csp_frontend_exploit():
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "tools"))
+    import re
+    import gen_frontend as GF
+    import gen_models as GM
+    ent = {"name": "Item", "fields": ["id", {"name": "name", "type": "str"}]}
+    fields = GM.norm_fields(ent)
+    specs = GF.entity_specs([{"name": "Item", "fields": fields}],
+                            {"Item": {"requires_auth": True}})
+    files = GF.gen_frontend_files("test", "Test", specs)
+    idx = files["index.html"]
+    assert "styles.css" in idx and "app.js" in idx, "index must link external assets"
+    for m in re.finditer(r"<script([^>]*)>", idx):
+        attrs = m.group(1)
+        assert 'src=' in attrs or 'type="application/json"' in attrs, \
+            f"executable inline script in generated index.html: <script{attrs}>"
+    assert "<style>" not in idx, "inline <style> blocked by CSP default-src 'self'"
+    assert not re.search(r"\son(click|load|submit|change)=", idx), "inline event handler blocked by CSP"
+    assert files["app.js"].strip() and files["styles.css"].strip()
+check("Generated SPA renders under CSP", csp_frontend_exploit)
+
 print(f"{'FINDING':<42} VERDICT")
 print("-" * 70)
 open_count = 0

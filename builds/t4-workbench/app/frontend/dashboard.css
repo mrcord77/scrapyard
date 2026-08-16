@@ -1,0 +1,27 @@
+  :root { --bg:#0f1419; --panel:#1a2129; --ink:#e6edf3; --dim:#8b98a5; --accent:#4ade80;
+          --warn:#fbbf24; --bad:#f87171; --line:#2d3742; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--ink); font:14px/1.5 ui-monospace,Consolas,monospace; padding:24px; }
+  h1 { font-size:18px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; }
+  .sub { color:var(--dim); margin-bottom:24px; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:24px; }
+  .tile { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+  .tile .n { font-size:28px; font-weight:700; }
+  .tile .l { color:var(--dim); font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:900px){ .cols { grid-template-columns:1fr; } }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+  .panel h2 { font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--dim); margin-bottom:10px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { text-align:left; color:var(--dim); font-weight:400; padding:4px 8px; border-bottom:1px solid var(--line); }
+  td { padding:5px 8px; border-bottom:1px solid var(--line); }
+  .pill { padding:1px 8px; border-radius:99px; font-size:11px; border:1px solid var(--line); }
+  .pill.running,.pill.executing { color:var(--warn); border-color:var(--warn); }
+  .pill.concluded,.pill.succeeded { color:var(--accent); border-color:var(--accent); }
+  .pill.failed,.pill.abandoned,.pill.cancelled { color:var(--bad); border-color:var(--bad); }
+  #login { max-width:340px; margin:80px auto; }
+  #login input { width:100%; margin-bottom:10px; padding:9px; background:var(--bg); color:var(--ink);
+                 border:1px solid var(--line); border-radius:6px; }
+  #login button { width:100%; padding:9px; background:var(--accent); color:#04310f; border:0;
+                  border-radius:6px; font-weight:700; cursor:pointer; }
+  .err { color:var(--bad); margin-top:8px; min-height:1.2em; }

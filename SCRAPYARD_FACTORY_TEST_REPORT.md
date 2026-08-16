@@ -7,7 +7,7 @@
 
 **Scrapyard genuinely builds working applications today.** All 15 builds — spanning 5 patterns × 12 domains (2 custom-authored), easy CRUD to encrypted healthcare — **generated on the first or second attempt, booted, and passed functional smoke over real HTTP with zero custom backend code**. The two custom code artifacts in the whole campaign: one 150-line dashboard (by choice) and one 1-line mount fix.
 
-The campaign also found **13 real defects, including 2 critical security defects** that all of Scrapyard's own 582/582-green verification had missed — both in the gap between "part proven in isolation" and "generated app behavior":
+The campaign also found **15 real defects, including 3 critical ones** that all of Scrapyard's own 582/582-green verification had missed. The third critical (F15) was found by a *human opening the app in a browser* after every automated check had passed: the generated SPA rendered as a **blank page in every real browser** — the backend's own CSP blocks its own inline frontend, and no verifier anywhere executed JavaScript. The first two live in the gap between "part proven in isolation" and "generated app behavior":
 
 1. **Right-to-erasure didn't erase identity** (F5/F6): the generated delete-account route silently hit the part's safe-by-default dry run, reported `{"deleted": true}`, and the "deleted" account could log back in.
 2. **DSAR export leaked credentials** (F9): `/privacy/export` contained the argon2 password hash and the caller's *live plaintext session token*.
@@ -55,6 +55,7 @@ Fixed during the campaign (each with a regression, suite re-run green, plus a pr
 - **F11 + F12 (high, dependencies):** one part declared internal modules as pip deps (uninstallable requirements.txt → Docker build failures), and a sweep found **197/582 parts import third-party modules they never declare** — apps only installed because some *other* part declared the package (httpx broke 3 containers). The requirements writer now AST-scans copied sources and unions known pip names.
 - **F10 (EOS):** no deployment artifacts on the EOS path (template path only). Now writes Dockerfile/compose/CI.
 - **F13 (React):** built assets 404'd under the `/app/` mount (absolute vite base). Now relative.
+- **F15 (critical, integration):** generated SPA blank in every real browser — its own CSP (`default-src 'self'`) blocks its own inline script/style. gen_frontend now emits external files; proven by headless-Edge post-JS DOM dump; structural regression added. Found by a human, not by any test — which is itself the finding: **no layer of verification (Scrapyard's or this campaign's initial harness) ever executed the frontend in a browser engine.**
 
 Open, recommended (not fixed — design decisions that belong to the maintainer):
 
@@ -76,7 +77,7 @@ Open, recommended (not fixed — design decisions that belong to the maintainer)
 
 **5. Is the resolver useful?** Yes; pattern+domain composition with dependency closure worked in all 15 builds and the closure step repeatedly caught graph gaps. Its weak edge was requirements generation (F11/F12), now closed with the import scan.
 
-**6. Are generated frontends useful?** Usable, not shippable-pretty. The vanilla SPA is contract-coherent (every SPA endpoint resolves against the backend — the fullstack verifier proves this), handles auth+CRUD, and served on every build. React (after F13) and the Jinja dashboard give three presentation styles over the same API; my custom dashboard took ~150 lines against an unmodified API, which is the correct division of labor.
+**6. Are generated frontends useful?** After F15, yes — before it, **no, and nobody knew**. The single most important finding of the frontend track: the generated SPA rendered as a **blank page in every real browser**, because the backend's own `Content-Security-Policy: default-src 'self'` blocks the SPA's inline script/style. Every verifier — the repo's fullstack check *and* this campaign's smoke — passed on HTTP 200 + HTML substring, because nothing ever executed JavaScript. It was caught only when a human opened the page. gen_frontend now emits external `styles.css`/`app.js` (keeping the strict CSP), proven by headless-Edge post-JS DOM dumps, with a structural regression. Post-fix: the SPA is contract-coherent, handles auth+CRUD, and actually renders; React (after F13) and the Jinja dashboard give three presentation styles over the same API; my custom dashboard took ~150 lines against an unmodified API. Lesson for the verification stack (and for me): **"serves HTML" is not "renders" — at least one check must execute the page in a browser engine.**
 
 **7. Most-leveraged parts?** The identity stack (users/sessions/auth_routes/password_policy), runtime bootstrap (settings/database/lifespan — the fail-closed production gate lives here), gen_models (entities→models/schemas/services/routes with policies, state machines, reference rules, M2M), pq_field_encryption, audit_logs, and the compliance pair (export/deletion — after their defects were fixed).
 

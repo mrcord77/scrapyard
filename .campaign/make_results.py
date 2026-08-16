@@ -106,6 +106,12 @@ DEFECTS = [
     dict(id="F14", category="part contract/documentation", severity="low", fixed=False,
          summary="hardening_registry 'proven end-to-end' prose claims are not executable evidence (the erasure claim was false through the HTTP route)",
          fix="recommended: registry entries should reference executable checks"),
+    dict(id="F15", category="integration incompatibility", severity="critical", fixed=True,
+         summary="GENERATED SPA RENDERED AS A BLANK PAGE IN EVERY REAL BROWSER: the backend's own Content-Security-Policy (default-src 'self') blocks the SPA's inline <style>/<script>. Every verifier (repo's and campaign's) passed because nothing executed JS — found only when a human opened the page",
+         fix="gen_frontend now emits external styles.css + app.js (CSP-compliant; JSON config block stays inline as data); proven by headless-Edge post-JS DOM dump; structural regression in security_regression.py"),
+    dict(id="F16", category="production-hardening limitation", severity="low", fixed=False,
+         summary="template-path (assemble) pages ship WITHOUT the security headers the EOS path enforces, and depend on the Tailwind CDN (offline = unstyled)",
+         fix="recommended: unify header middleware across paths; vendor the CSS"),
 ]
 
 VERIFICATION = dict(
