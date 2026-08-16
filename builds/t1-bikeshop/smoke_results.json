@@ -1,0 +1,102 @@
+{
+ "base": "http://127.0.0.1:8103",
+ "passed": 18,
+ "failed": 1,
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"0xXoDXr03Ln2n2M6eJYxNkf9YHZFAxHhy2QPXBPGq7o\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjc4MSwiZXhwIjoxNzg2OTEzNjgxfQ.acDGsAcQMzdFJO4Yg73AOY5k2QXVyZeFX26J6a5TBP4\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI3ODEsImV4cCI6MTc4NzUxNzU4MX0.dwdOkZUs1UMcGIWfeBC_gCwk"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"W2vkSEHpHo_cTmjjgzht4H1Go-AwucsBdH4_QyUD2dw\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjc4MSwiZXhwIjoxNzg2OTEzNjgxfQ.NBl-mJ3jD9Xy7hec6H4u1nbYO8sfeZPHHN2SZGzCcpU\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI3ODEsImV4cCI6MTc4NzUxNzU4MX0.wSuVhaE3YXPGhxZuNUx5x2Tv"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "name": "create /users",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /repair_tickets",
+   "ok": false,
+   "detail": "403 {\"detail\":\"requires role: admin\"}"
+  },
+  {
+   "name": "read /users/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /users",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership n/a (public policy) /users",
+   "ok": true,
+   "detail": "declared public"
+  },
+  {
+   "name": "anon read allowed by policy /users",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "update /users/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"email\":\"smoke@example.com\"}"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422"
+  },
+  {
+   "name": "delete /users/1",
+   "ok": true,
+   "detail": "204"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}

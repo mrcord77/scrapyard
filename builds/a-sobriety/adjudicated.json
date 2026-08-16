@@ -1,0 +1,356 @@
+{
+ "build": "a-sobriety",
+ "raw": "55/58",
+ "true_failures": 0,
+ "failures": [],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":14.0,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"45PynLzbFYYiwikx9NMgnfUGTol77XNmz-mdxLQRwTM\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjkwNiwiZXhwIjoxNzg2OTEzODA2fQ.gXg6dNOjS2aSEhRQQcdaZg83o0UwqZcXeHo6zSN989w\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI5MDYsImV4cCI6MTc4NzUxNzcwNn0.frGYCKS2LZ6uBihHdf4FcbIt",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"HwX4X4Wik5mp4gphGJJ1imQ5AkHgPeHRtxFuN-kwlX8\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjkwNiwiZXhwIjoxNzg2OTEzODA2fQ.69Fk6ezBNh3RHjVjCW6isDUe6NCv-8XzKTbCh-P4euk\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI5MDYsImV4cCI6MTc4NzUxNzcwNn0.4OdHRsZIr-fjvV2D0pLgtL7k",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "9",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /users",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /memberships",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /posts",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /sponsors",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /meetings",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /attendances",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /chips",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /journal_entries",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /milestones",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /users/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /users",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /users",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /users",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /memberships/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /memberships",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /memberships",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /memberships",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /posts/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /posts",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /posts",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /posts",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /sponsors/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /sponsors",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /sponsors",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /sponsors",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /meetings/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /meetings",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /meetings",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /meetings",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /attendances/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /attendances",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /attendances",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /attendances",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /chips/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /chips",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /chips",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /chips",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /journal_entries/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /journal_entries",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /journal_entries",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /journal_entries",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /milestones/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /milestones",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /milestones",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /milestones",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "update /users/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"display_name\":\"smoke-display_name\",\"sobriety_date\":\"smoke-sobriety_date\",\"timezone\":\"smoke-timezone\",\"is_anonymous\":true}",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /users/1",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

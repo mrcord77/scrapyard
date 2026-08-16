@@ -1,0 +1,197 @@
+{
+ "base": "http://127.0.0.1:8113",
+ "passed": 33,
+ "failed": 5,
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"NeU85hq27krJF39tW2-DoN6r81bfROPK3bkqFGKc1dU\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM4NSwiZXhwIjoxNzg2OTE0Mjg1fQ.tKkmhd-tbSbsrZiNSs-Q-xYnpDCunSndgoeYFfbnRys\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzODUsImV4cCI6MTc4NzUxODE4NX0.aO5R5gWR2kBy-JXTau8nRKAw"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"MFw2tbh-07BnuBLgP1h6QuXUBHoe-t9UGE_ZbSEXoPc\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM4NSwiZXhwIjoxNzg2OTE0Mjg1fQ.ePGif9cpHmlWLb87nIARQ7lNuG4p0fH6W8dzZuxXO6g\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzODUsImV4cCI6MTc4NzUxODE4NX0.yXwQZcp-0rPrtXMt6z65wSia"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "5"
+  },
+  {
+   "name": "create /products",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /variants",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /carts",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /orders",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /shipments",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "read /products/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /products",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /products",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /products",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /variants/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /variants",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /variants",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /variants",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /carts/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /carts",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /carts",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /carts",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /orders/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /orders",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /orders",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /orders",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /shipments/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /shipments",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /shipments",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /shipments",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "update /products/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"title\":\"smoke-title\",\"description\":\"smoke-description\",\"status\":null,\"tags\":{}}"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422"
+  },
+  {
+   "name": "delete /products/1",
+   "ok": true,
+   "detail": "204"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}

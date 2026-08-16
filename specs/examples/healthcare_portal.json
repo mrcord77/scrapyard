@@ -1,0 +1,9 @@
+{
+  "product_type": "subscription saas patient portal for clinic scheduling",
+  "domain": "healthcare",
+  "stage": "growth",
+  "expected_users": 5000,
+  "must_have": ["field_encryption", "account_deletion", "data_export", "audit_logs", "retention_policy", "privacy_policy_hooks"],
+  "must_not": [],
+  "notes": "Admin & scheduling focus, non-clinical-decision. Privacy-first, gate-compliant."
+}

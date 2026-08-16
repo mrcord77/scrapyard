@@ -1,0 +1,402 @@
+{
+  "domain": "saas",
+  "entities": [
+    {
+      "name": "Account",
+      "plural": "accounts",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "plan_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "plan_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Member",
+      "plural": "members",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "account_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "invited_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "account_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "invited_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Plan",
+      "plural": "plans",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "price_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "interval",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "entitlements",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "price_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "interval",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "entitlements",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Invitation",
+      "plural": "invitations",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "account_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "token",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "expires_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "account_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "token",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "expires_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/accounts"
+    },
+    {
+      "method": "POST",
+      "path": "/accounts"
+    },
+    {
+      "method": "GET",
+      "path": "/accounts/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/accounts/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/accounts/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/members"
+    },
+    {
+      "method": "POST",
+      "path": "/members"
+    },
+    {
+      "method": "GET",
+      "path": "/members/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/members/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/members/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/plans"
+    },
+    {
+      "method": "POST",
+      "path": "/plans"
+    },
+    {
+      "method": "GET",
+      "path": "/plans/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/plans/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/plans/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/invitations"
+    },
+    {
+      "method": "POST",
+      "path": "/invitations"
+    },
+    {
+      "method": "GET",
+      "path": "/invitations/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/invitations/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/invitations/{id_}"
+    }
+  ]
+}

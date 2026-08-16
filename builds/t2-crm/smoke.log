@@ -1,0 +1,19 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /leads
+  [PASS] read /leads/1
+  [PASS] list /leads
+  [FAIL] ownership: B blocked from A's /leads -- 200
+  [PASS] anon blocked /leads
+  [PASS] update /leads/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /leads/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 17/18 passed -> builds/t2-crm/smoke_results.json

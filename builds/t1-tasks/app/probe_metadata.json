@@ -1,0 +1,121 @@
+{
+  "entities": [
+    {
+      "collection": "/labels",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/labels",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/labels/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/labels/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/labels/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/projects",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/projects",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/projects/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/projects/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/projects/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/projects/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/tasks",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/tasks",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/tasks/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/tasks/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/tasks/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/tasks/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session"
+}

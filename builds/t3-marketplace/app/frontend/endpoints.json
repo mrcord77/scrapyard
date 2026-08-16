@@ -1,0 +1,118 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/products"
+  },
+  {
+    "method": "POST",
+    "path": "/products"
+  },
+  {
+    "method": "GET",
+    "path": "/products/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/products/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/products/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/variants"
+  },
+  {
+    "method": "POST",
+    "path": "/variants"
+  },
+  {
+    "method": "GET",
+    "path": "/variants/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/variants/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/variants/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/carts"
+  },
+  {
+    "method": "POST",
+    "path": "/carts"
+  },
+  {
+    "method": "GET",
+    "path": "/carts/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/carts/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/carts/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/orders"
+  },
+  {
+    "method": "POST",
+    "path": "/orders"
+  },
+  {
+    "method": "GET",
+    "path": "/orders/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/orders/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/shipments"
+  },
+  {
+    "method": "POST",
+    "path": "/shipments"
+  },
+  {
+    "method": "GET",
+    "path": "/shipments/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/shipments/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/shipments/{id_}"
+  }
+]

@@ -8,7 +8,7 @@ account_deletion — Hard/soft delete + downstream purge with a deletion registr
   "purpose": "Account deletion for GDPR erasure: soft delete into a registry table (account_deletion_deleted_accounts), hard-delete cascade across every mapped table with a user_id column, bulk deletion under a policy, aged purge of soft-deleted records with real counts, JSON serialization of results and full-account GDPR export, plus working audit/metrics hook registries and deletion events.",
   "addition": false,
   "status": "core",
-  "dependencies": ["sqlalchemy", "scrapyard.database.base_model", "scrapyard.identity.users", "scrapyard.admin.audit_logs", "scrapyard.compliance.data_export"],
+  "dependencies": ["sqlalchemy"],
   "inputs": "SQLAlchemy Session, user ids, SoftDeletePolicy, DeletionFilter expressions ('column op literal'), hook callables.",
   "outputs": "Per-table deletion counts, registry listings, purge summaries, JSON-safe dicts; UserNotFoundError/InvalidFilterError/etc on bad input.",
   "files_created": [],

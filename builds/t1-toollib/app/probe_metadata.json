@@ -1,0 +1,237 @@
+{
+  "entities": [
+    {
+      "collection": "/incidents",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/incidents",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/incidents/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/incidents/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/incidents/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/maintenance_records",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/maintenance_records",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/maintenance_records/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/maintenance_records/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/maintenance_records/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/maintenance_records/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/members",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/members",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/members/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/members/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/members/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/members/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/reservations",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/reservations",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/reservations/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/reservations/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/reservations/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/reservations/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/tags",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/tags",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/tags/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/tags/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/tags/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/tools",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/tools",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/tools/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/tools/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/tools/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/tools/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session"
+}

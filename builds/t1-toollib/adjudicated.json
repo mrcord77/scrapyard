@@ -1,0 +1,266 @@
+{
+ "build": "t1-toollib",
+ "raw": "43/43",
+ "true_failures": 0,
+ "failures": [],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":80.5,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"63ewungtj-SjGbmVM4hW3wSZ7CKee3xemBr7JlyqtR8\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjU4MiwiZXhwIjoxNzg2OTEzNDgyfQ.jzYpJeOvL1BqbyOx3cNgYibVKs_pDamkH4yon9RF20g\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI1ODIsImV4cCI6MTc4NzUxNzM4Mn0.Y-N58FhZciHdTVaSdcWW8evW",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"f6I692cwL0GDKmmc5yzHwLC18Jt-bXb62KE-lEdYRmY\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjU4MiwiZXhwIjoxNzg2OTEzNDgyfQ.yYOnMIzkoA315gNhSOfP3ORmssmXVjQc_-XyH9pokXo\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI1ODIsImV4cCI6MTc4NzUxNzM4Mn0.KdMk5YffSvznLkjs2WgpFV8C",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "6",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /members",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /tools",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /reservations",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /incidents",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /maintenance_records",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /tags",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /members/2",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /members",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership n/a (public policy) /members",
+   "ok": true,
+   "detail": "declared public",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon read allowed by policy /members",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /tools/4",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /tools",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership n/a (public policy) /tools",
+   "ok": true,
+   "detail": "declared public",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon read allowed by policy /tools",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /reservations/2",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /reservations",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership n/a (public policy) /reservations",
+   "ok": true,
+   "detail": "declared public",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon read allowed by policy /reservations",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /incidents/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /incidents",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership n/a (public policy) /incidents",
+   "ok": true,
+   "detail": "declared public",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon read allowed by policy /incidents",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /maintenance_records/3",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /maintenance_records",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership n/a (public policy) /maintenance_records",
+   "ok": true,
+   "detail": "declared public",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon read allowed by policy /maintenance_records",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /tags/3",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /tags",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership n/a (public policy) /tags",
+   "ok": true,
+   "detail": "declared public",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon read allowed by policy /tags",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "update /members/2",
+   "ok": true,
+   "detail": "200 {\"id\":2,\"name\":\"smoke-name\",\"status\":\"active\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /members/2",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

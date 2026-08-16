@@ -1,0 +1,116 @@
+{
+ "build": "t2-crm",
+ "raw": "17/18",
+ "true_failures": 0,
+ "failures": [],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"Momk6P-5qDmVxQpTYuSxwzMthvnMVXazlRjiATNE8qk\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjgwOCwiZXhwIjoxNzg2OTEzNzA4fQ.ioX14LOa6UY2aI9gZA1-OWfzCG7mJrftvYTyLBWKQDk\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI4MDgsImV4cCI6MTc4NzUxNzYwOH0.NKLn_nCClFBq-ImNUgqsu4ww",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"iToQyPTF0NldsWY61rACh6TC2pvpBmtNGjV_kZKaigQ\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjgwOCwiZXhwIjoxNzg2OTEzNzA4fQ.vMlrvmIKbAX_S941vm4bzK7623cbv76QVF-qgh8rS7I\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI4MDgsImV4cCI6MTc4NzUxNzYwOH0.HpCtXYKUpN_9l8BRUKpT9Yoc",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "1",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /leads",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /leads/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /leads",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /leads",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /leads",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "update /leads/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"source\":\"smoke-source\",\"name\":\"smoke-name\",\"email\":\"smoke@example.com\",\"phone\":\"smoke-phone\",\"zip\":\"smoke-zip\",\"intent\":\"smoke-intent\",\"answe",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /leads/1",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

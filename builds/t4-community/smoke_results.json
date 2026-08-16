@@ -1,0 +1,147 @@
+{
+ "base": "http://127.0.0.1:8116",
+ "passed": 22,
+ "failed": 6,
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.2,\"checks\":{}}"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"pe4prQp_NZTE49D09ydBp8CbWwkFI0qVCsgArACbduQ\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzQwNCwiZXhwIjoxNzg2OTE0MzA0fQ.pjMm_MuaBLMAMPB6B3zLzc1pSRM6MGDrx_OU3q91RBY\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTM0MDQsImV4cCI6MTc4NzUxODIwNH0.ydDTLTtCuOxzzXZkshVKUWY1"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"OFdPQcAGmIUQ_VArs2n0gVdL1l52rUMrq-9Pu7lWFaE\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzQwNCwiZXhwIjoxNzg2OTE0MzA0fQ.PtIPTbTlYKPJNS5KZDyXa9576ZgnvOsq0OmtFXjUsTY\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTM0MDQsImV4cCI6MTc4NzUxODIwNH0.IJz-KCSesCByVffpZn54ridT"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "name": "create /users",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /memberships",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /posts",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "read /users/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /users",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /users",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /users",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /memberships/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /memberships",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /memberships",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /memberships",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /posts/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /posts",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /posts",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /posts",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "update /users/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"display_name\":\"smoke-display_name\",\"email\":\"smoke@example.com\",\"created_at\":\"2026-08-16T20:50:04\"}"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422"
+  },
+  {
+   "name": "delete /users/1",
+   "ok": true,
+   "detail": "204"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}

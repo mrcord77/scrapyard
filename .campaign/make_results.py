@@ -1,0 +1,133 @@
+"""Assemble factory_test_results.json from per-build artifacts + campaign facts."""
+import json, os
+
+# name: (difficulty, pattern, domain, assembly_path, leverage_band, intervention,
+#        generated, bootable, functional, validated, notes)
+BUILDS = {
+    "t1-toollib": dict(difficulty="tier1", pattern="basic_saas", domain="tool_library",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="43/43 smoke; full reservation lifecycle w/ guards+effects; persistence across restart; public CRUD is declared policy (F2)"),
+    "t1-tasks": dict(difficulty="tier1", pattern="web_application", domain="task_tracker (CUSTOM)",
+        assembly="eos", leverage="over 75%", intervention=1,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="custom domain authored (domain.json only); owner-scoped via route_policies; 27/28 (label sharing = policy)"),
+    "t1-bikeshop": dict(difficulty="tier1", pattern="web_application", domain="bikeshop",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="RBAC lifecycle proven 8/8: non-admin 403, grant/promote/revoke via /admin/roles, anon 401"),
+    "t2-crm": dict(difficulty="tier2", pattern="crm", domain="ev_leads",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="lead-gen CRM; 17/18 raw, 0 true failures after policy adjudication"),
+    "t2-education": dict(difficulty="tier2", pattern="course_platform", domain="education",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="33/38 raw, 0 true failures (shared course entities = moderate-tier policy)"),
+    "t2-realestate": dict(difficulty="tier2", pattern="directory_site", domain="real_estate",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="29/33 raw, 0 true failures"),
+    "t2-ticketing": dict(difficulty="tier2", pattern="ticketing_system", domain="construction",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="25/33 raw, 0 true failures"),
+    "t2-internal": dict(difficulty="tier2", pattern="internal_tool (template)", domain="-",
+        assembly="template(assemble.py)", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=False,
+        notes="template path: 29 parts, smoke_check green, Jinja dashboard at /; no domain entities so CRUD depth n/a"),
+    "a-sobriety": dict(difficulty="tier3", pattern="saas_subscription_app", domain="sobriety",
+        assembly="eos --request (gated)", leverage="over 75%", intervention=2,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="DEEP 22/22: journal encrypted at rest (raw-DB proven), logs clean, export+stream, audit no-leak, erasure real after FIX of dry-run defect; billing routes NOT generated (Stripe path also unwired upstream — honest limitation)"),
+    "b-healthcare": dict(difficulty="tier3", pattern="saas_subscription_app", domain="healthcare",
+        assembly="eos --request (gated)", leverage="over 75%", intervention=2,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="DEEP 18/18: PHI(mrn) encrypted at rest, audited CRUD, secure boot refusal w/o keys, export redacted after FIX, erasure real; runs as container"),
+    "c-saas": dict(difficulty="tier3", pattern="saas_subscription_app", domain="saas",
+        assembly="eos", leverage="over 75%", intervention=1,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="CONTROL: full PG+Redis compose stack; PG persistence across container restart; prod boot fail-closed in-container (stub backends itemized)"),
+    "t3-marketplace": dict(difficulty="tier3", pattern="marketplace", domain="ecommerce",
+        assembly="eos + gen_frontend_react", leverage="over 75%", intervention=2,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="React/Vite frontend npm-built and served from container; seller/buyer flow on PG; 33/38 raw 0 true failures"),
+    "t4-oilgas": dict(difficulty="tier4", pattern="ticketing_system", domain="oil_and_gas",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="field ops (wells/work orders/production logs); 29/33 raw, 0 true failures"),
+    "t4-workbench": dict(difficulty="tier4", pattern="agent_platform", domain="research_workbench (CUSTOM)",
+        assembly="eos", leverage="50-75%", intervention=3,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="custom domain; full experiment/run lifecycle + reference rules proven; custom ops dashboard (~150 LOC custom UI)"),
+    "t4-community": dict(difficulty="tier4", pattern="basic_saas", domain="community_platform",
+        assembly="eos", leverage="over 75%", intervention=0,
+        generated=True, bootable=True, functional=True, validated=True,
+        notes="22/28 raw, 0 true failures after adjudication"),
+}
+
+DEFECTS = [
+    dict(id="F1", category="part contract/documentation", severity="high", fixed=True,
+         summary="CAPABILITIES.md claimed 'auth + owner-scoped' for ALL entities; low-sensitivity domains actually generate PUBLIC CRUD",
+         fix="tools/eos.py policy_label() derives the claim from gen_models.effective_policies; regression in tests/security_regression.py"),
+    dict(id="F2", category="production-hardening limitation", severity="medium", fixed=False,
+         summary="data_sensitivity 'low' generates anonymous create/update/DELETE (anon POST /tools -> 201, anon DELETE -> 204) — bad default for 'basic_saas'",
+         fix="recommended: public reads, auth writes at low tier"),
+    dict(id="F3", category="generator problem", severity="medium", fixed=False,
+         summary="create accepts arbitrary values for state-machine fields (row created in a state not in the machine), breaking reference rules downstream",
+         fix="recommended: force initial state or validate against machine states on create"),
+    dict(id="F4", category="domain specification problem", severity="low", fixed=False,
+         summary="shared (auth-only) entities are writable/deletable by ANY authenticated user (sobriety Meeting/Sponsor, healthcare Encounter)",
+         fix="recommended: role-gate writes on shared entities in domain specs"),
+    dict(id="F5", category="generator problem", severity="critical", fixed=True,
+         summary="RIGHT-TO-ERASURE DID NOT ERASE IDENTITY: generated /privacy/delete-account called delete_account() without confirm=True -> silent dry-run; route returned {'deleted': true}; deleted account could LOG BACK IN. Registry prose claimed 'proven end-to-end' with no executable backing",
+         fix="gen_models emits confirm=True; verify_runtime --fullstack now proves erasure (session revoked, re-login 401, bystander intact) — 12/12"),
+    dict(id="F6", category="integration incompatibility", severity="high", fixed=True,
+         summary="DeletionRecord table never created (account_deletion imported lazily inside route, model missed boot-time create_all) — hard-delete path crashed at commit once F5 was fixed",
+         fix="module-scope import in generated routes + account_deletion in security_caps + table in _ensure_security_tables"),
+    dict(id="F7", category="missing capability", severity="medium", fixed=False,
+         summary="billing/subscription parts materialize as library code but NO billing routes are generated (openapi has zero billing surface); live Stripe SDK path also unwired (documented)",
+         fix="recommended: generate checkout/subscription routes when billing caps resolve"),
+    dict(id="F9", category="part defect", severity="critical", fixed=True,
+         summary="DSAR EXPORT LEAKED CREDENTIALS: /privacy/export contained argon2 password hash AND the live plaintext session token (account takeover from a leaked export file)",
+         fix="data_export redacts SECRET_COLUMNS; selftest + security_regression cover hash+token"),
+    dict(id="F10", category="EOS/orchestration problem", severity="medium", fixed=True,
+         summary="EOS path wrote no deployment artifacts (Dockerfile/compose only on template path) despite resolving the 'docker' capability",
+         fix="eos.py now calls gen_deployment.write_deployment"),
+    dict(id="F11", category="dependency declaration problem", severity="high", fixed=True,
+         summary="account_deletion declared internal scrapyard modules as pip dependencies -> generated requirements.txt uninstallable -> Docker builds failed",
+         fix="metadata corrected + assemble_parts filters scrapyard.* from pip deps"),
+    dict(id="F12", category="dependency declaration problem", severity="high", fixed=True,
+         summary="197/582 parts import third-party modules they never declare; apps only installed because SOME OTHER part declared the package (httpx broke c-saas/marketplace/healthcare containers)",
+         fix="assemble_parts scans copied sources (AST, module-level imports) and unions known pip names into requirements; password_policy metadata corrected"),
+    dict(id="F13", category="integration incompatibility", severity="medium", fixed=True,
+         summary="gen_frontend_react emitted absolute asset base '/', but EOS mounts the SPA at /app/ -> built assets 404 in the browser",
+         fix="vite config base './' (relative)"),
+    dict(id="F14", category="part contract/documentation", severity="low", fixed=False,
+         summary="hardening_registry 'proven end-to-end' prose claims are not executable evidence (the erasure claim was false through the HTTP route)",
+         fix="recommended: registry entries should reference executable checks"),
+]
+
+VERIFICATION = dict(
+    index_catalog="PASS 582/582 core, 0 hollow (rerun after fixes: PASS)",
+    verify_part_selftests="PASS 582/582 (rerun after fixes: PASS)",
+    ui_lint="PASS", security_regression="PASS 8/8 (2 new checks added)",
+    build_matrix="PASS all 5 templates",
+    verify_runtime_healthcare_secure="PASS 13/13 adversarial",
+    verify_runtime_sobriety_fullstack="PASS 12/12 (4 new erasure checks added)",
+)
+
+out = dict(campaign="scrapyard-factory-test", date="2026-08-16",
+           repo="github.com/mrcord77/scrapyard", commit="bc8c18b6939e (main)",
+           builds={}, defects=DEFECTS, verification=VERIFICATION)
+for name, b in BUILDS.items():
+    adj_p = os.path.join("builds", name, "adjudicated.json")
+    tests_passed = tests_failed = None
+    if os.path.exists(adj_p):
+        adj = json.load(open(adj_p))
+        tests_passed = sum(1 for c in adj["checks"] if c["verdict"].startswith("pass"))
+        tests_failed = adj["true_failures"]
+    out["builds"][name] = {**b, "tests_passed": tests_passed, "tests_failed": tests_failed}
+
+json.dump(out, open("factory_test_results.json", "w"), indent=1)
+print("factory_test_results.json written:", len(out["builds"]), "builds,", len(DEFECTS), "defects")

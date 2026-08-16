@@ -1,0 +1,127 @@
+{
+ "build": "t1-bikeshop",
+ "raw": "18/19",
+ "true_failures": 1,
+ "failures": [
+  {
+   "name": "create /repair_tickets",
+   "detail": "403 {\"detail\":\"requires role: admin\"}"
+  }
+ ],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"0xXoDXr03Ln2n2M6eJYxNkf9YHZFAxHhy2QPXBPGq7o\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjc4MSwiZXhwIjoxNzg2OTEzNjgxfQ.acDGsAcQMzdFJO4Yg73AOY5k2QXVyZeFX26J6a5TBP4\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI3ODEsImV4cCI6MTc4NzUxNzU4MX0.dwdOkZUs1UMcGIWfeBC_gCwk",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"W2vkSEHpHo_cTmjjgzht4H1Go-AwucsBdH4_QyUD2dw\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjc4MSwiZXhwIjoxNzg2OTEzNjgxfQ.NBl-mJ3jD9Xy7hec6H4u1nbYO8sfeZPHHN2SZGzCcpU\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI3ODEsImV4cCI6MTc4NzUxNzU4MX0.wSuVhaE3YXPGhxZuNUx5x2Tv",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "2",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /users",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /repair_tickets",
+   "ok": false,
+   "detail": "403 {\"detail\":\"requires role: admin\"}",
+   "verdict": "FAIL"
+  },
+  {
+   "name": "read /users/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /users",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership n/a (public policy) /users",
+   "ok": true,
+   "detail": "declared public",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon read allowed by policy /users",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "update /users/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"email\":\"smoke@example.com\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /users/1",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

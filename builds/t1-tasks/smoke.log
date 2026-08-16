@@ -1,0 +1,29 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /projects
+  [PASS] create /tasks
+  [PASS] create /labels
+  [PASS] read /projects/1
+  [PASS] list /projects
+  [PASS] ownership: B blocked from A's /projects
+  [PASS] anon blocked /projects
+  [PASS] read /tasks/1
+  [PASS] list /tasks
+  [PASS] ownership: B blocked from A's /tasks
+  [PASS] anon blocked /tasks
+  [PASS] read /labels/1
+  [PASS] list /labels
+  [FAIL] ownership: B blocked from A's /labels -- 200
+  [PASS] anon blocked /labels
+  [PASS] update /projects/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /projects/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 27/28 passed -> builds/t1-tasks/smoke_results.json

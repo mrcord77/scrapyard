@@ -1,0 +1,206 @@
+{
+ "build": "c-saas",
+ "raw": "25/33",
+ "true_failures": 0,
+ "failures": [],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"cAnQDe-dvW7XzPTefEeyY2-tUnK0KuqcT437EEUmsAU\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM3OSwiZXhwIjoxNzg2OTE0Mjc5fQ.F8RZqw7be5yqSurS3ngI5KPeX6NR-e06nu1Aj0cHaUQ\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzNzksImV4cCI6MTc4NzUxODE3OX0.-apxDBSz4gC1n4_0iaZGfJWo",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"X2vL9tJ_ZvLxyGMpdIUOGSeTwwBa3zuvw4JmzW2TvCg\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM3OSwiZXhwIjoxNzg2OTE0Mjc5fQ.nGL-Ih9O8CafLBGxJmkJ0pxU7nnufG0yCeVRFQo4Q3w\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzNzksImV4cCI6MTc4NzUxODE3OX0.2B66OVxfesiywZAknO_3UY2W",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "4",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /accounts",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /members",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /plans",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /invitations",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /plans/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /plans",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /plans",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /plans",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(public)"
+  },
+  {
+   "name": "read /accounts/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /accounts",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /accounts",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /accounts",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(public)"
+  },
+  {
+   "name": "read /members/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /members",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /members",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /members",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(public)"
+  },
+  {
+   "name": "read /invitations/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /invitations",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /invitations",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /invitations",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(public)"
+  },
+  {
+   "name": "update /plans/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"name\":\"smoke-name\",\"price_cents\":1,\"interval\":\"smoke-interval\",\"entitlements\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /plans/1",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

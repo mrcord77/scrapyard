@@ -1,0 +1,45 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 679B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 114B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a
+#4 resolve docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 948.44kB 0.1s done
+#5 DONE 0.1s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [3/6] COPY requirements.txt .
+#7 CACHED
+
+#8 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 CACHED
+
+#9 [5/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN useradd -m appuser && chown -R appuser /app
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 exporting manifest sha256:a9c59e95fc40ff699e4e04d3b8cf97414e1d97906ee5b3fba047561671d7d590 done
+#11 exporting config sha256:44e0dc2e1d16395806a20e8ff18a599b0ed9a094cf27c1d211b59ede0bb94949 done
+#11 exporting attestation manifest sha256:7b5816e95c35f1d3e21a0b4287dae77bc868edae1b79878055a9d41270f2a8e7 0.0s done
+#11 exporting manifest list sha256:b82344dc1831f7988ec4d1a5c0873bcdaeec8dff0578c04ad7b20e35bed5bf2d 0.0s done
+#11 naming to docker.io/library/scrapyard-t4-workbench:test done
+#11 unpacking to docker.io/library/scrapyard-t4-workbench:test done
+#11 DONE 0.1s

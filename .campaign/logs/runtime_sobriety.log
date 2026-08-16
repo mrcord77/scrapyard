@@ -1,0 +1,38 @@
+
+=== EOS: saas_subscription_app+sobriety @mvp [advisory] ===
+[enforce]    must_have honored: True  must_not honored: True
+[policy-deps] generated routes require: account_deletion, audit_logs, auth_routes, crypto_agility, data_export, jwt_manager, pq_envelope, pq_field_encryption, pq_signing, session_manager, users (force-included)
+[resolve]    materialized -> C:\Users\andre\AppData\Local\Temp\rtfull_j2auirj9  (61 parts, 16 py deps, +DOMAIN.md, +COMPOSITIONS.md (2), +LESSONS.md (21))
+[runtime]    bundled scrapyard/runtime (settings, database, lifespan, startup)
+[models]       [collision-safe] User table -> 'app_users' (avoids library-owned 'users'); route stays /users
+[frontend]   generated SPA -> frontend/index.html (served at /app)
+[wire]       wrote main.py (runtime.bootstrap: settings+db+lifecycle+routers+headers + encryption guard + auth + frontend)
+[closure]    +5 module(s) the graph missed: scrapyard.api.domain_errors, scrapyard.authorization.permissions, scrapyard.authorization.roles, scrapyard.observability.metrics, scrapyard.security.row_level_security
+[report]     9 entities · 1 FK relationship(s) · 0 workflow(s) -> BUILD_REPORT.md + build_report.json
+[legal]      wrote PRIVACY_POLICY.md + TERMS_OF_SERVICE.md (templates — require legal review)
+[deploy]     wrote Dockerfile, docker-compose.yml, .dockerignore, .env.production.example, .github/workflows/ci.yml
+[review]     validation pass + fitness: RISKY
+[cost]       wrote COST.md (3 cost drivers)
+[ops-reason] External dependencies in play: db_session, smtp_provider, stripe_api
+[verify]     => VERIFIED (24 behaviors proven, 0 failed)
+[metadata]   9 entities probed · 9 fully green (auth=session) -> PROBE_METADATA.md + probe_metadata.json
+[workflows]  4 verified, 0 blocked (stubs), 0 failed
+[capabilities] wrote CAPABILITIES.md (endpoints + required config + honest fallbacks)
+[runnable]   PASS: generated eos app is runnable (boots from its own files, health, feature routes)
+
+=== DONE -> C:\Users\andre\AppData\Local\Temp\rtfull_j2auirj9 ===
+  validation=WARN  fitness=RISKY  impl_behavior_checks=passed  confidence=0.76  parts=57  must_have=ok  must_not=ok
+  active lessons flag 2 missing mitigation(s): idempotency, field_encryption
+  [PASS] contract_coherent  all 49 SPA endpoints resolve to mounted backend routes
+  [PASS] spa_served         generated SPA served at /app/
+  [PASS] auth_flow          register + login issues a session token
+  [PASS] anon_blocked       anonymous GET /User -> 401
+  [PASS] create_ok          authenticated create User -> 201
+  [PASS] list_ok            created User appears in owner's list
+  [PASS] get_ok             GET User/id -> 200
+  [PASS] delete_ok          DELETE User/id -> 204
+  [PASS] erasure_accepted   POST /privacy/delete-account -> 200
+  [PASS] erasure_session_revoked stale session rejected after erasure
+  [PASS] erasure_relogin_blocked erased account cannot log back in
+  [PASS] erasure_bystander_intact other users' data untouched by erasure
+FULLSTACK: 12/12 proven — generated frontend + backend compose and run end-to-end

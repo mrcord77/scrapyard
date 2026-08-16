@@ -1,0 +1,34 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /listings
+  [PASS] create /agents
+  [PASS] create /showings
+  [PASS] create /inquiries
+  [PASS] read /agents/1
+  [PASS] list /agents
+  [PASS] ownership n/a (public policy) /agents
+  [FAIL] anon read allowed by policy /agents -- 401
+  [PASS] read /listings/1
+  [PASS] list /listings
+  [PASS] ownership n/a (public policy) /listings
+  [FAIL] anon read allowed by policy /listings -- 401
+  [PASS] read /showings/1
+  [PASS] list /showings
+  [PASS] ownership n/a (public policy) /showings
+  [FAIL] anon read allowed by policy /showings -- 401
+  [PASS] read /inquiries/1
+  [PASS] list /inquiries
+  [PASS] ownership n/a (public policy) /inquiries
+  [FAIL] anon read allowed by policy /inquiries -- 401
+  [PASS] update /agents/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /agents/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 29/33 passed -> builds/t2-realestate/smoke_results.json

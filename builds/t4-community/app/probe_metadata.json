@@ -1,0 +1,107 @@
+{
+  "entities": [
+    {
+      "collection": "/memberships",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/memberships",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/memberships/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/memberships/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/memberships/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/posts",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/posts",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/posts/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/posts/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/posts/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/users",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/users",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/users/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/users/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/users/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session"
+}

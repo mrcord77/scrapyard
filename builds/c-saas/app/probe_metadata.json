@@ -1,0 +1,141 @@
+{
+  "entities": [
+    {
+      "collection": "/accounts",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/accounts",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/accounts/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/accounts/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/accounts/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/invitations",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/invitations",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/invitations/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/invitations/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/invitations/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/members",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/members",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/members/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/members/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/members/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/plans",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/plans",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/plans/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/plans/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/plans/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session"
+}

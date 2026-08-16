@@ -1,0 +1,11 @@
+
+=== EOS: saas_subscription_app+healthcare @mvp [GATE] ===
+[enforce]    must_have honored: True  must_not honored: True
+[GATE FAILED] build blocked:
+   - [sensitive] sensitive domain requires account_deletion
+   - [sensitive] sensitive domain requires data_export
+   - [sensitive] sensitive domain requires field_encryption
+   - [sensitive] sensitive domain requires retention_policy
+   - [sensitive] sensitive domain requires privacy_policy_hooks
+   - [sensitive] sensitive domain requires one of ['audit_logs', 'structured_logging']
+  fix the plan (add safeguards / adjust request) or drop --gate for advisory mode.

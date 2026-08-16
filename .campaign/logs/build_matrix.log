@@ -1,0 +1,8 @@
+Template       Assemble  Verify  Smoke  Behavior  Frontend
+ai_tool        PASS      PASS    PASS   PASS      PASS
+content_site   PASS      PASS    PASS   PASS      PASS
+internal_tool  PASS      PASS    PASS   PASS      PASS
+marketplace    PASS      PASS    PASS   PASS      PASS
+saas_app       PASS      PASS    PASS   PASS      PASS
+
+BUILD MATRIX: PASS — every template assembles into a working app.

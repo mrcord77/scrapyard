@@ -1,0 +1,311 @@
+{
+  "entities": [
+    {
+      "collection": "/attendances",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/attendances",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/attendances/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/attendances/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/attendances/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/chips",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/chips",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/chips/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/chips/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/chips/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/journal_entries",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/journal_entries",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/journal_entries/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/journal_entries/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/journal_entries/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/meetings",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/meetings",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/meetings/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/meetings/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/meetings/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/memberships",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/memberships",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/memberships/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/memberships/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/memberships/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/milestones",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/milestones",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/milestones/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/milestones/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/milestones/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/posts",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/posts",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/posts/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/posts/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/posts/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/sponsors",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/sponsors",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/sponsors/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/sponsors/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/sponsors/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/users",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/users",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/users/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/users/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/users/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session"
+}

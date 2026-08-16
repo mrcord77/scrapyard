@@ -1,0 +1,469 @@
+{
+  "domain": "tool_library",
+  "entities": [
+    {
+      "name": "Member",
+      "plural": "members",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Tool",
+      "plural": "tools",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Reservation",
+      "plural": "reservations",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "member_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "tool_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "start_at",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "end_at",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "member_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "tool_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "start_at",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "end_at",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Incident",
+      "plural": "incidents",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "tool_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "reservation_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "note",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "tool_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "reservation_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "note",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "MaintenanceRecord",
+      "plural": "maintenance_records",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "tool_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "resolution",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "tool_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "resolution",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Tag",
+      "plural": "tags",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/members"
+    },
+    {
+      "method": "POST",
+      "path": "/members"
+    },
+    {
+      "method": "GET",
+      "path": "/members/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/members/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/members/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/tools"
+    },
+    {
+      "method": "POST",
+      "path": "/tools"
+    },
+    {
+      "method": "GET",
+      "path": "/tools/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/tools/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/tools/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/reservations"
+    },
+    {
+      "method": "POST",
+      "path": "/reservations"
+    },
+    {
+      "method": "GET",
+      "path": "/reservations/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/reservations/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/reservations/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/incidents"
+    },
+    {
+      "method": "POST",
+      "path": "/incidents"
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/incidents/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/incidents/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/maintenance_records"
+    },
+    {
+      "method": "POST",
+      "path": "/maintenance_records"
+    },
+    {
+      "method": "GET",
+      "path": "/maintenance_records/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/maintenance_records/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/maintenance_records/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/tags"
+    },
+    {
+      "method": "POST",
+      "path": "/tags"
+    },
+    {
+      "method": "GET",
+      "path": "/tags/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/tags/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/tags/{id_}"
+    }
+  ]
+}

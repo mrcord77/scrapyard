@@ -31,3 +31,11 @@ Thumbs.db
 
 # The parent worktree ignores *credentials*, but this is source code, not a secret.
 !scrapyard/connectors/oauth2_client_credentials.py
+
+# factory-test campaign artifacts that don't belong in git
+builds/**/node_modules/
+builds/**/__pycache__/
+builds/**/*.db
+builds/**/pq_secret.key
+builds/.*.log
+.campaign/catalog-check*/

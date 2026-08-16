@@ -1,0 +1,430 @@
+{
+  "domain": "real_estate",
+  "entities": [
+    {
+      "name": "Listing",
+      "plural": "listings",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "address",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "price_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "beds",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "baths",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "sqft",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "agent_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "address",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "price_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "beds",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "baths",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "sqft",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "agent_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Agent",
+      "plural": "agents",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "license_no",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "brokerage",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "license_no",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "brokerage",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Showing",
+      "plural": "showings",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "listing_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "client_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "scheduled_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "listing_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "client_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "scheduled_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Inquiry",
+      "plural": "inquiries",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "listing_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "contact",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "message",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "listing_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "contact",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "message",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/listings"
+    },
+    {
+      "method": "POST",
+      "path": "/listings"
+    },
+    {
+      "method": "GET",
+      "path": "/listings/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/listings/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/listings/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/agents"
+    },
+    {
+      "method": "POST",
+      "path": "/agents"
+    },
+    {
+      "method": "GET",
+      "path": "/agents/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/agents/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/agents/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/showings"
+    },
+    {
+      "method": "POST",
+      "path": "/showings"
+    },
+    {
+      "method": "GET",
+      "path": "/showings/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/showings/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/showings/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/inquiries"
+    },
+    {
+      "method": "POST",
+      "path": "/inquiries"
+    },
+    {
+      "method": "GET",
+      "path": "/inquiries/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/inquiries/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/inquiries/{id_}"
+    }
+  ]
+}

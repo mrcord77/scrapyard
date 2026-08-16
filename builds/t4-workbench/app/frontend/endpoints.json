@@ -1,0 +1,118 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/research_docs"
+  },
+  {
+    "method": "POST",
+    "path": "/research_docs"
+  },
+  {
+    "method": "GET",
+    "path": "/research_docs/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/research_docs/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/research_docs/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/notes"
+  },
+  {
+    "method": "POST",
+    "path": "/notes"
+  },
+  {
+    "method": "GET",
+    "path": "/notes/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/notes/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/notes/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/experiments"
+  },
+  {
+    "method": "POST",
+    "path": "/experiments"
+  },
+  {
+    "method": "GET",
+    "path": "/experiments/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/experiments/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/experiments/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/runs"
+  },
+  {
+    "method": "POST",
+    "path": "/runs"
+  },
+  {
+    "method": "GET",
+    "path": "/runs/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/runs/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/runs/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/tags"
+  },
+  {
+    "method": "POST",
+    "path": "/tags"
+  },
+  {
+    "method": "GET",
+    "path": "/tags/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/tags/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/tags/{id_}"
+  }
+]

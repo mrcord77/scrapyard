@@ -1,0 +1,39 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /courses
+  [PASS] create /modules
+  [PASS] create /lessons
+  [PASS] create /enrollments
+  [PASS] create /progresses
+  [PASS] read /courses/1
+  [PASS] list /courses
+  [FAIL] ownership: B blocked from A's /courses -- 200
+  [PASS] anon blocked /courses
+  [PASS] read /modules/1
+  [PASS] list /modules
+  [FAIL] ownership: B blocked from A's /modules -- 200
+  [PASS] anon blocked /modules
+  [PASS] read /lessons/1
+  [PASS] list /lessons
+  [FAIL] ownership: B blocked from A's /lessons -- 200
+  [PASS] anon blocked /lessons
+  [PASS] read /enrollments/1
+  [PASS] list /enrollments
+  [FAIL] ownership: B blocked from A's /enrollments -- 200
+  [PASS] anon blocked /enrollments
+  [PASS] read /progresses/1
+  [PASS] list /progresses
+  [FAIL] ownership: B blocked from A's /progresses -- 200
+  [PASS] anon blocked /progresses
+  [PASS] update /courses/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /courses/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 33/38 passed -> builds/t2-education/smoke_results.json

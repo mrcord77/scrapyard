@@ -1,0 +1,39 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /products
+  [PASS] create /variants
+  [PASS] create /carts
+  [PASS] create /orders
+  [PASS] create /shipments
+  [PASS] read /products/1
+  [PASS] list /products
+  [FAIL] ownership: B blocked from A's /products -- 200
+  [PASS] anon blocked /products
+  [PASS] read /variants/1
+  [PASS] list /variants
+  [FAIL] ownership: B blocked from A's /variants -- 200
+  [PASS] anon blocked /variants
+  [PASS] read /carts/1
+  [PASS] list /carts
+  [FAIL] ownership: B blocked from A's /carts -- 200
+  [PASS] anon blocked /carts
+  [PASS] read /orders/1
+  [PASS] list /orders
+  [FAIL] ownership: B blocked from A's /orders -- 200
+  [PASS] anon blocked /orders
+  [PASS] read /shipments/1
+  [PASS] list /shipments
+  [FAIL] ownership: B blocked from A's /shipments -- 200
+  [PASS] anon blocked /shipments
+  [PASS] update /products/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /products/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 33/38 passed -> builds/t3-marketplace/smoke_pg.json

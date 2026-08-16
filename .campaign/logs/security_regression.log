@@ -1,0 +1,11 @@
+FINDING                                    VERDICT
+----------------------------------------------------------------------
+JWT revocation padding bypass              CLOSED
+PQ signing downgrade                       CLOSED
+CSRF secret honored                        CLOSED
+signed_cookies policy+expiry               CLOSED
+AST evaluators reject hostile objects (6)  CLOSED
+DSAR export credential leak                CLOSED
+CAPABILITIES.md security-claim accuracy    CLOSED
+----------------------------------------------------------------------
+all closed: True

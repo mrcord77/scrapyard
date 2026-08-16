@@ -1,0 +1,332 @@
+{
+  "domain": "healthcare",
+  "entities": [
+    {
+      "name": "Patient",
+      "plural": "patients",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "dob",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "mrn",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        }
+      ],
+      "writable": [
+        {
+          "name": "dob",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "mrn",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        }
+      ]
+    },
+    {
+      "name": "Provider",
+      "plural": "providers",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "npi",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "specialty",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "npi",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "specialty",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Appointment",
+      "plural": "appointments",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "patient_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "provider_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "starts_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "patient_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "provider_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "starts_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Encounter",
+      "plural": "encounters",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "appointment_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "notes_ref",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "appointment_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "notes_ref",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/patients"
+    },
+    {
+      "method": "POST",
+      "path": "/patients"
+    },
+    {
+      "method": "GET",
+      "path": "/patients/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/patients/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/patients/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/providers"
+    },
+    {
+      "method": "POST",
+      "path": "/providers"
+    },
+    {
+      "method": "GET",
+      "path": "/providers/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/providers/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/providers/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/appointments"
+    },
+    {
+      "method": "POST",
+      "path": "/appointments"
+    },
+    {
+      "method": "GET",
+      "path": "/appointments/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/appointments/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/appointments/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/encounters"
+    },
+    {
+      "method": "POST",
+      "path": "/encounters"
+    },
+    {
+      "method": "GET",
+      "path": "/encounters/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/encounters/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/encounters/{id_}"
+    }
+  ]
+}

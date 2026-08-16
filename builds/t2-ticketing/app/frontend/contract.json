@@ -1,0 +1,409 @@
+{
+  "domain": "construction",
+  "entities": [
+    {
+      "name": "Project",
+      "plural": "projects",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "client",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "budget_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "client",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "budget_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Task",
+      "plural": "tasks",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "project_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "assignee_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "due",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "project_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "assignee_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "due",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "ChangeOrder",
+      "plural": "change_orders",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "project_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "amount_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "project_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "amount_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Document",
+      "plural": "documents",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "project_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "media_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "uploaded_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "project_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "media_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "uploaded_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/projects"
+    },
+    {
+      "method": "POST",
+      "path": "/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/projects/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/tasks"
+    },
+    {
+      "method": "POST",
+      "path": "/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/tasks/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/tasks/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/change_orders"
+    },
+    {
+      "method": "POST",
+      "path": "/change_orders"
+    },
+    {
+      "method": "GET",
+      "path": "/change_orders/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/change_orders/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/change_orders/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/documents"
+    },
+    {
+      "method": "POST",
+      "path": "/documents"
+    },
+    {
+      "method": "GET",
+      "path": "/documents/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/documents/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/documents/{id_}"
+    }
+  ]
+}

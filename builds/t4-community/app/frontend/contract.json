@@ -1,0 +1,246 @@
+{
+  "domain": "community_platform",
+  "entities": [
+    {
+      "name": "User",
+      "plural": "users",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "display_name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "display_name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Membership",
+      "plural": "memberships",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "joined_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "joined_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Post",
+      "plural": "posts",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "body",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "body",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/users"
+    },
+    {
+      "method": "POST",
+      "path": "/users"
+    },
+    {
+      "method": "GET",
+      "path": "/users/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/users/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/memberships"
+    },
+    {
+      "method": "POST",
+      "path": "/memberships"
+    },
+    {
+      "method": "GET",
+      "path": "/memberships/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/memberships/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/memberships/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/posts"
+    },
+    {
+      "method": "POST",
+      "path": "/posts"
+    },
+    {
+      "method": "GET",
+      "path": "/posts/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/posts/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/posts/{id_}"
+    }
+  ]
+}

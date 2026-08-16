@@ -1,0 +1,13 @@
+# Cost & scale projection (ESTIMATES)
+
+Order-of-magnitude monthly USD for planning only — not a quote.
+
+| Users | Est. monthly |
+|---|---|
+| 10 | $15 |
+| 100 | $15 |
+| 1,000 | $17 |
+| 100,000 | $215 |
+
+## Cost drivers
+- **db_session** — base $15/mo + $2/1k users — managed Postgres baseline + storage

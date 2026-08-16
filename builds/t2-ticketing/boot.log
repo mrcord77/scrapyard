@@ -1,0 +1,48 @@
+INFO:     Started server process [12796]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8107 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52872 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /openapi.json HTTP/1.1" 200 OK
+2026-08-16 13:40:28,343 INFO    scrapyard.identity.users: audit user.created user_id=1 {}
+INFO:     127.0.0.1:52873 - "POST /auth/register HTTP/1.1" 200 OK
+C:\Users\andre\AppData\Local\Programs\Python\Python312\Lib\site-packages\jwt\api_jwt.py:147: InsecureKeyLengthWarning: The HMAC key is 9 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2.
+  return self._jws.encode(
+2026-08-16 13:40:28,377 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=af862f5178d6..
+2026-08-16 13:40:28,377 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=c6f446aa2f86..
+INFO:     127.0.0.1:52873 - "POST /auth/login HTTP/1.1" 200 OK
+2026-08-16 13:40:28,409 INFO    scrapyard.identity.users: audit user.created user_id=2 {}
+INFO:     127.0.0.1:52874 - "POST /auth/register HTTP/1.1" 200 OK
+2026-08-16 13:40:28,443 INFO    scrapyard.identity.jwt_manager: token_issued subject=2 token=6a88bc7823a1..
+2026-08-16 13:40:28,443 INFO    scrapyard.identity.jwt_manager: token_issued subject=2 token=2ec50412904b..
+INFO:     127.0.0.1:52874 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "POST /auth/register HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:52873 - "GET /auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "POST /projects HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52873 - "POST /tasks HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52873 - "POST /change_orders HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52873 - "POST /documents HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52873 - "GET /projects/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52874 - "GET /projects/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52876 - "GET /projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /tasks/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52874 - "GET /tasks/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52876 - "GET /tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /change_orders/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /change_orders HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52874 - "GET /change_orders/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52876 - "GET /change_orders HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /documents/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52874 - "GET /documents/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52876 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "PUT /projects/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /projects/999999 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52873 - "POST /projects HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:52873 - "DELETE /projects/1 HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:52873 - "GET /projects/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52873 - "POST /auth/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "GET /auth/me HTTP/1.1" 401 Unauthorized

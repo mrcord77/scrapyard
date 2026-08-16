@@ -1,0 +1,75 @@
+ Image app-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 611B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 679B done
+#2 DONE 0.0s
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/python:3.12-slim
+#4 DONE 0.5s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 114B done
+#5 DONE 0.0s
+
+#6 [1/6] FROM docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a
+#6 resolve docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a 0.0s done
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 38.99MB 2.9s done
+#7 DONE 2.9s
+
+#8 [3/6] COPY requirements.txt .
+#8 CACHED
+
+#9 [2/6] WORKDIR /app
+#9 CACHED
+
+#10 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#10 CACHED
+
+#11 [5/6] COPY . .
+#11 DONE 0.3s
+
+#12 [6/6] RUN useradd -m appuser && chown -R appuser /app
+#12 DONE 5.3s
+
+#13 exporting to image
+#13 exporting layers
+#13 exporting layers 0.9s done
+#13 exporting manifest sha256:f42e09136d34c94af15140c4fd4ec4c299c19ef577c2364d93ef45ad519a3009 0.0s done
+#13 exporting config sha256:c3da747b2400e330346cdc9ee23946c274aba39d929afacb025a16d8a79726f5 done
+#13 exporting attestation manifest sha256:6b3683431412fc69f1e3a7a4bcd9dcb686f34fbbf10a293e3007e4255f4183bf 0.0s done
+#13 exporting manifest list sha256:85a6fe43e876b8257fd4bcb2e3d083d018dfc3d1ac3397c783e0f07163121552 0.0s done
+#13 naming to docker.io/library/app-web:latest done
+#13 unpacking to docker.io/library/app-web:latest
+#13 unpacking to docker.io/library/app-web:latest 0.8s done
+#13 DONE 1.8s
+
+#14 resolving provenance for metadata file
+#14 DONE 0.0s
+ Image app-web Built 
+ Network app_default Creating 
+ Network app_default Created 
+ Container app-db-1 Creating 
+ Container app-redis-1 Creating 
+ Container app-redis-1 Created 
+ Container app-db-1 Created 
+ Container app-web-1 Creating 
+ Container app-web-1 Created 
+ Container app-redis-1 Starting 
+ Container app-db-1 Starting 
+ Container app-db-1 Started 
+ Container app-redis-1 Started 
+ Container app-db-1 Waiting 
+ Container app-redis-1 Waiting 
+ Container app-db-1 Healthy 
+ Container app-redis-1 Healthy 
+ Container app-web-1 Starting 
+ Container app-web-1 Started 

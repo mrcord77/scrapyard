@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mb-8 flex items-center justify-between">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+    <p class="mt-1 text-sm text-gray-500">Overview of your application</p>
+  </div>
+  <button onclick="location.reload()" class="rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-500">Refresh</button>
+</div>
+
+<!-- Stats cards -->
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+  {% for stat in stats %}
+  <div class="overflow-hidden rounded-xl bg-white shadow ring-1 ring-gray-900/5">
+    <div class="px-5 py-4">
+      <p class="text-sm font-medium text-gray-500 truncate">{{ stat.label }}</p>
+      <p class="mt-1 text-3xl font-bold tracking-tight text-gray-900">{{ stat.value }}</p>
+    </div>
+  </div>
+  {% endfor %}
+  {% if not stats %}
+  <div class="col-span-full overflow-hidden rounded-xl bg-white shadow ring-1 ring-gray-900/5">
+    <div class="px-5 py-4">
+      <p class="text-sm font-medium text-gray-500">No stats available yet</p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Main content area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <!-- Primary panel -->
+  <div class="lg:col-span-2">
+    <div class="rounded-xl bg-white shadow ring-1 ring-gray-900/5 overflow-hidden">
+      <div class="px-6 py-5 border-b border-gray-100">
+        <h2 class="text-lg font-semibold text-gray-900">Recent Activity</h2>
+      </div>
+      <div class="px-6 py-8" id="activity-area">
+        {% if items %}
+        <div class="divide-y divide-gray-100">
+          {% for item in items %}
+          <div class="py-4 flex items-center justify-between gap-4">
+            <div class="min-w-0 flex-1">
+              <p class="text-sm font-medium text-gray-900 truncate">{{ item.title }}</p>
+              {% if item.subtitle %}
+              <p class="text-sm text-gray-500">{{ item.subtitle }}</p>
+              {% endif %}
+            </div>
+            {% if item.badge %}
+            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold
+              {% if item.badge_color == 'green' %}bg-green-50 text-green-700 ring-1 ring-green-600/20
+              {% elif item.badge_color == 'amber' %}bg-amber-50 text-amber-700 ring-1 ring-amber-600/20
+              {% elif item.badge_color == 'red' %}bg-red-50 text-red-700 ring-1 ring-red-600/20
+              {% else %}bg-gray-50 text-gray-700 ring-1 ring-gray-600/20{% endif %}">
+              {{ item.badge }}
+            </span>
+            {% endif %}
+            {% if item.action %}
+            <a href="{{ item.action_url }}" class="rounded-lg bg-brand-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600">
+              {{ item.action }}
+            </a>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-8">
+          <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859" /></svg>
+          <h3 class="mt-2 text-sm font-semibold text-gray-900">No activity yet</h3>
+          <p class="mt-1 text-sm text-gray-500">Get started by creating your first record.</p>
+          <button onclick="location.reload()" class="mt-4 rounded-lg bg-ink px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700">Check for new records</button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="space-y-6">
+    <div class="rounded-xl bg-white shadow ring-1 ring-gray-900/5 overflow-hidden">
+      <div class="px-6 py-5 border-b border-gray-100">
+        <h2 class="text-lg font-semibold text-gray-900">System Status</h2>
+      </div>
+      <div class="px-6 py-4 space-y-3">
+        {% for check in health_checks %}
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-600">{{ check.label }}</span>
+          <span class="inline-flex items-center gap-1.5">
+            <span class="h-2 w-2 rounded-full {% if check.ok %}bg-green-500{% else %}bg-red-500{% endif %}"></span>
+            <span class="text-xs font-medium {% if check.ok %}text-green-700{% else %}text-red-700{% endif %}">
+              {{ 'OK' if check.ok else 'Error' }}
+            </span>
+          </span>
+        </div>
+        {% endfor %}
+        {% if not health_checks %}
+        <p class="text-sm text-gray-500">Loading status...</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="rounded-xl bg-white shadow ring-1 ring-gray-900/5 overflow-hidden">
+      <div class="px-6 py-5 border-b border-gray-100">
+        <h2 class="text-lg font-semibold text-gray-900">Routes</h2>
+      </div>
+      <div class="px-6 py-4">
+        {% if routes %}
+        <ul class="space-y-2">
+          {% for route in routes %}
+          <li class="flex items-center gap-2">
+            <span class="inline-flex items-center rounded-md bg-brand-50 px-2 py-1 text-xs font-medium text-brand-700 ring-1 ring-brand-600/20">{{ route }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-sm text-gray-500">No feature routes mounted</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

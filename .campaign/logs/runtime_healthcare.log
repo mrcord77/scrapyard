@@ -1,0 +1,38 @@
+
+=== EOS: basic_saas+healthcare @mvp [advisory] ===
+[enforce]    must_have honored: True  must_not honored: True
+[policy-deps] generated routes require: account_deletion, audit_logs, auth_routes, crypto_agility, data_export, jwt_manager, pq_envelope, pq_field_encryption, pq_signing, retention_policy, session_manager, users (force-included)
+[resolve]    materialized -> C:\Users\andre\AppData\Local\Temp\rtsec_zkm1twwb  (49 parts, 15 py deps, +DOMAIN.md, +COMPOSITIONS.md (1), +LESSONS.md (19))
+[runtime]    bundled scrapyard/runtime (settings, database, lifespan, startup)
+[models]     generated 4 entities -> C:\Users\andre\AppData\Local\Temp\rtsec_zkm1twwb\scrapyard\models/  (models, schemas, services, routes)  [security: high — 4/4 entities protected via 'high' tier defaults]: Patient, Provider, Appointment, Encounter
+[frontend]   generated SPA -> frontend/index.html (served at /app)
+[wire]       wrote main.py (runtime.bootstrap: settings+db+lifecycle+routers+headers + encryption guard + auth + frontend + retention sweep)
+[closure]    +5 module(s) the graph missed: scrapyard.api.domain_errors, scrapyard.authorization.permissions, scrapyard.authorization.roles, scrapyard.observability.metrics, scrapyard.security.row_level_security
+[report]     4 entities · 3 FK relationship(s) · 0 workflow(s) -> BUILD_REPORT.md + build_report.json
+[legal]      wrote PRIVACY_POLICY.md + TERMS_OF_SERVICE.md (templates — require legal review)
+[deploy]     wrote Dockerfile, docker-compose.yml, .dockerignore, .env.production.example, .github/workflows/ci.yml
+[review]     validation pass + fitness: RISKY
+[cost]       wrote COST.md (2 cost drivers)
+[ops-reason] External dependencies in play: db_session, smtp_provider
+[verify]     => VERIFIED (20 behaviors proven, 0 failed)
+[metadata]   4 entities probed · 4 fully green (auth=session) -> PROBE_METADATA.md + probe_metadata.json
+[workflows]  4 verified, 0 blocked (stubs), 0 failed
+[capabilities] wrote CAPABILITIES.md (endpoints + required config + honest fallbacks)
+[runnable]   PASS: generated eos app is runnable (boots from its own files, health, feature routes)
+
+=== DONE -> C:\Users\andre\AppData\Local\Temp\rtsec_zkm1twwb ===
+  validation=WARN  fitness=RISKY  impl_behavior_checks=passed  confidence=0.79  parts=44  must_have=ok  must_not=ok
+  [PASS] anonymous_blocked          GET /patients without session -> 401
+  [PASS] ownership_forced           forged user_id ignored; row owned by caller
+  [PASS] cross_user_denied          another user's row -> 404
+  [PASS] ciphertext_at_rest         raw mrn column is encrypted, not plaintext
+  [PASS] pq_hybrid_at_rest          stored field is a hybrid PQ envelope (hybrid-mlkem768-x25519-aes256gcm)
+  [PASS] retention_purges_expired   expired row deleted by sweep
+  [PASS] retention_keeps_fresh      fresh row retained by sweep
+  [PASS] pq_implementations_present crypto_agility + pq_envelope + pq_signing import in the built app
+  [PASS] pq_default_post_quantum    default suites are hybrid post-quantum
+  [PASS] pq_envelope_roundtrip      hybrid X25519+ML-KEM-768 envelope seals/opens
+  [PASS] pq_hybrid_enforced         decryption requires BOTH shares (corrupt ML-KEM -> fails)
+  [PASS] pq_signing_witness         hybrid Ed25519+ML-DSA-65 signs/verifies, tamper rejected
+  [PASS] audit_trail_tamper_evident audit chain intact + 1 PQ-witnessed entries verify
+SECURE: 13/13 adversarial properties proven — sensitive domain holds end-to-end

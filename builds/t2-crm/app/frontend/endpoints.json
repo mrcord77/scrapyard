@@ -1,0 +1,38 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/leads"
+  },
+  {
+    "method": "POST",
+    "path": "/leads"
+  },
+  {
+    "method": "GET",
+    "path": "/leads/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/leads/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/leads/{id_}"
+  }
+]

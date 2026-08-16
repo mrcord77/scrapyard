@@ -1,0 +1,80 @@
+{
+  "entities": [
+    {
+      "collection": "/repair_tickets",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/repair_tickets",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/repair_tickets/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/repair_tickets/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/repair_tickets/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/repair_tickets/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/users",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/users",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/users/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/users/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/users/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session+admin"
+}

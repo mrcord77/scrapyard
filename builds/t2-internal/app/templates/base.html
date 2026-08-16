@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | Internal Tool</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#f0fdf4', 100:'#dcfce7', 500:'#22c55e', 600:'#16a34a', 700:'#15803d', 900:'#14532d' },
+            ink: '#111827',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .loading-pulse { animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  </style>
+</head>
+<body class="h-full">
+  <div class="min-h-full">
+    <nav class="bg-ink">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-14 items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="h-8 w-8 rounded-lg bg-brand-500 flex items-center justify-center">
+              <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+            </div>
+            <span class="text-white font-semibold text-lg">Internal Tool</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="/" class="text-gray-300 hover:text-white text-sm font-medium">Dashboard</a>
+            <span id="health-dot" class="h-2.5 w-2.5 rounded-full bg-gray-500" title="Checking..."></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <script>
+    fetch('/health').then(r=>r.json()).then(d=>{
+      const dot=document.getElementById('health-dot');
+      dot.className='h-2.5 w-2.5 rounded-full '+(d.ok?'bg-green-400':'bg-red-400');
+      dot.title=d.ok?'API healthy':'API error';
+    }).catch(()=>{
+      document.getElementById('health-dot').className='h-2.5 w-2.5 rounded-full bg-red-400';
+    });
+  </script>
+</body>
+</html>

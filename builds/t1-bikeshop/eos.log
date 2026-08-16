@@ -1,0 +1,22 @@
+
+=== EOS: web_application+bikeshop @mvp [GATE] ===
+[enforce]    must_have honored: True  must_not honored: True
+[policy-deps] generated routes require: auth_routes, jwt_manager, permissions, roles, session_manager, users (force-included)
+[resolve]    materialized -> builds/t1-bikeshop/app  (32 parts, 10 py deps, +DOMAIN.md, +LESSONS.md (19))
+[runtime]    bundled scrapyard/runtime (settings, database, lifespan, startup)
+[models]       [collision-safe] User table -> 'app_users' (avoids library-owned 'users'); route stays /users
+[frontend]   generated SPA -> frontend/index.html (served at /app)
+[wire]       wrote main.py (runtime.bootstrap: settings+db+lifecycle+routers+headers + auth + frontend)
+[report]     2 entities · 0 FK relationship(s) · 1 workflow(s) -> BUILD_REPORT.md + build_report.json
+[legal]      wrote PRIVACY_POLICY.md + TERMS_OF_SERVICE.md (templates — require legal review)
+[review]     validation pass + fitness: FIT
+[cost]       wrote COST.md (1 cost drivers)
+[ops-reason] External dependencies in play: db_session
+[verify]     => VERIFIED (9 behaviors proven, 0 failed)
+[metadata]   2 entities probed · 2 fully green (auth=session+admin) -> PROBE_METADATA.md + probe_metadata.json
+[workflows]  4 verified, 0 blocked (stubs), 0 failed
+[capabilities] wrote CAPABILITIES.md (endpoints + required config + honest fallbacks)
+[runnable]   PASS: generated eos app is runnable (boots from its own files, health, feature routes)
+
+=== DONE -> builds/t1-bikeshop/app ===
+  validation=WARN  fitness=FIT  impl_behavior_checks=passed  confidence=0.85  parts=25  must_have=ok  must_not=ok

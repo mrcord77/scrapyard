@@ -1,0 +1,197 @@
+{
+ "base": "http://127.0.0.1:8105",
+ "passed": 33,
+ "failed": 5,
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"I3M-HTca-7VsElijaU2mSCq-q0iOo-LItOXOLWu6Z5g\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjgxNSwiZXhwIjoxNzg2OTEzNzE1fQ.7ir7MEQq7H6fafCS3HnbU2HGgLOzE7hGcuRqTODaO7w\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI4MTUsImV4cCI6MTc4NzUxNzYxNX0.9fyK8-31bXDLCdaQjVdkpi7P"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"AqCY0sPVkgKCaoIVOt8t3fRkBO2LUv78nLehcaF3LSI\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjgxNSwiZXhwIjoxNzg2OTEzNzE1fQ.ZExnuVUDT02F11ybAdG0trBLIEug0WaIobFk66OmoAw\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI4MTUsImV4cCI6MTc4NzUxNzYxNX0.LBX2FKEWJcqCMAD-zJt3IUX4"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "5"
+  },
+  {
+   "name": "create /courses",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /modules",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /lessons",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /enrollments",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /progresses",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "read /courses/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /courses",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /courses",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /courses",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /modules/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /modules",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /modules",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /modules",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /lessons/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /lessons",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /lessons",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /lessons",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /enrollments/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /enrollments",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /enrollments",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /enrollments",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /progresses/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /progresses",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /progresses",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /progresses",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "update /courses/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"title\":\"smoke-title\",\"description\":\"smoke-description\",\"status\":null,\"price_cents\":1}"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422"
+  },
+  {
+   "name": "delete /courses/1",
+   "ok": true,
+   "detail": "204"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /accounts
+  [PASS] create /members
+  [PASS] create /plans
+  [PASS] create /invitations
+  [PASS] read /plans/1
+  [PASS] list /plans
+  [FAIL] ownership: B blocked from A's /plans -- 200
+  [FAIL] anon blocked /plans -- 200
+  [PASS] read /accounts/2
+  [PASS] list /accounts
+  [FAIL] ownership: B blocked from A's /accounts -- 200
+  [FAIL] anon blocked /accounts -- 200
+  [PASS] read /members/2
+  [PASS] list /members
+  [FAIL] ownership: B blocked from A's /members -- 200
+  [FAIL] anon blocked /members -- 200
+  [PASS] read /invitations/2
+  [PASS] list /invitations
+  [FAIL] ownership: B blocked from A's /invitations -- 200
+  [FAIL] anon blocked /invitations -- 200
+  [PASS] update /plans/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /plans/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 25/33 passed -> builds/c-saas/smoke_pg.json

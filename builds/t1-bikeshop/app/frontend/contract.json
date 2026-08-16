@@ -1,0 +1,181 @@
+{
+  "domain": "bikeshop",
+  "entities": [
+    {
+      "name": "User",
+      "plural": "users",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "RepairTicket",
+      "plural": "repair_tickets",
+      "owner": null,
+      "requires_auth": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "bike_model",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "parts_received",
+          "type": "bool",
+          "optional": true,
+          "input": "checkbox",
+          "encrypted": false
+        },
+        {
+          "name": "paid",
+          "type": "bool",
+          "optional": true,
+          "input": "checkbox",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "bike_model",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "parts_received",
+          "type": "bool",
+          "optional": true,
+          "input": "checkbox",
+          "encrypted": false
+        },
+        {
+          "name": "paid",
+          "type": "bool",
+          "optional": true,
+          "input": "checkbox",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/users"
+    },
+    {
+      "method": "POST",
+      "path": "/users"
+    },
+    {
+      "method": "GET",
+      "path": "/users/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/users/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/repair_tickets"
+    },
+    {
+      "method": "POST",
+      "path": "/repair_tickets"
+    },
+    {
+      "method": "GET",
+      "path": "/repair_tickets/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/repair_tickets/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/repair_tickets/{id_}"
+    }
+  ]
+}

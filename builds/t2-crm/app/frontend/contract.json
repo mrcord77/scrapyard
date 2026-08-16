@@ -1,0 +1,305 @@
+{
+  "domain": "ev_leads",
+  "entities": [
+    {
+      "name": "Lead",
+      "plural": "leads",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "source",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "phone",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "zip",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "intent",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "answers",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "estimate_lo",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "estimate_hi",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "message",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "score",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "verdict",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "flags",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "gaps",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "draft_reply",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "panel_risk",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "source",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "phone",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "zip",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "intent",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "answers",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "estimate_lo",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "estimate_hi",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "message",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "score",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "verdict",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "flags",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "gaps",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "draft_reply",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "panel_risk",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/leads"
+    },
+    {
+      "method": "POST",
+      "path": "/leads"
+    },
+    {
+      "method": "GET",
+      "path": "/leads/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/leads/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/leads/{id_}"
+    }
+  ]
+}

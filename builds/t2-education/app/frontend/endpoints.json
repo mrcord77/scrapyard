@@ -1,0 +1,118 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/courses"
+  },
+  {
+    "method": "POST",
+    "path": "/courses"
+  },
+  {
+    "method": "GET",
+    "path": "/courses/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/courses/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/courses/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/modules"
+  },
+  {
+    "method": "POST",
+    "path": "/modules"
+  },
+  {
+    "method": "GET",
+    "path": "/modules/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/modules/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/modules/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/lessons"
+  },
+  {
+    "method": "POST",
+    "path": "/lessons"
+  },
+  {
+    "method": "GET",
+    "path": "/lessons/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/lessons/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/lessons/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/enrollments"
+  },
+  {
+    "method": "POST",
+    "path": "/enrollments"
+  },
+  {
+    "method": "GET",
+    "path": "/enrollments/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/enrollments/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/enrollments/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/progresses"
+  },
+  {
+    "method": "POST",
+    "path": "/progresses"
+  },
+  {
+    "method": "GET",
+    "path": "/progresses/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/progresses/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/progresses/{id_}"
+  }
+]

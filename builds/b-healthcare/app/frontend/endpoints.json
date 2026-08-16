@@ -1,0 +1,98 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/patients"
+  },
+  {
+    "method": "POST",
+    "path": "/patients"
+  },
+  {
+    "method": "GET",
+    "path": "/patients/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/patients/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/patients/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/providers"
+  },
+  {
+    "method": "POST",
+    "path": "/providers"
+  },
+  {
+    "method": "GET",
+    "path": "/providers/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/providers/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/providers/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/appointments"
+  },
+  {
+    "method": "POST",
+    "path": "/appointments"
+  },
+  {
+    "method": "GET",
+    "path": "/appointments/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/appointments/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/appointments/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/encounters"
+  },
+  {
+    "method": "POST",
+    "path": "/encounters"
+  },
+  {
+    "method": "GET",
+    "path": "/encounters/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/encounters/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/encounters/{id_}"
+  }
+]

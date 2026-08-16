@@ -1,0 +1,98 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/projects"
+  },
+  {
+    "method": "POST",
+    "path": "/projects"
+  },
+  {
+    "method": "GET",
+    "path": "/projects/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/projects/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/projects/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/tasks"
+  },
+  {
+    "method": "POST",
+    "path": "/tasks"
+  },
+  {
+    "method": "GET",
+    "path": "/tasks/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/tasks/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/tasks/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/change_orders"
+  },
+  {
+    "method": "POST",
+    "path": "/change_orders"
+  },
+  {
+    "method": "GET",
+    "path": "/change_orders/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/change_orders/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/change_orders/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/documents"
+  },
+  {
+    "method": "POST",
+    "path": "/documents"
+  },
+  {
+    "method": "GET",
+    "path": "/documents/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/documents/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/documents/{id_}"
+  }
+]

@@ -1,0 +1,24 @@
+
+=== EOS: course_platform+education @mvp [GATE] ===
+[enforce]    must_have honored: True  must_not honored: True
+[policy-deps] generated routes require: auth_routes, jwt_manager, session_manager, users (force-included)
+[resolve]    materialized -> builds/t2-education/app  (52 parts, 12 py deps, +DOMAIN.md, +COMPOSITIONS.md (1), +LESSONS.md (20))
+[runtime]    bundled scrapyard/runtime (settings, database, lifespan, startup)
+[models]     generated 5 entities -> builds/t2-education/app\scrapyard\models/  (models, schemas, services, routes)  [security: moderate — 5/5 entities protected via 'moderate' tier defaults]: Course, Module, Lesson, Enrollment, Progress
+[frontend]   generated SPA -> frontend/index.html (served at /app)
+[wire]       wrote main.py (runtime.bootstrap: settings+db+lifecycle+routers+headers + auth + frontend)
+[closure]    +8 module(s) the graph missed: scrapyard.admin.audit_logs, scrapyard.api.domain_errors, scrapyard.authorization.permissions, scrapyard.authorization.roles, scrapyard.observability.metrics, scrapyard.security.crypto_agility, scrapyard.security.pq_signing, scrapyard.security.row_level_security
+[report]     5 entities · 5 FK relationship(s) · 0 workflow(s) -> BUILD_REPORT.md + build_report.json
+[legal]      wrote PRIVACY_POLICY.md + TERMS_OF_SERVICE.md (templates — require legal review)
+[review]     validation pass + fitness: FIT
+[cost]       wrote COST.md (3 cost drivers)
+[ops-reason] External dependencies in play: db_session, smtp_provider, stripe_api
+[verify]     => VERIFIED (20 behaviors proven, 0 failed)
+[metadata]   5 entities probed · 5 fully green (auth=session) -> PROBE_METADATA.md + probe_metadata.json
+[workflows]  4 verified, 0 blocked (stubs), 0 failed
+[capabilities] wrote CAPABILITIES.md (endpoints + required config + honest fallbacks)
+[runnable]   PASS: generated eos app is runnable (boots from its own files, health, feature routes)
+
+=== DONE -> builds/t2-education/app ===
+  validation=WARN  fitness=FIT  impl_behavior_checks=passed  confidence=0.8  parts=52  must_have=ok  must_not=ok
+  active lessons flag 1 missing mitigation(s): idempotency

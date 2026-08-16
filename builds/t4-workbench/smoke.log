@@ -1,0 +1,35 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /research_docs
+  [PASS] create /notes
+  [PASS] create /experiments
+  [FAIL] create /runs -- 409 {"detail":"experiment must be running or analyzing"}
+  [PASS] create /tags
+  [PASS] read /research_docs/1
+  [PASS] list /research_docs
+  [PASS] ownership: B blocked from A's /research_docs
+  [PASS] anon blocked /research_docs
+  [PASS] read /notes/1
+  [PASS] list /notes
+  [PASS] ownership: B blocked from A's /notes
+  [PASS] anon blocked /notes
+  [PASS] read /experiments/1
+  [PASS] list /experiments
+  [PASS] ownership: B blocked from A's /experiments
+  [PASS] anon blocked /experiments
+  [PASS] read /tags/1
+  [PASS] list /tags
+  [FAIL] ownership: B blocked from A's /tags -- 200
+  [PASS] anon blocked /tags
+  [PASS] update /research_docs/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /research_docs/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 32/34 passed -> builds/t4-workbench/smoke_results.json

@@ -1,0 +1,476 @@
+{
+  "domain": "tool_library",
+  "label": "Community Tool Library",
+  "data_sensitivity": "low",
+  "summary": {
+    "entities": 6,
+    "relationships_with_foreign_keys": 5,
+    "workflows": 4,
+    "entities_requiring_auth": 0,
+    "entities_owner_scoped": 0,
+    "entities_with_encrypted_fields": 0
+  },
+  "entities": [
+    {
+      "name": "Member",
+      "table": "members",
+      "security": {
+        "auth_required": false,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [],
+      "indexed_non_fk_ids": [],
+      "workflow": true,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Tool",
+      "table": "tools",
+      "security": {
+        "auth_required": false,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [],
+      "indexed_non_fk_ids": [],
+      "workflow": true,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Reservation",
+      "table": "reservations",
+      "security": {
+        "auth_required": false,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "member_id",
+          "references": "members"
+        },
+        {
+          "column": "tool_id",
+          "references": "tools"
+        }
+      ],
+      "indexed_non_fk_ids": [],
+      "workflow": true,
+      "reference_rules": {
+        "member_id": {
+          "entity": "Member",
+          "status_field": "status",
+          "allowed": [
+            "active"
+          ],
+          "error": "member must exist and be active"
+        },
+        "tool_id": {
+          "entity": "Tool",
+          "status_field": "status",
+          "allowed": [
+            "available"
+          ],
+          "error": "tool must exist and be available"
+        }
+      },
+      "no_overlap": {
+        "scope": "tool_id",
+        "start": "start_at",
+        "end": "end_at",
+        "active": [
+          "requested",
+          "approved",
+          "reserved",
+          "checked_out"
+        ],
+        "error": "tool already reserved for an overlapping period"
+      },
+      "cross_entity_guards": [
+        {
+          "ref": "tool_id",
+          "entity": "Tool",
+          "field": "status",
+          "in": [
+            "available",
+            "reserved"
+          ],
+          "error": "cannot check out: tool is not available"
+        },
+        {
+          "ref": "member_id",
+          "entity": "Member",
+          "field": "status",
+          "in": [
+            "active"
+          ],
+          "error": "cannot check out: member is not active"
+        }
+      ],
+      "transition_effects": {
+        "checked_out": [
+          {
+            "set_related": {
+              "ref": "tool_id",
+              "entity": "Tool",
+              "field": "status",
+              "value": "checked_out",
+              "guarded": true
+            }
+          }
+        ],
+        "returned": [
+          {
+            "set_related": {
+              "ref": "tool_id",
+              "entity": "Tool",
+              "field": "status",
+              "value": "available",
+              "guarded": true
+            }
+          }
+        ],
+        "returned_damaged": [
+          {
+            "set_related": {
+              "ref": "tool_id",
+              "entity": "Tool",
+              "field": "status",
+              "value": "maintenance",
+              "guarded": true
+            }
+          },
+          {
+            "create": {
+              "entity": "Incident",
+              "values": {
+                "tool_id": "$tool_id",
+                "reservation_id": "$id",
+                "note": "damaged on return"
+              }
+            }
+          },
+          {
+            "create": {
+              "entity": "MaintenanceRecord",
+              "values": {
+                "tool_id": "$tool_id",
+                "status": "open"
+              }
+            }
+          }
+        ]
+      },
+      "time_transitions": [
+        {
+          "from": "requested",
+          "to": "expired",
+          "when": "end_at"
+        },
+        {
+          "from": "approved",
+          "to": "expired",
+          "when": "end_at"
+        },
+        {
+          "from": "reserved",
+          "to": "expired",
+          "when": "end_at"
+        }
+      ]
+    },
+    {
+      "name": "Incident",
+      "table": "incidents",
+      "security": {
+        "auth_required": false,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "tool_id",
+          "references": "tools"
+        },
+        {
+          "column": "reservation_id",
+          "references": "reservations"
+        }
+      ],
+      "indexed_non_fk_ids": [],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "MaintenanceRecord",
+      "table": "maintenance_records",
+      "security": {
+        "auth_required": false,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "tool_id",
+          "references": "tools"
+        }
+      ],
+      "indexed_non_fk_ids": [],
+      "workflow": true,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {
+        "completed": [
+          {
+            "set_related": {
+              "ref": "tool_id",
+              "entity": "Tool",
+              "field": "status",
+              "value": "available",
+              "guarded": true
+            }
+          }
+        ]
+      },
+      "time_transitions": []
+    },
+    {
+      "name": "Tag",
+      "table": "tags",
+      "security": {
+        "auth_required": false,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [],
+      "indexed_non_fk_ids": [],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "reservations",
+      "column": "member_id",
+      "to_table": "members"
+    },
+    {
+      "from_table": "reservations",
+      "column": "tool_id",
+      "to_table": "tools"
+    },
+    {
+      "from_table": "incidents",
+      "column": "tool_id",
+      "to_table": "tools"
+    },
+    {
+      "from_table": "incidents",
+      "column": "reservation_id",
+      "to_table": "reservations"
+    },
+    {
+      "from_table": "maintenance_records",
+      "column": "tool_id",
+      "to_table": "tools"
+    }
+  ],
+  "many_to_many": [
+    {
+      "left": "Tool",
+      "right": "Tag",
+      "join_table": "tool_tags"
+    }
+  ],
+  "workflows": [
+    {
+      "entity": "Member",
+      "field": "status",
+      "initial": "active",
+      "states": [
+        "active",
+        "banned",
+        "expired",
+        "suspended"
+      ],
+      "transitions": {
+        "active": [
+          "suspended",
+          "expired",
+          "banned"
+        ],
+        "suspended": [
+          "active"
+        ],
+        "expired": [
+          "active"
+        ],
+        "banned": []
+      },
+      "guards": {}
+    },
+    {
+      "entity": "Tool",
+      "field": "status",
+      "initial": "available",
+      "states": [
+        "available",
+        "broken",
+        "checked_out",
+        "maintenance",
+        "reserved",
+        "retired"
+      ],
+      "transitions": {
+        "available": [
+          "reserved",
+          "checked_out",
+          "maintenance",
+          "broken",
+          "retired"
+        ],
+        "reserved": [
+          "available",
+          "checked_out"
+        ],
+        "checked_out": [
+          "available",
+          "maintenance",
+          "broken"
+        ],
+        "maintenance": [
+          "available",
+          "retired"
+        ],
+        "broken": [
+          "maintenance",
+          "retired"
+        ]
+      },
+      "guards": {}
+    },
+    {
+      "entity": "Reservation",
+      "field": "status",
+      "initial": "requested",
+      "states": [
+        "approved",
+        "cancelled",
+        "checked_out",
+        "denied",
+        "expired",
+        "requested",
+        "reserved",
+        "returned",
+        "returned_damaged"
+      ],
+      "transitions": {
+        "requested": [
+          "approved",
+          "cancelled",
+          "denied",
+          "expired"
+        ],
+        "approved": [
+          "reserved",
+          "cancelled",
+          "expired"
+        ],
+        "reserved": [
+          "checked_out",
+          "cancelled",
+          "expired"
+        ],
+        "checked_out": [
+          "returned",
+          "returned_damaged"
+        ],
+        "returned": [],
+        "returned_damaged": [],
+        "cancelled": [],
+        "denied": [],
+        "expired": []
+      },
+      "guards": {
+        "checked_out": [
+          {
+            "ref": "tool_id",
+            "entity": "Tool",
+            "field": "status",
+            "in": [
+              "available",
+              "reserved"
+            ],
+            "error": "cannot check out: tool is not available"
+          },
+          {
+            "ref": "member_id",
+            "entity": "Member",
+            "field": "status",
+            "in": [
+              "active"
+            ],
+            "error": "cannot check out: member is not active"
+          }
+        ]
+      }
+    },
+    {
+      "entity": "MaintenanceRecord",
+      "field": "status",
+      "initial": "open",
+      "states": [
+        "completed",
+        "open"
+      ],
+      "transitions": {
+        "open": [
+          "completed"
+        ],
+        "completed": []
+      },
+      "guards": {}
+    }
+  ],
+  "enforced_by_generation": [
+    "Per-entity tables with primary keys and Alembic-compatible models.",
+    "Client-supplied <entity>_id columns are real FOREIGN KEYs (+ index); orphaned references are rejected (409).",
+    "Server-set owner columns (user_id) are indexed; ownership is forced from the authenticated principal.",
+    "Declared state machines: only listed transitions are allowed; target-state guards must hold; violations return 409.",
+    "Auth / owner-scoping / field encryption / audit per the entity's data-sensitivity policy."
+  ],
+  "not_enforced": [
+    "many-to-many is now generated from a domain many_to_many declaration (join table with two CASCADE FKs + a uniqueness constraint, plus a link service and attach/detach/list routes) \u2014 proven by the many_to_many contract + HTTP e2e; still pending: relationships are otherwise inferred from <entity>_id naming (one-to-many / many-to-one), and richer declared relationship metadata (named roles, through-attributes on the join row) is not generated",
+    "still pending: guards now support same-row (field==value) AND cross-entity (related row status) checks; what remains is SIDE EFFECTS on transition (e.g. a damaged return auto-creating an incident + maintenance record and locking the tool), time-based transitions, and notifications"
+  ]
+}

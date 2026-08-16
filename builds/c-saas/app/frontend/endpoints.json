@@ -1,0 +1,98 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/accounts"
+  },
+  {
+    "method": "POST",
+    "path": "/accounts"
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/accounts/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/accounts/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/members"
+  },
+  {
+    "method": "POST",
+    "path": "/members"
+  },
+  {
+    "method": "GET",
+    "path": "/members/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/members/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/members/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/plans"
+  },
+  {
+    "method": "POST",
+    "path": "/plans"
+  },
+  {
+    "method": "GET",
+    "path": "/plans/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/plans/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/plans/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/invitations"
+  },
+  {
+    "method": "POST",
+    "path": "/invitations"
+  },
+  {
+    "method": "GET",
+    "path": "/invitations/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/invitations/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/invitations/{id_}"
+  }
+]

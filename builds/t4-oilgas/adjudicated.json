@@ -1,0 +1,206 @@
+{
+ "build": "t4-oilgas",
+ "raw": "29/33",
+ "true_failures": 0,
+ "failures": [],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"GUJhbUFqgYG_k0IcKFpkvsPK3B16kwPAvgQQNipjFDw\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM5MSwiZXhwIjoxNzg2OTE0MjkxfQ.tHAk5nzMKIEJlvxMx5OUFn6FH6j0IIFRXmZJVu0g3YA\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzOTEsImV4cCI6MTc4NzUxODE5MX0.PV4Qv6atHfQZX4B7oS3Q5-Ne",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"9tvnGAaO1GyZabfQKYUdME90VDeQbH7WS2R6vHmxE88\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM5MSwiZXhwIjoxNzg2OTE0MjkxfQ.qNVPqP6FgbU9R4DRr24PFlzi5Q_feGnI5v28NFDSK7A\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzOTEsImV4cCI6MTc4NzUxODE5MX0.KHehGwutxQqJlXZb7CvWVDpn",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "4",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /wells",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /leases",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /production_logs",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /work_orders",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /leases/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /leases",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /leases",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /leases",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /wells/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /wells",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /wells",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /wells",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /production_logs/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /production_logs",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /production_logs",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /production_logs",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /work_orders/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /work_orders",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /work_orders",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /work_orders",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "update /leases/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"name\":\"smoke-name\",\"operator\":\"smoke-operator\",\"county\":\"smoke-county\",\"state\":null}",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /leases/1",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

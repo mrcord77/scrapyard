@@ -34,6 +34,18 @@ def run(tool, *args):
     return r.returncode, (r.stdout + r.stderr).strip()
 
 
+def policy_label(p: dict) -> str:
+    """Human-readable security label for an entity's EFFECTIVE route policy.
+    Must never overstate: an empty policy is public and must say so."""
+    if p.get("requires_auth") and p.get("owner_field"):
+        return "auth + owner-scoped"
+    if p.get("write_role"):
+        return f"reads auth-only; writes require role '{p['write_role']}'"
+    if p.get("requires_auth"):
+        return "auth required (shared across users)"
+    return "PUBLIC — no auth (low-sensitivity tier)"
+
+
 def main(argv):
     out = argv[argv.index("--out") + 1] if "--out" in argv else None
     gate = "--gate" in argv
@@ -111,6 +123,12 @@ def main(argv):
         # the backend and UI are composed from the same entities/contract.
         if dobj.get("entities"):
             policy_caps |= {"auth_routes", "jwt_manager", "users", "session_manager"}
+        # privacy routes (/privacy/export + /privacy/delete-account) are generated
+        # whenever there are owner-scoped entities behind auth; they import the
+        # compliance parts at runtime, so those parts must ship with the app.
+        if any(p.get("owner_field") for p in eps.values()) and \
+           any(p.get("requires_auth") for p in eps.values()):
+            policy_caps |= {"account_deletion", "data_export"}
     include_caps = list(dict.fromkeys(list(must_have) + sorted(policy_caps)))
     if policy_caps:
         print(f"[policy-deps] generated routes require: {', '.join(sorted(policy_caps))} (force-included)")
@@ -140,7 +158,8 @@ def main(argv):
         safe_app = bool(plan["domain"]) and plan["domain"].get("data_sensitivity") in ("high", "regulated")
         # the generated app mounts auth + serves a frontend, so it needs the
         # library auth-principal ('users') and session tables created at boot.
-        sec_caps = sorted((policy_caps & {"audit_logs", "roles"}) | {"users", "session_manager"})
+        sec_caps = sorted((policy_caps & {"audit_logs", "roles", "account_deletion"})
+                          | {"users", "session_manager"})
 
         # generate the frontend from the SAME domain entities/contract as the backend
         run("gen_frontend.py", domain, os.path.join(out, "frontend"))
@@ -263,6 +282,15 @@ def main(argv):
         except Exception as _re:
             print(f"[report]     skipped ({_re!r})")
 
+    # deployment artifacts: the assemble (template) path always writes these; the
+    # EOS path must too, or "docker" resolves as a capability with no Dockerfile.
+    try:
+        from gen_deployment import write_deployment
+        dep = write_deployment(out)
+        print(f"[deploy]     wrote {', '.join(dep['written'])}")
+    except Exception as _de:
+        print(f"[deploy]     skipped ({_de!r})")
+
     # reasoning docs from the SAME enforced plan
     fr = RV.write_docs(plan, out, users)
     print(f"[review]     validation pass + fitness: {fr['verdict']}")
@@ -331,9 +359,13 @@ def main(argv):
         routes = ["`GET /healthz`, `GET /livez` — health/liveness"]
         if domain:
             routes.append("`POST /auth/register`, `POST /auth/login`, `POST /auth/logout`, `GET /auth/me`")
+            # Describe each entity's ACTUAL effective policy — never a blanket
+            # claim (a low-sensitivity domain generates public CRUD).
+            pol = _GM.effective_policies(ents, plan["domain"] or {})
             for e in ents:
                 pl = _GM._plural(e["name"])
-                routes.append(f"`GET|POST /{pl}`, `GET|PUT|DELETE /{pl}/{{id}}` — {e['name']} CRUD (auth + owner-scoped)")
+                label = policy_label(pol.get(e["name"], {}))
+                routes.append(f"`GET|POST /{pl}`, `GET|PUT|DELETE /{pl}/{{id}}` — {e['name']} CRUD ({label})")
             routes.append("`GET /app/` — generated single-page frontend")
         ENV = []
         ENV.append(("DATABASE_URL", "required (non-dev)", "Postgres/MySQL URL; dev falls back to local sqlite"))

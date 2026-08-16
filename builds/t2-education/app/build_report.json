@@ -1,0 +1,178 @@
+{
+  "domain": "education",
+  "label": "Learning / courses",
+  "data_sensitivity": "moderate",
+  "summary": {
+    "entities": 5,
+    "relationships_with_foreign_keys": 5,
+    "workflows": 0,
+    "entities_requiring_auth": 5,
+    "entities_owner_scoped": 0,
+    "entities_with_encrypted_fields": 0
+  },
+  "entities": [
+    {
+      "name": "Course",
+      "table": "courses",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [],
+      "indexed_non_fk_ids": [],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Module",
+      "table": "modules",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "course_id",
+          "references": "courses"
+        }
+      ],
+      "indexed_non_fk_ids": [],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Lesson",
+      "table": "lessons",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "module_id",
+          "references": "modules"
+        }
+      ],
+      "indexed_non_fk_ids": [
+        "media_id"
+      ],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Enrollment",
+      "table": "enrollments",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "course_id",
+          "references": "courses"
+        }
+      ],
+      "indexed_non_fk_ids": [
+        "user_id"
+      ],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Progress",
+      "table": "progresses",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "enrollment_id",
+          "references": "enrollments"
+        },
+        {
+          "column": "lesson_id",
+          "references": "lessons"
+        }
+      ],
+      "indexed_non_fk_ids": [],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "modules",
+      "column": "course_id",
+      "to_table": "courses"
+    },
+    {
+      "from_table": "lessons",
+      "column": "module_id",
+      "to_table": "modules"
+    },
+    {
+      "from_table": "enrollments",
+      "column": "course_id",
+      "to_table": "courses"
+    },
+    {
+      "from_table": "progresses",
+      "column": "enrollment_id",
+      "to_table": "enrollments"
+    },
+    {
+      "from_table": "progresses",
+      "column": "lesson_id",
+      "to_table": "lessons"
+    }
+  ],
+  "many_to_many": [],
+  "workflows": [],
+  "enforced_by_generation": [
+    "Per-entity tables with primary keys and Alembic-compatible models.",
+    "Client-supplied <entity>_id columns are real FOREIGN KEYs (+ index); orphaned references are rejected (409).",
+    "Server-set owner columns (user_id) are indexed; ownership is forced from the authenticated principal.",
+    "Declared state machines: only listed transitions are allowed; target-state guards must hold; violations return 409.",
+    "Auth / owner-scoping / field encryption / audit per the entity's data-sensitivity policy."
+  ],
+  "not_enforced": [
+    "many-to-many is now generated from a domain many_to_many declaration (join table with two CASCADE FKs + a uniqueness constraint, plus a link service and attach/detach/list routes) \u2014 proven by the many_to_many contract + HTTP e2e; still pending: relationships are otherwise inferred from <entity>_id naming (one-to-many / many-to-one), and richer declared relationship metadata (named roles, through-attributes on the join row) is not generated",
+    "still pending: guards now support same-row (field==value) AND cross-entity (related row status) checks; what remains is SIDE EFFECTS on transition (e.g. a damaged return auto-creating an incident + maintenance record and locking the tool), time-based transitions, and notifications"
+  ]
+}

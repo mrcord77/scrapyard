@@ -1,0 +1,52 @@
+ Image app-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 595B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 679B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 114B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a
+#5 resolve docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 877.68kB 0.1s done
+#6 DONE 0.1s
+
+#7 [5/6] COPY . .
+#7 CACHED
+
+#8 [2/6] WORKDIR /app
+#8 CACHED
+
+#9 [3/6] COPY requirements.txt .
+#9 CACHED
+
+#10 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#10 CACHED
+
+#11 [6/6] RUN useradd -m appuser && chown -R appuser /app
+#11 CACHED
+
+#12 exporting to image
+#12 exporting layers done
+#12 exporting manifest sha256:5570d46dfae4d81d8e8041c64ec414228c6ce5e3c8cee313b65e142f3549194e 0.0s done
+#12 exporting config sha256:0acf1c0bb462d5e1307545fcb866946e4ec94c0f0a0be84dcbe2a1cfc27d92a4 done
+#12 exporting attestation manifest sha256:8f91c520107642f4d7b078e504c2b5499f762eb1f903ddae45298d049ff0ae74 0.0s done
+#12 exporting manifest list sha256:0b1182a9cbbf13db136e8a19799e9b0d991c962e1ed285b05da945898fbbc32b 0.0s done
+#12 naming to docker.io/library/app-web:latest done
+#12 unpacking to docker.io/library/app-web:latest done
+#12 DONE 0.1s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image app-web Built 

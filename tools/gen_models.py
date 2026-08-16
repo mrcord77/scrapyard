@@ -127,7 +127,7 @@ def effective_policies(entities, domain) -> dict:
     declared = domain.get("sensitive_fields") or {}   # {EntityName: [field, ...]}
     eps = {}
     for e in entities:
-        fields = e.get("fields", [])
+        fields = norm_fields(e)  # tolerate shorthand string fields from raw domain specs
         ftypes = {f["name"]: f.get("type") for f in fields}
         has_uid = any(f["name"] == "user_id" for f in fields)
         declared_here = [f for f in (declared.get(e["name"]) or []) if ftypes.get(f) in ("str", "text")]
@@ -742,6 +742,9 @@ def gen_routes(entities, wire=False, safe=False, policies=None, links=None) -> s
     if owner_models and any_auth:
         L += [
             "# --- data subject rights (GDPR/CCPA: access, portability, erasure) ---",
+            "# Module-scope import so DeletionRecord registers on the ORM base BEFORE the",
+            "# boot-time create_all — a lazy in-route import would leave its table missing.",
+            "import scrapyard.compliance.account_deletion  # noqa: F401  (model registration)",
             '@router.get("/privacy/export")',
             "def privacy_export(db: Session = Depends(get_db), uid: int = Depends(current_user_id)):",
             '    """Export everything stored about the authenticated user (domain + identity)."""',
@@ -765,7 +768,9 @@ def gen_routes(entities, wire=False, safe=False, policies=None, links=None) -> s
             "    from . import privacy as _p",
             "    from scrapyard.compliance.account_deletion import delete_account as _delete_identity",
             "    domain = _p.delete_user_data(db, uid)   # domain tables (own ORM registry)",
-            "    identity = _delete_identity(db, uid)    # library identity tables + user row",
+            "    # confirm=True: without it delete_account is a SAFE-BY-DEFAULT dry run and",
+            "    # the user row + sessions would survive (deleted account could log back in).",
+            "    identity = _delete_identity(db, uid, confirm=True)  # library identity tables + user row",
             "    db.commit()",
             "    return {'deleted': True, 'domain': domain, 'identity': identity}", ""]
     # many-to-many link routes: attach (201, idempotent), detach (204), list linked

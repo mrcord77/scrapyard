@@ -1,0 +1,196 @@
+{
+  "entities": [
+    {
+      "collection": "/experiments",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/experiments",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/experiments/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/experiments/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/experiments/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/experiments/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/notes",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/notes",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/notes/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/notes/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/notes/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/research_docs",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/research_docs",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/research_docs/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/research_docs/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/research_docs/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/research_docs/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/runs",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/runs",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/runs/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/runs/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/runs/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/runs/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/tags",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/tags",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/tags/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/tags/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/tags/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session"
+}

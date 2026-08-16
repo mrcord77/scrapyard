@@ -1,0 +1,25 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /patients
+  [PASS] create /providers
+  [FAIL] create /encounters -- 409 {"detail":"constraint violation: a referenced record does not exist, or a uniqueness constraint failed"}
+  [PASS] read /patients/1
+  [PASS] list /patients
+  [PASS] ownership: B blocked from A's /patients
+  [PASS] anon blocked /patients
+  [PASS] read /providers/1
+  [PASS] list /providers
+  [PASS] ownership: B blocked from A's /providers
+  [PASS] anon blocked /providers
+  [PASS] update /patients/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /patients/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 23/24 passed -> builds/b-healthcare/smoke_results.json

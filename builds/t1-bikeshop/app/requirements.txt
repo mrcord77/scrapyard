@@ -1,0 +1,10 @@
+alembic
+bleach
+email-validator
+fastapi
+passlib[argon2]
+pydantic
+pydantic-settings
+pydantic[email]
+pyjwt
+sqlalchemy

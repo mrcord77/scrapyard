@@ -1,0 +1,17 @@
+alembic
+cryptography
+dilithium-py
+fastapi
+jinja2
+opentelemetry-sdk
+passlib[argon2]
+psycopg2-binary
+pydantic
+pydantic-settings
+pyjwt
+redis
+scrapyard.admin.audit_logs
+scrapyard.identity.users (default authorizer)
+sentry-sdk
+sqlalchemy
+uvicorn

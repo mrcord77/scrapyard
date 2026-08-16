@@ -1,0 +1,51 @@
+INFO:     Started server process [5964]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8106 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52793 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /openapi.json HTTP/1.1" 200 OK
+2026-08-16 13:40:21,576 INFO    scrapyard.identity.users: audit user.created user_id=1 {}
+INFO:     127.0.0.1:52794 - "POST /auth/register HTTP/1.1" 200 OK
+C:\Users\andre\AppData\Local\Programs\Python\Python312\Lib\site-packages\jwt\api_jwt.py:147: InsecureKeyLengthWarning: The HMAC key is 9 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2.
+  return self._jws.encode(
+2026-08-16 13:40:21,612 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=35335ec317be..
+2026-08-16 13:40:21,612 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=df96091564a5..
+INFO:     127.0.0.1:52794 - "POST /auth/login HTTP/1.1" 200 OK
+2026-08-16 13:40:21,658 INFO    scrapyard.identity.users: audit user.created user_id=2 {}
+INFO:     127.0.0.1:52795 - "POST /auth/register HTTP/1.1" 200 OK
+2026-08-16 13:40:21,692 INFO    scrapyard.identity.jwt_manager: token_issued subject=2 token=d61fcc949138..
+2026-08-16 13:40:21,692 INFO    scrapyard.identity.jwt_manager: token_issued subject=2 token=b9295236b773..
+INFO:     127.0.0.1:52795 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "POST /auth/register HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:52794 - "GET /auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "POST /listings HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:52794 - "POST /agents HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52794 - "POST /showings HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:52794 - "POST /inquiries HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:52794 - "POST /listings HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52794 - "POST /showings HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52794 - "POST /inquiries HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52794 - "GET /agents/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52795 - "GET /agents/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52796 - "GET /agents HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52794 - "GET /listings/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /listings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52795 - "GET /listings/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52796 - "GET /listings HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52794 - "GET /showings/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /showings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52795 - "GET /showings/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52796 - "GET /showings HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52794 - "GET /inquiries/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /inquiries HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52795 - "GET /inquiries/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52796 - "GET /inquiries HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52794 - "PUT /agents/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /agents/999999 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52794 - "POST /agents HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:52794 - "DELETE /agents/1 HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:52794 - "GET /agents/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52794 - "POST /auth/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /auth/me HTTP/1.1" 401 Unauthorized

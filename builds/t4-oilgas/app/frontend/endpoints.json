@@ -1,0 +1,98 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/wells"
+  },
+  {
+    "method": "POST",
+    "path": "/wells"
+  },
+  {
+    "method": "GET",
+    "path": "/wells/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/wells/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/wells/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/leases"
+  },
+  {
+    "method": "POST",
+    "path": "/leases"
+  },
+  {
+    "method": "GET",
+    "path": "/leases/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/leases/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/leases/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/production_logs"
+  },
+  {
+    "method": "POST",
+    "path": "/production_logs"
+  },
+  {
+    "method": "GET",
+    "path": "/production_logs/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/production_logs/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/production_logs/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/work_orders"
+  },
+  {
+    "method": "POST",
+    "path": "/work_orders"
+  },
+  {
+    "method": "GET",
+    "path": "/work_orders/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/work_orders/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/work_orders/{id_}"
+  }
+]

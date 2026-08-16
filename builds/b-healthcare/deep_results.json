@@ -1,0 +1,96 @@
+{
+ "passed": 18,
+ "failed": 0,
+ "checks": [
+  {
+   "name": "patient create",
+   "ok": true,
+   "detail": "{\"id\":1,\"user_id\":1,\"dob\":\"1980-01-02T00:00:00\",\"mrn\":\"MRN-SECRET-884213-ZQ\"}"
+  },
+  {
+   "name": "owner reads decrypted MRN",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "B blocked from A's patient",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "anon blocked",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "MRN encrypted at rest",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "MRN absent from logs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "audit rows exist",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "audit covers patient create",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "audit does not contain MRN",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "update+delete audited",
+   "ok": true,
+   "detail": "3 rows"
+  },
+  {
+   "name": "appointment create",
+   "ok": true,
+   "detail": "{\"id\":1,\"patient_id\":1,\"provider_id\":1,\"starts_at\":null,\"status\":null}"
+  },
+  {
+   "name": "export includes patient data",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "export redacts password hash",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "export redacts live session token",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "delete-account",
+   "ok": true,
+   "detail": "{\"deleted\":true,\"domain\":{\"patients\":1,\"providers\":1},\"identity\":{\"sessions\":1,\"users\":1}}"
+  },
+  {
+   "name": "session revoked",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "erased account cannot re-login",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "B unaffected",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

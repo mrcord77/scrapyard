@@ -1,0 +1,34 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /wells
+  [PASS] create /leases
+  [PASS] create /production_logs
+  [PASS] create /work_orders
+  [PASS] read /leases/1
+  [PASS] list /leases
+  [FAIL] ownership: B blocked from A's /leases -- 200
+  [PASS] anon blocked /leases
+  [PASS] read /wells/1
+  [PASS] list /wells
+  [FAIL] ownership: B blocked from A's /wells -- 200
+  [PASS] anon blocked /wells
+  [PASS] read /production_logs/1
+  [PASS] list /production_logs
+  [FAIL] ownership: B blocked from A's /production_logs -- 200
+  [PASS] anon blocked /production_logs
+  [PASS] read /work_orders/1
+  [PASS] list /work_orders
+  [FAIL] ownership: B blocked from A's /work_orders -- 200
+  [PASS] anon blocked /work_orders
+  [PASS] update /leases/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /leases/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 29/33 passed -> builds/t4-oilgas/smoke_results.json

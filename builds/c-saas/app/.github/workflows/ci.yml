@@ -1,0 +1,43 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: app
+          POSTGRES_DB: app
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U app -d app"
+          --health-interval 5s --health-timeout 3s --health-retries 12
+      redis:
+        image: redis:7
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 3s --health-retries 12
+    env:
+      PYTHONPATH: .
+      APP_ENV: development
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Smoke (boots + mounts routes)
+        run: python smoke_check.py
+      - name: Behavior (feature routes work)
+        run: python behavior_check.py
+      - name: Migrations apply on real Postgres
+        env:
+          DATABASE_URL: postgresql+psycopg2://app:app@localhost:5432/app
+        run: alembic upgrade head
+      - name: Build the production image
+        run: docker build -t app-image .

@@ -1,0 +1,20 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /users
+  [FAIL] create /repair_tickets -- 403 {"detail":"requires role: admin"}
+  [PASS] read /users/1
+  [PASS] list /users
+  [PASS] ownership n/a (public policy) /users
+  [PASS] anon read allowed by policy /users
+  [PASS] update /users/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /users/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 18/19 passed -> builds/t1-bikeshop/smoke_results.json

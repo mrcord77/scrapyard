@@ -1,0 +1,187 @@
+ Image app-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 595B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 679B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 114B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a
+#5 resolve docker.io/library/python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 756.39kB 0.1s done
+#6 DONE 0.1s
+
+#7 [2/6] WORKDIR /app
+#7 CACHED
+
+#8 [3/6] COPY requirements.txt .
+#8 DONE 0.0s
+
+#9 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#9 1.443 Collecting alembic (from -r requirements.txt (line 1))
+#9 1.505   Downloading alembic-1.19.1-py3-none-any.whl.metadata (7.3 kB)
+#9 1.524 Collecting bleach (from -r requirements.txt (line 2))
+#9 1.537   Downloading bleach-6.4.0-py3-none-any.whl.metadata (32 kB)
+#9 1.558 Collecting email-validator (from -r requirements.txt (line 3))
+#9 1.568   Downloading email_validator-2.3.0-py3-none-any.whl.metadata (26 kB)
+#9 1.616 Collecting fastapi (from -r requirements.txt (line 4))
+#9 1.626   Downloading fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+#9 1.652 Collecting httpx (from -r requirements.txt (line 5))
+#9 1.662   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#9 1.680 Collecting jinja2 (from -r requirements.txt (line 6))
+#9 1.689   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#9 1.742 Collecting psycopg2-binary (from -r requirements.txt (line 8))
+#9 1.752   Downloading psycopg2_binary-2.9.12-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+#9 1.847 Collecting pydantic (from -r requirements.txt (line 9))
+#9 1.859   Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+#9 1.897 Collecting pydantic-settings (from -r requirements.txt (line 10))
+#9 1.908   Downloading pydantic_settings-2.15.0-py3-none-any.whl.metadata (3.9 kB)
+#9 1.926 Collecting pyjwt (from -r requirements.txt (line 12))
+#9 1.937   Downloading pyjwt-2.13.0-py3-none-any.whl.metadata (3.4 kB)
+#9 1.966 Collecting redis (from -r requirements.txt (line 13))
+#9 1.978   Downloading redis-8.1.0-py3-none-any.whl.metadata (16 kB)
+#9 2.187 Collecting sqlalchemy (from -r requirements.txt (line 14))
+#9 2.198   Downloading sqlalchemy-2.0.52-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.6 kB)
+#9 2.258 Collecting stripe (from -r requirements.txt (line 15))
+#9 2.270   Downloading stripe-15.5.0-py3-none-any.whl.metadata (18 kB)
+#9 2.297 Collecting uvicorn (from -r requirements.txt (line 16))
+#9 2.307   Downloading uvicorn-0.52.3-py3-none-any.whl.metadata (6.6 kB)
+#9 2.321 Collecting passlib[argon2] (from -r requirements.txt (line 7))
+#9 2.331   Downloading passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+#9 2.356 Collecting Mako (from alembic->-r requirements.txt (line 1))
+#9 2.365   Downloading mako-1.4.1-py3-none-any.whl.metadata (2.9 kB)
+#9 2.383 Collecting typing-extensions>=4.12 (from alembic->-r requirements.txt (line 1))
+#9 2.395   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#9 2.406 Collecting webencodings (from bleach->-r requirements.txt (line 2))
+#9 2.416   Downloading webencodings-0.6.1-py3-none-any.whl.metadata (3.4 kB)
+#9 2.430 Collecting dnspython>=2.0.0 (from email-validator->-r requirements.txt (line 3))
+#9 2.440   Downloading dnspython-2.8.0-py3-none-any.whl.metadata (5.7 kB)
+#9 2.456 Collecting idna>=2.0.0 (from email-validator->-r requirements.txt (line 3))
+#9 2.466   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#9 2.494 Collecting starlette>=0.46.0 (from fastapi->-r requirements.txt (line 4))
+#9 2.504   Downloading starlette-1.6.0-py3-none-any.whl.metadata (6.4 kB)
+#9 2.523 Collecting typing-inspection>=0.4.2 (from fastapi->-r requirements.txt (line 4))
+#9 2.533   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#9 2.544 Collecting annotated-doc>=0.0.2 (from fastapi->-r requirements.txt (line 4))
+#9 2.553   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#9 2.571 Collecting anyio (from httpx->-r requirements.txt (line 5))
+#9 2.580   Downloading anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+#9 2.600 Collecting certifi (from httpx->-r requirements.txt (line 5))
+#9 2.610   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+#9 2.628 Collecting httpcore==1.* (from httpx->-r requirements.txt (line 5))
+#9 2.641   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#9 2.655 Collecting h11>=0.16 (from httpcore==1.*->httpx->-r requirements.txt (line 5))
+#9 2.664   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#9 2.706 Collecting MarkupSafe>=2.0 (from jinja2->-r requirements.txt (line 6))
+#9 2.716   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#9 2.735 Collecting argon2-cffi>=18.2.0 (from passlib[argon2]->-r requirements.txt (line 7))
+#9 2.746   Downloading argon2_cffi-25.1.0-py3-none-any.whl.metadata (4.1 kB)
+#9 2.759 Collecting annotated-types>=0.6.0 (from pydantic->-r requirements.txt (line 9))
+#9 2.771   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#9 3.284 Collecting pydantic-core==2.46.4 (from pydantic->-r requirements.txt (line 9))
+#9 3.295   Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#9 3.322 Collecting python-dotenv>=0.21.0 (from pydantic-settings->-r requirements.txt (line 10))
+#9 3.331   Downloading python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+#9 3.463 Collecting greenlet>=1 (from sqlalchemy->-r requirements.txt (line 14))
+#9 3.473   Downloading greenlet-3.5.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#9 3.501 Collecting requests>=2.20 (from stripe->-r requirements.txt (line 15))
+#9 3.511   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+#9 3.530 Collecting click>=7.0 (from uvicorn->-r requirements.txt (line 16))
+#9 3.539   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#9 3.554 Collecting argon2-cffi-bindings (from argon2-cffi>=18.2.0->passlib[argon2]->-r requirements.txt (line 7))
+#9 3.565   Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (7.4 kB)
+#9 3.656 Collecting charset_normalizer<4,>=2 (from requests>=2.20->stripe->-r requirements.txt (line 15))
+#9 3.668   Downloading charset_normalizer-3.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (45 kB)
+#9 3.696 Collecting urllib3<3,>=1.26 (from requests>=2.20->stripe->-r requirements.txt (line 15))
+#9 3.706   Downloading urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+#9 3.802 Collecting cffi>=1.0.1 (from argon2-cffi-bindings->argon2-cffi>=18.2.0->passlib[argon2]->-r requirements.txt (line 7))
+#9 3.811   Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+#9 3.824 Collecting pycparser (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi>=18.2.0->passlib[argon2]->-r requirements.txt (line 7))
+#9 3.834   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#9 3.846 Downloading alembic-1.19.1-py3-none-any.whl (265 kB)
+#9 3.894 Downloading bleach-6.4.0-py3-none-any.whl (165 kB)
+#9 3.927 Downloading email_validator-2.3.0-py3-none-any.whl (35 kB)
+#9 3.942 Downloading fastapi-0.141.1-py3-none-any.whl (131 kB)
+#9 3.971 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#9 3.991 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#9 4.013 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#9 4.042 Downloading psycopg2_binary-2.9.12-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.3 MB)
+#9 4.750    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 6.0 MB/s eta 0:00:00
+#9 4.760 Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+#9 4.838 Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#9 5.161    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 6.5 MB/s eta 0:00:00
+#9 5.173 Downloading pydantic_settings-2.15.0-py3-none-any.whl (69 kB)
+#9 5.195 Downloading pyjwt-2.13.0-py3-none-any.whl (31 kB)
+#9 5.209 Downloading redis-8.1.0-py3-none-any.whl (560 kB)
+#9 5.299    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 560.6/560.6 kB 7.4 MB/s eta 0:00:00
+#9 5.309 Downloading sqlalchemy-2.0.52-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+#9 5.902    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 5.7 MB/s eta 0:00:00
+#9 5.911 Downloading stripe-15.5.0-py3-none-any.whl (2.2 MB)
+#9 6.242    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 6.7 MB/s eta 0:00:00
+#9 6.253 Downloading uvicorn-0.52.3-py3-none-any.whl (79 kB)
+#9 6.277 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#9 6.289 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#9 6.300 Downloading argon2_cffi-25.1.0-py3-none-any.whl (14 kB)
+#9 6.313 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#9 6.339 Downloading dnspython-2.8.0-py3-none-any.whl (331 kB)
+#9 6.406 Downloading greenlet-3.5.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+#9 6.510    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.4/621.4 kB 5.7 MB/s eta 0:00:00
+#9 6.521 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#9 6.539 Downloading idna-3.18-py3-none-any.whl (65 kB)
+#9 6.556 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#9 6.570 Downloading python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+#9 6.581 Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+#9 6.603 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#9 6.634 Downloading starlette-1.6.0-py3-none-any.whl (75 kB)
+#9 6.656 Downloading anyio-4.14.2-py3-none-any.whl (125 kB)
+#9 6.683 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#9 6.701 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#9 6.713 Downloading mako-1.4.1-py3-none-any.whl (80 kB)
+#9 6.736 Downloading passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+#9 6.815    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 525.6/525.6 kB 7.1 MB/s eta 0:00:00
+#9 6.825 Downloading webencodings-0.6.1-py3-none-any.whl (8.7 kB)
+#9 6.836 Downloading charset_normalizer-3.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (248 kB)
+#9 6.881 Downloading urllib3-2.7.0-py3-none-any.whl (131 kB)
+#9 6.919 Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (87 kB)
+#9 6.940 Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+#9 6.991 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#9 7.068 Installing collected packages: passlib, webencodings, urllib3, typing-extensions, redis, python-dotenv, pyjwt, pycparser, psycopg2-binary, MarkupSafe, idna, h11, greenlet, dnspython, click, charset_normalizer, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, sqlalchemy, requests, pydantic-core, Mako, jinja2, httpcore, email-validator, cffi, bleach, anyio, stripe, starlette, pydantic, httpx, argon2-cffi-bindings, alembic, pydantic-settings, fastapi, argon2-cffi
+#9 9.872 Successfully installed Mako-1.4.1 MarkupSafe-3.0.3 alembic-1.19.1 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.14.2 argon2-cffi-25.1.0 argon2-cffi-bindings-25.1.0 bleach-6.4.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 click-8.4.2 dnspython-2.8.0 email-validator-2.3.0 fastapi-0.141.1 greenlet-3.5.5 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.18 jinja2-3.1.6 passlib-1.7.4 psycopg2-binary-2.9.12 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 pydantic-settings-2.15.0 pyjwt-2.13.0 python-dotenv-1.2.3 redis-8.1.0 requests-2.34.2 sqlalchemy-2.0.52 starlette-1.6.0 stripe-15.5.0 typing-extensions-4.16.0 typing-inspection-0.4.4 urllib3-2.7.0 uvicorn-0.52.3 webencodings-0.6.1
+#9 9.872 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#9 9.941 
+#9 9.941 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+#9 9.941 [notice] To update, run: pip install --upgrade pip
+#9 DONE 10.2s
+
+#10 [5/6] COPY . .
+#10 DONE 0.1s
+
+#11 [6/6] RUN useradd -m appuser && chown -R appuser /app
+#11 DONE 0.8s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 2.0s done
+#12 exporting manifest sha256:33855297638e7bfa7ec7e8faa72f9ca1660d646a77c5864b58adbd5a96d6a9fe 0.0s done
+#12 exporting config sha256:e02f74b510de8786b6b3ad0c92c26d8ad26bd4d723e78cc674bf5cb4c4aa54ef 0.0s done
+#12 exporting attestation manifest sha256:74416167a80544ae46e3ab48596f2f2d40875b5c5f92275b9b4d579d8100df2d 0.0s done
+#12 exporting manifest list sha256:364f6d2cfc674992bb88f626f66dfa33e6d9d68296518d7c5cc10d6aa2d0faf2 done
+#12 naming to docker.io/library/app-web:latest done
+#12 unpacking to docker.io/library/app-web:latest
+#12 unpacking to docker.io/library/app-web:latest 1.1s done
+#12 DONE 3.2s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image app-web Built 

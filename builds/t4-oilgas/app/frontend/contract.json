@@ -1,0 +1,409 @@
+{
+  "domain": "oil_and_gas",
+  "entities": [
+    {
+      "name": "Well",
+      "plural": "wells",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "lease_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "location",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "lease_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "location",
+          "type": "json",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Lease",
+      "plural": "leases",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "operator",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "county",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "state",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "operator",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "county",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "state",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "ProductionLog",
+      "plural": "production_logs",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "well_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "date",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "oil_bbl",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "gas_mcf",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "water_bbl",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "well_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "date",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "oil_bbl",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "gas_mcf",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "water_bbl",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "WorkOrder",
+      "plural": "work_orders",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "well_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "scheduled_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "well_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "scheduled_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/wells"
+    },
+    {
+      "method": "POST",
+      "path": "/wells"
+    },
+    {
+      "method": "GET",
+      "path": "/wells/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/wells/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/wells/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/leases"
+    },
+    {
+      "method": "POST",
+      "path": "/leases"
+    },
+    {
+      "method": "GET",
+      "path": "/leases/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/leases/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/leases/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/production_logs"
+    },
+    {
+      "method": "POST",
+      "path": "/production_logs"
+    },
+    {
+      "method": "GET",
+      "path": "/production_logs/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/production_logs/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/production_logs/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/work_orders"
+    },
+    {
+      "method": "POST",
+      "path": "/work_orders"
+    },
+    {
+      "method": "GET",
+      "path": "/work_orders/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/work_orders/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/work_orders/{id_}"
+    }
+  ]
+}

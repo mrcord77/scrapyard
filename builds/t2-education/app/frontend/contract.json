@@ -1,0 +1,474 @@
+{
+  "domain": "education",
+  "entities": [
+    {
+      "name": "Course",
+      "plural": "courses",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "price_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "price_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Module",
+      "plural": "modules",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "course_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "order",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "course_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "order",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Lesson",
+      "plural": "lessons",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "module_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "media_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "order",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "module_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": false
+        },
+        {
+          "name": "media_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "order",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Enrollment",
+      "plural": "enrollments",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "course_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "enrolled_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "course_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "enrolled_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Progress",
+      "plural": "progresses",
+      "owner": null,
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "enrollment_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "lesson_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "completed_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "enrollment_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "lesson_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "completed_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/courses"
+    },
+    {
+      "method": "POST",
+      "path": "/courses"
+    },
+    {
+      "method": "GET",
+      "path": "/courses/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/courses/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/courses/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/modules"
+    },
+    {
+      "method": "POST",
+      "path": "/modules"
+    },
+    {
+      "method": "GET",
+      "path": "/modules/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/modules/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/modules/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/lessons"
+    },
+    {
+      "method": "POST",
+      "path": "/lessons"
+    },
+    {
+      "method": "GET",
+      "path": "/lessons/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/lessons/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/lessons/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/enrollments"
+    },
+    {
+      "method": "POST",
+      "path": "/enrollments"
+    },
+    {
+      "method": "GET",
+      "path": "/enrollments/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/enrollments/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/enrollments/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/progresses"
+    },
+    {
+      "method": "POST",
+      "path": "/progresses"
+    },
+    {
+      "method": "GET",
+      "path": "/progresses/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/progresses/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/progresses/{id_}"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+ "passed": 22,
+ "failed": 0,
+ "checks": [
+  {
+   "name": "journal create",
+   "ok": true,
+   "detail": "{\"id\":1,\"user_id\":1,\"body\":\"relapsed-thought-XYZZY-7741 about a private meeting\",\"mood\":\"fragile\",\"created_at\":\"2026-08-16T20:47:37\",\"private\":false}"
+  },
+  {
+   "name": "journal private from B",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "journal readable by owner (decrypted)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "journal body encrypted at rest",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "mood encrypted at rest",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "journal body absent from logs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "export endpoint",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "export contains journal",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "streaming export",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "audit table exists",
+   "ok": true,
+   "detail": "['app_users', 'memberships', 'posts', 'sponsors', 'meetings', 'chips', 'journal_entries', 'milestones', 'attendances', 'audit_logs', 'sessions', 'users_users', 'account_deletion_deleted_accounts']"
+  },
+  {
+   "name": "audit rows recorded",
+   "ok": true,
+   "detail": "1 rows"
+  },
+  {
+   "name": "audit mentions journal create",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "audit does not leak journal body",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "meeting create",
+   "ok": true,
+   "detail": "{\"id\":1,\"title\":null,\"kind\":null,\"schedule\":{\"day\":\"sun\",\"time\":\"8am\"},\"location_or_url\":null,\"tags\":{}}"
+  },
+  {
+   "name": "attendance log",
+   "ok": true,
+   "detail": "{\"id\":1,\"user_id\":1,\"meeting_id\":1,\"attended_on\":null}"
+  },
+  {
+   "name": "chip create",
+   "ok": true,
+   "detail": "{\"id\":1,\"user_id\":1,\"milestone_days\":null,\"awarded_on\":null}"
+  },
+  {
+   "name": "milestone create",
+   "ok": true,
+   "detail": "{\"id\":1,\"user_id\":1,\"kind\":\"30 days\",\"reached_on\":null}"
+  },
+  {
+   "name": "delete-account",
+   "ok": true,
+   "detail": "200 {\"deleted\":true,\"domain\":{\"memberships\":0,\"posts\":0,\"attendances\":1,\"chips\":1,\"journal_entries\":1,\"milestones\":1},\"identity\":{\"sessions\":1,\"users\":1}}"
+  },
+  {
+   "name": "A session revoked after deletion",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "A's encrypted rows erased",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "B's journal untouched",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "deleted account cannot log in",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}

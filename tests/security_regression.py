@@ -100,6 +100,43 @@ def ast_exploit():
             assert flagcls.invoked is False, f"{mod}: a dunder fired on the hostile {label} object"
 check("AST evaluators reject hostile objects (6)", ast_exploit)
 
+# 8. DSAR export must not leak credentials (password hash / live session token).
+# (2026-08-16 factory campaign: /privacy/export contained the argon2 hash AND
+# the caller's active plaintext session token.)
+def export_leak_exploit():
+    # subprocess: the part selftest asserts hash+token redaction; an in-process
+    # run would collide with other tests on the shared declarative registry.
+    import subprocess
+    p = subprocess.run([sys.executable, "-m", "scrapyard.compliance.data_export"],
+                       capture_output=True, text=True,
+                       cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    assert p.returncode == 0, f"data_export selftest failed: {p.stderr[-400:]}"
+    assert "passed" in p.stdout
+check("DSAR export credential leak", export_leak_exploit)
+
+# 7. Generated CAPABILITIES.md must not overstate route security.
+# (2026-08-16 factory campaign: low-sensitivity builds shipped public CRUD
+# while CAPABILITIES.md claimed "auth + owner-scoped" on every entity.)
+def caps_claim_exploit():
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "tools"))
+    import eos, gen_models
+    ents = [{"name": "Widget", "fields": [{"name": "id"}, {"name": "name", "type": "str"}]}]
+    low = gen_models.effective_policies(ents, {"data_sensitivity": "low"})
+    lab = eos.policy_label(low["Widget"])
+    assert "PUBLIC" in lab and "owner-scoped" not in lab, \
+        f"low-sensitivity label overstates security: {lab!r}"
+    high = gen_models.effective_policies(
+        ents + [{"name": "Note", "fields": [{"name": "id"}, {"name": "user_id"},
+                                            {"name": "body", "type": "str"}]}],
+        {"data_sensitivity": "high"})
+    lab_h = eos.policy_label(high["Note"])
+    assert "owner-scoped" in lab_h, f"high-sensitivity owner entity mislabeled: {lab_h!r}"
+    # shorthand string fields (e.g. bikeshop's "fields": ["id", "email"]) must not crash
+    short = gen_models.effective_policies(
+        [{"name": "User", "fields": ["id", "email"]}], {"data_sensitivity": "low"})
+    assert "PUBLIC" in eos.policy_label(short["User"])
+check("CAPABILITIES.md security-claim accuracy", caps_claim_exploit)
+
 print(f"{'FINDING':<42} VERDICT")
 print("-" * 70)
 open_count = 0

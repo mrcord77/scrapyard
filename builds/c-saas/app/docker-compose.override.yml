@@ -1,0 +1,8 @@
+# Campaign override: dev posture on real Postgres+Redis (prod requires citadel
+# crypto custody + SMTP + LLM keys, unavailable in this environment by design).
+services:
+  web:
+    environment:
+      APP_ENV: development
+      RATE_LIMIT_BACKEND: redis
+      CACHE_BACKEND: redis

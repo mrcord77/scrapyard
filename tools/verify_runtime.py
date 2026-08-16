@@ -502,6 +502,24 @@ with TestClient(app) as c:
         res["probed_entity"] = ent["name"]
     else:
         res["anon_blocked"] = res["create_ok"] = res["list_ok"] = res["get_ok"] = res["delete_ok"] = False
+    # 3) right-to-erasure must be REAL: after POST /privacy/delete-account the
+    # identity is gone (stale session 401, re-login 401) and bystanders keep
+    # their data. Regression for the confirm=True dry-run bug (2026-08-16).
+    if "/privacy/delete-account" in mounted and res.get("auth_flow"):
+        c.post("/auth/register", json={"email": "bystander@scrapyard-fs.com", "password": pw})
+        b_lr = c.post("/auth/login", json={"email": "bystander@scrapyard-fs.com", "password": pw})
+        BH = {"X-Session": b_lr.json().get("session", "")}
+        b_rid = None
+        if ent:
+            b_cr = c.post(f"/{ent['plural']}", json=payload, headers=BH)
+            b_rid = b_cr.json().get("id") if b_cr.status_code == 201 else None
+        dr = c.post("/privacy/delete-account", headers=H)
+        res["erasure_accepted"] = dr.status_code == 200
+        res["erasure_session_revoked"] = c.get("/auth/me", headers=H).status_code == 401
+        relog = c.post("/auth/login", json={"email": "fsprobe@scrapyard-fs.com", "password": pw})
+        res["erasure_relogin_blocked"] = relog.status_code == 401
+        res["erasure_bystander_intact"] = (b_rid is None) or \
+            c.get(f"/{ent['plural']}/{b_rid}", headers=BH).status_code == 200
 print("FULLSTACK_RESULT=" + json.dumps(res))
 '''
 
@@ -533,7 +551,8 @@ def run_fullstack(argv: list[str]) -> int:
     line = next((l for l in p.stdout.splitlines() if l.startswith("FULLSTACK_RESULT=")), None)
     if not line:
         print("  [FAIL] fullstack probe did not complete:")
-        print("   " + (p.stderr.strip().splitlines()[-1] if p.stderr.strip() else "no output"))
+        for l in (p.stderr.strip().splitlines()[-25:] if p.stderr.strip() else ["no output"]):
+            print("   " + l)
         return 1
     res = json.loads(line.split("=", 1)[1])
     ent = res.get("probed_entity", "?")
@@ -548,6 +567,16 @@ def run_fullstack(argv: list[str]) -> int:
         ("get_ok", res.get("get_ok"), f"GET {ent}/id -> 200"),
         ("delete_ok", res.get("delete_ok"), f"DELETE {ent}/id -> 204"),
     ]
+    if "erasure_accepted" in res:
+        checks += [
+            ("erasure_accepted", res.get("erasure_accepted"), "POST /privacy/delete-account -> 200"),
+            ("erasure_session_revoked", res.get("erasure_session_revoked"),
+             "stale session rejected after erasure"),
+            ("erasure_relogin_blocked", res.get("erasure_relogin_blocked"),
+             "erased account cannot log back in"),
+            ("erasure_bystander_intact", res.get("erasure_bystander_intact"),
+             "other users' data untouched by erasure"),
+        ]
     failed = [n for n, ok, _ in checks if not ok]
     for n, ok, d in checks:
         print(f"  [{'PASS' if ok else 'FAIL'}] {n:18} {d}")

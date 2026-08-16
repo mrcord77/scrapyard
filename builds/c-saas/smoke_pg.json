@@ -1,0 +1,172 @@
+{
+ "base": "http://127.0.0.1:8000",
+ "passed": 25,
+ "failed": 8,
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":26.7,\"checks\":{}}"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"h0Wj9-RQfjery_v5u50k6csm1Jxw5acDWyMMGV8M67o\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxNDQzMCwiZXhwIjoxNzg2OTE1MzMwfQ.SYKuNrH1KKenZ4EHImPr7dS3Z9eUH5NceXLusdbYNfI\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTQ0MzAsImV4cCI6MTc4NzUxOTIzMH0.wsb8qosi4Xku1TFSVhJyZH-V"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"eYwfGgEGJEo8dU77a8fyVi39W5f3daTqbTPYmv1fny4\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxNDQzMCwiZXhwIjoxNzg2OTE1MzMwfQ.o-_kGaGoKCYUwgWcaaa7w15ZyW-ZLEomMUWx-ct7cd0\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTQ0MzAsImV4cCI6MTc4NzUxOTIzMH0.8Ona6N9nabBwpTt1v9zG-Fmp"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "4"
+  },
+  {
+   "name": "create /accounts",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}"
+  },
+  {
+   "name": "create /members",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}"
+  },
+  {
+   "name": "create /plans",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /invitations",
+   "ok": true,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}"
+  },
+  {
+   "name": "read /plans/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /plans",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /plans",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /plans",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /accounts/2",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /accounts",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /accounts",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /accounts",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /members/2",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /members",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /members",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /members",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /invitations/2",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /invitations",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /invitations",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /invitations",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "update /plans/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"name\":\"smoke-name\",\"price_cents\":1,\"interval\":\"smoke-interval\",\"entitlements\":{}}"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422"
+  },
+  {
+   "name": "delete /plans/1",
+   "ok": true,
+   "detail": "204"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}

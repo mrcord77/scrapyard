@@ -1,0 +1,138 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/members"
+  },
+  {
+    "method": "POST",
+    "path": "/members"
+  },
+  {
+    "method": "GET",
+    "path": "/members/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/members/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/members/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/tools"
+  },
+  {
+    "method": "POST",
+    "path": "/tools"
+  },
+  {
+    "method": "GET",
+    "path": "/tools/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/tools/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/tools/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/reservations"
+  },
+  {
+    "method": "POST",
+    "path": "/reservations"
+  },
+  {
+    "method": "GET",
+    "path": "/reservations/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/reservations/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/reservations/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/incidents"
+  },
+  {
+    "method": "POST",
+    "path": "/incidents"
+  },
+  {
+    "method": "GET",
+    "path": "/incidents/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/incidents/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/incidents/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/maintenance_records"
+  },
+  {
+    "method": "POST",
+    "path": "/maintenance_records"
+  },
+  {
+    "method": "GET",
+    "path": "/maintenance_records/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/maintenance_records/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/maintenance_records/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/tags"
+  },
+  {
+    "method": "POST",
+    "path": "/tags"
+  },
+  {
+    "method": "GET",
+    "path": "/tags/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/tags/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/tags/{id_}"
+  }
+]

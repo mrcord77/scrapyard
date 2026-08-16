@@ -1,0 +1,77 @@
+{
+  "name": "task_tracker",
+  "label": "Personal Task Tracker",
+  "terminology": {},
+  "data_sensitivity": "moderate",
+  "route_policies": {
+    "Task": {"requires_auth": true, "owner_field": "user_id"},
+    "Project": {"requires_auth": true, "owner_field": "user_id"}
+  },
+  "entities": [
+    {
+      "name": "Project",
+      "fields": [
+        {"name": "id"},
+        {"name": "user_id"},
+        {"name": "name", "type": "str"},
+        {"name": "status", "type": "str"}
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "active",
+        "transitions": {
+          "active": ["archived"],
+          "archived": ["active"]
+        }
+      }
+    },
+    {
+      "name": "Task",
+      "fields": [
+        {"name": "id"},
+        {"name": "user_id"},
+        {"name": "project_id"},
+        {"name": "title", "type": "str"},
+        {"name": "notes", "type": "str"},
+        {"name": "priority", "type": "str"},
+        {"name": "due_at", "type": "int"},
+        {"name": "status", "type": "str"}
+      ],
+      "reference_rules": {
+        "project_id": {
+          "entity": "Project",
+          "status_field": "status",
+          "allowed": ["active"],
+          "error": "project must exist and be active"
+        }
+      },
+      "state_machine": {
+        "field": "status",
+        "initial": "todo",
+        "transitions": {
+          "todo": ["doing", "cancelled"],
+          "doing": ["todo", "blocked", "done", "cancelled"],
+          "blocked": ["doing", "cancelled"],
+          "done": [],
+          "cancelled": ["todo"]
+        }
+      }
+    },
+    {
+      "name": "Label",
+      "fields": [
+        {"name": "id"},
+        {"name": "name", "type": "str"}
+      ]
+    }
+  ],
+  "many_to_many": [
+    {"left": "Task", "right": "Label"}
+  ],
+  "workflows": [
+    "create project -> add tasks -> todo -> doing -> done; blocked tasks resume to doing; cancelled tasks can be reopened"
+  ],
+  "permissions": [],
+  "reports": [],
+  "capability_hints": []
+}

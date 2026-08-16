@@ -1,0 +1,9 @@
+INFO:     Started server process [27108]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8113 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57781 - "GET /app/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57782 - "GET /app/assets/index-CK38YIgG.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51407 - "GET /assets/index-CK38YIgG.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54765 - "GET /app/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54766 - "GET /app/assets/index-CK38YIgG.js HTTP/1.1" 200 OK

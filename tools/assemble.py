@@ -63,6 +63,22 @@ def assemble_parts(part_import_paths, out: str, *, name: str, description: str =
     frontend deps (react, etc.) are listed separately in START.md.
     """
     NON_PIP = {"react", "react-dom", "next", "tailwindcss", "vite"}
+    # import-name -> pip-name for modules parts actually import at module scope.
+    # Declared metadata deps are trusted but INCOMPLETE in practice (2026-08-16
+    # audit: 197/582 parts import third-party modules they never declare — an
+    # app only booted because some OTHER part declared the package). The writer
+    # closes the gap by scanning the copied sources.
+    IMPORT_TO_PIP = {
+        "httpx": "httpx", "pydantic": "pydantic", "pydantic_core": "pydantic",
+        "sqlalchemy": "sqlalchemy", "fastapi": "fastapi", "starlette": "fastapi",
+        "jinja2": "jinja2", "redis": "redis", "stripe": "stripe", "jwt": "pyjwt",
+        "passlib": "passlib[argon2]", "argon2": "argon2-cffi", "bleach": "bleach",
+        "alembic": "alembic", "yaml": "pyyaml", "cryptography": "cryptography",
+        "psycopg2": "psycopg2-binary", "email_validator": "email-validator",
+        "dilithium_py": "dilithium-py", "kyber_py": "kyber-py", "uvicorn": "uvicorn",
+        "sentry_sdk": "sentry-sdk", "authlib": "authlib", "joserfc": "joserfc",
+        "markdown": "markdown", "multipart": "python-multipart",
+    }
     by_ip = index_by_import(load_catalog())
     os.makedirs(os.path.join(out, "scrapyard"), exist_ok=True)
     shutil.copy(os.path.join(PKG, "__init__.py"), os.path.join(out, "scrapyard", "__init__.py"))
@@ -84,8 +100,36 @@ def assemble_parts(part_import_paths, out: str, *, name: str, description: str =
             shutil.copy(li, os.path.join(ldir, "__init__.py"))
         shutil.copy(src, os.path.join(ldir, os.path.basename(src)))
         for d in p.get("dependencies", []):
+            if d.startswith("scrapyard."):
+                continue  # internal module, not a pip package (closure copies the file)
             (js_deps if d in NON_PIP else deps).add(d)
         copied.append(ip)
+    # close the declared-vs-actual gap: scan copied sources for module-level
+    # third-party imports and union the known pip names into requirements.
+    import ast as _ast
+    import sys as _sys
+    _stdlib = set(_sys.stdlib_module_names)
+    for dirpath, _, files in os.walk(os.path.join(out, "scrapyard")):
+        for fn in files:
+            if not fn.endswith(".py"):
+                continue
+            try:
+                tree = _ast.parse(open(os.path.join(dirpath, fn), encoding="utf-8",
+                                       errors="ignore").read())
+            except SyntaxError:
+                continue
+            for node in tree.body:
+                mods = []
+                if isinstance(node, _ast.Import):
+                    mods = [a.name.split(".")[0] for a in node.names]
+                elif isinstance(node, _ast.ImportFrom) and node.module and node.level == 0:
+                    mods = [node.module.split(".")[0]]
+                for m in mods:
+                    if m in _stdlib or m == "scrapyard":
+                        continue
+                    pip = IMPORT_TO_PIP.get(m)
+                    if pip:
+                        deps.add(pip)
     with open(os.path.join(out, "requirements.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(sorted(deps)) + ("\n" if deps else ""))
     with open(os.path.join(out, "START.md"), "w", encoding="utf-8") as f:

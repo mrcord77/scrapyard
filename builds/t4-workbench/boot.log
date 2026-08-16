@@ -1,0 +1,30 @@
+INFO:     Started server process [10732]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8115 (Press CTRL+C to quit)
+2026-08-16 13:56:15,318 INFO    scrapyard.identity.users: audit user.created user_id=1 {}
+INFO:     127.0.0.1:55315 - "POST /auth/register HTTP/1.1" 200 OK
+C:\Users\andre\AppData\Local\Programs\Python\Python312\Lib\site-packages\jwt\api_jwt.py:147: InsecureKeyLengthWarning: The HMAC key is 9 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2.
+  return self._jws.encode(
+2026-08-16 13:56:15,358 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=e7427671dbee..
+2026-08-16 13:56:15,358 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=d0477864a1cf..
+INFO:     127.0.0.1:55315 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "POST /experiments HTTP/1.1" 201 Created
+INFO:     127.0.0.1:55315 - "POST /experiments/1/transition HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "POST /runs HTTP/1.1" 201 Created
+INFO:     127.0.0.1:55315 - "POST /runs/1/transition HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "POST /runs/1/transition HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "PUT /runs/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "POST /experiments/1/transition HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "POST /experiments/1/transition HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "POST /research_docs HTTP/1.1" 201 Created
+INFO:     127.0.0.1:55315 - "POST /notes HTTP/1.1" 201 Created
+INFO:     127.0.0.1:55315 - "POST /research_docs/1/transition HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55315 - "POST /notes HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:52166 - "GET /app/dashboard.html HTTP/1.1" 200 OK
+2026-08-16 14:12:46,429 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=27e0761d9927..
+2026-08-16 14:12:46,429 INFO    scrapyard.identity.jwt_manager: token_issued subject=1 token=77ce4afbe983..
+INFO:     127.0.0.1:52167 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52167 - "GET /experiments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52167 - "GET /runs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52167 - "GET /research_docs HTTP/1.1" 200 OK

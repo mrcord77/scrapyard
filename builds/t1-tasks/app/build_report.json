@@ -1,0 +1,168 @@
+{
+  "domain": "task_tracker",
+  "label": "Personal Task Tracker",
+  "data_sensitivity": "moderate",
+  "summary": {
+    "entities": 3,
+    "relationships_with_foreign_keys": 1,
+    "workflows": 2,
+    "entities_requiring_auth": 3,
+    "entities_owner_scoped": 2,
+    "entities_with_encrypted_fields": 0
+  },
+  "entities": [
+    {
+      "name": "Project",
+      "table": "projects",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": "user_id",
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [],
+      "indexed_non_fk_ids": [
+        "user_id"
+      ],
+      "workflow": true,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Task",
+      "table": "tasks",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": "user_id",
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [
+        {
+          "column": "project_id",
+          "references": "projects"
+        }
+      ],
+      "indexed_non_fk_ids": [
+        "user_id"
+      ],
+      "workflow": true,
+      "reference_rules": {
+        "project_id": {
+          "entity": "Project",
+          "status_field": "status",
+          "allowed": [
+            "active"
+          ],
+          "error": "project must exist and be active"
+        }
+      },
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    },
+    {
+      "name": "Label",
+      "table": "labels",
+      "security": {
+        "auth_required": true,
+        "owner_scoped_by": null,
+        "write_requires_role": null,
+        "encrypted_fields": [],
+        "audited_actions": []
+      },
+      "foreign_keys": [],
+      "indexed_non_fk_ids": [],
+      "workflow": false,
+      "reference_rules": {},
+      "no_overlap": null,
+      "cross_entity_guards": [],
+      "transition_effects": {},
+      "time_transitions": []
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "tasks",
+      "column": "project_id",
+      "to_table": "projects"
+    }
+  ],
+  "many_to_many": [
+    {
+      "left": "Task",
+      "right": "Label",
+      "join_table": "task_labels"
+    }
+  ],
+  "workflows": [
+    {
+      "entity": "Project",
+      "field": "status",
+      "initial": "active",
+      "states": [
+        "active",
+        "archived"
+      ],
+      "transitions": {
+        "active": [
+          "archived"
+        ],
+        "archived": [
+          "active"
+        ]
+      },
+      "guards": {}
+    },
+    {
+      "entity": "Task",
+      "field": "status",
+      "initial": "todo",
+      "states": [
+        "blocked",
+        "cancelled",
+        "doing",
+        "done",
+        "todo"
+      ],
+      "transitions": {
+        "todo": [
+          "doing",
+          "cancelled"
+        ],
+        "doing": [
+          "todo",
+          "blocked",
+          "done",
+          "cancelled"
+        ],
+        "blocked": [
+          "doing",
+          "cancelled"
+        ],
+        "done": [],
+        "cancelled": [
+          "todo"
+        ]
+      },
+      "guards": {}
+    }
+  ],
+  "enforced_by_generation": [
+    "Per-entity tables with primary keys and Alembic-compatible models.",
+    "Client-supplied <entity>_id columns are real FOREIGN KEYs (+ index); orphaned references are rejected (409).",
+    "Server-set owner columns (user_id) are indexed; ownership is forced from the authenticated principal.",
+    "Declared state machines: only listed transitions are allowed; target-state guards must hold; violations return 409.",
+    "Auth / owner-scoping / field encryption / audit per the entity's data-sensitivity policy."
+  ],
+  "not_enforced": [
+    "many-to-many is now generated from a domain many_to_many declaration (join table with two CASCADE FKs + a uniqueness constraint, plus a link service and attach/detach/list routes) \u2014 proven by the many_to_many contract + HTTP e2e; still pending: relationships are otherwise inferred from <entity>_id naming (one-to-many / many-to-one), and richer declared relationship metadata (named roles, through-attributes on the join row) is not generated",
+    "still pending: guards now support same-row (field==value) AND cross-entity (related row status) checks; what remains is SIDE EFFECTS on transition (e.g. a damaged return auto-creating an incident + maintenance record and locking the tool), time-based transitions, and notifications"
+  ]
+}

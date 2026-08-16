@@ -1,0 +1,217 @@
+{
+ "build": "t4-workbench",
+ "raw": "32/34",
+ "true_failures": 1,
+ "failures": [
+  {
+   "name": "create /runs",
+   "detail": "409 {\"detail\":\"experiment must be running or analyzing\"}"
+  }
+ ],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"bhbAexVYS1u4uQezfK7HWjvhLRQdmmq3yT5qAEE8U7E\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM5NywiZXhwIjoxNzg2OTE0Mjk3fQ.J90-0ciEwgc21Uefe2EBVXcI1dj03Xq1u9sM-WTebSo\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzOTcsImV4cCI6MTc4NzUxODE5N30.MdZ73WzeXBqSio_PukUD0V9X",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"qQFKujToFMgev24v_3nx5HLywrBJaWaySz8p-lfy5TA\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzM5OCwiZXhwIjoxNzg2OTE0Mjk4fQ.Nogd4SRWPuBfg8FHoHkieQjIZm9oIVhASsIEpvekLeQ\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTMzOTgsImV4cCI6MTc4NzUxODE5OH0.TH2KRiH40bn7HzSmYBBFef7y",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "5",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /research_docs",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /notes",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /experiments",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /runs",
+   "ok": false,
+   "detail": "409 {\"detail\":\"experiment must be running or analyzing\"}",
+   "verdict": "FAIL"
+  },
+  {
+   "name": "create /tags",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /research_docs/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /research_docs",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /research_docs",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /research_docs",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /notes/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /notes",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /notes",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /notes",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /experiments/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /experiments",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /experiments",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /experiments",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /tags/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /tags",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /tags",
+   "ok": false,
+   "detail": "200",
+   "verdict": "pass-per-policy(shared)"
+  },
+  {
+   "name": "anon blocked /tags",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "update /research_docs/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"user_id\":1,\"title\":\"smoke-title\",\"source_url\":\"smoke-source_url\",\"content\":\"smoke-content\",\"status\":\"inbox\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /research_docs/1",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

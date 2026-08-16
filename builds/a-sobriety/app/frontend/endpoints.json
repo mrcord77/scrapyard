@@ -1,0 +1,198 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/users"
+  },
+  {
+    "method": "POST",
+    "path": "/users"
+  },
+  {
+    "method": "GET",
+    "path": "/users/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/users/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/users/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/memberships"
+  },
+  {
+    "method": "POST",
+    "path": "/memberships"
+  },
+  {
+    "method": "GET",
+    "path": "/memberships/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/memberships/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/memberships/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/posts"
+  },
+  {
+    "method": "POST",
+    "path": "/posts"
+  },
+  {
+    "method": "GET",
+    "path": "/posts/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/posts/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/posts/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/sponsors"
+  },
+  {
+    "method": "POST",
+    "path": "/sponsors"
+  },
+  {
+    "method": "GET",
+    "path": "/sponsors/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/sponsors/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/sponsors/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/meetings"
+  },
+  {
+    "method": "POST",
+    "path": "/meetings"
+  },
+  {
+    "method": "GET",
+    "path": "/meetings/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/meetings/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/meetings/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/attendances"
+  },
+  {
+    "method": "POST",
+    "path": "/attendances"
+  },
+  {
+    "method": "GET",
+    "path": "/attendances/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/attendances/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/attendances/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/chips"
+  },
+  {
+    "method": "POST",
+    "path": "/chips"
+  },
+  {
+    "method": "GET",
+    "path": "/chips/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/chips/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/chips/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/journal_entries"
+  },
+  {
+    "method": "POST",
+    "path": "/journal_entries"
+  },
+  {
+    "method": "GET",
+    "path": "/journal_entries/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/journal_entries/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/journal_entries/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/milestones"
+  },
+  {
+    "method": "POST",
+    "path": "/milestones"
+  },
+  {
+    "method": "GET",
+    "path": "/milestones/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/milestones/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/milestones/{id_}"
+  }
+]

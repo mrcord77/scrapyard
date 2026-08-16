@@ -1,0 +1,78 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/users"
+  },
+  {
+    "method": "POST",
+    "path": "/users"
+  },
+  {
+    "method": "GET",
+    "path": "/users/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/users/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/users/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/memberships"
+  },
+  {
+    "method": "POST",
+    "path": "/memberships"
+  },
+  {
+    "method": "GET",
+    "path": "/memberships/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/memberships/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/memberships/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/posts"
+  },
+  {
+    "method": "POST",
+    "path": "/posts"
+  },
+  {
+    "method": "GET",
+    "path": "/posts/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/posts/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/posts/{id_}"
+  }
+]

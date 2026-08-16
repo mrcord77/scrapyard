@@ -1,0 +1,157 @@
+{
+ "build": "b-healthcare",
+ "raw": "23/24",
+ "true_failures": 1,
+ "failures": [
+  {
+   "name": "create /encounters",
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}"
+  }
+ ],
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":9.4,\"checks\":{}}",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"4DduKkitB8Ps_6-cxWrergbf56k-hlh3QlzgiLbrlSw\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzczOCwiZXhwIjoxNzg2OTE0NjM4fQ.LbqvoerF-FDQYVLZidzQ-Dj5kqLBYS2A8LUnForIQn0\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTM3MzgsImV4cCI6MTc4NzUxODUzOH0.vsKxknQcV_tY0SjxLGQiyuA4",
+   "verdict": "pass"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"YmJo6I93kWS60p3_ZkZDurJogqzb1Re7k2Hu1xnjjnU\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0IiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMzczOCwiZXhwIjoxNzg2OTE0NjM4fQ.dYKelCXe2ywo-9o2FQv-ESgCqAIT3Sw00SIs6cVZEcc\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0IiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTM3MzgsImV4cCI6MTc4NzUxODUzOH0.dlzkho4yznkPmfvPf5ykVsVK",
+   "verdict": "pass"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409",
+   "verdict": "pass"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":3,\"email\":\"alice.smoke@example.com\",\"verified\":false}",
+   "verdict": "pass"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "3",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /patients",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /providers",
+   "ok": true,
+   "detail": "",
+   "verdict": "pass"
+  },
+  {
+   "name": "create /encounters",
+   "ok": false,
+   "detail": "409 {\"detail\":\"constraint violation: a referenced record does not exist, or a uniqueness constraint failed\"}",
+   "verdict": "FAIL"
+  },
+  {
+   "name": "read /patients/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /patients",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /patients",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /patients",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "read /providers/1",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "list /providers",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "ownership: B blocked from A's /providers",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "anon blocked /providers",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  },
+  {
+   "name": "update /patients/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"user_id\":3,\"dob\":\"2026-08-16T12:00:00Z\",\"mrn\":\"smoke-mrn\"}",
+   "verdict": "pass"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422",
+   "verdict": "pass"
+  },
+  {
+   "name": "delete /patients/1",
+   "ok": true,
+   "detail": "204",
+   "verdict": "pass"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404",
+   "verdict": "pass"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200",
+   "verdict": "pass"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401",
+   "verdict": "pass"
+  }
+ ]
+}

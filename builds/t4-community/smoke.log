@@ -1,0 +1,29 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /users
+  [PASS] create /memberships
+  [PASS] create /posts
+  [PASS] read /users/1
+  [PASS] list /users
+  [FAIL] ownership: B blocked from A's /users -- 200
+  [FAIL] anon blocked /users -- 200
+  [PASS] read /memberships/1
+  [PASS] list /memberships
+  [FAIL] ownership: B blocked from A's /memberships -- 200
+  [FAIL] anon blocked /memberships -- 200
+  [PASS] read /posts/1
+  [PASS] list /posts
+  [FAIL] ownership: B blocked from A's /posts -- 200
+  [FAIL] anon blocked /posts -- 200
+  [PASS] update /users/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /users/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 22/28 passed -> builds/t4-community/smoke_results.json

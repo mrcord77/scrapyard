@@ -1,0 +1,3 @@
+INFO:torch._native.dsl_registry:Successfully registered DSL: cutedsl
+INFO:torch._native.dsl_registry:Successfully registered DSL: triton
+catalog written -> .campaign/catalog-check\catalog.json: 582 parts / 60 layers (582 verified core, 0 skeleton; 0 undocumented, 0 import failures, 0 hollow)

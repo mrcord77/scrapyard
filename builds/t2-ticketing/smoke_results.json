@@ -1,0 +1,172 @@
+{
+ "base": "http://127.0.0.1:8107",
+ "passed": 25,
+ "failed": 8,
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"Px0PTzkRN182AwNwsgPhz-5h-g-jmtMrnI5Y5wwfRQE\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjgyOCwiZXhwIjoxNzg2OTEzNzI4fQ._QpBimpJiNaDfFQnaVjrSHhIDCZfGWFeFKch69KWmd0\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI4MjgsImV4cCI6MTc4NzUxNzYyOH0.pKKF-zJllHUlZwQfwg2LwkpI"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"V01UXm1FRntHfJXmI_3uDXtwpGHtf4pekzWH85CJ9wc\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkxMjgyOCwiZXhwIjoxNzg2OTEzNzI4fQ.12kgRTg-LJO704d91JB4AnBimLYOTrvGc2_Tqw8FUQM\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MTI4MjgsImV4cCI6MTc4NzUxNzYyOH0.NKfKQW_3aFm15etp_rpa3sID"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "4"
+  },
+  {
+   "name": "create /projects",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /tasks",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /change_orders",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /documents",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "read /projects/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /projects",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /projects",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /projects",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /tasks/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /tasks",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /tasks",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /tasks",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /change_orders/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /change_orders",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /change_orders",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /change_orders",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "read /documents/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /documents",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /documents",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "anon blocked /documents",
+   "ok": false,
+   "detail": "200"
+  },
+  {
+   "name": "update /projects/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"name\":\"smoke-name\",\"client\":\"smoke-client\",\"status\":null,\"budget_cents\":1}"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422"
+  },
+  {
+   "name": "delete /projects/1",
+   "ok": true,
+   "detail": "204"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}
