@@ -1,6 +1,7 @@
 name: scrapyard representative builds
 
 on:
+  workflow_dispatch:
   push:
     branches: ["test/scrapyard-builds-20260816"]
 
