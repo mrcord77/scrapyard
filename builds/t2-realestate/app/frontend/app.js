@@ -52,11 +52,11 @@ function renderAuth(){
   app.innerHTML = "";
   let mode = "login";
   const box = $(`<div class="center"><div class="card">
-    <h1 style="margin-top:0">${esc(CFG.label)}</h1>
+    <h1 class="mt0">${esc(CFG.label)}</h1>
     <p class="muted" id="sub">Sign in to continue</p>
     <label>Email</label><input id="email" type="email" autocomplete="username"/>
     <label>Password</label><input id="pw" type="password" autocomplete="current-password"/>
-    <div class="row" style="margin-top:14px"><button class="primary" id="go">Sign in</button>
+    <div class="row mt14"><button class="primary" id="go">Sign in</button>
     <button id="swap">Need an account?</button></div>
     <p class="err hidden" id="err"></p></div></div>`);
   app.appendChild(box);
@@ -84,7 +84,7 @@ function shell(activeName){
   app.innerHTML = "";
   app.appendChild($(`<header><h1>${esc(CFG.label)}</h1>
     <span class="badge">${CFG.entities.length} entities</span>
-    <span class="who">${esc(Session.email||"")} · <a id="out" style="cursor:pointer;color:var(--acc)">sign out</a></span></header>`));
+    <span class="who">${esc(Session.email||"")} · <a id="out" class="linkbtn">sign out</a></span></header>`));
   const wrap = $(`<div class="wrap"><nav></nav><main id="main"></main></div>`);
   const nav = wrap.querySelector("nav");
   for (const s of CFG.entities){
@@ -99,21 +99,21 @@ async function renderEntity(name){
   shell(name);
   const s = CFG.entities.find(e=>e.name===name);
   const main = document.getElementById("main");
-  main.appendChild($(`<div class="card"><h2 style="margin:0 0 4px">New ${esc(s.name)}</h2>
-    <p class="muted" style="margin-top:0">${s.owner?`Owned by you (server-enforced).`:""}</p>
+  main.appendChild($(`<div class="card"><h2 class="m0b4">New ${esc(s.name)}</h2>
+    <p class="muted mt0">${s.owner?`Owned by you (server-enforced).`:""}</p>
     <form id="cform"></form>
-    <div class="row" style="margin-top:12px"><button class="primary" id="create">Create</button>
+    <div class="row mt12"><button class="primary" id="create">Create</button>
     <span class="err" id="cerr"></span></div></div>`));
   const form = main.querySelector("#cform");
   const grid = $(`<div class="grid"></div>`); form.appendChild(grid);
   for (const f of s.writable){
     const lab = `${f.name}${f.encrypted?' <span class="lock">🔒 encrypted at rest</span>':''}${f.optional?'':' *'}`;
-    if (f.input==="textarea") grid.appendChild($(`<div style="grid-column:1/-1"><label>${lab}</label><textarea name="${f.name}"></textarea></div>`));
-    else if (f.input==="checkbox") grid.appendChild($(`<div class="row" style="margin-top:18px"><input type="checkbox" name="${f.name}" style="width:auto"/><label style="margin:0">${f.name}</label></div>`));
+    if (f.input==="textarea") grid.appendChild($(`<div class="colspan"><label>${lab}</label><textarea name="${f.name}"></textarea></div>`));
+    else if (f.input==="checkbox") grid.appendChild($(`<div class="row mt18"><input type="checkbox" name="${f.name}" class="wauto"/><label class="m0">${f.name}</label></div>`));
     else grid.appendChild($(`<div><label>${lab}</label><input type="${f.input}" name="${f.name}"/></div>`));
   }
-  const list = $(`<div class="card"><div class="row"><h2 style="margin:0">${esc(s.plural)}</h2>
-    <button id="refresh" style="margin-left:auto">Refresh</button></div>
+  const list = $(`<div class="card"><div class="row"><h2 class="m0">${esc(s.plural)}</h2>
+    <button id="refresh" class="mlauto">Refresh</button></div>
     <div id="rows"><p class="muted">loading…</p></div></div>`);
   main.appendChild(list);
 

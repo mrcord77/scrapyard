@@ -22,12 +22,23 @@ import time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
-CHROME_BIN = (
-    os.environ.get("CHROME_BIN")
-    or r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-    if os.name == "nt"
-    else "/usr/bin/google-chrome"
-)
+def _find_chrome() -> str:
+    """First existing Chrome/Chromium binary. (The old one-liner had an operator-
+    precedence bug: `env or path if nt else linuxpath` ignored CHROME_BIN on Linux.)"""
+    candidates = [
+        os.environ.get("CHROME_BIN"),
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        "/usr/bin/google-chrome",
+        "/usr/bin/chromium-browser",
+        "/usr/bin/chromium",
+    ]
+    for c in candidates:
+        if c and os.path.exists(c):
+            return c
+    return ""
+
+CHROME_BIN = _find_chrome()
 
 RUBRIC = [
     ("F1a", "Top-level heading names the product or view, not a framework name"),
@@ -450,6 +461,80 @@ def judge(signals: dict) -> list[tuple[str, str, bool, str]]:
     return results
 
 
+def _smoke_signals(url: str) -> dict:
+    """Load the page in headless Chrome and collect the BLOCKING render signals:
+    does the page produce real DOM after JS runs, are there console errors
+    (CSP violations and JS exceptions are SEVERE), is anything interactive."""
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.common.by import By
+    opts = Options()
+    opts.add_argument("--headless=new")
+    opts.add_argument("--no-sandbox")
+    opts.add_argument("--disable-gpu")
+    opts.add_argument("--window-size=1280,900")
+    opts.set_capability("goog:loggingPrefs", {"browser": "ALL"})
+    if CHROME_BIN:
+        opts.binary_location = CHROME_BIN
+    driver = webdriver.Chrome(options=opts)
+    try:
+        driver.get(url)
+        time.sleep(2.0)
+        body_text = driver.find_element(By.TAG_NAME, "body").text.strip()
+        el_count = driver.execute_script("return document.body.querySelectorAll('*').length")
+        interactive = driver.execute_script(
+            "return document.querySelectorAll('button, input, select, textarea, a[href]').length")
+        severe = [e["message"] for e in driver.get_log("browser")
+                  if e.get("level") == "SEVERE" and "favicon.ico" not in e.get("message", "")]
+        return {"body_text_len": len(body_text), "el_count": el_count,
+                "interactive": interactive, "severe": severe}
+    finally:
+        driver.quit()
+
+
+def run_frontend_smoke(app_dir: str) -> bool:
+    """BLOCKING anti-blank-page gate (no aesthetics): boot the app, execute its
+    page in a real browser engine, and fail unless JS produced substantive,
+    interactive DOM with a clean console. Exists because 2026-08-16 every
+    HTTP-level check passed while the SPA rendered a blank page under its own
+    CSP — nothing in the pipeline had ever executed the frontend."""
+    port = 18199
+    print(f"  [frontend-smoke] booting {app_dir}...")
+    server = _boot_app_in_thread(app_dir, port)
+    if not server:
+        print("  [FAIL] boot")
+        return False
+    try:
+        import httpx
+        best_url = None
+        for path in ("/app/", "/", "/index.html"):
+            try:
+                r = httpx.get(f"http://127.0.0.1:{port}{path}", timeout=3, follow_redirects=True)
+                if r.status_code == 200 and "html" in r.headers.get("content-type", ""):
+                    best_url = f"http://127.0.0.1:{port}{path}"
+                    break
+            except Exception:
+                continue
+        if not best_url:
+            print("  [FAIL] no HTML page served at /app/, / or /index.html")
+            return False
+        s = _smoke_signals(best_url)
+        checks = [
+            ("renders_content", s["body_text_len"] >= 20 and s["el_count"] >= 5,
+             f"body text {s['body_text_len']} chars, {s['el_count']} elements after JS"),
+            ("interactive_ui", s["interactive"] >= 1, f"{s['interactive']} interactive elements"),
+            ("console_clean", not s["severe"],
+             "no SEVERE console errors" if not s["severe"] else "; ".join(s["severe"])[:300]),
+        ]
+        ok = all(c[1] for c in checks)
+        for name, passed, ev in checks:
+            print(f"  [{'PASS' if passed else 'FAIL'}] {name:16} {ev}")
+        print(f"  FRONTEND SMOKE ({best_url}): {'PASS' if ok else 'FAIL'}")
+        return ok
+    finally:
+        server.should_exit = True
+
+
 def run_frontend_gate(app_dir: str, screenshot_path: str = None) -> tuple[bool, list]:
     """Full gate: boot, screenshot, analyze, judge. Returns (passed, verdicts)."""
     port = 18199
@@ -507,6 +592,8 @@ def main():
         sys.exit(2)
 
     app_dir = os.path.abspath(sys.argv[1])
+    if "--smoke" in sys.argv:
+        sys.exit(0 if run_frontend_smoke(app_dir) else 1)
     screenshot_out = None
     if "--out" in sys.argv:
         idx = sys.argv.index("--out")

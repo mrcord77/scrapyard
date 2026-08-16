@@ -23,7 +23,12 @@ python tools/verify_part_selftests.py --jobs 4
 python tools/ui_lint.py
 python tests/security_regression.py
 python tools/verify_build.py all
+python tools/verify_frontend.py <generated-app> --smoke   # page RENDERS in a real browser (blocking)
 ```
+
+The `--smoke` frontend check is mandatory for any change touching gen_frontend,
+security headers/CSP, or the static mount: HTTP-level checks cannot see a page
+that serves 200 but renders blank (found the hard way, 2026-08-16).
 
 The complete CI gate additionally uses PostgreSQL, Redis, npm, and Docker.
 

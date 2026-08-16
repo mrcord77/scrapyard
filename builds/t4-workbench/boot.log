@@ -1,0 +1,13 @@
+INFO:     Started server process [27192]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8115 (Press CTRL+C to quit)
+INFO:     127.0.0.1:55576 - "GET /app/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50186 - "GET /app/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50186 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54678 - "GET /app/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60833 - "GET /app/dashboard.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60833 - "GET /app/dashboard.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62423 - "GET /app/dashboard.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62423 - "GET /auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:62423 - "GET /favicon.ico HTTP/1.1" 404 Not Found

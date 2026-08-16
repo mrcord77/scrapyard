@@ -37,3 +37,7 @@
   .badge { font-size:11px; color:var(--mut); border:1px solid var(--line); border-radius:20px;
            padding:2px 9px; }
   .hidden { display:none; }
+  .mt0 { margin-top:0; } .mt12 { margin-top:12px; } .mt14 { margin-top:14px; }
+  .mt18 { margin-top:18px; } .m0 { margin:0; } .m0b4 { margin:0 0 4px; }
+  .colspan { grid-column:1/-1; } .wauto { width:auto; } .mlauto { margin-left:auto; }
+  .linkbtn { cursor:pointer; color:var(--acc); }

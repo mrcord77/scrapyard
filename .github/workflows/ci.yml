@@ -31,3 +31,13 @@ jobs:
         run: |
           python tools/ui_lint.py
           python tests/security_regression.py
+      # Anti-blank-page gate: generate a representative app and prove its
+      # frontend RENDERS in a real browser engine under the app's own CSP —
+      # substantive DOM after JS, interactive elements, clean console.
+      # (2026-08-16: the SPA shipped blank in every browser while every
+      # HTTP-level check passed; this step is why that cannot recur.)
+      - name: Frontend renders in a real browser (blocking)
+        run: |
+          python -m pip install selenium
+          python tools/eos.py --pattern basic_saas --domain tool_library --out /tmp/fe-smoke-app
+          python tools/verify_frontend.py /tmp/fe-smoke-app --smoke
