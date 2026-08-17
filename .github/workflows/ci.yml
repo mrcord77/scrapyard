@@ -41,6 +41,12 @@ jobs:
           python -m pip install selenium
           python tools/eos.py --pattern basic_saas --domain tool_library --out /tmp/fe-smoke-app
           python tools/verify_frontend.py /tmp/fe-smoke-app --smoke --out /tmp/fe-smoke-render.png
+      # Design floor: the generated UI must pass the FULL 24-point frontend
+      # rubric (headings, cards, states, spacing, palette, hierarchy, "would
+      # not embarrass in a demo"). Made blocking 2026-08-16 once the template
+      # reached 24/24 — regressions below that bar fail the build.
+      - name: Frontend passes the design rubric (blocking)
+        run: python tools/verify_frontend.py /tmp/fe-smoke-app --out /tmp/fe-rubric-render.png
       # Keep the visible evidence: the rendered screenshot + the generated app,
       # downloadable from the run page — the proof must outlive the runner.
       - name: Upload render evidence
@@ -50,6 +56,7 @@ jobs:
           name: frontend-render-evidence
           path: |
             /tmp/fe-smoke-render.png
+            /tmp/fe-rubric-render.png
             /tmp/fe-smoke-app
           if-no-files-found: warn
           retention-days: 30

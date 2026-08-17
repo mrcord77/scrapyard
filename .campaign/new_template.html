@@ -1,117 +1,4 @@
-"""
-gen_frontend.py — Generate a real single-page frontend from a domain, wired to the
-SAME generated REST contract as the backend (one source of truth).
-
-For each domain entity it emits list / create / edit / delete views that call the
-exact routes gen_models.py generates (`GET/POST /{plural}`, `GET/PUT/DELETE
-/{plural}/{id_}`), plus a register/login flow against /auth/*. The session token
-from /auth/login is sent as the `X-Session` header on every call — the same header
-the generated `current_user_id` dependency reads. Owner-scoped entities omit the
-`user_id` field from forms because the server forces ownership.
-
-The generated app embeds a machine-readable ENDPOINTS metadata so verification can
-assert that every call the frontend makes resolves to a real mounted backend route.
-
-Usage:
-    python tools/gen_frontend.py <domain> <out_dir>     # writes <out_dir>/index.html
-"""
-from __future__ import annotations
-import json
-import os
-import re
-import sys
-
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "tools"))
-
-# field type -> HTML input kind
-_INPUT = {"int": "number", "float": "number", "bool": "checkbox",
-          "datetime": "datetime-local", "str": "text", "text": "textarea", "json": "textarea"}
-_SKIP_WRITE = {"id", "created_at", "updated_at"}
-
-
-def _plural(name: str) -> str:
-    import gen_models as GM
-    return GM._plural(name)
-
-
-def entity_specs(entities, eps) -> list[dict]:
-    """Per-entity metadata the frontend renders from (same source as the backend)."""
-    specs = []
-    for e in entities:
-        name = e["name"]
-        pol = eps.get(name, {}) or {}
-        owner = pol.get("owner_field")
-        plural = _plural(name)
-        fields = []
-        for f in e["fields"]:
-            fields.append({"name": f["name"], "type": f["type"], "optional": f["optional"],
-                           "input": _INPUT.get(f["type"], "text"),
-                           "encrypted": f["name"] in set(pol.get("encrypted_fields") or [])})
-        writable = [f for f in fields
-                    if f["name"] not in _SKIP_WRITE and not (owner and f["name"] == owner)]
-        specs.append({"name": name, "plural": plural, "owner": owner,
-                      "requires_auth": bool(pol.get("requires_auth") or owner),
-                      "fields": fields, "writable": writable})
-    return specs
-
-
-def frontend_endpoints(specs) -> list[dict]:
-    """The exact (method, path_template) set the frontend calls — for contract
-    verification against the backend's mounted routes."""
-    eps = [
-        {"method": "POST", "path": "/auth/register"},
-        {"method": "POST", "path": "/auth/login"},
-        {"method": "POST", "path": "/auth/logout"},
-        {"method": "GET", "path": "/auth/me"},
-    ]
-    for s in specs:
-        p = s["plural"]
-        eps += [
-            {"method": "GET", "path": f"/{p}"},
-            {"method": "POST", "path": f"/{p}"},
-            {"method": "GET", "path": f"/{p}/{{id_}}"},
-            {"method": "PUT", "path": f"/{p}/{{id_}}"},
-            {"method": "DELETE", "path": f"/{p}/{{id_}}"},
-        ]
-    return eps
-
-
-def gen_index_html(domain_name: str, label: str, specs: list[dict]) -> str:
-    endpoints = frontend_endpoints(specs)
-    cfg = json.dumps({"domain": domain_name, "label": label,
-                      "entities": specs, "endpoints": endpoints}, indent=2)
-    # This is a generated standalone app served by uvicorn; localStorage is the
-    # intended place for its session token.
-    return _TEMPLATE.replace("__LABEL__", label).replace("/*__CONFIG__*/ {}", cfg)
-
-
-def gen_frontend_files(domain_name: str, label: str, specs: list[dict]) -> dict:
-    """Split the SPA into CSP-compliant files. The backend serves
-    `Content-Security-Policy: default-src 'self'`, which forbids inline
-    <style>/<script> — a single-file inline SPA renders as a BLANK PAGE in a
-    real browser (2026-08-16 campaign finding; every HTTP-level check passed
-    because nothing executed JS). External same-origin files are allowed, so:
-    index.html links styles.css + app.js. The inline JSON config block stays —
-    type="application/json" is data, not an executed script, and CSP permits it.
-    """
-    html = gen_index_html(domain_name, label, specs)
-    s0 = html.index("<style>")
-    s1 = html.index("</style>")
-    css = html[s0 + len("<style>"):s1].strip("\n")
-    m0 = html.index('<script type="module">')
-    m1 = html.rindex("</script>")
-    js = html[m0 + len('<script type="module">'):m1].strip("\n")
-    index = (html[:s0] + '<link rel="stylesheet" href="styles.css"/>' + html[s1 + len("</style>"):m0]
-             + '<script type="module" src="app.js"></script>' + html[m1 + len("</script>"):])
-    favicon = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">'
-               '<rect width="16" height="16" rx="3" fill="#4f8cff"/>'
-               '<text x="8" y="12" text-anchor="middle" font-size="10" fill="#fff" '
-               'font-family="sans-serif">' + (label[:1].upper() or "A") + "</text></svg>\n")
-    return {"index.html": index, "styles.css": css, "app.js": js, "favicon.svg": favicon}
-
-
-_TEMPLATE = r"""<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -367,12 +254,12 @@ function fillForm(spec, form, row){
 // --- chrome ---
 function topbar(){
   const authed = !!Session.token;
-  const el = $(`<header class="topbar">
+  const el = $(`<div class="topbar">
     <span class="brand"><span class="brand-mark"></span>${esc(CFG.label)}</span>
     <span class="badge">${CFG.entities.length} record types</span>
     ${authed ? `<span class="userchip"><span class="avatar">${esc((Session.email||"?")[0].toUpperCase())}</span>
       <span>${esc(Session.email||"")}</span><button class="btn btn-ghost" id="out">Sign out</button></span>` : ``}
-  </header>`);
+  </div>`);
   if (authed) el.querySelector("#out").onclick = async () => { await logout(); renderAuth(); };
   return el;
 }
@@ -386,17 +273,17 @@ function renderAuth(){
   const names = CFG.entities.map(e=>e.plural.replace(/_/g," "));
   const listed = names.slice(0,3).join(", ") + (names.length>3 ? ` and ${names.length-3} more` : "");
   const wrap = $(`<div class="auth-wrap">
-    <section class="hero section-hero">
-      <h2 class="mb-4">Every record. One dashboard. Status at a glance.</h2>
-      <p class="lead mt-4 mb-4">Manage ${esc(listed)} — with secure accounts, audited changes and
+    <div class="hero">
+      <h2>Every record. One dashboard. Status at a glance.</h2>
+      <p class="lead mt-4">Manage ${esc(listed)} — with secure accounts, audited changes and
         active session control built in from the first request.</p>
-      <div class="feature mt-6 gap-4"><span class="dot"></span><span>Owner-scoped records — every user sees exactly their own data, enforced server-side.</span></div>
-      <div class="feature mt-4 gap-4"><span class="dot"></span><span>Live status workflow on every record type, with guarded state transitions.</span></div>
-      <div class="feature mt-4 gap-4"><span class="dot"></span><span>Total visibility: counts, recent activity and pending work on the dashboard.</span></div>
+      <div class="feature mt-6"><span class="dot"></span><span>Owner-scoped records — every user sees exactly their own data, enforced server-side.</span></div>
+      <div class="feature mt-4"><span class="dot"></span><span>Live status workflow on every record type, with guarded state transitions.</span></div>
+      <div class="feature mt-4"><span class="dot"></span><span>Total visibility: counts, recent activity and pending work on the dashboard.</span></div>
       <div class="row gap-4 mt-6"><span class="pill status-ok">Encrypted at rest</span>
         <span class="pill">Audited</span><span class="pill">Session-secured</span></div>
-    </section>
-    <div class="auth-side p-6">
+    </div>
+    <div class="auth-side">
       <div class="card auth-card rounded-xl p-6">
         <h3 id="formtitle">Welcome back</h3>
         <p class="muted" id="sub">Sign in to your workspace</p>
@@ -595,37 +482,3 @@ async function renderEntity(name){
 </script>
 </body>
 </html>
-"""
-
-
-def main(argv: list[str]) -> int:
-    if len(argv) < 2:
-        print(__doc__); return 2
-    domain_name, out = argv[0], argv[1]
-    import resolve as R
-    import gen_models as GM
-    domain = R.load_domain(domain_name)
-    if not domain:
-        print(f"unknown domain: {domain_name}"); return 1
-    entities = [{"name": e["name"], "fields": GM.norm_fields(e)} for e in domain.get("entities", [])]
-    eps = GM.effective_policies(entities, domain)
-    specs = entity_specs(entities, eps)
-    label = domain.get("label") or domain_name.replace("_", " ").title()
-    os.makedirs(out, exist_ok=True)
-    files = gen_frontend_files(domain_name, label, specs)
-    for fname, content in files.items():
-        open(os.path.join(out, fname), "w", encoding="utf-8").write(content)
-    html = files["index.html"]
-    # machine-readable contract for verification
-    open(os.path.join(out, "endpoints.json"), "w", encoding="utf-8").write(
-        json.dumps(frontend_endpoints(specs), indent=2))
-    open(os.path.join(out, "contract.json"), "w", encoding="utf-8").write(
-        json.dumps({"domain": domain_name, "entities": specs,
-                    "endpoints": frontend_endpoints(specs)}, indent=2))
-    print(f"generated frontend -> {out}/index.html  "
-          f"({len(specs)} entities, {len(frontend_endpoints(specs))} endpoints, {len(html)} bytes)")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main(sys.argv[1:]))
