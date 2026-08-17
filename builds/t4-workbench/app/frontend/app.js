@@ -102,7 +102,7 @@ function renderAuth(){
   const listed = names.slice(0,3).join(", ") + (names.length>3 ? ` and ${names.length-3} more` : "");
   const wrap = $(`<div class="auth-wrap">
     <section class="hero section-hero">
-      <h2 class="mb-4">Every record. One dashboard. Status at a glance.</h2>
+      <h2 class="mb-4">Run the experiment. Keep the evidence.</h2>
       <p class="lead mt-4 mb-4">Manage ${esc(listed)} — with secure accounts, audited changes and
         active session control built in from the first request.</p>
       <div class="feature mt-6 gap-4"><span class="dot"></span><span>Owner-scoped records — every user sees exactly their own data, enforced server-side.</span></div>

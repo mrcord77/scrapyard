@@ -103,5 +103,10 @@
   },
   "retention_days": {
     "encounters": 2555
+  },
+  "brand": {
+    "accent": "#38bdf8",
+    "accent2": "#60a5fa",
+    "tagline": "Clinic scheduling without the clipboard."
   }
 }

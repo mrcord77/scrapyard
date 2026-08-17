@@ -349,5 +349,10 @@
       "left": "Tool",
       "right": "Tag"
     }
-  ]
+  ],
+  "brand": {
+    "accent": "#f59e0b",
+    "accent2": "#fb923c",
+    "tagline": "Every tool in the shed, one shared shelf."
+  }
 }

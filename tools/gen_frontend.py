@@ -77,16 +77,44 @@ def frontend_endpoints(specs) -> list[dict]:
     return eps
 
 
-def gen_index_html(domain_name: str, label: str, specs: list[dict]) -> str:
+# Curated accent pairs that hold up on the dark ground (no reds — red reads as
+# destructive in buttons). A domain gets a stable pick by name hash, or declares
+# its own: domain.json {"brand": {"accent": "#hex", "accent2": "#hex", "tagline": "..."}}
+PALETTES = [
+    ("#5b7cfa", "#22d3ee"),   # indigo / cyan
+    ("#34d399", "#a3e635"),   # emerald / lime
+    ("#f59e0b", "#fb923c"),   # amber / orange
+    ("#e879f9", "#a78bfa"),   # fuchsia / violet
+    ("#38bdf8", "#60a5fa"),   # sky / blue
+    ("#2dd4bf", "#34d399"),   # teal / emerald
+    ("#fb7185", "#f472b6"),   # rose / pink
+    ("#c084fc", "#818cf8"),   # purple / indigo
+]
+
+def _brand(domain_name: str, brand: dict | None) -> dict:
+    import hashlib
+    brand = brand or {}
+    idx = int(hashlib.md5(domain_name.encode()).hexdigest(), 16) % len(PALETTES)
+    acc, acc2 = brand.get("accent") or PALETTES[idx][0], brand.get("accent2") or PALETTES[idx][1]
+    r, g, b = (int(acc.lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
+    return {"acc": acc, "acc2": acc2, "accrgb": f"{r},{g},{b}",
+            "tagline": brand.get("tagline") or "Every record. One dashboard. Status at a glance."}
+
+def gen_index_html(domain_name: str, label: str, specs: list[dict],
+                   brand: dict | None = None) -> str:
     endpoints = frontend_endpoints(specs)
     cfg = json.dumps({"domain": domain_name, "label": label,
                       "entities": specs, "endpoints": endpoints}, indent=2)
+    bb = _brand(domain_name, brand)
     # This is a generated standalone app served by uvicorn; localStorage is the
     # intended place for its session token.
-    return _TEMPLATE.replace("__LABEL__", label).replace("/*__CONFIG__*/ {}", cfg)
+    return (_TEMPLATE.replace("__LABEL__", label).replace("/*__CONFIG__*/ {}", cfg)
+            .replace("__ACC2__", bb["acc2"]).replace("__ACCRGB__", bb["accrgb"])
+            .replace("__ACC__", bb["acc"]).replace("__TAGLINE__", bb["tagline"]))
 
 
-def gen_frontend_files(domain_name: str, label: str, specs: list[dict]) -> dict:
+def gen_frontend_files(domain_name: str, label: str, specs: list[dict],
+                       brand: dict | None = None) -> dict:
     """Split the SPA into CSP-compliant files. The backend serves
     `Content-Security-Policy: default-src 'self'`, which forbids inline
     <style>/<script> — a single-file inline SPA renders as a BLANK PAGE in a
@@ -95,7 +123,7 @@ def gen_frontend_files(domain_name: str, label: str, specs: list[dict]) -> dict:
     index.html links styles.css + app.js. The inline JSON config block stays —
     type="application/json" is data, not an executed script, and CSP permits it.
     """
-    html = gen_index_html(domain_name, label, specs)
+    html = gen_index_html(domain_name, label, specs, brand)
     s0 = html.index("<style>")
     s1 = html.index("</style>")
     css = html[s0 + len("<style>"):s1].strip("\n")
@@ -104,8 +132,9 @@ def gen_frontend_files(domain_name: str, label: str, specs: list[dict]) -> dict:
     js = html[m0 + len('<script type="module">'):m1].strip("\n")
     index = (html[:s0] + '<link rel="stylesheet" href="styles.css"/>' + html[s1 + len("</style>"):m0]
              + '<script type="module" src="app.js"></script>' + html[m1 + len("</script>"):])
+    bb = _brand(domain_name, brand)
     favicon = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">'
-               '<rect width="16" height="16" rx="3" fill="#4f8cff"/>'
+               '<rect width="16" height="16" rx="3" fill="' + bb["acc"] + '"/>'
                '<text x="8" y="12" text-anchor="middle" font-size="10" fill="#fff" '
                'font-family="sans-serif">' + (label[:1].upper() or "A") + "</text></svg>\n")
     return {"index.html": index, "styles.css": css, "app.js": js, "favicon.svg": favicon}
@@ -121,7 +150,7 @@ _TEMPLATE = r"""<!doctype html>
 <style>
   :root {
     --bg:#0b0e14; --panel:#12161f; --elev:#1a2029; --line:#232a38;
-    --fg:#e8ecf4; --mut:#93a0b4; --acc:#5b7cfa; --acc2:#22d3ee;
+    --fg:#e8ecf4; --mut:#93a0b4; --acc:__ACC__; --acc2:__ACC2__; --accrgb:__ACCRGB__;
     --ok:#34d399; --warn:#fbbf24; --bad:#f87171;
     --r-lg:10px; --r-xl:14px;
   }
@@ -162,8 +191,8 @@ _TEMPLATE = r"""<!doctype html>
   .btn:active { transform:translateY(1px); }
   .btn:focus-visible { outline:2px solid var(--acc); outline-offset:2px; }
   .btn-primary { background:var(--acc); border-color:var(--acc); color:#fff;
-                 box-shadow:0 4px 14px rgba(91,124,250,.28); }
-  .btn-primary:hover { filter:brightness(1.08); box-shadow:0 6px 20px rgba(91,124,250,.38); }
+                 box-shadow:0 4px 14px rgba(var(--accrgb),.28); }
+  .btn-primary:hover { filter:brightness(1.08); box-shadow:0 6px 20px rgba(var(--accrgb),.38); }
   .btn-ghost { background:transparent; }
   .btn-danger { background:transparent; color:var(--bad); border-color:#3d2a33; }
   .btn-danger:hover { border-color:var(--bad); }
@@ -175,7 +204,7 @@ _TEMPLATE = r"""<!doctype html>
   /* auth screen */
   .auth-wrap { display:flex; min-height:calc(100vh - 55px); align-items:stretch; }
   .hero { flex:1.15; display:flex; flex-direction:column; justify-content:center; padding:56px;
-          background:linear-gradient(145deg,rgba(91,124,250,.16),rgba(34,211,238,.07) 55%,transparent);
+          background:linear-gradient(145deg,rgba(var(--accrgb),.16),rgba(var(--accrgb),.05) 55%,transparent);
           border-right:1px solid var(--line); }
   .hero h2 { font-size:34px; line-height:1.15; max-width:440px; }
   .hero p.lead { color:var(--mut); max-width:430px; font-size:16px; }
@@ -191,7 +220,7 @@ _TEMPLATE = r"""<!doctype html>
           border:1px solid var(--line); border-radius:var(--r-lg); padding:10px 12px;
           transition:border-color .15s ease, box-shadow .15s ease; }
   input:focus,textarea:focus,select:focus { outline:none; border-color:var(--acc);
-          box-shadow:0 0 0 3px rgba(91,124,250,.18); }
+          box-shadow:0 0 0 3px rgba(var(--accrgb),.18); }
   textarea { min-height:76px; resize:vertical; }
   .error { color:var(--bad); font-size:14px; margin:10px 0 0; }
 
@@ -387,7 +416,7 @@ function renderAuth(){
   const listed = names.slice(0,3).join(", ") + (names.length>3 ? ` and ${names.length-3} more` : "");
   const wrap = $(`<div class="auth-wrap">
     <section class="hero section-hero">
-      <h2 class="mb-4">Every record. One dashboard. Status at a glance.</h2>
+      <h2 class="mb-4">__TAGLINE__</h2>
       <p class="lead mt-4 mb-4">Manage ${esc(listed)} — with secure accounts, audited changes and
         active session control built in from the first request.</p>
       <div class="feature mt-6 gap-4"><span class="dot"></span><span>Owner-scoped records — every user sees exactly their own data, enforced server-side.</span></div>
@@ -612,7 +641,7 @@ def main(argv: list[str]) -> int:
     specs = entity_specs(entities, eps)
     label = domain.get("label") or domain_name.replace("_", " ").title()
     os.makedirs(out, exist_ok=True)
-    files = gen_frontend_files(domain_name, label, specs)
+    files = gen_frontend_files(domain_name, label, specs, domain.get("brand"))
     for fname, content in files.items():
         open(os.path.join(out, fname), "w", encoding="utf-8").write(content)
     html = files["index.html"]

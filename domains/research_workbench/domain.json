@@ -4,47 +4,101 @@
   "terminology": {},
   "data_sensitivity": "moderate",
   "route_policies": {
-    "ResearchDoc": {"requires_auth": true, "owner_field": "user_id"},
-    "Note": {"requires_auth": true, "owner_field": "user_id"},
-    "Experiment": {"requires_auth": true, "owner_field": "user_id"},
-    "Run": {"requires_auth": true, "owner_field": "user_id"}
+    "ResearchDoc": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "Note": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "Experiment": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "Run": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    }
   },
   "entities": [
     {
       "name": "ResearchDoc",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "title", "type": "str"},
-        {"name": "source_url", "type": "str"},
-        {"name": "content", "type": "text"},
-        {"name": "status", "type": "str"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "title",
+          "type": "str"
+        },
+        {
+          "name": "source_url",
+          "type": "str"
+        },
+        {
+          "name": "content",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
       ],
       "state_machine": {
         "field": "status",
         "initial": "inbox",
         "transitions": {
-          "inbox": ["reading", "archived"],
-          "reading": ["annotated", "archived"],
-          "annotated": ["archived"],
-          "archived": ["inbox"]
+          "inbox": [
+            "reading",
+            "archived"
+          ],
+          "reading": [
+            "annotated",
+            "archived"
+          ],
+          "annotated": [
+            "archived"
+          ],
+          "archived": [
+            "inbox"
+          ]
         }
       }
     },
     {
       "name": "Note",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "doc_id"},
-        {"name": "body", "type": "text"},
-        {"name": "kind", "type": "str"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "doc_id"
+        },
+        {
+          "name": "body",
+          "type": "text"
+        },
+        {
+          "name": "kind",
+          "type": "str"
+        }
       ],
       "reference_rules": {
         "doc_id": {
           "entity": "ResearchDoc",
           "status_field": "status",
-          "allowed": ["inbox", "reading", "annotated"],
+          "allowed": [
+            "inbox",
+            "reading",
+            "annotated"
+          ],
           "error": "document must exist and not be archived"
         }
       }
@@ -52,40 +106,85 @@
     {
       "name": "Experiment",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "name", "type": "str"},
-        {"name": "hypothesis", "type": "text"},
-        {"name": "status", "type": "str"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "name",
+          "type": "str"
+        },
+        {
+          "name": "hypothesis",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
       ],
       "state_machine": {
         "field": "status",
         "initial": "draft",
         "transitions": {
-          "draft": ["running", "abandoned"],
-          "running": ["analyzing", "failed", "abandoned"],
-          "analyzing": ["concluded", "running"],
+          "draft": [
+            "running",
+            "abandoned"
+          ],
+          "running": [
+            "analyzing",
+            "failed",
+            "abandoned"
+          ],
+          "analyzing": [
+            "concluded",
+            "running"
+          ],
           "concluded": [],
-          "failed": ["draft"],
-          "abandoned": ["draft"]
+          "failed": [
+            "draft"
+          ],
+          "abandoned": [
+            "draft"
+          ]
         }
       }
     },
     {
       "name": "Run",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "experiment_id"},
-        {"name": "params", "type": "json"},
-        {"name": "metrics", "type": "json"},
-        {"name": "status", "type": "str"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "experiment_id"
+        },
+        {
+          "name": "params",
+          "type": "json"
+        },
+        {
+          "name": "metrics",
+          "type": "json"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
       ],
       "reference_rules": {
         "experiment_id": {
           "entity": "Experiment",
           "status_field": "status",
-          "allowed": ["running", "analyzing"],
+          "allowed": [
+            "running",
+            "analyzing"
+          ],
           "error": "experiment must be running or analyzing"
         }
       },
@@ -93,10 +192,19 @@
         "field": "status",
         "initial": "queued",
         "transitions": {
-          "queued": ["executing", "cancelled"],
-          "executing": ["succeeded", "failed", "cancelled"],
+          "queued": [
+            "executing",
+            "cancelled"
+          ],
+          "executing": [
+            "succeeded",
+            "failed",
+            "cancelled"
+          ],
           "succeeded": [],
-          "failed": ["queued"],
+          "failed": [
+            "queued"
+          ],
           "cancelled": []
         }
       }
@@ -104,20 +212,41 @@
     {
       "name": "Tag",
       "fields": [
-        {"name": "id"},
-        {"name": "name", "type": "str"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "name",
+          "type": "str"
+        }
       ]
     }
   ],
   "many_to_many": [
-    {"left": "ResearchDoc", "right": "Tag"},
-    {"left": "Experiment", "right": "Tag"}
+    {
+      "left": "ResearchDoc",
+      "right": "Tag"
+    },
+    {
+      "left": "Experiment",
+      "right": "Tag"
+    }
   ],
   "workflows": [
     "ingest doc -> read -> annotate (notes) -> archive",
     "draft experiment -> run (params) -> record metrics -> conclude"
   ],
-  "capability_hints": ["document_store", "providers", "background_jobs", "search_core"],
+  "capability_hints": [
+    "document_store",
+    "providers",
+    "background_jobs",
+    "search_core"
+  ],
   "permissions": [],
-  "reports": []
+  "reports": [],
+  "brand": {
+    "accent": "#c084fc",
+    "accent2": "#818cf8",
+    "tagline": "Run the experiment. Keep the evidence."
+  }
 }

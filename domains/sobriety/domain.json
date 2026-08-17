@@ -184,5 +184,10 @@
     "Membership": [
       "role"
     ]
+  },
+  "brand": {
+    "accent": "#2dd4bf",
+    "accent2": "#34d399",
+    "tagline": "Your recovery, one day at a time."
   }
 }
