@@ -1,0 +1,327 @@
+{
+  "name": "iep_binder",
+  "label": "The Binder",
+  "terminology": {},
+  "data_sensitivity": "high",
+  "brand": {
+    "accent": "#c084fc",
+    "accent2": "#818cf8",
+    "tagline": "IEP disputes are decided on documentation. Bring the better binder."
+  },
+  "route_policies": {
+    "Child": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "encrypted_fields": [
+        "first_name",
+        "diagnosis",
+        "notes"
+      ],
+      "audit": [
+        "create",
+        "update",
+        "delete"
+      ]
+    },
+    "Meeting": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "encrypted_fields": [
+        "notes",
+        "attendees"
+      ],
+      "audit": [
+        "create",
+        "update"
+      ]
+    },
+    "Correspondence": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "encrypted_fields": [
+        "body",
+        "subject"
+      ],
+      "audit": [
+        "create"
+      ]
+    },
+    "ServiceEntry": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "ActionItem": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    }
+  },
+  "entities": [
+    {
+      "name": "Child",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "first_name",
+          "type": "str"
+        },
+        {
+          "name": "grade",
+          "type": "str"
+        },
+        {
+          "name": "school",
+          "type": "str"
+        },
+        {
+          "name": "plan_type",
+          "type": "str"
+        },
+        {
+          "name": "diagnosis",
+          "type": "text"
+        },
+        {
+          "name": "notes",
+          "type": "text"
+        },
+        {
+          "name": "promised_minutes_week",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Meeting",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "child_id"
+        },
+        {
+          "name": "kind",
+          "type": "str"
+        },
+        {
+          "name": "held_at",
+          "type": "datetime"
+        },
+        {
+          "name": "attendees",
+          "type": "str"
+        },
+        {
+          "name": "notes",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
+      ],
+      "reference_rules": {
+        "child_id": {
+          "entity": "Child",
+          "error": "meeting must belong to a child on file"
+        }
+      },
+      "state_machine": {
+        "field": "status",
+        "initial": "requested",
+        "transitions": {
+          "requested": [
+            "scheduled",
+            "refused"
+          ],
+          "scheduled": [
+            "held",
+            "cancelled_by_school",
+            "rescheduled"
+          ],
+          "rescheduled": [
+            "scheduled"
+          ],
+          "held": [
+            "minutes_received",
+            "disputed"
+          ],
+          "minutes_received": [],
+          "disputed": [
+            "resolved",
+            "state_complaint"
+          ],
+          "refused": [
+            "state_complaint"
+          ],
+          "cancelled_by_school": [
+            "rescheduled",
+            "state_complaint"
+          ],
+          "state_complaint": [
+            "resolved"
+          ],
+          "resolved": []
+        }
+      }
+    },
+    {
+      "name": "Correspondence",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "child_id"
+        },
+        {
+          "name": "direction",
+          "type": "str"
+        },
+        {
+          "name": "with_whom",
+          "type": "str"
+        },
+        {
+          "name": "channel",
+          "type": "str"
+        },
+        {
+          "name": "sent_at",
+          "type": "datetime"
+        },
+        {
+          "name": "subject",
+          "type": "str"
+        },
+        {
+          "name": "body",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "ServiceEntry",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "child_id"
+        },
+        {
+          "name": "service",
+          "type": "str"
+        },
+        {
+          "name": "minutes",
+          "type": "int"
+        },
+        {
+          "name": "delivered_at",
+          "type": "datetime"
+        },
+        {
+          "name": "delivered",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "ActionItem",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "child_id"
+        },
+        {
+          "name": "owner",
+          "type": "str"
+        },
+        {
+          "name": "description",
+          "type": "str"
+        },
+        {
+          "name": "due_at",
+          "type": "datetime"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "open",
+        "transitions": {
+          "open": [
+            "done",
+            "overdue",
+            "dropped"
+          ],
+          "overdue": [
+            "done",
+            "escalated"
+          ],
+          "escalated": [
+            "done"
+          ],
+          "done": [],
+          "dropped": []
+        }
+      }
+    }
+  ],
+  "workflows": [
+    "request meeting (paper trail starts) -> scheduled -> held -> minutes received or disputed -> state complaint if stonewalled",
+    "log every promised service delivery vs the plan's promised minutes - the gap IS the case",
+    "every email/call with the school captured as correspondence on a tamper-evident chain"
+  ],
+  "permissions": [],
+  "reports": [],
+  "capability_hints": [],
+  "exempt_fields": {
+    "Child": [
+      "grade",
+      "school",
+      "plan_type"
+    ],
+    "Meeting": [
+      "kind",
+      "status"
+    ],
+    "Correspondence": [
+      "direction",
+      "with_whom",
+      "channel"
+    ],
+    "ServiceEntry": [
+      "service"
+    ],
+    "ActionItem": [
+      "owner",
+      "description",
+      "status"
+    ]
+  }
+}

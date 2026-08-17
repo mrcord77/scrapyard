@@ -1,0 +1,172 @@
+{
+ "base": "http://127.0.0.1:8152",
+ "passed": 33,
+ "failed": 0,
+ "checks": [
+  {
+   "name": "health",
+   "ok": true,
+   "detail": "{\"status\":\"ok\",\"ok\":true,\"uptime_s\":1.1,\"checks\":{}}"
+  },
+  {
+   "name": "register+login A",
+   "ok": true,
+   "detail": "{\"session\":\"kRbr3tySCJojxQncm5tH07c3F5SgZC2m--aBwaW1nXs\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkyNjI3OCwiZXhwIjoxNzg2OTI3MTc4fQ.rOJvMqKomNwIbiJHYmX8x8ycN7TZAAjYCZMOAoP_p0w\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MjYyNzgsImV4cCI6MTc4NzUzMTA3OH0.6tISM4GrzcS5CEg1mnhmv1jl"
+  },
+  {
+   "name": "register+login B",
+   "ok": true,
+   "detail": "{\"session\":\"H2hM02qcTemGvG_1ovaWWDvBGGBD8iChEbsJPBn2w_o\",\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc4NjkyNjI3OCwiZXhwIjoxNzg2OTI3MTc4fQ.OG1uBrPR778j7YUUsV-a8XfK3eImee7ZdOTysBzSzz0\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3ODY5MjYyNzgsImV4cCI6MTc4NzUzMTA3OH0.SiKyFJqgRMdQXsEz_IX-CQVt"
+  },
+  {
+   "name": "duplicate registration rejected",
+   "ok": true,
+   "detail": "409"
+  },
+  {
+   "name": "auth/me",
+   "ok": true,
+   "detail": "{\"id\":1,\"email\":\"alice.smoke@example.com\",\"verified\":false}"
+  },
+  {
+   "name": "entities discovered",
+   "ok": true,
+   "detail": "4"
+  },
+  {
+   "name": "create /tenancies",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /evidence_shots",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /deductions",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "create /dispute_letters",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "read /tenancies/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /tenancies",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /tenancies",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "anon blocked /tenancies",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /evidence_shots/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /evidence_shots",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /evidence_shots",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "anon blocked /evidence_shots",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /deductions/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /deductions",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /deductions",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "anon blocked /deductions",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "read /dispute_letters/1",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "list /dispute_letters",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "ownership: B blocked from A's /dispute_letters",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "anon blocked /dispute_letters",
+   "ok": true,
+   "detail": "401"
+  },
+  {
+   "name": "update /tenancies/1",
+   "ok": true,
+   "detail": "200 {\"id\":1,\"user_id\":1,\"address\":\"smoke-address\",\"landlord\":\"smoke-landlord\",\"deposit_cents\":1,\"move_in\":\"2026-08-16T12:00:00Z\",\"move_out\":\"2026-08-16T12"
+  },
+  {
+   "name": "missing record -> 404",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "malformed payload rejected",
+   "ok": true,
+   "detail": "422"
+  },
+  {
+   "name": "delete /tenancies/1",
+   "ok": true,
+   "detail": "204"
+  },
+  {
+   "name": "deleted record gone",
+   "ok": true,
+   "detail": "404"
+  },
+  {
+   "name": "logout",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "stale session rejected after logout",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}

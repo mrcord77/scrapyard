@@ -1,0 +1,138 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/care_recipients"
+  },
+  {
+    "method": "POST",
+    "path": "/care_recipients"
+  },
+  {
+    "method": "GET",
+    "path": "/care_recipients/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/care_recipients/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/care_recipients/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/care_tasks"
+  },
+  {
+    "method": "POST",
+    "path": "/care_tasks"
+  },
+  {
+    "method": "GET",
+    "path": "/care_tasks/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/care_tasks/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/care_tasks/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/medications"
+  },
+  {
+    "method": "POST",
+    "path": "/medications"
+  },
+  {
+    "method": "GET",
+    "path": "/medications/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/medications/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/medications/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/dose_logs"
+  },
+  {
+    "method": "POST",
+    "path": "/dose_logs"
+  },
+  {
+    "method": "GET",
+    "path": "/dose_logs/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/dose_logs/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/dose_logs/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/appointments"
+  },
+  {
+    "method": "POST",
+    "path": "/appointments"
+  },
+  {
+    "method": "GET",
+    "path": "/appointments/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/appointments/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/appointments/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/updates"
+  },
+  {
+    "method": "POST",
+    "path": "/updates"
+  },
+  {
+    "method": "GET",
+    "path": "/updates/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/updates/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/updates/{id_}"
+  }
+]

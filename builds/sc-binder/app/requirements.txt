@@ -1,0 +1,17 @@
+cryptography
+dilithium-py
+email-validator
+fastapi
+httpx
+kyber-py
+markdown
+passlib[argon2]
+psycopg2-binary
+pydantic
+pydantic-settings
+pydantic[email]
+pyjwt
+pyyaml
+redis
+sqlalchemy
+uvicorn

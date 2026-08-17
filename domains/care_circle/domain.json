@@ -1,0 +1,136 @@
+{
+  "name": "care_circle",
+  "label": "Care Circle",
+  "terminology": {},
+  "data_sensitivity": "moderate",
+  "brand": {
+    "accent": "#38bdf8",
+    "accent2": "#60a5fa",
+    "tagline": "Mom has five helpers and no coordinator. Be the circle, not the group chat."
+  },
+  "route_policies": {
+    "CareRecipient": {"requires_auth": true},
+    "CareTask": {"requires_auth": true},
+    "Medication": {"requires_auth": true},
+    "DoseLog": {"requires_auth": true},
+    "Appointment": {"requires_auth": true},
+    "Update": {"requires_auth": true}
+  },
+  "entities": [
+    {
+      "name": "CareRecipient",
+      "fields": [
+        {"name": "id"},
+        {"name": "name", "type": "str"},
+        {"name": "lives_at", "type": "str"},
+        {"name": "primary_doctor", "type": "str"},
+        {"name": "emergency_contact", "type": "str"}
+      ]
+    },
+    {
+      "name": "CareTask",
+      "fields": [
+        {"name": "id"},
+        {"name": "recipient_id"},
+        {"name": "title", "type": "str"},
+        {"name": "assigned_to", "type": "str"},
+        {"name": "due_at", "type": "datetime"},
+        {"name": "status", "type": "str"}
+      ],
+      "reference_rules": {
+        "recipient_id": {"entity": "CareRecipient", "error": "task must belong to someone in the circle"}
+      },
+      "state_machine": {
+        "field": "status",
+        "initial": "open",
+        "transitions": {
+          "open": ["claimed", "dropped"],
+          "claimed": ["done", "open", "missed"],
+          "missed": ["open", "escalated"],
+          "escalated": ["done"],
+          "done": [],
+          "dropped": []
+        }
+      }
+    },
+    {
+      "name": "Medication",
+      "fields": [
+        {"name": "id"},
+        {"name": "recipient_id"},
+        {"name": "name", "type": "str"},
+        {"name": "dose", "type": "str"},
+        {"name": "schedule", "type": "str"},
+        {"name": "prescriber", "type": "str"},
+        {"name": "status", "type": "str"}
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "active",
+        "transitions": {
+          "active": ["paused", "discontinued"],
+          "paused": ["active", "discontinued"],
+          "discontinued": []
+        }
+      }
+    },
+    {
+      "name": "DoseLog",
+      "fields": [
+        {"name": "id"},
+        {"name": "medication_id"},
+        {"name": "given_at", "type": "datetime"},
+        {"name": "given_by", "type": "str"},
+        {"name": "taken", "type": "bool"},
+        {"name": "note", "type": "str"}
+      ],
+      "reference_rules": {
+        "medication_id": {
+          "entity": "Medication",
+          "status_field": "status",
+          "allowed": ["active", "paused"],
+          "error": "dose logs attach to a current medication"
+        }
+      }
+    },
+    {
+      "name": "Appointment",
+      "fields": [
+        {"name": "id"},
+        {"name": "recipient_id"},
+        {"name": "with_whom", "type": "str"},
+        {"name": "at", "type": "datetime"},
+        {"name": "driver", "type": "str"},
+        {"name": "outcome_note", "type": "text"},
+        {"name": "status", "type": "str"}
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "scheduled",
+        "transitions": {
+          "scheduled": ["attended", "missed", "cancelled"],
+          "missed": ["scheduled"],
+          "attended": [],
+          "cancelled": ["scheduled"]
+        }
+      }
+    },
+    {
+      "name": "Update",
+      "fields": [
+        {"name": "id"},
+        {"name": "recipient_id"},
+        {"name": "author", "type": "str"},
+        {"name": "posted_at", "type": "datetime"},
+        {"name": "body", "type": "text"}
+      ]
+    }
+  ],
+  "workflows": [
+    "family shares one circle: tasks get claimed (not assigned into a void), missed tasks escalate instead of vanishing",
+    "every dose logged against an active med; appointments have a named driver; updates keep long-distance siblings in the loop"
+  ],
+  "permissions": [],
+  "reports": [],
+  "capability_hints": []
+}

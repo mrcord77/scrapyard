@@ -1,0 +1,189 @@
+{
+  "entities": [
+    {
+      "collection": "/appeals",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/appeals",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/appeals/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/appeals/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/appeals/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/appeals/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/call_logs",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/call_logs",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/call_logs/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/call_logs/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/call_logs/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/claims",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/claims",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/claims/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/claims/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "transition_guard",
+          "method": "POST",
+          "path": "/claims/1/transition",
+          "status": 409,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/claims/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/denials",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/denials",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/denials/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/denials/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/denials/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    },
+    {
+      "collection": "/evidence_items",
+      "operations": [
+        {
+          "op": "create",
+          "method": "POST",
+          "path": "/evidence_items",
+          "status": 201,
+          "ok": true
+        },
+        {
+          "op": "read",
+          "method": "GET",
+          "path": "/evidence_items/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "update",
+          "method": "PUT",
+          "path": "/evidence_items/1",
+          "status": 200,
+          "ok": true
+        },
+        {
+          "op": "delete",
+          "method": "DELETE",
+          "path": "/evidence_items/1",
+          "status": 204,
+          "ok": true
+        }
+      ],
+      "ok": true
+    }
+  ],
+  "auth": "session"
+}

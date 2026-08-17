@@ -74,9 +74,15 @@ def norm_fields(entity: dict) -> list[dict]:
     return out
 
 
+_IRREGULAR_PLURALS = {"child": "children", "person": "people", "man": "men",
+                      "woman": "women", "staff": "staff", "equipment": "equipment"}
+
 def _plural(name: str) -> str:
     import re
     n = re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()  # JournalEntry -> journal_entry
+    last = n.rsplit("_", 1)[-1]
+    if last in _IRREGULAR_PLURALS:                     # child -> children (never 'childs')
+        return n[: len(n) - len(last)] + _IRREGULAR_PLURALS[last]
     if n.endswith("y") and n[-2:-1] not in "aeiou":
         return n[:-1] + "ies"        # entry -> entries
     if n.endswith(("s", "x", "z", "ch", "sh")):

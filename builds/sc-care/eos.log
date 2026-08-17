@@ -1,0 +1,24 @@
+
+=== EOS: basic_saas+care_circle @mvp [GATE] ===
+[enforce]    must_have honored: True  must_not honored: True
+[policy-deps] generated routes require: auth_routes, jwt_manager, session_manager, users (force-included)
+[resolve]    materialized -> builds/sc-care/app  (41 parts, 12 py deps, +DOMAIN.md, +LESSONS.md (19))
+[runtime]    bundled scrapyard/runtime (settings, database, lifespan, startup)
+[models]     generated 6 entities -> builds/sc-care/app\scrapyard\models/  (models, schemas, services, routes)  [security: moderate — 6/6 entities protected via explicit policies]: CareRecipient, CareTask, Medication, DoseLog, Appointment, Update
+[frontend]   generated SPA -> frontend/index.html (served at /app)
+[wire]       wrote main.py (runtime.bootstrap: settings+db+lifecycle+routers+headers + auth + frontend)
+[closure]    +10 module(s) the graph missed: scrapyard.admin.audit_logs, scrapyard.api.domain_errors, scrapyard.authorization.permissions, scrapyard.authorization.roles, scrapyard.compliance.account_deletion, scrapyard.compliance.data_export, scrapyard.observability.metrics, scrapyard.security.crypto_agility, scrapyard.security.pq_signing, scrapyard.security.row_level_security
+[report]     6 entities · 1 FK relationship(s) · 3 workflow(s) -> BUILD_REPORT.md + build_report.json
+[legal]      wrote PRIVACY_POLICY.md + TERMS_OF_SERVICE.md (templates — require legal review)
+[deploy]     wrote Dockerfile, docker-compose.yml, .dockerignore, .env.production.example, .github/workflows/ci.yml
+[review]     validation pass + fitness: FIT
+[cost]       wrote COST.md (2 cost drivers)
+[ops-reason] External dependencies in play: db_session, smtp_provider
+[verify]     => VERIFIED (17 behaviors proven, 0 failed)
+[metadata]   6 entities probed · 6 fully green (auth=session) -> PROBE_METADATA.md + probe_metadata.json
+[workflows]  4 verified, 0 blocked (stubs), 0 failed
+[capabilities] wrote CAPABILITIES.md (endpoints + required config + honest fallbacks)
+[runnable]   PASS: generated eos app is runnable (boots from its own files, health, feature routes)
+
+=== DONE -> builds/sc-care/app ===
+  validation=WARN  fitness=FIT  impl_behavior_checks=passed  confidence=0.85  parts=41  must_have=ok  must_not=ok

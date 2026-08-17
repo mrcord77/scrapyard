@@ -31,3 +31,7 @@ INFO:     127.0.0.1:63258 - "GET /members?limit=100 HTTP/1.1" 200 OK
 INFO:     127.0.0.1:49339 - "GET /maintenance_records?limit=100 HTTP/1.1" 200 OK
 INFO:     127.0.0.1:52775 - "GET /incidents?limit=100 HTTP/1.1" 200 OK
 INFO:     127.0.0.1:52775 - "GET /reservations?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64696 - "GET /app/index.html?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64696 - "GET /app/styles.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57175 - "GET /app/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57175 - "GET /app/favicon.svg HTTP/1.1" 200 OK

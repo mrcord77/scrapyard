@@ -1,0 +1,98 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/tenancies"
+  },
+  {
+    "method": "POST",
+    "path": "/tenancies"
+  },
+  {
+    "method": "GET",
+    "path": "/tenancies/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/tenancies/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/tenancies/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/evidence_shots"
+  },
+  {
+    "method": "POST",
+    "path": "/evidence_shots"
+  },
+  {
+    "method": "GET",
+    "path": "/evidence_shots/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/evidence_shots/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/evidence_shots/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/deductions"
+  },
+  {
+    "method": "POST",
+    "path": "/deductions"
+  },
+  {
+    "method": "GET",
+    "path": "/deductions/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/deductions/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/deductions/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/dispute_letters"
+  },
+  {
+    "method": "POST",
+    "path": "/dispute_letters"
+  },
+  {
+    "method": "GET",
+    "path": "/dispute_letters/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/dispute_letters/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/dispute_letters/{id_}"
+  }
+]

@@ -1,0 +1,357 @@
+{
+  "name": "appeal_fighter",
+  "label": "Overturn",
+  "terminology": {},
+  "data_sensitivity": "high",
+  "brand": {
+    "accent": "#f59e0b",
+    "accent2": "#fb923c",
+    "tagline": "Denied is not the end. Most appeals win. File yours."
+  },
+  "route_policies": {
+    "Claim": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "audit": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "encrypted_fields": [
+        "service"
+      ]
+    },
+    "Denial": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "encrypted_fields": [
+        "reason_text"
+      ],
+      "audit": [
+        "create",
+        "delete"
+      ]
+    },
+    "Appeal": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "audit": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "encrypted_fields": [
+        "argument"
+      ]
+    },
+    "EvidenceItem": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "encrypted_fields": [
+        "body"
+      ],
+      "audit": [
+        "create",
+        "delete"
+      ]
+    },
+    "CallLog": {
+      "requires_auth": true,
+      "owner_field": "user_id",
+      "encrypted_fields": [
+        "summary"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "name": "Claim",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "insurer",
+          "type": "str"
+        },
+        {
+          "name": "claim_number",
+          "type": "str"
+        },
+        {
+          "name": "service",
+          "type": "str"
+        },
+        {
+          "name": "provider",
+          "type": "str"
+        },
+        {
+          "name": "service_date",
+          "type": "datetime"
+        },
+        {
+          "name": "billed_cents",
+          "type": "int"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
+      ],
+      "state_machine": {
+        "field": "status",
+        "initial": "submitted",
+        "transitions": {
+          "submitted": [
+            "paid",
+            "denied"
+          ],
+          "denied": [
+            "internal_appeal",
+            "abandoned"
+          ],
+          "internal_appeal": [
+            "overturned",
+            "upheld",
+            "abandoned"
+          ],
+          "upheld": [
+            "external_review",
+            "abandoned"
+          ],
+          "external_review": [
+            "overturned",
+            "final_denial"
+          ],
+          "overturned": [
+            "paid"
+          ],
+          "paid": [],
+          "final_denial": [],
+          "abandoned": [
+            "denied"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Denial",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "claim_id"
+        },
+        {
+          "name": "denial_date",
+          "type": "datetime"
+        },
+        {
+          "name": "reason_code",
+          "type": "str"
+        },
+        {
+          "name": "reason_text",
+          "type": "text"
+        },
+        {
+          "name": "internal_appeal_deadline",
+          "type": "datetime"
+        },
+        {
+          "name": "external_review_deadline",
+          "type": "datetime"
+        }
+      ],
+      "reference_rules": {
+        "claim_id": {
+          "entity": "Claim",
+          "status_field": "status",
+          "allowed": [
+            "submitted",
+            "denied",
+            "internal_appeal",
+            "upheld",
+            "external_review"
+          ],
+          "error": "claim must exist and not be closed"
+        }
+      }
+    },
+    {
+      "name": "Appeal",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "claim_id"
+        },
+        {
+          "name": "level",
+          "type": "str"
+        },
+        {
+          "name": "filed_at",
+          "type": "datetime"
+        },
+        {
+          "name": "argument",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
+      ],
+      "reference_rules": {
+        "claim_id": {
+          "entity": "Claim",
+          "status_field": "status",
+          "allowed": [
+            "denied",
+            "internal_appeal",
+            "upheld",
+            "external_review"
+          ],
+          "error": "appeal requires a denied claim"
+        }
+      },
+      "state_machine": {
+        "field": "status",
+        "initial": "drafting",
+        "transitions": {
+          "drafting": [
+            "filed"
+          ],
+          "filed": [
+            "won",
+            "lost",
+            "no_response"
+          ],
+          "won": [],
+          "lost": [],
+          "no_response": [
+            "filed"
+          ]
+        }
+      }
+    },
+    {
+      "name": "EvidenceItem",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "claim_id"
+        },
+        {
+          "name": "kind",
+          "type": "str"
+        },
+        {
+          "name": "title",
+          "type": "str"
+        },
+        {
+          "name": "body",
+          "type": "text"
+        },
+        {
+          "name": "received_at",
+          "type": "datetime"
+        }
+      ],
+      "reference_rules": {
+        "claim_id": {
+          "entity": "Claim",
+          "status_field": "status",
+          "allowed": [
+            "submitted",
+            "denied",
+            "internal_appeal",
+            "upheld",
+            "external_review",
+            "overturned"
+          ],
+          "error": "evidence attaches to an open claim"
+        }
+      }
+    },
+    {
+      "name": "CallLog",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "claim_id"
+        },
+        {
+          "name": "called_at",
+          "type": "datetime"
+        },
+        {
+          "name": "rep_name",
+          "type": "str"
+        },
+        {
+          "name": "reference_number",
+          "type": "str"
+        },
+        {
+          "name": "summary",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    "claim submitted -> denied (capture denial letter + deadlines) -> draft internal appeal -> file -> won (claim overturned -> paid) or upheld -> external review -> overturned/final",
+    "every call to the insurer logged with rep name + reference number on a tamper-evident audit chain"
+  ],
+  "permissions": [],
+  "reports": [],
+  "capability_hints": [],
+  "exempt_fields": {
+    "Claim": [
+      "insurer",
+      "claim_number",
+      "provider",
+      "status"
+    ],
+    "Denial": [
+      "reason_code"
+    ],
+    "Appeal": [
+      "level",
+      "status"
+    ],
+    "EvidenceItem": [
+      "kind",
+      "title"
+    ],
+    "CallLog": [
+      "rep_name",
+      "reference_number"
+    ]
+  }
+}

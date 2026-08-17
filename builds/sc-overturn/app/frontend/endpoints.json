@@ -1,0 +1,118 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/claims"
+  },
+  {
+    "method": "POST",
+    "path": "/claims"
+  },
+  {
+    "method": "GET",
+    "path": "/claims/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/claims/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/claims/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/denials"
+  },
+  {
+    "method": "POST",
+    "path": "/denials"
+  },
+  {
+    "method": "GET",
+    "path": "/denials/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/denials/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/denials/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/appeals"
+  },
+  {
+    "method": "POST",
+    "path": "/appeals"
+  },
+  {
+    "method": "GET",
+    "path": "/appeals/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/appeals/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/appeals/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/evidence_items"
+  },
+  {
+    "method": "POST",
+    "path": "/evidence_items"
+  },
+  {
+    "method": "GET",
+    "path": "/evidence_items/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/evidence_items/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/evidence_items/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/call_logs"
+  },
+  {
+    "method": "POST",
+    "path": "/call_logs"
+  },
+  {
+    "method": "GET",
+    "path": "/call_logs/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/call_logs/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/call_logs/{id_}"
+  }
+]

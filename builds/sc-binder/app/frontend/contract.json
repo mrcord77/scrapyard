@@ -1,0 +1,663 @@
+{
+  "domain": "iep_binder",
+  "entities": [
+    {
+      "name": "Child",
+      "plural": "children",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "first_name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "grade",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "school",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "plan_type",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "diagnosis",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "promised_minutes_week",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "first_name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "grade",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "school",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "plan_type",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "diagnosis",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "promised_minutes_week",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Meeting",
+      "plural": "meetings",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "held_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "attendees",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "held_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "attendees",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Correspondence",
+      "plural": "correspondences",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "direction",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "with_whom",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "channel",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "sent_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "subject",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "body",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        }
+      ],
+      "writable": [
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "direction",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "with_whom",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "channel",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "sent_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "subject",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "body",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        }
+      ]
+    },
+    {
+      "name": "ServiceEntry",
+      "plural": "service_entries",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "service",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "minutes",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "delivered_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "delivered",
+          "type": "bool",
+          "optional": true,
+          "input": "checkbox",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "service",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "minutes",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "delivered_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "delivered",
+          "type": "bool",
+          "optional": true,
+          "input": "checkbox",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "ActionItem",
+      "plural": "action_items",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "owner",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "due_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "child_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "owner",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "due_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/children"
+    },
+    {
+      "method": "POST",
+      "path": "/children"
+    },
+    {
+      "method": "GET",
+      "path": "/children/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/children/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/children/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/meetings"
+    },
+    {
+      "method": "POST",
+      "path": "/meetings"
+    },
+    {
+      "method": "GET",
+      "path": "/meetings/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/meetings/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/meetings/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/correspondences"
+    },
+    {
+      "method": "POST",
+      "path": "/correspondences"
+    },
+    {
+      "method": "GET",
+      "path": "/correspondences/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/correspondences/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/correspondences/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/service_entries"
+    },
+    {
+      "method": "POST",
+      "path": "/service_entries"
+    },
+    {
+      "method": "GET",
+      "path": "/service_entries/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/service_entries/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/service_entries/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/action_items"
+    },
+    {
+      "method": "POST",
+      "path": "/action_items"
+    },
+    {
+      "method": "GET",
+      "path": "/action_items/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/action_items/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/action_items/{id_}"
+    }
+  ]
+}

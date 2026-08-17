@@ -1,0 +1,635 @@
+{
+  "domain": "appeal_fighter",
+  "entities": [
+    {
+      "name": "Claim",
+      "plural": "claims",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "insurer",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "claim_number",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "service",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "provider",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "service_date",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "billed_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "insurer",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "claim_number",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "service",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": true
+        },
+        {
+          "name": "provider",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "service_date",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "billed_cents",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Denial",
+      "plural": "denials",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "denial_date",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "reason_code",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "reason_text",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "internal_appeal_deadline",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "external_review_deadline",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "denial_date",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "reason_code",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "reason_text",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "internal_appeal_deadline",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "external_review_deadline",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "Appeal",
+      "plural": "appeals",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "level",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "filed_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "argument",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "level",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "filed_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "argument",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "EvidenceItem",
+      "plural": "evidence_items",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "body",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "received_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ],
+      "writable": [
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "kind",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "body",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        },
+        {
+          "name": "received_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        }
+      ]
+    },
+    {
+      "name": "CallLog",
+      "plural": "call_logs",
+      "owner": "user_id",
+      "requires_auth": true,
+      "fields": [
+        {
+          "name": "id",
+          "type": "int",
+          "optional": false,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "called_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "rep_name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "reference_number",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        }
+      ],
+      "writable": [
+        {
+          "name": "claim_id",
+          "type": "int",
+          "optional": true,
+          "input": "number",
+          "encrypted": false
+        },
+        {
+          "name": "called_at",
+          "type": "datetime",
+          "optional": true,
+          "input": "datetime-local",
+          "encrypted": false
+        },
+        {
+          "name": "rep_name",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "reference_number",
+          "type": "str",
+          "optional": true,
+          "input": "text",
+          "encrypted": false
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "optional": true,
+          "input": "textarea",
+          "encrypted": true
+        }
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/claims"
+    },
+    {
+      "method": "POST",
+      "path": "/claims"
+    },
+    {
+      "method": "GET",
+      "path": "/claims/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/claims/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/claims/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/denials"
+    },
+    {
+      "method": "POST",
+      "path": "/denials"
+    },
+    {
+      "method": "GET",
+      "path": "/denials/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/denials/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/denials/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/appeals"
+    },
+    {
+      "method": "POST",
+      "path": "/appeals"
+    },
+    {
+      "method": "GET",
+      "path": "/appeals/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/appeals/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/appeals/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/evidence_items"
+    },
+    {
+      "method": "POST",
+      "path": "/evidence_items"
+    },
+    {
+      "method": "GET",
+      "path": "/evidence_items/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/evidence_items/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/evidence_items/{id_}"
+    },
+    {
+      "method": "GET",
+      "path": "/call_logs"
+    },
+    {
+      "method": "POST",
+      "path": "/call_logs"
+    },
+    {
+      "method": "GET",
+      "path": "/call_logs/{id_}"
+    },
+    {
+      "method": "PUT",
+      "path": "/call_logs/{id_}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/call_logs/{id_}"
+    }
+  ]
+}

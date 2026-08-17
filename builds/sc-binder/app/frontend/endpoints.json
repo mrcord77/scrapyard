@@ -1,0 +1,118 @@
+[
+  {
+    "method": "POST",
+    "path": "/auth/register"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login"
+  },
+  {
+    "method": "POST",
+    "path": "/auth/logout"
+  },
+  {
+    "method": "GET",
+    "path": "/auth/me"
+  },
+  {
+    "method": "GET",
+    "path": "/children"
+  },
+  {
+    "method": "POST",
+    "path": "/children"
+  },
+  {
+    "method": "GET",
+    "path": "/children/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/children/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/children/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/meetings"
+  },
+  {
+    "method": "POST",
+    "path": "/meetings"
+  },
+  {
+    "method": "GET",
+    "path": "/meetings/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/meetings/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/meetings/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/correspondences"
+  },
+  {
+    "method": "POST",
+    "path": "/correspondences"
+  },
+  {
+    "method": "GET",
+    "path": "/correspondences/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/correspondences/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/correspondences/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/service_entries"
+  },
+  {
+    "method": "POST",
+    "path": "/service_entries"
+  },
+  {
+    "method": "GET",
+    "path": "/service_entries/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/service_entries/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/service_entries/{id_}"
+  },
+  {
+    "method": "GET",
+    "path": "/action_items"
+  },
+  {
+    "method": "POST",
+    "path": "/action_items"
+  },
+  {
+    "method": "GET",
+    "path": "/action_items/{id_}"
+  },
+  {
+    "method": "PUT",
+    "path": "/action_items/{id_}"
+  },
+  {
+    "method": "DELETE",
+    "path": "/action_items/{id_}"
+  }
+]

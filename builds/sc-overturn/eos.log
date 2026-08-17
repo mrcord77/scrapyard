@@ -1,0 +1,16 @@
+
+=== EOS: saas_subscription_app+appeal_fighter @mvp [GATE] ===
+[enforce]    must_have honored: True  must_not honored: True
+[GATE FAILED] build blocked:
+   - [sensitive] sensitive domain requires account_deletion
+   - [sensitive] sensitive domain requires data_export
+   - [sensitive] sensitive domain requires field_encryption
+   - [sensitive] sensitive domain requires retention_policy
+   - [sensitive] sensitive domain requires privacy_policy_hooks
+   - [sensitive] sensitive domain requires one of ['audit_logs', 'structured_logging']
+   - [sensitive-plaintext] Claim has unclassified text field(s) ['insurer', 'claim_number', 'service', 'provider', 'status'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] Denial has unclassified text field(s) ['reason_code', 'reason_text'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] Appeal has unclassified text field(s) ['level', 'argument', 'status'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] EvidenceItem has unclassified text field(s) ['kind', 'title'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] CallLog has unclassified text field(s) ['rep_name', 'reference_number'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+  fix the plan (add safeguards / adjust request) or drop --gate for advisory mode.

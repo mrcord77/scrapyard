@@ -1,0 +1,39 @@
+  [PASS] health
+  [PASS] register+login A
+  [PASS] register+login B
+  [PASS] duplicate registration rejected
+  [PASS] auth/me
+  [PASS] entities discovered
+  [PASS] create /care_recipients
+  [PASS] create /care_tasks
+  [PASS] create /medications
+  [PASS] create /dose_logs
+  [PASS] create /updates
+  [PASS] read /care_recipients/1
+  [PASS] list /care_recipients
+  [FAIL] ownership: B blocked from A's /care_recipients -- 200
+  [PASS] anon blocked /care_recipients
+  [PASS] read /care_tasks/1
+  [PASS] list /care_tasks
+  [FAIL] ownership: B blocked from A's /care_tasks -- 200
+  [PASS] anon blocked /care_tasks
+  [PASS] read /medications/1
+  [PASS] list /medications
+  [FAIL] ownership: B blocked from A's /medications -- 200
+  [PASS] anon blocked /medications
+  [PASS] read /dose_logs/1
+  [PASS] list /dose_logs
+  [FAIL] ownership: B blocked from A's /dose_logs -- 200
+  [PASS] anon blocked /dose_logs
+  [PASS] read /updates/1
+  [PASS] list /updates
+  [FAIL] ownership: B blocked from A's /updates -- 200
+  [PASS] anon blocked /updates
+  [PASS] update /care_recipients/1
+  [PASS] missing record -> 404
+  [PASS] malformed payload rejected
+  [PASS] delete /care_recipients/1
+  [PASS] deleted record gone
+  [PASS] logout
+  [PASS] stale session rejected after logout
+SMOKE: 33/38 passed -> builds/sc-care/smoke_results.json

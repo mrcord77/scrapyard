@@ -1,0 +1,16 @@
+
+=== EOS: basic_saas+iep_binder @mvp [GATE] ===
+[enforce]    must_have honored: True  must_not honored: True
+[GATE FAILED] build blocked:
+   - [sensitive] sensitive domain requires account_deletion
+   - [sensitive] sensitive domain requires data_export
+   - [sensitive] sensitive domain requires field_encryption
+   - [sensitive] sensitive domain requires retention_policy
+   - [sensitive] sensitive domain requires privacy_policy_hooks
+   - [sensitive] sensitive domain requires one of ['audit_logs', 'structured_logging']
+   - [sensitive-plaintext] Child has unclassified text field(s) ['first_name', 'grade', 'school', 'plan_type'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] Meeting has unclassified text field(s) ['kind', 'attendees', 'status'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] Correspondence has unclassified text field(s) ['direction', 'with_whom', 'channel', 'subject'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] ServiceEntry has unclassified text field(s) ['service'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+   - [sensitive-plaintext] ActionItem has unclassified text field(s) ['owner', 'description', 'status'] — declare them encrypted (sensitive_fields/route_policies) or exempt (exempt_fields)
+  fix the plan (add safeguards / adjust request) or drop --gate for advisory mode.
