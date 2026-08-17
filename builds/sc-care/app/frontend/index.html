@@ -674,7 +674,51 @@
       "method": "DELETE",
       "path": "/updates/{id_}"
     }
-  ]
+  ],
+  "home": {
+    "headline": "Today, for Mom",
+    "nav_label": "The circle",
+    "widgets": [
+      {
+        "type": "countdown",
+        "entity": "Appointment",
+        "fields": [
+          "at"
+        ],
+        "label": "Coming up"
+      },
+      {
+        "type": "board",
+        "entity": "CareTask",
+        "statuses": [
+          "open",
+          "claimed",
+          "missed",
+          "escalated",
+          "done"
+        ],
+        "label": "Who has what"
+      },
+      {
+        "type": "timeline",
+        "entity": "DoseLog",
+        "time_field": "given_at",
+        "title_field": "given_by",
+        "body_field": "note",
+        "label": "Medication log"
+      },
+      {
+        "type": "timeline",
+        "entity": "Update",
+        "time_field": "posted_at",
+        "title_field": "author",
+        "body_field": "body",
+        "label": "Family updates",
+        "wide": true
+      }
+    ]
+  },
+  "artifacts": []
 }</script>
 <script type="module" src="app.js"></script>
 </body>

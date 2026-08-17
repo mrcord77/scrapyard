@@ -353,5 +353,68 @@
       "rep_name",
       "reference_number"
     ]
+  },
+  "home": {
+    "headline": "The war room",
+    "nav_label": "War room",
+    "widgets": [
+      {
+        "type": "money",
+        "entity": "Claim",
+        "amount_field": "billed_cents",
+        "statuses": [
+          "overturned",
+          "paid"
+        ],
+        "label": "Recovered",
+        "sub": "denials beaten"
+      },
+      {
+        "type": "money",
+        "entity": "Claim",
+        "amount_field": "billed_cents",
+        "statuses": [
+          "denied",
+          "internal_appeal",
+          "upheld",
+          "external_review"
+        ],
+        "label": "Still in the fight",
+        "sub": "keep pushing"
+      },
+      {
+        "type": "countdown",
+        "entity": "Denial",
+        "fields": [
+          "internal_appeal_deadline",
+          "external_review_deadline"
+        ],
+        "label": "Appeal deadlines",
+        "wide": true
+      },
+      {
+        "type": "board",
+        "entity": "Claim",
+        "statuses": [
+          "submitted",
+          "denied",
+          "internal_appeal",
+          "upheld",
+          "external_review",
+          "overturned",
+          "paid"
+        ],
+        "label": "Claims by stage"
+      },
+      {
+        "type": "timeline",
+        "entity": "CallLog",
+        "time_field": "called_at",
+        "title_field": "rep_name",
+        "body_field": "reference_number",
+        "label": "Insurer call log",
+        "wide": true
+      }
+    ]
   }
 }

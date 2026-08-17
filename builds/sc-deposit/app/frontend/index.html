@@ -502,7 +502,45 @@
       "method": "DELETE",
       "path": "/dispute_letters/{id_}"
     }
-  ]
+  ],
+  "home": {
+    "headline": "Your evidence, room by room",
+    "nav_label": "Evidence",
+    "widgets": [
+      {
+        "type": "money",
+        "entity": "Tenancy",
+        "amount_field": "deposit_cents",
+        "label": "Deposit on the line",
+        "sub": "documented from day one"
+      },
+      {
+        "type": "money",
+        "entity": "Deduction",
+        "amount_field": "amount_cents",
+        "statuses": [
+          "contested"
+        ],
+        "label": "Deductions contested",
+        "sub": "answered with paired evidence"
+      },
+      {
+        "type": "pair_grid",
+        "entity": "EvidenceShot",
+        "group_field": "room",
+        "phase_field": "phase",
+        "phases": [
+          "move_in",
+          "move_out"
+        ],
+        "note_field": "condition_note",
+        "time_field": "taken_at",
+        "ref_field": "photo_ref",
+        "label": "Move-in vs move-out"
+      }
+    ]
+  },
+  "artifacts": []
 }</script>
 <script type="module" src="app.js"></script>
 </body>

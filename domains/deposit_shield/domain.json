@@ -9,35 +9,90 @@
     "tagline": "Document everything. Tenants with evidence win 70% of deposit fights."
   },
   "route_policies": {
-    "Tenancy": {"requires_auth": true, "owner_field": "user_id"},
-    "EvidenceShot": {"requires_auth": true, "owner_field": "user_id"},
-    "Deduction": {"requires_auth": true, "owner_field": "user_id"},
-    "DisputeLetter": {"requires_auth": true, "owner_field": "user_id"}
+    "Tenancy": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "EvidenceShot": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "Deduction": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    },
+    "DisputeLetter": {
+      "requires_auth": true,
+      "owner_field": "user_id"
+    }
   },
   "entities": [
     {
       "name": "Tenancy",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "address", "type": "str"},
-        {"name": "landlord", "type": "str"},
-        {"name": "deposit_cents", "type": "int"},
-        {"name": "move_in", "type": "datetime"},
-        {"name": "move_out", "type": "datetime"},
-        {"name": "return_deadline_days", "type": "int"},
-        {"name": "status", "type": "str"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "address",
+          "type": "str"
+        },
+        {
+          "name": "landlord",
+          "type": "str"
+        },
+        {
+          "name": "deposit_cents",
+          "type": "int"
+        },
+        {
+          "name": "move_in",
+          "type": "datetime"
+        },
+        {
+          "name": "move_out",
+          "type": "datetime"
+        },
+        {
+          "name": "return_deadline_days",
+          "type": "int"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
       ],
       "state_machine": {
         "field": "status",
         "initial": "active",
         "transitions": {
-          "active": ["notice_given"],
-          "notice_given": ["moved_out"],
-          "moved_out": ["deposit_returned", "deductions_received"],
-          "deductions_received": ["disputing", "accepted"],
-          "disputing": ["resolved_full", "resolved_partial", "small_claims"],
-          "small_claims": ["resolved_full", "resolved_partial", "lost"],
+          "active": [
+            "notice_given"
+          ],
+          "notice_given": [
+            "moved_out"
+          ],
+          "moved_out": [
+            "deposit_returned",
+            "deductions_received"
+          ],
+          "deductions_received": [
+            "disputing",
+            "accepted"
+          ],
+          "disputing": [
+            "resolved_full",
+            "resolved_partial",
+            "small_claims"
+          ],
+          "small_claims": [
+            "resolved_full",
+            "resolved_partial",
+            "lost"
+          ],
           "deposit_returned": [],
           "accepted": [],
           "resolved_full": [],
@@ -49,20 +104,47 @@
     {
       "name": "EvidenceShot",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "tenancy_id"},
-        {"name": "phase", "type": "str"},
-        {"name": "room", "type": "str"},
-        {"name": "photo_ref", "type": "str"},
-        {"name": "condition_note", "type": "text"},
-        {"name": "taken_at", "type": "datetime"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "tenancy_id"
+        },
+        {
+          "name": "phase",
+          "type": "str"
+        },
+        {
+          "name": "room",
+          "type": "str"
+        },
+        {
+          "name": "photo_ref",
+          "type": "str"
+        },
+        {
+          "name": "condition_note",
+          "type": "text"
+        },
+        {
+          "name": "taken_at",
+          "type": "datetime"
+        }
       ],
       "reference_rules": {
         "tenancy_id": {
           "entity": "Tenancy",
           "status_field": "status",
-          "allowed": ["active", "notice_given", "moved_out", "deductions_received", "disputing"],
+          "allowed": [
+            "active",
+            "notice_given",
+            "moved_out",
+            "deductions_received",
+            "disputing"
+          ],
           "error": "evidence attaches to a live tenancy"
         }
       }
@@ -70,18 +152,37 @@
     {
       "name": "Deduction",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "tenancy_id"},
-        {"name": "amount_cents", "type": "int"},
-        {"name": "landlord_reason", "type": "str"},
-        {"name": "status", "type": "str"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "tenancy_id"
+        },
+        {
+          "name": "amount_cents",
+          "type": "int"
+        },
+        {
+          "name": "landlord_reason",
+          "type": "str"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        }
       ],
       "state_machine": {
         "field": "status",
         "initial": "contested",
         "transitions": {
-          "contested": ["dropped", "upheld", "accepted"],
+          "contested": [
+            "dropped",
+            "upheld",
+            "accepted"
+          ],
           "dropped": [],
           "upheld": [],
           "accepted": []
@@ -91,12 +192,27 @@
     {
       "name": "DisputeLetter",
       "fields": [
-        {"name": "id"},
-        {"name": "user_id"},
-        {"name": "tenancy_id"},
-        {"name": "sent_at", "type": "datetime"},
-        {"name": "method", "type": "str"},
-        {"name": "body", "type": "text"}
+        {
+          "name": "id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "tenancy_id"
+        },
+        {
+          "name": "sent_at",
+          "type": "datetime"
+        },
+        {
+          "name": "method",
+          "type": "str"
+        },
+        {
+          "name": "body",
+          "type": "text"
+        }
       ]
     }
   ],
@@ -105,5 +221,42 @@
   ],
   "permissions": [],
   "reports": [],
-  "capability_hints": []
+  "capability_hints": [],
+  "home": {
+    "headline": "Your evidence, room by room",
+    "nav_label": "Evidence",
+    "widgets": [
+      {
+        "type": "money",
+        "entity": "Tenancy",
+        "amount_field": "deposit_cents",
+        "label": "Deposit on the line",
+        "sub": "documented from day one"
+      },
+      {
+        "type": "money",
+        "entity": "Deduction",
+        "amount_field": "amount_cents",
+        "statuses": [
+          "contested"
+        ],
+        "label": "Deductions contested",
+        "sub": "answered with paired evidence"
+      },
+      {
+        "type": "pair_grid",
+        "entity": "EvidenceShot",
+        "group_field": "room",
+        "phase_field": "phase",
+        "phases": [
+          "move_in",
+          "move_out"
+        ],
+        "note_field": "condition_note",
+        "time_field": "taken_at",
+        "ref_field": "photo_ref",
+        "label": "Move-in vs move-out"
+      }
+    ]
+  }
 }

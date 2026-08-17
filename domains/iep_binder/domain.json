@@ -323,5 +323,52 @@
       "description",
       "status"
     ]
+  },
+  "home": {
+    "headline": "The case, in numbers",
+    "nav_label": "The case",
+    "widgets": [
+      {
+        "type": "deficit",
+        "entity": "ServiceEntry",
+        "value_field": "minutes",
+        "time_field": "delivered_at",
+        "target_entity": "Child",
+        "target_field": "promised_minutes_week",
+        "label": "Minutes delivered vs promised (per week)"
+      },
+      {
+        "type": "board",
+        "entity": "ActionItem",
+        "statuses": [
+          "open",
+          "overdue",
+          "escalated",
+          "done"
+        ],
+        "label": "Commitments"
+      },
+      {
+        "type": "board",
+        "entity": "Meeting",
+        "statuses": [
+          "requested",
+          "scheduled",
+          "held",
+          "minutes_received",
+          "disputed"
+        ],
+        "label": "Meetings"
+      },
+      {
+        "type": "timeline",
+        "entity": "Correspondence",
+        "time_field": "sent_at",
+        "title_field": "with_whom",
+        "body_field": "channel",
+        "label": "Paper trail",
+        "wide": true
+      }
+    ]
   }
 }

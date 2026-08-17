@@ -126,7 +126,7 @@ def load_domain(name: str) -> dict | None:
                    "consent_requirements", "audit_requirements",
                    "minimum_security_stage", "privacy_notes", "route_policies",
                    "sensitive_fields", "exempt_fields", "retention_days", "many_to_many",
-                   "brand")
+                   "brand", "home", "artifacts")
     for node in chain:  # leaf -> base
         for k in PASSTHROUGH:
             if k in node and k not in merged:
