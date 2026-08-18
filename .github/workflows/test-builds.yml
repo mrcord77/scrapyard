@@ -1,0 +1,75 @@
+name: scrapyard representative builds
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["test/scrapyard-builds-20260816"]
+
+permissions:
+  contents: read
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: scrapyard
+          POSTGRES_PASSWORD: scrapyard
+          POSTGRES_DB: scrapyard
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U scrapyard -d scrapyard"
+          --health-interval 5s --health-timeout 3s --health-retries 12
+      redis:
+        image: redis:7
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 3s --health-retries 12
+    env:
+      PYTHONPATH: .
+      DATABASE_URL: postgresql+psycopg2://scrapyard:scrapyard@localhost:5432/scrapyard
+      SCRAPYARD_TEST_PG_URL: postgresql+psycopg2://scrapyard:scrapyard@localhost:5432/scrapyard
+      SCRAPYARD_TEST_REDIS_URL: redis://localhost:6379/0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Show available patterns and examples
+        run: |
+          python tools/resolve.py --list
+          find specs/examples -maxdepth 1 -type f -print | sort
+      - name: Build 1 - SaaS subscription sobriety app
+        run: |
+          rm -rf /tmp/build-saas
+          python tools/eos.py --pattern saas_subscription_app --domain sobriety --stage mvp --out /tmp/build-saas --gate
+          test -f /tmp/build-saas/main.py
+          test -f /tmp/build-saas/frontend/index.html
+          test -f /tmp/build-saas/BUILD_REPORT.md
+          python -m py_compile /tmp/build-saas/main.py
+      - name: Build 2 - secure healthcare app
+        run: |
+          rm -rf /tmp/build-healthcare
+          python tools/eos.py --pattern saas_subscription_app --domain healthcare --stage mvp --out /tmp/build-healthcare --gate
+          test -f /tmp/build-healthcare/main.py
+          test -f /tmp/build-healthcare/frontend/index.html
+          test -f /tmp/build-healthcare/BUILD_REPORT.md
+          python -m py_compile /tmp/build-healthcare/main.py
+      - name: Build 3 - generic SaaS assembly
+        run: |
+          rm -rf /tmp/build-generic
+          python tools/assemble.py saas_app /tmp/build-generic
+          test -f /tmp/build-generic/main.py
+          python -m py_compile /tmp/build-generic/main.py
+      - name: Verify generated runtimes
+        run: |
+          python tools/verify_runtime.py --domain healthcare --secure
+          python tools/verify_runtime.py --domain sobriety --fullstack
+      - name: Build matrix
+        run: python tools/build_matrix.py
